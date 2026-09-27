@@ -61,10 +61,10 @@ Minelan assigns the port.
 
 1. Start the server.
 2. In the console, check that Skript loaded the script:
-   `sk reload lostsky` should report no errors.
-   Tip: the panel's log editor only shows part of `latest.log` until you
-   scroll or zoom out. Search it for `ERROR` to find problems. If it lists errors, copy
+   `sk reload lostsky` should report no errors. If it lists errors, copy
    them and send them over so they can be fixed.
+   Tip: the panel's log editor only shows part of `latest.log` until you
+   scroll or zoom out. Search it for `ERROR` to find problems.
 3. Give yourself admin: `lp user <your name> permission set lostsky.admin true`
 4. Add yourself to the whitelist: `whitelist add <your name>`
 5. Join the game and try `/chapter`, `/lostsky giverelic <you> shard`,
