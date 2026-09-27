@@ -3,6 +3,9 @@
 Install into `server/plugins/`. Versions are not pinned yet. Pin them once
 the server is first tested.
 
+Minecraft version in use: **Paper 1.21.11** (Minelan). Every plugin must
+match this version.
+
 | Plugin | Needed? | Notes |
 |--------|---------|-------|
 | BentoBox | required | Skyblock framework |
@@ -11,7 +14,7 @@ the server is first tested.
 | ↳ Challenges addon | required | Weekly challenges |
 | ↳ MagicCobblestoneGenerator addon | required | Generator tiers per chapter |
 | Skript | required | Runs `scripts/lostsky.sk` |
-| Vault | required | Economy bridge (Skript + BentoBox use it) |
+| VaultUnlocked (Modrinth) | required | Drop-in replacement for Vault, the economy bridge Skript + BentoBox use. Original Vault (SpigotMC, by MilkBowl) also works |
 | EssentialsX (+ EssentialsX Spawn) | required | Economy, `/spawn`, basics |
 | EssentialsX Chat | required | Shows LuckPerms title prefixes in chat |
 | LuckPerms | required | Permission groups |

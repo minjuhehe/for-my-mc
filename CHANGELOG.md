@@ -11,6 +11,17 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address on the website.
 
+## 0.2.3: plugin choices on Minelan (2026-09-28)
+
+**Why:** the original Vault isn't on Modrinth, which is where the Minelan
+Plugins tab searches.
+
+Changed:
+- `server/PLUGINS.md`: use **VaultUnlocked** (a drop-in Vault replacement)
+  and note that the server runs Paper 1.21.11.
+
+No commands changed.
+
 ## 0.2.2: Minelan install guide (2026-09-28)
 
 **Why:** the server is now rented at Minelan (Spider Pack, 8 GB RAM,
