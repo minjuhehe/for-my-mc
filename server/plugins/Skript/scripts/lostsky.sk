@@ -1,7 +1,8 @@
 # ============================================================================
 #  Lost Sky — story system (chapters, relics, Citadel, ruin warp)
 #  Status: DRAFT — not tested on a real server yet.
-#  Needs: Skript 2.9+, Vault + an economy plugin (EssentialsX) for money rewards.
+#  Needs: Skript 2.9+, Vault + an economy plugin (EssentialsX) for money rewards,
+#         LuckPerms for title prefixes.
 #  Read docs/DEV_NOTES.md before editing. Update docs/COMMANDS.md if you
 #  change any command here.
 # ============================================================================
@@ -11,6 +12,7 @@ options:
     relic-tag: Lost Sky Relic
     donate-money: 25
     ruin-minutes: 45
+    ruin-warning-minutes: 5
 
 # ---------------------------------------------------------------------------
 #  Setup: chapter goals and starting values (only set if missing)
@@ -70,8 +72,75 @@ function checkChapter():
     if {lostsky::relics} >= {lostsky::goal::%{_next}%}:
         set {lostsky::chapter} to {_next}
         broadcast "{@prefix} &eThe Citadel stirs... &6Chapter %{_next}%: %{lostsky::name::%{_next}%}% &ehas begun!"
-        # TODO: unlock chapter content here (generator tiers, biomes, ruin tier).
+        runUnlocks({_next})
         checkChapter()
+
+# Runs every console command saved for a chapter with /lsunlock.
+# This is how chapters unlock real content (generator tiers, biomes...).
+function runUnlocks(n: number):
+    loop {lostsky::unlocks::%{_n}%::*}:
+        execute console command loop-value
+
+# ---------------------------------------------------------------------------
+#  Titles: LuckPerms prefix based on personal Citadel points.
+#  Prefix priority 100. Shown in chat by EssentialsX Chat.
+# ---------------------------------------------------------------------------
+function titleFor(pts: number) :: text:
+    if {_pts} >= 400:
+        return "&6[Citadel Keeper] "
+    if {_pts} >= 150:
+        return "&d[Sky Scholar] "
+    if {_pts} >= 50:
+        return "&b[Relic Seeker] "
+    if {_pts} >= 10:
+        return "&7[Wanderer] "
+    return ""
+
+function updateTitle(p: player):
+    set {_pts} to {lostsky::points::%uuid of {_p}%} ? 0
+    set {_t} to titleFor({_pts})
+    if {_t} is "":
+        stop
+    if {lostsky::title::%uuid of {_p}%} is {_t}:
+        stop
+    set {lostsky::title::%uuid of {_p}%} to {_t}
+    execute console command "lp user %name of {_p}% meta setprefix 100 ""%{_t}%"""
+    send "{@prefix} &eYou earned a new title: %{_t}%" to {_p}
+
+# ---------------------------------------------------------------------------
+#  Ruins. Admins pre-build ruins at "ruin sites" far from spawn.
+#  A site has an id and a tier (1-5). Only sites with tier <= current
+#  chapter can be picked. Every 2 hours one random site opens as /ruin.
+# ---------------------------------------------------------------------------
+function openRuin(loc: location):
+    set {lostsky::ruin} to {_loc}
+    broadcast "{@prefix} &eA ruin has drifted in from the void! &f/ruin &eto explore it ({@ruin-minutes} min)."
+    wait {@ruin-minutes} minutes
+    # Only close it if a different ruin has not replaced it in the meantime.
+    if {lostsky::ruin} is {_loc}:
+        delete {lostsky::ruin}
+        broadcast "{@prefix} &7The ruin sinks back into the void..."
+
+function spawnRandomRuin():
+    if {lostsky::ruin} is set:
+        stop
+    loop {lostsky::site::*}:
+        if {lostsky::sitetier::%loop-index%} <= {lostsky::chapter}:
+            add loop-index to {_pool::*}
+    if size of {_pool::*} is 0:
+        stop
+    set {_id} to random element out of {_pool::*}
+    broadcast "{@prefix} &7Something is rising from the void... a ruin arrives in {@ruin-warning-minutes} minutes."
+    wait {@ruin-warning-minutes} minutes
+    if {lostsky::ruin} is set:
+        stop
+    if {lostsky::site::%{_id}%} is not set:
+        stop
+    openRuin({lostsky::site::%{_id}%})
+
+every 2 hours:
+    if {lostsky::autoruins} is true:
+        spawnRandomRuin()
 
 # ---------------------------------------------------------------------------
 #  Player commands
@@ -92,6 +161,8 @@ command /relics:
     executable by: players
     trigger:
         send "{@prefix} &7Your Citadel points: &f%{lostsky::points::%player's uuid%} ? 0%"
+        if {lostsky::title::%player's uuid%} is set:
+            send "&7Your title: %{lostsky::title::%player's uuid%}%"
 
 command /donate:
     description: Donate the relic in your main hand to the Citadel.
@@ -107,6 +178,7 @@ command /donate:
         add {_value} to {lostsky::points::%player's uuid%}
         add {@donate-money} to player's balance
         send "{@prefix} &aThe Citadel accepts your relic! &7(+%{_value}% points, +${@donate-money})"
+        updateTitle(player)
         checkChapter()
 
 command /citadel:
@@ -169,16 +241,71 @@ command /lostsky [<text>] [<text>] [<text>]:
             set {lostsky::citadel} to location of player
             send "{@prefix} &aCitadel warp saved."
         else if arg-1 is "setruin":
-            set {_loc} to location of player
-            set {lostsky::ruin} to {_loc}
-            broadcast "{@prefix} &eA ruin has drifted in from the void! &f/ruin &eto explore it ({@ruin-minutes} min)."
-            wait {@ruin-minutes} minutes
-            # Only close it if an admin has not replaced it in the meantime.
-            if {lostsky::ruin} is {_loc}:
-                delete {lostsky::ruin}
-                broadcast "{@prefix} &7The ruin sinks back into the void..."
+            openRuin(location of player)
+        else if arg-1 is "spawnruin":
+            if {lostsky::ruin} is set:
+                send "{@prefix} &cA ruin is already open. Use /lostsky clearruin first."
+                stop
+            if size of {lostsky::site::*} is 0:
+                send "{@prefix} &cNo ruin sites saved yet. Use /lostsky addsite <id> <tier> first."
+                stop
+            send "{@prefix} &aPicking a random ruin site (it opens after the {@ruin-warning-minutes} min warning)."
+            spawnRandomRuin()
         else if arg-1 is "clearruin":
             delete {lostsky::ruin}
             send "{@prefix} &aRuin warp closed."
+        else if arg-1 is "addsite":
+            set {_tier} to arg-3 parsed as integer
+            if arg-2 is not set:
+                send "&cUsage: /lostsky addsite <id> <tier 1-5>"
+                stop
+            if {_tier} is not set:
+                send "&cUsage: /lostsky addsite <id> <tier 1-5>"
+                stop
+            set {lostsky::site::%arg-2%} to location of player
+            set {lostsky::sitetier::%arg-2%} to {_tier}
+            send "{@prefix} &aRuin site '%arg-2%' (tier %{_tier}%) saved here."
+        else if arg-1 is "delsite":
+            delete {lostsky::site::%arg-2%}
+            delete {lostsky::sitetier::%arg-2%}
+            send "{@prefix} &aRuin site '%arg-2%' removed."
+        else if arg-1 is "sites":
+            send "{@prefix} &7Ruin sites:"
+            loop {lostsky::site::*}:
+                send "&f- %loop-index% &7(tier %{lostsky::sitetier::%loop-index%}%)"
+        else if arg-1 is "autoruins":
+            if arg-2 is "on":
+                set {lostsky::autoruins} to true
+            else:
+                set {lostsky::autoruins} to false
+            send "{@prefix} &aAutomatic ruins: %{lostsky::autoruins}%"
         else:
-            send "&3Lost Sky admin: &fsetchapter, addrelics, giverelic, setcitadel, setruin, clearruin"
+            send "&3Lost Sky admin: &fsetchapter, addrelics, giverelic, setcitadel, setruin, spawnruin, clearruin, addsite, delsite, sites, autoruins"
+            send "&3Chapter unlocks: &f/lsunlock, /lsunlocks, /lsunlockclear"
+
+# ---------------------------------------------------------------------------
+#  Chapter unlock commands. This is a separate command so the saved console
+#  command can contain spaces. Write the command WITHOUT the leading slash.
+#  Example: /lsunlock 2 broadcast Ore generators tier 2 are now open!
+# ---------------------------------------------------------------------------
+command /lsunlock <integer> <text>:
+    description: Add a console command that runs when a chapter unlocks.
+    permission: lostsky.admin
+    trigger:
+        add arg-2 to {lostsky::unlocks::%arg-1%::*}
+        send "{@prefix} &aWhen chapter %arg-1% unlocks, the console will run: &f%arg-2%"
+
+command /lsunlocks <integer>:
+    description: List the unlock commands for a chapter.
+    permission: lostsky.admin
+    trigger:
+        send "{@prefix} &7Unlock commands for chapter %arg-1%:"
+        loop {lostsky::unlocks::%arg-1%::*}:
+            send "&f%loop-index%. %loop-value%"
+
+command /lsunlockclear <integer>:
+    description: Remove all unlock commands for a chapter.
+    permission: lostsky.admin
+    trigger:
+        delete {lostsky::unlocks::%arg-1%::*}
+        send "{@prefix} &aCleared unlock commands for chapter %arg-1%."

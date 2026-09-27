@@ -28,7 +28,7 @@ Columns:
 | `/chapter` | Show current chapter, relic total and next goal | none | lostsky.sk | draft |
 | `/citadel` | Teleport to the Sky Citadel | `lostsky.citadel` | lostsky.sk | draft |
 | `/donate` | Donate the relic in your main hand | `lostsky.donate` | lostsky.sk | draft |
-| `/relics` | Show your personal Citadel points | none | lostsky.sk | draft |
+| `/relics` | Show your personal Citadel points and title | none | lostsky.sk | draft |
 | `/ruin` | Teleport to the active ruin island (if one is up) | `lostsky.ruin` | lostsky.sk | draft |
 
 ### General (from EssentialsX)
@@ -47,10 +47,27 @@ Columns:
 | `/lostsky addrelics <amount>` | Add to the server relic total | `lostsky.admin` | lostsky.sk | draft |
 | `/lostsky giverelic <player> <type>` | Give a relic item (`shard`, `tablet`, `core`, `crown`) | `lostsky.admin` | lostsky.sk | draft |
 | `/lostsky setcitadel` | Save your position as the Citadel warp | `lostsky.admin` | lostsky.sk | draft |
-| `/lostsky setruin` | Save your position as the active ruin warp | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky setruin` | Open a ruin warp at your position right now (closes after 45 min) | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky spawnruin` | Pick a random ruin site now (5 min warning, then opens) | `lostsky.admin` | lostsky.sk | draft |
 | `/lostsky clearruin` | Close the ruin warp | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky addsite <id> <tier>` | Save your position as a ruin site (tier 1-5 = earliest chapter it can appear) | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky delsite <id>` | Remove a ruin site | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky sites` | List ruin sites and their tiers | `lostsky.admin` | lostsky.sk | draft |
+| `/lostsky autoruins <on\|off>` | Turn automatic ruins (every 2 hours) on or off. Default: off | `lostsky.admin` | lostsky.sk | draft |
+| `/lsunlock <chapter> <command>` | Save a console command (no `/`) to run when that chapter unlocks | `lostsky.admin` | lostsky.sk | draft |
+| `/lsunlocks <chapter>` | List a chapter's unlock commands | `lostsky.admin` | lostsky.sk | draft |
+| `/lsunlockclear <chapter>` | Delete all of a chapter's unlock commands | `lostsky.admin` | lostsky.sk | draft |
 | `/bsbadmin ...` | Island admin tools | `bskyblock.admin.*` | BSkyBlock | planned |
 | `/co inspect` | Check who broke/placed blocks | `coreprotect.inspect` | CoreProtect | planned |
+
+## Commands the script runs by itself (console)
+
+These run automatically. If you rename a plugin or change these, update the script.
+
+| When | Console command | Needs |
+|------|-----------------|-------|
+| Player reaches a new title | `lp user <name> meta setprefix 100 "<title>"` | LuckPerms |
+| A chapter unlocks | Every command saved with `/lsunlock` for that chapter | whatever plugin each command belongs to |
 
 ## Permission groups (LuckPerms)
 

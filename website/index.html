@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lost Sky</title>
+<meta name="description" content="Lost Sky is a story-driven Skyblock Minecraft server. Recover relics from drifting ruins and rebuild the Sky Citadel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus+SC&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+  /* Keep content in sync with docs/CONCEPT.md and docs/COMMANDS.md */
+  :root {
+    color-scheme: light;
+    --sky: #E6EDF3;
+    --sky-deep: #CFDCE7;
+    --panel: #F4F7FA;
+    --ink: #1C2733;
+    --ink-soft: #4C5B6B;
+    --line: #B9C7D4;
+    --amethyst: #6D4FB8;
+    --gold: #9A6E12;
+    --stone: #7E8781;
+    --grass: #5E8C3A;
+    --dirt: #7A5A3C;
+    --display: "Marcellus SC", "Palatino Linotype", Palatino, Georgia, serif;
+    --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --sky: #0E1322; --sky-deep: #182038; --panel: #141B2E;
+      --ink: #E4E7F0; --ink-soft: #A3ACC2; --line: #2C3654;
+      --amethyst: #B49DF2; --gold: #E2B75A; --stone: #8C938E;
+      --grass: #6FA348; --dirt: #8B6847;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --sky: #0E1322; --sky-deep: #182038; --panel: #141B2E;
+    --ink: #E4E7F0; --ink-soft: #A3ACC2; --line: #2C3654;
+    --amethyst: #B49DF2; --gold: #E2B75A; --stone: #8C938E;
+    --grass: #6FA348; --dirt: #8B6847;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--sky);
+    color: var(--ink);
+    font: 400 17px/1.6 var(--body);
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding-inline: 20px; }
+  h1, h2, h3 { font-family: var(--display); font-weight: 400; text-wrap: balance; margin: 0; line-height: 1.15; }
+  h2 { font-size: clamp(1.7rem, 4vw, 2.3rem); }
+  h3 { font-size: 1.25rem; }
+  p { margin: 0; max-width: 65ch; }
+  .eyebrow { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--amethyst); }
+  code, .mono { font-family: var(--mono); font-size: 0.9em; }
+  a { color: var(--amethyst); }
+  :focus-visible { outline: 2px solid var(--amethyst); outline-offset: 3px; }
+
+  /* Hero: drifting islands */
+  .hero { position: relative; overflow: hidden; background: linear-gradient(var(--sky-deep), var(--sky)); }
+  #sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-inner { position: relative; padding-block: 72px 64px; display: grid; gap: 20px; }
+  .hero h1 { font-size: clamp(3rem, 11vw, 6.5rem); letter-spacing: 0.04em; }
+  .hero h1 span { color: var(--amethyst); }
+  .hero .lede { font-size: 1.2rem; color: var(--ink-soft); max-width: 44ch; }
+  .join {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
+    background: var(--panel); border: 1px solid var(--line);
+    padding: 10px 10px 10px 16px; width: fit-content; max-width: 100%;
+  }
+  .join .mono { font-size: 1rem; }
+  .join .tag { font: 600 0.7rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  button {
+    font: 600 0.85rem/1 var(--mono); cursor: pointer;
+    background: var(--amethyst); color: var(--sky); border: 0; padding: 10px 14px;
+  }
+
+  section { padding-block: 64px; border-top: 1px solid var(--line); }
+  .sec-head { display: grid; gap: 10px; margin-bottom: 32px; }
+
+  /* Loop */
+  .loop { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+  .loop div { display: grid; gap: 6px; align-content: start; }
+  .loop b { font-family: var(--mono); font-size: 0.8rem; color: var(--amethyst); }
+
+  /* Chapters as an ascent: chapter 5 at the top */
+  .ascent { display: flex; flex-direction: column-reverse; gap: 0; }
+  .ch { display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: baseline; padding-block: 18px; border-bottom: 1px solid var(--line); }
+  .ch:last-child { border-top: 1px solid var(--line); }
+  .ch .n { font-family: var(--display); font-size: 2.2rem; color: var(--stone); line-height: 1; }
+  .ch .goal { font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .ch p { color: var(--ink-soft); font-size: 0.95rem; }
+  .ch.final .n, .ch.final h3 { color: var(--gold); }
+  .season { margin-top: 18px; font-family: var(--mono); font-size: 0.85rem; color: var(--ink-soft); }
+
+  /* Relics */
+  .relics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .relic { background: var(--panel); border: 1px solid var(--line); padding: 18px; display: grid; grid-template-columns: 40px 1fr; gap: 4px 14px; align-items: center; }
+  .relic canvas { grid-row: span 2; width: 40px; height: 40px; image-rendering: pixelated; }
+  .relic .pts { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-soft); }
+  .relic small { grid-column: 1 / -1; color: var(--ink-soft); margin-top: 8px; font-size: 0.88rem; }
+
+  /* Titles */
+  .titles { display: grid; gap: 0; max-width: 560px; }
+  .titles div { display: flex; justify-content: space-between; gap: 16px; padding-block: 10px; border-bottom: 1px dashed var(--line); }
+  .titles .pts { font-family: var(--mono); font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+
+  /* Commands */
+  .table-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 460px; }
+  th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+  td:first-child { white-space: nowrap; font-family: var(--mono); color: var(--amethyst); }
+
+  footer { padding-block: 40px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.9rem; }
+
+  @media (max-width: 560px) {
+    .ch { grid-template-columns: 44px 1fr; }
+    .ch .goal { grid-column: 2; text-align: left; }
+    .ch .n { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Skyblock · Season 1</span>
+    <h1>Lost <span>Sky</span></h1>
+    <p class="lede">Ruins of a fallen sky civilisation are drifting back out of the void. Grow your island, explore the ruins, and bring relics home to rebuild the Citadel.</p>
+    <div class="join">
+      <span class="mono" id="ip">play.lostsky.example</span>
+      <button type="button" id="copy">Copy address</button>
+      <span class="tag">Opening soon · Java 1.21</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap" id="how">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2>Your island. Everyone's Citadel.</h2>
+    </div>
+    <div class="loop">
+      <div><b>/is</b><h3>Grow your island</h3><p>Start on a tiny floating island. Farm, build generators, and play with up to three friends.</p></div>
+      <div><b>/ruin</b><h3>Explore the ruins</h3><p>Every two hours a ruin drifts in for 45 minutes. It has loot, mobs, puzzles and relics.</p></div>
+      <div><b>/donate</b><h3>Return the relics</h3><p>Give relics to the Sky Citadel. You earn points and money, and the whole server moves the story forward.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="chapters">
+    <div class="sec-head">
+      <span class="eyebrow">The story</span>
+      <h2>Five chapters to the Citadel</h2>
+      <p>Each chapter unlocks for everyone when the server's donated relic points reach its goal.</p>
+    </div>
+    <div class="ascent">
+      <div class="ch"><span class="n">1</span><div><h3>The Awakening</h3><p>Basic islands, cobblestone generator, tier 1 ruins.</p></div><span class="goal">start</span></div>
+      <div class="ch"><span class="n">2</span><div><h3>Roots of Stone</h3><p>Ore generator tier 2, forest and plains biomes, tier 2 ruins.</p></div><span class="goal">100 relics</span></div>
+      <div class="ch"><span class="n">3</span><div><h3>The Drowned Spire</h3><p>Ocean biome, fishing relics, bigger islands, tier 3 ruins.</p></div><span class="goal">300 relics</span></div>
+      <div class="ch"><span class="n">4</span><div><h3>Ember Halls</h3><p>Nether biome, lava generator, tier 4 ruins with a mini-boss.</p></div><span class="goal">600 relics</span></div>
+      <div class="ch final"><span class="n">5</span><div><h3>The Citadel Rises</h3><p>Sky biome, elytra crafting, and the final boss raid.</p></div><span class="goal">1000 relics</span></div>
+    </div>
+    <p class="season">When the final boss falls, the season ends. Titles and cosmetics stay, islands reset.</p>
+  </section>
+
+  <section class="wrap" id="relics">
+    <div class="sec-head">
+      <span class="eyebrow">Relics</span>
+      <h2>What to bring back</h2>
+      <p>Real relics carry the line <em>Lost Sky Relic</em> under their name. Renamed items don't count.</p>
+    </div>
+    <div class="relics">
+      <div class="relic"><canvas width="8" height="8" data-relic="shard"></canvas><h3>Common Shard</h3><span class="pts">1 point</span><small>Any ruin chest.</small></div>
+      <div class="relic"><canvas width="8" height="8" data-relic="tablet"></canvas><h3>Carved Tablet</h3><span class="pts">3 points</span><small>Puzzles in tier 2+ ruins.</small></div>
+      <div class="relic"><canvas width="8" height="8" data-relic="core"></canvas><h3>Ancient Core</h3><span class="pts">10 points</span><small>Guardians in tier 3+ ruins.</small></div>
+      <div class="relic"><canvas width="8" height="8" data-relic="crown"></canvas><h3>Crown Fragment</h3><span class="pts">25 points</span><small>Chapter bosses.</small></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="titles">
+    <div class="sec-head">
+      <span class="eyebrow">Titles</span>
+      <h2>Earn your name in chat</h2>
+    </div>
+    <div class="titles">
+      <div><span>[Wanderer]</span><span class="pts">10 pts</span></div>
+      <div><span>[Relic Seeker]</span><span class="pts">50 pts</span></div>
+      <div><span>[Sky Scholar]</span><span class="pts">150 pts</span></div>
+      <div><span>[Citadel Keeper]</span><span class="pts">400 pts</span></div>
+      <div><span>[Founder]</span><span class="pts">top 3 of a season</span></div>
+    </div>
+  </section>
+
+  <section class="wrap" id="commands">
+    <div class="sec-head">
+      <span class="eyebrow">Commands</span>
+      <h2>Everything you need in game</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td>/is</td><td>Create your island or teleport to it</td></tr>
+          <tr><td>/is team invite &lt;player&gt;</td><td>Invite a friend to your island</td></tr>
+          <tr><td>/is level · /is top</td><td>Your island level and the leaderboard</td></tr>
+          <tr><td>/chapter</td><td>Current chapter and relic progress</td></tr>
+          <tr><td>/ruin</td><td>Teleport to the ruin that's open right now</td></tr>
+          <tr><td>/donate</td><td>Donate the relic in your hand</td></tr>
+          <tr><td>/relics</td><td>Your Citadel points and title</td></tr>
+          <tr><td>/citadel</td><td>Teleport to the Sky Citadel</td></tr>
+          <tr><td>/spawn · /bal · /pay</td><td>Spawn, money, and paying other players</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Lost Sky is a fan-run Minecraft server, not affiliated with Mojang or Microsoft. Season 1 is in development.</div>
+</footer>
+
+<script>
+(function () {
+  var css = getComputedStyle(document.documentElement);
+  function tok(n) { return css.getPropertyValue(n).trim(); }
+
+  // Copy server address
+  var btn = document.getElementById('copy');
+  btn.addEventListener('click', function () {
+    var ip = document.getElementById('ip').textContent;
+    function done() { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy address'; }, 1600); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(document.getElementById('ip'));
+      var s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      btn.textContent = 'Press Ctrl+C';
+    }
+    if (navigator.clipboard) navigator.clipboard.writeText(ip).then(done, fallback); else fallback();
+  });
+
+  // Pixel relic icons (8x8)
+  var icons = {
+    shard:  ["....a...","...aA...","...aAa..","..aAAa..","..aAa...","..aa....",".aa.....","........"],
+    tablet: ["........",".ssssss.",".sdsdds.",".ssssss.",".sddsds.",".ssssss.",".sdssds.",".ssssss."],
+    core:   ["........","..cccc..",".cCCccc.",".cCaacc.",".ccaacc.",".cccccc.","..cccc..","........"],
+    crown:  ["........",".g.g.g..",".ggggg..",".gGgGg..",".ggggg..","........","........","........"]
+  };
+  var pal = {
+    a: tok('--amethyst'), A: '#E6DBFF', s: tok('--stone'), d: tok('--ink-soft'),
+    c: '#2F8F9D', C: '#9FE3EA', g: tok('--gold'), G: '#FFF1C2'
+  };
+  document.querySelectorAll('canvas[data-relic]').forEach(function (cv) {
+    var x = cv.getContext('2d'), rows = icons[cv.dataset.relic];
+    rows.forEach(function (row, y) {
+      for (var i = 0; i < 8; i++) {
+        var ch = row[i]; if (ch === '.') continue;
+        x.fillStyle = pal[ch]; x.fillRect(i, y, 1, 1);
+      }
+    });
+  });
+
+  // Drifting floating islands behind the hero
+  var cv = document.getElementById('sky'), ctx = cv.getContext('2d');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var B = 10, islands = [], W = 0, H = 0;
+  function make(seed) {
+    var w = 4 + (seed * 7) % 6, depth = 2 + (seed % 3), cells = [];
+    for (var r = 0; r < depth + 1; r++) {
+      var inset = r === 0 ? 0 : Math.min(r, Math.floor(w / 2) - 1);
+      for (var c = inset; c < w - inset; c++) cells.push([c, r]);
+    }
+    return { cells: cells, w: w };
+  }
+  function resize() {
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * devicePixelRatio; cv.height = H * devicePixelRatio;
+    ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
+    if (!islands.length) {
+      for (var i = 0; i < 6; i++) {
+        var m = make(i + 3);
+        islands.push({ m: m, x: (i / 6) * W * 1.2 + 40, y: 30 + ((i * 53) % Math.max(60, H - 80)), s: 0.08 + (i % 3) * 0.05, o: 0.18 + (i % 3) * 0.1 });
+      }
+    }
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    var grass = tok('--grass'), dirt = tok('--dirt'), stone = tok('--stone');
+    islands.forEach(function (isl) {
+      ctx.globalAlpha = isl.o;
+      isl.m.cells.forEach(function (c) {
+        ctx.fillStyle = c[1] === 0 ? grass : (c[1] === 1 ? dirt : stone);
+        ctx.fillRect(Math.round(isl.x + c[0] * B), Math.round(isl.y + c[1] * B), B, B);
+      });
+    });
+    ctx.globalAlpha = 1;
+  }
+  function tick() {
+    islands.forEach(function (isl) {
+      isl.x -= isl.s;
+      if (isl.x < -isl.m.w * B - 10) isl.x = W + 20;
+    });
+    draw();
+    requestAnimationFrame(tick);
+  }
+  resize(); draw();
+  addEventListener('resize', function () { resize(); draw(); });
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { css = getComputedStyle(document.documentElement); draw(); });
+  if (!reduce) requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>

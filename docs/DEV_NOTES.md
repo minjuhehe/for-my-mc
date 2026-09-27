@@ -49,9 +49,16 @@ File: `server/plugins/Skript/scripts/lostsky.sk`
 | `{lostsky::name::<n>}` | Display name of chapter `n` (set on load) |
 | `{lostsky::citadel}` | Citadel warp location |
 | `{lostsky::ruin}` | Active ruin warp. Unset when no ruin is up |
+| `{lostsky::site::<id>}` | Location of a pre-built ruin site |
+| `{lostsky::sitetier::<id>}` | Tier of that site = earliest chapter it can appear |
+| `{lostsky::autoruins}` | `true` = open a random ruin every 2 hours |
+| `{lostsky::unlocks::<n>::*}` | Console commands to run when chapter `n` unlocks |
+| `{lostsky::title::<uuid>}` | The last title prefix given to a player |
 
-**Season reset:** delete `{lostsky::*}`, then reload the script. That
-wipes all story progress. Do it only between seasons.
+**Season reset:** reset only the progress, not the setup:
+`chapter`, `relics`, `points::*`, `title::*` (and remove the LuckPerms
+prefixes). Keep `site::*`, `sitetier::*`, `unlocks::*`, `citadel` so the
+next season can reuse them. Do it only between seasons.
 
 ### How relics are recognised
 
@@ -76,25 +83,67 @@ and place the items in the schematic's chests before saving it.
 ### Chapter unlocking
 
 `checkChapter()` runs after every donation and after `/lostsky addrelics`.
-When the total reaches the next goal it moves the chapter up and
-broadcasts. It calls itself again so one big donation can skip more than
-one chapter.
+When the total reaches the next goal it moves the chapter up, broadcasts,
+and calls `runUnlocks(n)`. It calls itself again so one big donation can
+skip more than one chapter (each skipped chapter still runs its unlocks).
 
-**The actual unlocks (generators, biomes, ruin tiers) are not wired yet.**
-That is the `TODO` in `checkChapter()`. The plan is to run console
-commands for the BentoBox addons from there, or to have admins do it by
-hand for the first season.
+**Unlocks are data, not code.** Admins save console commands per chapter
+with `/lsunlock <chapter> <command>`. The script doesn't know about
+generators or biomes. It only runs what was saved. So to change what a
+chapter unlocks, you don't edit the script. You use `/lsunlocks` to look
+and `/lsunlockclear` + `/lsunlock` to change.
 
-### Ruins (for now: manual)
+Plan for the first season (fill these in on the real server, and write
+the exact commands into `docs/CHAPTER_UNLOCKS.md` when they're known):
+- Ch 2: generator tier 2 + forest/plains biomes
+- Ch 3: ocean biome + island size upgrade
+- Ch 4: nether biome + lava generator
+- Ch 5: sky biome + elytra recipe + boss event
 
-1. An admin pastes a ruin schematic near spawn with WorldEdit.
-2. The admin stands at its entrance and runs `/lostsky setruin`.
-3. Everyone gets a broadcast and can use `/ruin` for 45 minutes. Then the
-   warp closes on its own. Remove the build by hand, or `//undo`.
+⚠ `/lostsky setchapter` does **not** run unlocks. It only moves the number.
+Use it for fixing mistakes, not for progressing the story.
 
-Automatic spawning every 2 hours is planned (see `CHANGELOG.md` → Next).
+### Ruins
 
-## 4. Conventions
+Ruins don't really fly in. They are **pre-built ruin sites** far from
+spawn (e.g. 5 000+ blocks away in the island world, or in a separate
+void world). "Drifting in" means the `/ruin` warp opens to one of them.
+
+Setup (once per ruin):
+1. Build or paste the ruin with WorldEdit. Put relics in its chests.
+2. Stand at its entrance: `/lostsky addsite <id> <tier>`.
+   Example: `/lostsky addsite mossy_tower 1`.
+3. When you have a few sites: `/lostsky autoruins on`.
+
+What happens then:
+- Every 2 hours (real time) the script picks a random site with
+  `tier <= current chapter`, broadcasts a 5-minute warning, then opens
+  `/ruin` for 45 minutes.
+- If a ruin is already open, that round is skipped.
+- `/lostsky setruin` still works for a one-off ruin at your position.
+
+⚠ **Loot does not refill by itself yet.** After a ruin closes, an admin
+has to restock its chests (or re-paste it with WorldEdit). Automatic
+restocking is in `CHANGELOG.md` → Next.
+
+### Titles
+
+After every donation `updateTitle()` checks the player's points and, if
+they've reached a new title, runs
+`lp user <name> meta setprefix 100 "<title>"`. EssentialsX Chat shows the
+prefix in chat. Thresholds are in `titleFor()` and must match the
+table in `docs/CONCEPT.md`.
+
+## 4. Website
+
+`website/index.html` is the public info page (one file, no build step).
+`.github/workflows/pages.yml` publishes it to GitHub Pages on every push
+to `main` that touches `website/`.
+
+If you change chapters, relics, titles or player commands, **update the
+website too**. It repeats that info for players.
+
+## 5. Conventions
 
 - Every new command gets a row in `docs/COMMANDS.md` with a permission,
   a source and a status (`planned` / `draft` / `live`).

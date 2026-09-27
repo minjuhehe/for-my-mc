@@ -13,6 +13,7 @@ the server is first tested.
 | Skript | required | Runs `scripts/lostsky.sk` |
 | Vault | required | Economy bridge (Skript + BentoBox use it) |
 | EssentialsX (+ EssentialsX Spawn) | required | Economy, `/spawn`, basics |
+| EssentialsX Chat | required | Shows LuckPerms title prefixes in chat |
 | LuckPerms | required | Permission groups |
 | WorldEdit or FastAsyncWorldEdit | required | Pasting ruins and the Citadel |
 | CoreProtect | recommended | Grief logging / rollback |
