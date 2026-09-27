@@ -6,6 +6,10 @@ the server is first tested.
 Minecraft version in use: **Paper 1.21.11** (Minelan). Every plugin must
 match this version.
 
+**Java 25 is required.** BentoBox 3.23.1 and WorldEdit 7.4.6 are built for
+Java 25 (class file version 69). On Java 21 they fail with
+`UnsupportedClassVersionError ... class file version 69.0`.
+
 | Plugin | Needed? | Notes |
 |--------|---------|-------|
 | BentoBox | required | Skyblock framework |

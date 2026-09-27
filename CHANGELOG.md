@@ -11,6 +11,17 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address on the website.
 
+## 0.2.4: Java 25 required (2026-09-28)
+
+**Why:** on the first real start, BentoBox 3.23.1 and WorldEdit 7.4.6 failed
+to load with `UnsupportedClassVersionError (class file version 69.0)`. They
+need Java 25, and the server was on Java 21. The other 7 plugins loaded fine.
+
+Changed:
+- `server/PLUGINS.md` and `docs/INSTALL_MINELAN.md`: server must run Java 25.
+
+No commands changed.
+
 ## 0.2.3: plugin choices on Minelan (2026-09-28)
 
 **Why:** the original Vault isn't on Modrinth, which is where the Minelan

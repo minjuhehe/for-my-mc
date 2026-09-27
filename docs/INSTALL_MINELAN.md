@@ -15,7 +15,10 @@ Plan in use: **Spider Pack**, 8 GB RAM, 50 GB disk, type "Minecraft Cross".
 
 1. Stop the server first (yellow **หยุด / Stop** button).
 2. **Versions** → choose **Paper**, latest **1.21.x**.
-3. Don't start the server yet.
+3. Set **Java 25** (Startup / Docker image / Java version setting).
+   BentoBox and WorldEdit won't load on Java 21. The error looks like
+   `UnsupportedClassVersionError ... class file version 69.0`.
+4. Don't start the server yet.
 
 "Minecraft Cross" probably means Bedrock players can join too (through
 Geyser). Check in the Plugins tab whether Geyser/Floodgate are already
@@ -58,7 +61,9 @@ Minelan assigns the port.
 
 1. Start the server.
 2. In the console, check that Skript loaded the script:
-   `sk reload lostsky` should report no errors. If it lists errors, copy
+   `sk reload lostsky` should report no errors.
+   Tip: the panel's log editor only shows part of `latest.log` until you
+   scroll or zoom out. Search it for `ERROR` to find problems. If it lists errors, copy
    them and send them over so they can be fixed.
 3. Give yourself admin: `lp user <your name> permission set lostsky.admin true`
 4. Add yourself to the whitelist: `whitelist add <your name>`
