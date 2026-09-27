@@ -23,6 +23,7 @@
     --stone: #7E8781;
     --grass: #5E8C3A;
     --dirt: #7A5A3C;
+    --danger: #B3452F;
     --display: "Marcellus SC", "Palatino Linotype", Palatino, Georgia, serif;
     --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
     --mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
@@ -33,7 +34,7 @@
       --sky: #0E1322; --sky-deep: #182038; --panel: #141B2E;
       --ink: #E4E7F0; --ink-soft: #A3ACC2; --line: #2C3654;
       --amethyst: #B49DF2; --gold: #E2B75A; --stone: #8C938E;
-      --grass: #6FA348; --dirt: #8B6847;
+      --grass: #6FA348; --dirt: #8B6847; --danger: #E88B72;
     }
   }
   :root[data-theme="dark"] {
@@ -41,7 +42,7 @@
     --sky: #0E1322; --sky-deep: #182038; --panel: #141B2E;
     --ink: #E4E7F0; --ink-soft: #A3ACC2; --line: #2C3654;
     --amethyst: #B49DF2; --gold: #E2B75A; --stone: #8C938E;
-    --grass: #6FA348; --dirt: #8B6847;
+    --grass: #6FA348; --dirt: #8B6847; --danger: #E88B72;
   }
 
   * { box-sizing: border-box; }
@@ -117,6 +118,41 @@
   th { font: 600 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
   td:first-child { white-space: nowrap; font-family: var(--mono); color: var(--amethyst); }
 
+  /* Top nav */
+  .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--sky) 88%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; gap: 20px; padding-block: 12px; }
+  .nav .brand { font-family: var(--display); font-size: 1.15rem; color: var(--ink); text-decoration: none; white-space: nowrap; }
+  .nav .links { display: flex; gap: 18px; overflow-x: auto; scrollbar-width: none; margin-left: auto; }
+  .nav .links a { font: 600 0.78rem/1 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); text-decoration: none; white-space: nowrap; padding-block: 6px; }
+  .nav .links a:hover { color: var(--amethyst); }
+  .nav .cta { color: var(--amethyst) !important; }
+  html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .status { display: inline-flex; align-items: center; gap: 8px; font: 600 0.72rem/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  .status::before { content: ""; width: 8px; height: 8px; background: var(--gold); }
+
+  /* What you need */
+  .need { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; counter-reset: step; }
+  .steps li { counter-increment: step; display: grid; grid-template-columns: 40px 1fr; gap: 4px 12px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+  .steps li::before { content: counter(step); grid-row: span 2; font-family: var(--display); font-size: 1.6rem; line-height: 1; color: var(--amethyst); }
+  .steps strong { font-weight: 700; }
+  .steps span { color: var(--ink-soft); font-size: 0.95rem; }
+  .spec { background: var(--panel); border: 1px solid var(--line); padding: 20px; display: grid; gap: 0; align-content: start; }
+  .spec h3 { margin-bottom: 10px; }
+  .spec dl { margin: 0; display: grid; grid-template-columns: auto 1fr; }
+  .spec dt, .spec dd { margin: 0; padding-block: 9px; border-top: 1px dashed var(--line); }
+  .spec dt { font: 600 0.75rem/1.6 var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding-right: 16px; }
+  .ok { color: var(--grass); font-weight: 700; }
+  .no { color: var(--danger); font-weight: 700; }
+
+  /* Rules */
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 32px; }
+  .rules li { padding-block: 10px; border-bottom: 1px solid var(--line); }
+  .rules b { display: block; }
+  .rules span { color: var(--ink-soft); font-size: 0.95rem; }
+
   footer { padding-block: 40px; border-top: 1px solid var(--line); color: var(--ink-soft); font-size: 0.9rem; }
 
   @media (max-width: 560px) {
@@ -128,7 +164,21 @@
 </head>
 <body>
 
-<header class="hero">
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Lost Sky</a>
+    <div class="links">
+      <a href="#how">How it works</a>
+      <a href="#chapters">Story</a>
+      <a href="#relics">Relics</a>
+      <a href="#rules">Rules</a>
+      <a href="#commands">Commands</a>
+      <a class="cta" href="#join">How to join</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="wrap hero-inner">
     <span class="eyebrow">Skyblock · Season 1</span>
@@ -137,12 +187,41 @@
     <div class="join">
       <span class="mono" id="ip">play.lostsky.example</span>
       <button type="button" id="copy">Copy address</button>
-      <span class="tag">Opening soon · Java 1.21</span>
     </div>
+    <span class="status">Opening soon · Java Edition 1.21 · Whitelist</span>
   </div>
 </header>
 
 <main>
+  <section class="wrap" id="join">
+    <div class="sec-head">
+      <span class="eyebrow">Before you join</span>
+      <h2>What you need to play</h2>
+      <p>No mods or downloads from us. A normal Minecraft Java account is enough.</p>
+    </div>
+    <div class="need">
+      <ol class="steps">
+        <li><strong>Own Minecraft: Java Edition</strong><span>For PC, Mac or Linux. Bedrock (phone, console, Windows store "Bedrock") can't join yet.</span></li>
+        <li><strong>Launch version 1.21</strong><span>In the launcher, pick the latest release. It should say 1.21.x.</span></li>
+        <li><strong>Get on the whitelist</strong><span>Send your exact Minecraft username to an admin. We add you before you can join.</span></li>
+        <li><strong>Add the server</strong><span>Multiplayer → Add Server → paste <code>play.lostsky.example</code> → Done.</span></li>
+        <li><strong>Type <code>/is</code></strong><span>You get your own island. Then check <code>/chapter</code> to see where the story is.</span></li>
+      </ol>
+      <div class="spec">
+        <h3>Quick check</h3>
+        <dl>
+          <dt>Edition</dt><dd>Java only</dd>
+          <dt>Version</dt><dd>1.21.x</dd>
+          <dt>Account</dt><dd>Paid Microsoft account (online mode)</dd>
+          <dt>Computer</dt><dd>Anything that runs vanilla Minecraft. 4 GB RAM for the game is plenty</dd>
+          <dt>Mods</dt><dd><span class="ok">Allowed:</span> Sodium, Iris shaders, minimaps, JEI-style recipe viewers</dd>
+          <dt></dt><dd><span class="no">Banned:</span> hacked clients, X-ray, auto-clickers, dupes</dd>
+          <dt>Team</dt><dd>Up to 4 players per island</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
   <section class="wrap" id="how">
     <div class="sec-head">
       <span class="eyebrow">How it works</span>
@@ -197,6 +276,21 @@
       <div><span>[Citadel Keeper]</span><span class="pts">400 pts</span></div>
       <div><span>[Founder]</span><span class="pts">top 3 of a season</span></div>
     </div>
+  </section>
+
+  <section class="wrap" id="rules">
+    <div class="sec-head">
+      <span class="eyebrow">Rules</span>
+      <h2>Keep the sky friendly</h2>
+    </div>
+    <ul class="rules">
+      <li><b>No griefing or stealing</b><span>Islands are protected. Block logs are kept, so we can check anything.</span></li>
+      <li><b>Share the ruins</b><span>Don't block entrances, trap other players or break puzzles.</span></li>
+      <li><b>No cheats or exploits</b><span>Found a bug or a dupe? Report it to an admin and get a reward.</span></li>
+      <li><b>No PvP</b><span>PvP is off everywhere, ruins included.</span></li>
+      <li><b>Be kind in chat</b><span>No hate, spam or advertising.</span></li>
+      <li><b>One account each</b><span>No alt accounts farming relics.</span></li>
+    </ul>
   </section>
 
   <section class="wrap" id="commands">

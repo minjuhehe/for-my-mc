@@ -74,8 +74,13 @@ Donating a relic gives the player:
 | 400 | `[Citadel Keeper]` |
 | Top 3 of season | `[Founder]` (kept forever) |
 
+## Decisions (defaults, used on the website)
+
+- Max island team size: **4** (set in BSkyBlock config when installed).
+- PvP: **off everywhere**, ruins included.
+- Java Edition only, whitelist on.
+
 ## Open questions (decide later)
 
-- Max island team size? (suggestion: 4)
-- PvP on ruins: on or off? (suggestion: off)
 - Season length target? (suggestion: ~2 months)
+- Bedrock support through GeyserMC? (not planned yet)

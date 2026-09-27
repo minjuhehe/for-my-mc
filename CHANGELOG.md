@@ -11,6 +11,24 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address on the website.
 
+## 0.2.1: website "how to join" + rules (2026-09-27)
+
+**Why:** new players need to know what to install and how to get in before
+they read about the story.
+
+Added to `website/index.html`:
+- Sticky top menu with links to each section.
+- **What you need to play**: Java Edition 1.21.x, whitelist, how to add the
+  server, allowed/banned client mods, team size.
+- **Rules** section.
+
+Decisions written onto the website (defaults, change them if you disagree):
+- Team size: **4 per island**.
+- PvP: **off everywhere**, ruins included (matches `pvp=false`).
+- Java only, whitelist on (matches `server.properties`).
+
+No commands changed.
+
 ## 0.2.0: ruins, chapter unlocks, titles, website (2026-09-27)
 
 **Why:** 0.1.0 announced new chapters but they didn't unlock anything, and
