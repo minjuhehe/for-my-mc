@@ -11,6 +11,18 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address on the website.
 
+## 0.2.2: Minelan install guide (2026-09-28)
+
+**Why:** the server is now rented at Minelan (Spider Pack, 8 GB RAM,
+"Minecraft Cross"). The owner needs clear steps to install everything
+through the Minelan panel.
+
+Added:
+- `docs/INSTALL_MINELAN.md`: Paper version, plugin list, uploading
+  `lostsky.sk`, settings, first test, and Bedrock notes.
+
+No commands changed.
+
 ## 0.2.1: website "how to join" + rules (2026-09-27)
 
 **Why:** new players need to know what to install and how to get in before
