@@ -1,0 +1,184 @@
+# ============================================================================
+#  Lost Sky — story system (chapters, relics, Citadel, ruin warp)
+#  Status: DRAFT — not tested on a real server yet.
+#  Needs: Skript 2.9+, Vault + an economy plugin (EssentialsX) for money rewards.
+#  Read docs/DEV_NOTES.md before editing. Update docs/COMMANDS.md if you
+#  change any command here.
+# ============================================================================
+
+options:
+    prefix: &3[Lost Sky]&r
+    relic-tag: Lost Sky Relic
+    donate-money: 25
+    ruin-minutes: 45
+
+# ---------------------------------------------------------------------------
+#  Setup: chapter goals and starting values (only set if missing)
+# ---------------------------------------------------------------------------
+on load:
+    set {lostsky::goal::2} to 100
+    set {lostsky::goal::3} to 300
+    set {lostsky::goal::4} to 600
+    set {lostsky::goal::5} to 1000
+    set {lostsky::name::1} to "The Awakening"
+    set {lostsky::name::2} to "Roots of Stone"
+    set {lostsky::name::3} to "The Drowned Spire"
+    set {lostsky::name::4} to "Ember Halls"
+    set {lostsky::name::5} to "The Citadel Rises"
+    if {lostsky::chapter} is not set:
+        set {lostsky::chapter} to 1
+    if {lostsky::relics} is not set:
+        set {lostsky::relics} to 0
+
+# ---------------------------------------------------------------------------
+#  Relic items. Real relics carry the lore line "{@relic-tag}".
+#  Anvils cannot add lore, so players cannot fake one by renaming.
+#    shard  = amethyst shard     (1 point)
+#    tablet = brick              (3 points)
+#    core   = heart of the sea   (10 points)
+#    crown  = nether star        (25 points)
+# ---------------------------------------------------------------------------
+function relicItem(type: text) :: item:
+    if {_type} is "shard":
+        return amethyst shard named "&bCommon Shard" with lore "&8{@relic-tag}" and "&7Worth 1 Citadel point"
+    if {_type} is "tablet":
+        return brick named "&aCarved Tablet" with lore "&8{@relic-tag}" and "&7Worth 3 Citadel points"
+    if {_type} is "core":
+        return heart of the sea named "&dAncient Core" with lore "&8{@relic-tag}" and "&7Worth 10 Citadel points"
+    if {_type} is "crown":
+        return nether star named "&6Crown Fragment" with lore "&8{@relic-tag}" and "&7Worth 25 Citadel points"
+
+# Returns the point value of a relic item, or 0 if it is not a real relic.
+function relicValue(i: item) :: number:
+    if uncolored line 1 of lore of {_i} is not "{@relic-tag}":
+        return 0
+    if {_i} is amethyst shard:
+        return 1
+    if {_i} is brick:
+        return 3
+    if {_i} is heart of the sea:
+        return 10
+    if {_i} is nether star:
+        return 25
+    return 0
+
+# Checks if the server total reached the next goal and advances the chapter.
+function checkChapter():
+    set {_next} to {lostsky::chapter} + 1
+    if {_next} > 5:
+        stop
+    if {lostsky::relics} >= {lostsky::goal::%{_next}%}:
+        set {lostsky::chapter} to {_next}
+        broadcast "{@prefix} &eThe Citadel stirs... &6Chapter %{_next}%: %{lostsky::name::%{_next}%}% &ehas begun!"
+        # TODO: unlock chapter content here (generator tiers, biomes, ruin tier).
+        checkChapter()
+
+# ---------------------------------------------------------------------------
+#  Player commands
+# ---------------------------------------------------------------------------
+command /chapter:
+    description: Show the current chapter and relic progress.
+    trigger:
+        set {_c} to {lostsky::chapter}
+        send "{@prefix} &6Chapter %{_c}%: %{lostsky::name::%{_c}%}%"
+        if {_c} < 5:
+            set {_next} to {_c} + 1
+            send "&7Relics donated: &f%{lostsky::relics}%&7 / &f%{lostsky::goal::%{_next}%}% &7to unlock Chapter %{_next}%"
+        else:
+            send "&7Relics donated: &f%{lostsky::relics}% &7— final chapter reached!"
+
+command /relics:
+    description: Show your personal Citadel points.
+    executable by: players
+    trigger:
+        send "{@prefix} &7Your Citadel points: &f%{lostsky::points::%player's uuid%} ? 0%"
+
+command /donate:
+    description: Donate the relic in your main hand to the Citadel.
+    permission: lostsky.donate
+    executable by: players
+    trigger:
+        set {_value} to relicValue(player's tool)
+        if {_value} <= 0:
+            send "{@prefix} &cHold a relic in your main hand to donate it."
+            stop
+        remove 1 of player's tool from player's inventory
+        add {_value} to {lostsky::relics}
+        add {_value} to {lostsky::points::%player's uuid%}
+        add {@donate-money} to player's balance
+        send "{@prefix} &aThe Citadel accepts your relic! &7(+%{_value}% points, +${@donate-money})"
+        checkChapter()
+
+command /citadel:
+    description: Teleport to the Sky Citadel.
+    permission: lostsky.citadel
+    executable by: players
+    trigger:
+        if {lostsky::citadel} is not set:
+            send "{@prefix} &cThe Citadel warp has not been set yet."
+            stop
+        teleport player to {lostsky::citadel}
+
+command /ruin:
+    description: Teleport to the active ruin island.
+    permission: lostsky.ruin
+    executable by: players
+    trigger:
+        if {lostsky::ruin} is not set:
+            send "{@prefix} &cNo ruin is drifting nearby right now."
+            stop
+        teleport player to {lostsky::ruin}
+
+# ---------------------------------------------------------------------------
+#  Admin command: /lostsky <sub> [arg1] [arg2]
+# ---------------------------------------------------------------------------
+command /lostsky [<text>] [<text>] [<text>]:
+    description: Lost Sky admin tools.
+    permission: lostsky.admin
+    trigger:
+        if arg-1 is "setchapter":
+            set {_n} to arg-2 parsed as integer
+            if {_n} is not set:
+                send "&cUsage: /lostsky setchapter <1-5>"
+                stop
+            if {_n} < 1 or {_n} > 5:
+                send "&cUsage: /lostsky setchapter <1-5>"
+                stop
+            set {lostsky::chapter} to {_n}
+            send "{@prefix} &aChapter set to %{_n}%."
+        else if arg-1 is "addrelics":
+            set {_n} to arg-2 parsed as integer
+            if {_n} is not set:
+                send "&cUsage: /lostsky addrelics <amount>"
+                stop
+            add {_n} to {lostsky::relics}
+            send "{@prefix} &aServer relic total is now %{lostsky::relics}%."
+            checkChapter()
+        else if arg-1 is "giverelic":
+            set {_p} to arg-2 parsed as player
+            set {_item} to relicItem(arg-3)
+            if {_p} is not set:
+                send "&cUsage: /lostsky giverelic <player> <shard|tablet|core|crown>"
+                stop
+            if {_item} is not set:
+                send "&cUsage: /lostsky giverelic <player> <shard|tablet|core|crown>"
+                stop
+            give {_item} to {_p}
+            send "{@prefix} &aGave %arg-3% relic to %{_p}%."
+        else if arg-1 is "setcitadel":
+            set {lostsky::citadel} to location of player
+            send "{@prefix} &aCitadel warp saved."
+        else if arg-1 is "setruin":
+            set {_loc} to location of player
+            set {lostsky::ruin} to {_loc}
+            broadcast "{@prefix} &eA ruin has drifted in from the void! &f/ruin &eto explore it ({@ruin-minutes} min)."
+            wait {@ruin-minutes} minutes
+            # Only close it if an admin has not replaced it in the meantime.
+            if {lostsky::ruin} is {_loc}:
+                delete {lostsky::ruin}
+                broadcast "{@prefix} &7The ruin sinks back into the void..."
+        else if arg-1 is "clearruin":
+            delete {lostsky::ruin}
+            send "{@prefix} &aRuin warp closed."
+        else:
+            send "&3Lost Sky admin: &fsetchapter, addrelics, giverelic, setcitadel, setruin, clearruin"
