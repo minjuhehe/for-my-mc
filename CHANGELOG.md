@@ -11,6 +11,19 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address on the website.
 
+## 0.2.5: `lostsky-minelan` skill (2026-09-28)
+
+**Why:** the owner wants a future Claude session, with panel access or
+screen control, to pick up where this one stopped.
+
+Added:
+- `.claude/skills/lostsky-minelan/SKILL.md`: project map, Minelan panel
+  facts (Paper 1.21.11 locked to Java 21, no API keys, hourly billing),
+  plugin status, the open BentoBox/WorldEdit Java problem, remaining steps,
+  how to guide the owner, and safety rules.
+
+No commands changed.
+
 ## 0.2.4: Java 25 required (2026-09-28)
 
 **Why:** on the first real start, BentoBox 3.23.1 and WorldEdit 7.4.6 failed

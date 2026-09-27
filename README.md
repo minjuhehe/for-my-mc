@@ -28,6 +28,7 @@ There are 5 chapters. After chapter 5 the season ends and a new one starts.
 | [docs/COMMANDS.md](docs/COMMANDS.md) | **Every command** (player + admin) and its permission |
 | [docs/DEV_NOTES.md](docs/DEV_NOTES.md) | How the pieces fit together. **Read this before changing anything** |
 | [docs/INSTALL_MINELAN.md](docs/INSTALL_MINELAN.md) | How to install everything on the Minelan server |
+| [.claude/skills/lostsky-minelan/](.claude/skills/lostsky-minelan/SKILL.md) | Skill for Claude: everything needed to keep setting up the Minelan server |
 | [CHANGELOG.md](CHANGELOG.md) | A log of every addition, with notes on what each one changed |
 | [server/](server/) | Starter config files |
 
