@@ -136,12 +136,59 @@ table in `docs/CONCEPT.md`.
 
 ## 4. Website
 
-`website/index.html` is the public info page (one file, no build step).
-`.github/workflows/pages.yml` publishes it to GitHub Pages on every push
-to `main` that touches `website/`.
+Thai-language info page. Static files, no build step, no backend.
 
-If you change chapters, relics, titles or player commands, **update the
-website too**. It repeats that info for players.
+| File | What it holds |
+|------|---------------|
+| `website/index.html` | All content (Thai). Sections: `#intro`, `#status`, `#how`, `#start`, `#story`, `#relics`, `#rules`, `#commands`, `#faq` |
+| `website/assets/site.css` | Colour tokens (light + dark), layout, reduced-motion rules |
+| `website/assets/site.js` | Mobile menu, chapter tabs, command filter, copy buttons, current-section highlight |
+| `website/assets/favicon.svg` | Tab icon |
+
+`.github/workflows/pages.yml` publishes the whole `website/` folder to
+GitHub Pages on every push to `main` that touches `website/`. Pages must be
+set to "GitHub Actions" in the repo settings once.
+
+### Rules for the content
+
+- **Say only what is true.** The server isn't open. Never add player counts,
+  online status, reviews or an opening date unless the owner confirms them.
+- **Every claim has a status badge:**
+  - `b-ok` (ยืนยันแล้ว): decided.
+  - `b-draft` (ร่าง · ยังไม่ทดสอบ): written but not tested in game.
+  - `b-plan` (แผน / วางแผน / แผนช่วงทดสอบ): intended, may change.
+  - `b-wait` (รอประกาศ): no information yet.
+- **Commands follow `docs/COMMANDS.md`.** `draft` → ร่าง badge, `planned` →
+  วางแผน badge. Only switch to a "tested" label after a real in-game test.
+  That label doesn't exist yet. Add a new badge class when it's needed.
+- **Server address and contact:** the hero box and FAQ say "รอประกาศ". When
+  the owner confirms the IP and Discord, replace that text. Add a copy
+  button for the IP only then (there's no fake button now).
+- Team 4, PvP off, Java only and whitelist are shown as **แผนช่วงทดสอบ**,
+  not as confirmed server settings.
+- Chapter goals (100/300/600/1000) are shown as **ตัวเลขเบื้องต้น**.
+
+If you change chapters, relics, titles, rules or player commands in the
+docs or the script, **update the website in the same commit**.
+
+### How it's built
+
+- Images are inline SVG: the hero islands (`#isle` symbol) and 8×8 relic
+  icons (`.px-*` classes). No image files and no canvas.
+- Works without JavaScript: all 5 chapters show stacked, and the copy and
+  filter buttons stay hidden. JS adds the `js` class to `<html>`.
+- Chapter tabs follow the WAI-ARIA tabs pattern: arrow keys, Home and End.
+- `prefers-reduced-motion: reduce` turns off all animation.
+- Fonts come from Google Fonts (Taviraj, IBM Plex Sans Thai Looped, IBM Plex
+  Mono), with Thai system fonts as fallback.
+
+### Testing before a push
+
+Serve the folder (`python3 -m http.server -d website 8765`) and check:
+desktop (1280px) and phone (390px) widths, light and dark mode, no sideways
+scrolling, the mobile menu (open, link, Escape), chapter tabs with the
+keyboard, command filter and copy, FAQ with Enter, reduced motion, and the
+page with JavaScript turned off.
 
 ## 5. Conventions
 

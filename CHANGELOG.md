@@ -9,7 +9,36 @@ commands** it touched. Newest first.
 - Write the real `/lsunlock` commands per chapter once plugins are installed.
 - Citadel hologram that shows relic progress.
 - MythicMobs ruin guardians and the chapter 5 boss.
-- Put the real server address on the website.
+- Put the real server address and contact (Discord) on the website once the
+  owner confirms them.
+
+## 0.3.0: Thai website (2026-09-29)
+
+**Why:** players need a clear Thai page about the story, how to get ready,
+the rules and the commands. It must be honest that the server is still in
+development and nothing is tested in game yet.
+
+Changed:
+- `website/index.html` rewritten in Thai: intro, status (confirmed / draft /
+  plan / waiting), how it works, how to get ready, the 5 chapters as
+  keyboard tabs, relics and titles, rules, player commands with filter and
+  copy buttons, FAQ.
+- Server address and contact show "รอประกาศ" (no IP, no fake button).
+- Team 4, PvP off, Java only and whitelist are labelled as plans for the
+  test period, not confirmed settings. Chapter goals are labelled as
+  starting numbers. `[Founder]` is labelled as a plan (not in the script).
+- Floating-island art is now inline SVG with CSS animation (replaces the
+  canvas). Animation stops with reduced motion.
+- New files: `website/assets/site.css`, `website/assets/site.js`,
+  `website/assets/favicon.svg`.
+- Mobile menu button, skip link, visible focus, tap targets 40px or taller, WCAG AA
+  colour contrast in light and dark mode.
+- `docs/DEV_NOTES.md` section 4 rewritten: files, content rules, badges,
+  how to test.
+
+Not changed:
+- `.github/workflows/pages.yml` still publishes `website/` from `main`.
+- No commands changed. All game commands stay `draft` or `planned`.
 
 ## 0.2.5: `lostsky-minelan` skill (2026-09-28)
 
