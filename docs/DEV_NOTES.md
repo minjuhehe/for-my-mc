@@ -140,25 +140,40 @@ they've reached a new title, runs
 prefix in chat. Thresholds are in `titleFor()` and must match the
 table in `docs/CONCEPT.md`.
 
-## 3b. Lobby (planned)
+## 4. Lobby schematics
 
-The lobby is the Sky Citadel plaza, planned in `docs/LOBBY_MAP.md`. It
-lives in its own void world, `lobby` (Multiverse-Core + VoidGen). Islands
-stay in the BSkyBlock world. WorldGuard will protect the lobby before
-players join.
+The generated lobby lives in `lobby/`. `lobby/tools/generate.js` is the source
+of truth and writes five complete Sponge v2 schematics to `lobby/schematics/`.
+Each version is 121×96×121, uses Minecraft 1.21 DataVersion 3953 and carries a
+WorldEdit offset that places the Arrival Terrace spawn pad at the paste point.
+
+Deployment order:
+
+1. Install a Java 21 compatible Multiverse-Core and VoidGen alongside the
+   tested WorldEdit 7.4.5.
+2. Create a separate void world named `lobby`.
+3. Copy `lobby/schematics/*.schem` to `plugins/WorldEdit/schematics/`.
+4. Paste `lobby_ch1` at the intended spawn position, then set Essentials spawn.
+5. Paste the matching full schematic when a later chapter unlocks.
+
+Run `node lobby/tools/test_lobby.js` after any generator change. The current
+suite has 998 checks. Back up the lobby world before every paste and keep it
+whitelist-only until a WorldGuard region is configured. Exact coordinates,
+paste behavior and the live-server checklist are in
+`lobby/LOBBY_HANDOFF.md` and `lobby/docs/LOBBY_IMPORT.md`.
 
 How it connects:
 - EssentialsX `/setspawn` sits on the Arrival Terrace.
 - `/lostsky setcitadel` is set at the donation altar.
-- The Ruin Dock is decoration: the `/ruin` warps still go to the ruin sites.
-- One version of the lobby per chapter (`lobby_ch1.schem` …
-  `lobby_ch5.schem`), pasted by an admin when a chapter unlocks. The
-  script can't paste schematics.
+- The Ruin Dock is decoration: `/ruin` still warps to configured ruin sites.
+- Islands remain in the BSkyBlock world; only the shared Citadel uses `lobby`.
+- The script cannot paste schematics, so an admin pastes the matching version
+  after a chapter unlock.
 
-Keep the spawn point, the altar and the sign positions identical in every
-version, or the saved warps break.
+The spawn point, altar and all sign positions are identical in every version,
+so saved warps remain valid across chapter upgrades.
 
-## 4. Website
+## 5. Website
 
 Thai-language info page. Static files, no build step, no backend.
 
@@ -214,7 +229,7 @@ scrolling, the mobile menu (open, link, Escape), chapter tabs with the
 keyboard, command filter and copy, FAQ with Enter, reduced motion, and the
 page with JavaScript turned off.
 
-## 5. Conventions
+## 6. Conventions
 
 - Every new command gets a row in `docs/COMMANDS.md` with a permission,
   a source and a status (`planned` / `draft` / `live`).

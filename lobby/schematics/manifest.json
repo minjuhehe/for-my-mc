@@ -1,0 +1,79 @@
+{
+  "generated": "2026-09-30T16:47:28.651Z",
+  "dataVersion": 3953,
+  "mcVersion": "1.21.x",
+  "size": {
+    "x": 121,
+    "y": 96,
+    "z": 121
+  },
+  "worldYBase": 16,
+  "spawn": {
+    "x": 60,
+    "y": 81,
+    "z": 108,
+    "yaw": 180
+  },
+  "altar": {
+    "x": 60,
+    "y": 81,
+    "z": 76
+  },
+  "pasteOffset": [
+    60,
+    65,
+    108
+  ],
+  "chapters": [
+    {
+      "ch": 1,
+      "file": "schematics/lobby_ch1.schem",
+      "kb": "92.8",
+      "blocks": 239000,
+      "palette": 61,
+      "signs": 24,
+      "frames": 4,
+      "ms": 75
+    },
+    {
+      "ch": 2,
+      "file": "schematics/lobby_ch2.schem",
+      "kb": "92.7",
+      "blocks": 239654,
+      "palette": 60,
+      "signs": 24,
+      "frames": 4,
+      "ms": 60
+    },
+    {
+      "ch": 3,
+      "file": "schematics/lobby_ch3.schem",
+      "kb": "93.8",
+      "blocks": 240578,
+      "palette": 66,
+      "signs": 24,
+      "frames": 4,
+      "ms": 59
+    },
+    {
+      "ch": 4,
+      "file": "schematics/lobby_ch4.schem",
+      "kb": "94.4",
+      "blocks": 240895,
+      "palette": 71,
+      "signs": 24,
+      "frames": 4,
+      "ms": 59
+    },
+    {
+      "ch": 5,
+      "file": "schematics/lobby_ch5.schem",
+      "kb": "94.3",
+      "blocks": 241463,
+      "palette": 73,
+      "signs": 24,
+      "frames": 4,
+      "ms": 53
+    }
+  ]
+}

@@ -49,6 +49,25 @@ Found:
 No commands changed. The lobby uses the existing `/spawn`, `/citadel`,
 `/ruin`, `/is` and `/donate`.
 
+## 0.4.0: generated Sky Citadel lobby (2026-09-30)
+
+**Why:** the server needs a real, repeatable lobby whose appearance follows
+the five story chapters and can be pasted safely with WorldEdit.
+
+Added:
+- `lobby/`: deterministic Node.js generator, five Sponge v2 schematics,
+  import guide, preview gallery, poster and source layout documents.
+- Seven playable zones: Arrival Terrace, tutorial path, Citadel and donation
+  altar, chapter pillars, Hall of Relics, Ruin Dock and Island Gate.
+- Chapter 3 prismarine water spire and four three-lane edge waterfalls.
+- Chapter 4 blackstone ember hearths; water and ember features persist in
+  later chapter versions.
+- 998 automated checks covering schematic format, paths, signs, lighting,
+  chapter changes, entity limits, palette rules and preview rendering.
+
+Commands documented for deployment: Multiverse world creation, WorldEdit
+schematic load/paste and Essentials `/setspawn`. No gameplay command changed.
+
 ## 0.3.1: first successful MineLan runtime stack (2026-09-30)
 
 **Why:** MineLan runs Paper 1.21.11 on Java 21. BentoBox 3.23.1 used Java
