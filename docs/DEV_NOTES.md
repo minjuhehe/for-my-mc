@@ -21,6 +21,12 @@ together, so you can change one part without breaking another.
 
 Full plugin list with notes: `server/PLUGINS.md`.
 
+MineLan runtime verified on 2026-09-30: Paper 1.21.11 build 132, Java 21,
+BentoBox 3.17.0, BSkyBlock 1.20.0, Challenges 1.8.1, Level 2.29.0 and
+MagicCobblestoneGenerator 2.9.0. Keep these versions together; BentoBox
+3.23.1 requires Java 25, while MagicCobblestoneGenerator 2.10.0 requires
+BentoBox 3.19.1 or newer.
+
 ## 2. How the pieces connect
 
 ```

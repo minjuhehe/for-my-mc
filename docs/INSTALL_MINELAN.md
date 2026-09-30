@@ -4,7 +4,8 @@ Step-by-step for the Minelan panel (`panel.minelan.in.th`). The panel tab
 names below (Versions, Plugins, Files, Configs, Console) match what the
 panel shows at the top.
 
-Plan in use: **Spider Pack**, 8 GB RAM, 50 GB disk, type "Minecraft Cross".
+Plan in use: **Woodlands Pack**, 4 CPU cores, 16 GB RAM, 80 GB disk,
+type "Minecraft Cross".
 
 > ⚠ Minelan bills credits **every hour** while the server exists. If the
 > server expires and isn't renewed within 12 hours, Minelan deletes it,
@@ -15,8 +16,9 @@ Plan in use: **Spider Pack**, 8 GB RAM, 50 GB disk, type "Minecraft Cross".
 
 1. Stop the server first (yellow **หยุด / Stop** button).
 2. **Versions** → choose **Paper**, latest **1.21.x**.
-3. Set **Java 25** (Startup / Docker image / Java version setting).
-   BentoBox and WorldEdit won't load on Java 21. The error looks like
+3. Paper 1.21.11 runs on **Java 21** at MineLan. Use the tested plugin pins:
+   BentoBox 3.17.0 and MagicCobblestoneGenerator 2.9.0. Newer BentoBox
+   3.23.1 needs Java 25 and will fail with
    `UnsupportedClassVersionError ... class file version 69.0`.
 4. Don't start the server yet.
 
@@ -41,6 +43,10 @@ Required, from `server/PLUGINS.md`:
 - WorldEdit (or FastAsyncWorldEdit)
 - CoreProtect (recommended)
 
+Do not use the panel's newest-version suggestion blindly. Keep the exact
+tested versions in `server/PLUGINS.md` until the whole stack is upgraded
+together.
+
 ## 3. Start once, then stop
 
 Start the server (green **เปิด / Start**). Wait until the console says
@@ -61,7 +67,7 @@ Minelan assigns the port.
 
 1. Start the server.
 2. In the console, check that Skript loaded the script:
-   `sk reload lostsky` should report no errors. If it lists errors, copy
+   `skript reload lostsky` should report no errors. If it lists errors, copy
    them and send them over so they can be fixed.
    Tip: the panel's log editor only shows part of `latest.log` until you
    scroll or zoom out. Search it for `ERROR` to find problems.

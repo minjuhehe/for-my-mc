@@ -26,10 +26,11 @@ The repo `minjuhehe/for-my-mc` holds everything. Read these before acting:
 
 Follow the `CLAUDE.md` rules after **every** change.
 
-## Facts about the Minelan server (learned 2026-09-28)
+## Facts about the Minelan server (updated 2026-09-30)
 
-- Panel: `https://panel.minelan.in.th`, server ID `86dc0d9e`, server name
-  "Lostsky", region BKK-8, plan "Spider Pack" (8 GB RAM, 50 GB disk).
+- Panel: `https://panel.minelan.in.th`, server ID `396da441`, server name
+  "Lostsky", region BKK-9, plan "Woodlands Pack" (4 CPU cores, 16 GB RAM,
+  80 GB disk).
 - Runner category: **Minecraft Cross** (the startup command has
   `-DgeyserUdpPort`, so Bedrock via Geyser is possible, but Geyser is not
   installed).
@@ -56,15 +57,18 @@ Follow the `CLAUDE.md` rules after **every** change.
 | LuckPerms | 5.5.71 | ✅ loaded |
 | Vault (VaultUnlocked) | 2.20.3 | ✅ loaded, Essentials found it |
 | Essentials, EssentialsChat, EssentialsSpawn | 2.22.0 | ✅ loaded |
-| Skript | 2.16.2 | ✅ loaded, but `lostsky.sk` not uploaded yet |
+| Skript | 2.16.2 | ✅ loaded; `lostsky.sk` reloads with no errors |
 | CoreProtect | 24.1 | ✅ loaded |
-| BentoBox | 3.23.1 | ❌ needs Java 25 (`class file version 69.0`) |
-| WorldEdit | 7.4.6-beta-02 | ❌ needs Java 25 (`class file version 69.0`) |
+| BentoBox | 3.17.0 | ✅ loaded on Java 21 |
+| BSkyBlock | 1.20.0 | ✅ enabled |
+| Challenges | 1.8.1 | ✅ enabled |
+| Level | 2.29.0 | ✅ enabled |
+| MagicCobblestoneGenerator | 2.9.0 | ✅ enabled |
+| WorldEdit | 7.4.5 | ✅ loaded on Java 21 |
 
-**Open problem:** BentoBox and WorldEdit must be replaced with the newest
-builds that run on **Java 21** (class file version 65 or lower) and support
-1.21.11. The other option is moving the whole server to Minecraft 26.x with
-Java 25, which needs every plugin re-checked. Recommended: older builds.
+**Resolved compatibility choice:** keep BentoBox 3.17.0, WorldEdit 7.4.5 and
+MagicCobblestoneGenerator 2.9.0 while the server stays on Paper 1.21.11 and
+Java 21. Upgrade these only as one tested stack.
 
 To find the right build for sure: download candidate jars from Modrinth
 (`api.modrinth.com`, `cdn.modrinth.com`, which must be allowed in the network
@@ -73,18 +77,13 @@ settings) and read the class file major version of the main class
 
 ## What's left, in order
 
-1. Fix BentoBox + WorldEdit (see above). Check that the BentoBox addons
-   (BSkyBlock, Level, Challenges, MagicCobblestoneGenerator) are in
-   `plugins/BentoBox/addons/`.
-2. Upload `lostsky.sk` to `plugins/Skript/scripts/`, then run
-   `sk reload lostsky` in the console. Fix any Skript errors in the repo
-   first, then give the owner the fixed file.
-3. Give the owner admin rights and whitelist them (`docs/INSTALL_MINELAN.md` step 6).
-4. Test each command in game and mark it `live` in `docs/COMMANDS.md`.
-5. Set team size 4 in the BSkyBlock config.
-6. Build ruin sites, save them with `/lostsky addsite`, and fill in the
+1. Give the owner admin rights and whitelist their Minecraft username
+   (`docs/INSTALL_MINELAN.md` step 6).
+2. Test each command in game and mark it `live` in `docs/COMMANDS.md`.
+3. Set team size 4 in the BSkyBlock config.
+4. Build ruin sites, save them with `/lostsky addsite`, and fill in the
    `/lsunlock` commands for each chapter.
-7. Put the real server address on the website (`website/index.html`) and
+5. Put the real server address on the website (`website/index.html`) and
    publish it (GitHub Pages needs a `main` branch and Pages enabled).
 
 ## How to work with the owner

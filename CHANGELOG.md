@@ -15,7 +15,7 @@ commands** it touched. Newest first.
   build `lobby_ch1` … `lobby_ch5`.
 - Add WorldGuard and protect the lobby before players join.
 
-## 0.3.2: lobby goes in a void world (2026-09-30)
+## 0.3.3: lobby goes in a void world (2026-09-30)
 
 **Why:** the owner chose a separate void world for the lobby, with
 protection added later.
@@ -28,7 +28,7 @@ Changed:
 
 No commands changed.
 
-## 0.3.1: lobby map plan and prompts (2026-09-30)
+## 0.3.2: lobby map plan and prompts (2026-09-30)
 
 **Why:** the owner asked what the lobby will be and for every prompt needed
 to design and build it.
@@ -48,6 +48,27 @@ Found:
 
 No commands changed. The lobby uses the existing `/spawn`, `/citadel`,
 `/ruin`, `/is` and `/donate`.
+
+## 0.3.1: first successful MineLan runtime stack (2026-09-30)
+
+**Why:** MineLan runs Paper 1.21.11 on Java 21. BentoBox 3.23.1 used Java
+25 bytecode, and MagicCobblestoneGenerator 2.10.0 required a newer BentoBox,
+so the SkyBlock engine could not start.
+
+Changed:
+- Pinned BentoBox 3.17.0 and MagicCobblestoneGenerator 2.9.0. The previous
+  jars were preserved outside the active bundle as incompatible archives.
+- Fixed the `/lostsky setchapter` range check so Skript 2.16.2 parses it.
+- Updated the MineLan guide and plugin list with the tested Woodlands Pack,
+  Java 21 and plugin versions.
+- Verified `bbox version`: BSkyBlock 1.20.0, Challenges 1.8.1, Level 2.29.0
+  and MagicCobblestoneGenerator 2.9.0 all report `ENABLED`.
+- Verified `skript reload lostsky`: the script reloads successfully after a
+  clean server restart.
+
+Commands checked: `bbox version`, `skript reload lostsky`, `plugins`,
+`whitelist list`. No player command was marked `live` because in-game testing
+is still pending.
 
 ## 0.3.0: Thai website (2026-09-29)
 

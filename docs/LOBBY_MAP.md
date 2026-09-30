@@ -95,8 +95,8 @@ Whole lobby: about **121×121 blocks**, floating island edge to edge.
    next one by hand when a chapter unlocks. `/lsunlock` can't paste
    schematics, but it can broadcast a message. Back up before each paste,
    and paste when few players are online.
-4. **WorldEdit must load first.** It currently fails because of the Java
-   version (see `server/PLUGINS.md`). Fix that before building.
+4. **WorldEdit:** pinned to 7.4.5, which loads on the server's Java 21
+   (see `server/PLUGINS.md`). Keep that version while building.
 
 ---
 
@@ -299,8 +299,7 @@ Full design: docs/LOBBY_MAP.md in github.com/minjuhehe/for-my-mc.
 
 ## 3. Build order (suggested)
 
-1. Fix WorldEdit. Install Multiverse-Core + VoidGen and create the `lobby`
-   void world. Protection (WorldGuard) comes later, before players join.
+1. Install Multiverse-Core + VoidGen and create the `lobby` void world. Protection (WorldGuard) comes later, before players join.
 2. Get concept art (A1, A2, A3) and pick a look.
 3. Island base (B2), then the Arrival Terrace and the path, so `/spawn`
    works early.

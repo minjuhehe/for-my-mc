@@ -213,7 +213,10 @@ command /lostsky [<text>] [<text>] [<text>]:
             if {_n} is not set:
                 send "&cUsage: /lostsky setchapter <1-5>"
                 stop
-            if {_n} < 1 or {_n} > 5:
+            if {_n} is less than 1:
+                send "&cUsage: /lostsky setchapter <1-5>"
+                stop
+            if {_n} is greater than 5:
                 send "&cUsage: /lostsky setchapter <1-5>"
                 stop
             set {lostsky::chapter} to {_n}
