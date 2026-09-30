@@ -1,28 +1,29 @@
 # Plugin List
 
-Install into `server/plugins/`. Versions are not pinned yet. Pin them once
-the server is first tested.
+Install into `server/plugins/`. The versions below are pinned from the first
+successful MineLan runtime test on 2026-09-30.
 
 Minecraft version in use: **Paper 1.21.11** (Minelan). Every plugin must
 match this version.
 
-**Java 25 is required.** BentoBox 3.23.1 and WorldEdit 7.4.6 are built for
-Java 25 (class file version 69). On Java 21 they fail with
-`UnsupportedClassVersionError ... class file version 69.0`.
+MineLan runs Paper 1.21.11 with **Java 21**. BentoBox 3.23.1 cannot run on
+that image because it uses Java 25 bytecode, so keep BentoBox pinned to
+3.17.0. MagicCobblestoneGenerator 2.10.0 requires BentoBox 3.19.1+, so keep
+that addon pinned to 2.9.0.
 
-| Plugin | Needed? | Notes |
-|--------|---------|-------|
-| BentoBox | required | Skyblock framework |
-| ↳ BSkyBlock addon | required | The Skyblock game mode (`/is`) |
-| ↳ Level addon | required | Island level + `/is top` |
-| ↳ Challenges addon | required | Weekly challenges |
-| ↳ MagicCobblestoneGenerator addon | required | Generator tiers per chapter |
-| Skript | required | Runs `scripts/lostsky.sk` |
-| VaultUnlocked (Modrinth) | required | Drop-in replacement for Vault, the economy bridge Skript + BentoBox use. Original Vault (SpigotMC, by MilkBowl) also works |
-| EssentialsX (+ EssentialsX Spawn) | required | Economy, `/spawn`, basics |
-| EssentialsX Chat | required | Shows LuckPerms title prefixes in chat |
-| LuckPerms | required | Permission groups |
-| WorldEdit or FastAsyncWorldEdit | required | Pasting ruins and the Citadel |
-| CoreProtect | recommended | Grief logging / rollback |
-| MythicMobs | later | Ruin guardians, chapter bosses |
-| DecentHolograms | later | Relic progress hologram at the Citadel |
+| Plugin | Tested version | Needed? | Notes |
+|--------|----------------|---------|-------|
+| BentoBox | 3.17.0 | required | Skyblock framework; Java 21 build |
+| ↳ BSkyBlock addon | 1.20.0 | required | The Skyblock game mode (`/is`) |
+| ↳ Level addon | 2.29.0 | required | Island level + `/is top` |
+| ↳ Challenges addon | 1.8.1 | required | Weekly challenges |
+| ↳ MagicCobblestoneGenerator addon | 2.9.0 | required | Generator tiers per chapter; compatible with BentoBox 3.17.0 |
+| Skript | 2.16.2 | required | Runs `scripts/lostsky.sk` |
+| VaultUnlocked (Modrinth) | 2.20.3 | required | Drop-in replacement for Vault, the economy bridge Skript + BentoBox use. Original Vault (SpigotMC, by MilkBowl) also works |
+| EssentialsX (+ EssentialsX Spawn) | 2.22.0 | required | Economy, `/spawn`, basics |
+| EssentialsX Chat | 2.22.0 | required | Shows LuckPerms title prefixes in chat |
+| LuckPerms | 5.5.71 | required | Permission groups |
+| WorldEdit | 7.4.5 | required | Pasting ruins and the Citadel |
+| CoreProtect | 24.1 | recommended | Grief logging / rollback |
+| MythicMobs | not installed | later | Ruin guardians, chapter bosses |
+| DecentHolograms | not installed | later | Relic progress hologram at the Citadel |
