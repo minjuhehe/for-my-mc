@@ -11,6 +11,43 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address and contact (Discord) on the website once the
   owner confirms them.
+- Build the lobby (`docs/LOBBY_MAP.md`) in the `lobby` void world, then
+  build `lobby_ch1` … `lobby_ch5`.
+- Add WorldGuard and protect the lobby before players join.
+
+## 0.3.2: lobby goes in a void world (2026-09-30)
+
+**Why:** the owner chose a separate void world for the lobby, with
+protection added later.
+
+Changed:
+- `docs/LOBBY_MAP.md`: decision recorded, with world-creation commands,
+  spawn setup, and a warning to keep players out until WorldGuard is set up.
+- `server/PLUGINS.md`: added Multiverse-Core and VoidGen (lobby), and
+  WorldGuard (needed before opening).
+
+No commands changed.
+
+## 0.3.1: lobby map plan and prompts (2026-09-30)
+
+**Why:** the owner asked what the lobby will be and for every prompt needed
+to design and build it.
+
+Added:
+- `docs/LOBBY_MAP.md`: the lobby is the ruined Sky Citadel on a floating
+  island (~121×121) that is rebuilt in 5 versions, one per chapter. It has
+  7 zones tied to game systems (spawn, tutorial path, Citadel + donation
+  altar, chapter pillars, Hall of Relics, Ruin Dock, Island Gate), a style
+  guide, open decisions (void world vs sky, spawn protection), concept-art
+  prompts, build-plan prompts, a human builder brief, and a build order.
+
+Found:
+- `server/server.properties` has `spawn-protection=0`, so the lobby would
+  be unprotected. Written up as a decision in the lobby doc; the file is
+  not changed yet.
+
+No commands changed. The lobby uses the existing `/spawn`, `/citadel`,
+`/ruin`, `/is` and `/donate`.
 
 ## 0.3.0: Thai website (2026-09-29)
 

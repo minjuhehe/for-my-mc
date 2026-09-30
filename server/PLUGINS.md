@@ -23,6 +23,9 @@ Java 25 (class file version 69). On Java 21 they fail with
 | EssentialsX Chat | required | Shows LuckPerms title prefixes in chat |
 | LuckPerms | required | Permission groups |
 | WorldEdit or FastAsyncWorldEdit | required | Pasting ruins and the Citadel |
+| Multiverse-Core | required (lobby) | Creates and manages the separate `lobby` world |
+| VoidGen | required (lobby) | Generator for the empty-sky `lobby` world |
+| WorldGuard | required before opening | Protects the lobby region (other worlds aren't covered by `spawn-protection`) |
 | CoreProtect | recommended | Grief logging / rollback |
 | MythicMobs | later | Ruin guardians, chapter bosses |
 | DecentHolograms | later | Relic progress hologram at the Citadel |

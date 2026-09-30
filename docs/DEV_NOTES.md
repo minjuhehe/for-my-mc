@@ -134,6 +134,24 @@ they've reached a new title, runs
 prefix in chat. Thresholds are in `titleFor()` and must match the
 table in `docs/CONCEPT.md`.
 
+## 3b. Lobby (planned)
+
+The lobby is the Sky Citadel plaza, planned in `docs/LOBBY_MAP.md`. It
+lives in its own void world, `lobby` (Multiverse-Core + VoidGen). Islands
+stay in the BSkyBlock world. WorldGuard will protect the lobby before
+players join.
+
+How it connects:
+- EssentialsX `/setspawn` sits on the Arrival Terrace.
+- `/lostsky setcitadel` is set at the donation altar.
+- The Ruin Dock is decoration: the `/ruin` warps still go to the ruin sites.
+- One version of the lobby per chapter (`lobby_ch1.schem` …
+  `lobby_ch5.schem`), pasted by an admin when a chapter unlocks. The
+  script can't paste schematics.
+
+Keep the spawn point, the altar and the sign positions identical in every
+version, or the saved warps break.
+
 ## 4. Website
 
 Thai-language info page. Static files, no build step, no backend.
