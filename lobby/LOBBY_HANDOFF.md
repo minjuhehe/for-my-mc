@@ -9,7 +9,7 @@ of that plan.
 
 Project folder: `C:\Lost sky`
 Handoff date: 2026-09-30
-Status: **all 5 chapter schematics generated and passing 998 automated checks**.
+Status: **all 5 chapter schematics generated and passing 1,087 automated checks**.
 Not yet verified in a live Minecraft client.
 
 ---
@@ -72,10 +72,12 @@ Key positions (schematic-local):
 | Title board | quartz panel x 56–64, z 27; signs at z 28 | Wanderer / Pathfinder / Sky Warden / Citadel Keeper |
 | Sky islets | 7 floating decor islets, radius 2–4, ~66–78 from centre | some with mini trees |
 
-Paste behaviour: each schematic carries `WEOffset = [60, 65, 108]` so `//paste`
-puts the **spawn pad at the paste position** (player stands where spawn should
-be). Schematic origin maps to world (0, 16, 0) in the target world; the island
-extends ~60 blocks in every direction and ~50 blocks down from the paste point.
+Paste behaviour: each schematic carries `WEOffset = [-60, -81, -108]`.
+WorldEdit reconstructs the clipboard origin as `Offset - WEOffset`, which is
+the local spawn coordinate `(60,81,108)`. Therefore `//paste` puts the
+**spawn pad at the paste position**. The island extends 60 blocks east/west,
+108 blocks north and 12 blocks south from that position, with its underside
+about 62 blocks below the player's feet.
 
 ---
 
@@ -176,7 +178,7 @@ Plain Node.js, **zero dependencies**. Data flow:
 | `tools/render_iso.js` | isometric cube renderer (painter's algorithm, 3-face shading) |
 | `tools/poster.js` | composites LOST_SKY_POSTER.png |
 | `tools/test_nbt.js` | NBT round-trip smoke test (also exports the parser used by other tools) |
-| `tools/test_lobby.js` | **998 assertions** against the actual .schem artifacts |
+| `tools/test_lobby.js` | **1,087 assertions** against the actual .schem artifacts |
 | `tools/rand.js` | seeded RNG (mulberry32) — all generation is deterministic |
 
 Commands:
@@ -187,7 +189,7 @@ node tools/generate.js --only 3   # rebuild one chapter
 node tools/render.js              # top-down + cross PNGs
 node tools/render_iso.js          # iso_ch1 + iso_ch5 (or: node tools/render_iso.js 3)
 node tools/poster.js              # rebuild the poster
-node tools/test_lobby.js          # run all 998 checks
+node tools/test_lobby.js          # run all 1,087 checks
 ```
 
 ---
@@ -223,8 +225,9 @@ node tools/test_lobby.js          # run all 998 checks
 5. **In-game verification pending**: schematic loads in WorldEdit 7.4.5 are
    expected (v2 is its native write format), but nobody has pasted these on a
    live server yet. docs/LOBBY_IMPORT.md has the paste runbook.
-6. **Protection**: nothing added server-side (WorldGuard is a later decision per
-   LOBBY_MAP.md); keep lobby whitelisted until then.
+6. **Protection**: the import guide now requires WorldGuard and lists the
+   `__global__` lobby flags. Keep the lobby whitelist-only until those flags are
+   applied and verified with a normal player account.
 
 ---
 

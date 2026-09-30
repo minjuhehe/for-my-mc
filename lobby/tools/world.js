@@ -97,6 +97,7 @@ const BLOCKS = {
   BEACON: { name: 'minecraft:beacon' },
   TORCH: { name: 'minecraft:torch' },
   CAMPFIRE: { name: 'minecraft:campfire', props: { facing: 'north', lit: 'true', signal_fire: 'false' } },
+  CAMPFIRE_UNLIT: { name: 'minecraft:campfire', props: { facing: 'north', lit: 'false', signal_fire: 'false' } },
 
   // Water
   WATER: { name: 'minecraft:water' },
@@ -107,8 +108,8 @@ const BLOCKS = {
   CHAIN: { name: 'minecraft:chain', props: { axis: 'y' } },
 
   // Furniture / functional
-  LECTERN_S: { name: 'minecraft:lectern', props: { facing: 'south', has_book: 'true' } },
-  LECTERN_N: { name: 'minecraft:lectern', props: { facing: 'north', has_book: 'true' } },
+  LECTERN_S: { name: 'minecraft:lectern', props: { facing: 'south', has_book: 'false' } },
+  LECTERN_N: { name: 'minecraft:lectern', props: { facing: 'north', has_book: 'false' } },
   BOOKSHELF: { name: 'minecraft:bookshelf' },
   CHISELED_BOOKSHELF_S: { name: 'minecraft:chiseled_bookshelf', props: { facing: 'south' } },
   PURPLE_CARPET: { name: 'minecraft:purple_carpet' },
@@ -379,14 +380,13 @@ class World {
   }
 }
 
-// Sponge v2 encodes palette indices as LEB128 varints (zigzag-signed).
+// Sponge v2 encodes non-negative palette indices as plain unsigned LEB128,
+// matching WorldEdit's WriterUtil.writeVarInt and VarIntIterator.
 function encodeVarIntArray(indices) {
   const out = new Uint8Array(indices.length * 3);
   let o = 0;
   for (let i = 0; i < indices.length; i++) {
-    const n = indices[i];
-    const zz = (n << 1) ^ (n >> 31);
-    let u = zz >>> 0;
+    let u = indices[i] >>> 0;
     while (true) {
       if ((u & ~0x7f) === 0) {
         out[o++] = u;

@@ -13,6 +13,7 @@ a chapter unlocks.
 | Multiverse-Core | 4 or 5 | creating + managing the `lobby` void world |
 | VoidGen | latest for 1.21.x | empty-sky world generator |
 | EssentialsX | latest | `/setspawn`, `spawn-on-join` |
+| WorldGuard | compatible with Paper 1.21.x / Java 21 | protect the whole lobby world |
 
 All schematics are **Sponge v2, DataVersion 3953 (Minecraft 1.21)** — exactly
 what WorldEdit 7.4.x writes natively.
@@ -79,13 +80,41 @@ When `/lsunlock` opens chapter *n*:
 Each version is a **full replacement island** — it pastes over the old one, no
 need to delete first. Spawn pad, altar, and all sign positions are identical in
 all five versions, so warps and spawn keep working. WorldEdit will ask to
-confirm replacing //paste — use `//paste -a` (skip air) if you prefer.
+confirm replacing `//paste`. Always paste **without `-a`**: skipping air would
+leave old rubble and broken walls wherever the new chapter contains air.
 
 ## 6. Protect before opening
 
-`spawn-protection` only covers the main world. Until WorldGuard is set up with
-a lobby region, **keep the lobby whitelist-only** (builders), as decided in
-`LOBBY_MAP.md`.
+`spawn-protection` only covers the main world. Install WorldGuard before
+letting players enter `lobby`, then protect the entire world through its
+`__global__` region:
+
+```
+/rg flag __global__ -w lobby passthrough deny
+/rg flag __global__ -w lobby pvp deny
+/rg flag __global__ -w lobby mob-spawning deny
+/rg flag __global__ -w lobby creeper-explosion deny
+/rg flag __global__ -w lobby tnt deny
+/rg flag __global__ -w lobby other-explosion deny
+/rg flag __global__ -w lobby ghast-fireball deny
+/rg flag __global__ -w lobby wither-damage deny
+/rg flag __global__ -w lobby enderman-grief deny
+/rg flag __global__ -w lobby ravager-grief deny
+/rg flag __global__ -w lobby entity-item-frame-destroy deny
+/rg flag __global__ -w lobby fire-spread deny
+/rg flag __global__ -w lobby lava-fire deny
+/rg flag __global__ -w lobby water-flow deny
+/rg flag __global__ -w lobby lava-flow deny
+```
+
+WorldGuard recommends `passthrough deny` for the global region; do not set its
+`build` flag. Enable `high-frequency-flags` in WorldGuard's config so the fire
+and fluid-flow flags are enforced. `water-flow deny` also keeps the decorative
+waterfalls stable.
+
+Give trusted builders `worldguard.region.bypass.lobby` through LuckPerms while
+they work, then remove that permission. Verify protection using a normal test
+account before opening. Keep the server whitelist-only until that check passes.
 
 ## Generated files
 

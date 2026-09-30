@@ -41,8 +41,8 @@ const PILLARS = [
   { x: 45, z: 73 },  // south-west
 ];
 
-// WEOffset so `//paste` puts the spawn point at the player's position:
-// schematic min corner is (0,16,0) in world coords; spawn is at (60,81,108).
+// WEOffset so `//paste` puts local spawn (60,81,108) at the player's position.
+// The exact negative offset is computed in generate.js.
 const PASTE_OFFSET = null; // computed in generate.js from SPAWN
 
 module.exports = {

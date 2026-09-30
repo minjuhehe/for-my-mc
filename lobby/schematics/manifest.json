@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-30T16:47:28.651Z",
+  "generated": "2026-09-30T17:38:53.193Z",
   "dataVersion": 3953,
   "mcVersion": "1.21.x",
   "size": {
@@ -20,56 +20,56 @@
     "z": 76
   },
   "pasteOffset": [
-    60,
-    65,
-    108
+    -60,
+    -81,
+    -108
   ],
   "chapters": [
     {
       "ch": 1,
       "file": "schematics/lobby_ch1.schem",
       "kb": "92.8",
-      "blocks": 239000,
-      "palette": 61,
+      "blocks": 239008,
+      "palette": 62,
       "signs": 24,
       "frames": 4,
-      "ms": 75
+      "ms": 80
     },
     {
       "ch": 2,
       "file": "schematics/lobby_ch2.schem",
-      "kb": "92.7",
-      "blocks": 239654,
-      "palette": 60,
+      "kb": "92.8",
+      "blocks": 239662,
+      "palette": 61,
       "signs": 24,
       "frames": 4,
-      "ms": 60
+      "ms": 68
     },
     {
       "ch": 3,
       "file": "schematics/lobby_ch3.schem",
-      "kb": "93.8",
-      "blocks": 240578,
-      "palette": 66,
+      "kb": "93.7",
+      "blocks": 240603,
+      "palette": 67,
       "signs": 24,
       "frames": 4,
-      "ms": 59
+      "ms": 57
     },
     {
       "ch": 4,
       "file": "schematics/lobby_ch4.schem",
       "kb": "94.4",
-      "blocks": 240895,
-      "palette": 71,
+      "blocks": 240914,
+      "palette": 72,
       "signs": 24,
       "frames": 4,
-      "ms": 59
+      "ms": 53
     },
     {
       "ch": 5,
       "file": "schematics/lobby_ch5.schem",
-      "kb": "94.3",
-      "blocks": 241463,
+      "kb": "94.1",
+      "blocks": 241493,
       "palette": 73,
       "signs": 24,
       "frames": 4,

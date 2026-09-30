@@ -11,9 +11,30 @@ commands** it touched. Newest first.
 - MythicMobs ruin guardians and the chapter 5 boss.
 - Put the real server address and contact (Discord) on the website once the
   owner confirms them.
-- Build the lobby (`docs/LOBBY_MAP.md`) in the `lobby` void world, then
-  build `lobby_ch1` … `lobby_ch5`.
-- Add WorldGuard and protect the lobby before players join.
+- Import the generated lobby into the `lobby` void world.
+- Apply and verify the documented WorldGuard flags before players join.
+
+## 0.4.1: WorldEdit compatibility and lobby safety fixes (2026-10-01)
+
+**Why:** an independent GLM review found that the generated block palette used
+zigzag VarInts while WorldEdit reads unsigned LEB128, and that the saved
+clipboard origin had the wrong sign. Either issue would break a live paste.
+
+Changed:
+- Matched WorldEdit 7.4.5's unsigned LEB128 encoding and corrected `WEOffset`
+  so `//paste` puts the Arrival Terrace spawn block at the player's feet.
+- Rebuilt the Chapter 5 beacon with a valid 3×3 gold base and a clear beam.
+- Added interior lights to every chapter.
+- Moved waterfalls under the solid outer rim so players cannot step into a
+  hole, and made ember hearths non-burning with hidden light sources.
+- Corrected chapter-upgrade instructions to forbid `//paste -a`.
+- Added required WorldGuard `__global__` protection flags and a CI workflow.
+- Expanded the independent artifact suite from 998 to 1,087 checks, including
+  canonical WorldEdit VarInt bytes, clipboard origin, beacon path, entity
+  bounds, interior lighting, safe waterfalls and hearths.
+
+Commands documented: WorldGuard `/rg flag` setup for the `lobby` world. No
+gameplay command changed.
 
 ## 0.3.3: lobby goes in a void world (2026-09-30)
 
@@ -62,7 +83,7 @@ Added:
 - Chapter 3 prismarine water spire and four three-lane edge waterfalls.
 - Chapter 4 blackstone ember hearths; water and ember features persist in
   later chapter versions.
-- 998 automated checks covering schematic format, paths, signs, lighting,
+- 1,087 automated checks covering schematic format, paths, signs, lighting,
   chapter changes, entity limits, palette rules and preview rendering.
 
 Commands documented for deployment: Multiverse world creation, WorldEdit

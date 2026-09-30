@@ -78,6 +78,11 @@ function checkChapter(ch) {
   ok(s.root.Version === 2, 'sponge v2');
   ok(s.root.DataVersion === 3953, 'DataVersion 3953 (1.21)');
   ok(s.W === 121 && s.H === 96 && s.Lg === 121, `size 121x96x121 (got ${s.W}x${s.H}x${s.Lg})`);
+  ok(s.root.PaletteMax === Object.keys(s.root.Palette).length, 'PaletteMax matches Palette size');
+  const min = s.root.Offset.__intArray;
+  const weOffset = [s.root.Metadata.WEOffsetX, s.root.Metadata.WEOffsetY, s.root.Metadata.WEOffsetZ];
+  const origin = min.map((v, i) => v - weOffset[i]);
+  ok(origin.join(',') === '60,81,108', `clipboard origin is spawn (${origin.join(',')})`);
 
   // Island plateau exists at the four quadrant sample points.
   for (const [x, z] of [[30, 30], [90, 30], [30, 90], [90, 90]]) {
@@ -125,7 +130,8 @@ function checkChapter(ch) {
   // Altar dais + lectern + crystal.
   ok(is(s.at(60, GROUND + 1, 76), 'minecraft:quartz_pillar'), 'altar centre column');
   ok(is(s.at(60, GROUND + 3, 76), 'minecraft:lectern'), 'lectern on altar');
-  ok(is(s.at(60, GROUND + 8, 76), 'minecraft:budding_amethyst'), 'floating crystal');
+  if (ch < 5) ok(is(s.at(60, GROUND + 8, 76), 'minecraft:budding_amethyst'), 'floating crystal');
+  else ok(is(s.at(61, GROUND + 8, 76), 'minecraft:amethyst_block'), 'ch5 crystal ring');
   ok(is(s.at(58, GROUND, 74), 'minecraft:polished_andesite'), 'altar dais inner');
 
   // Chapter pillars: all five base rings exist; restored count per chapter.
@@ -162,6 +168,11 @@ function checkChapter(ch) {
   // Entity + sign limits from LOBBY_MAP.md.
   ok(s.signCount === 24, `24 signs (got ${s.signCount})`);
   ok(s.entityCount === 4, `4 item frames (got ${s.entityCount})`);
+  for (const e of (s.root.Entities ? s.root.Entities.__list : [])) {
+    const p = e.Pos.__list;
+    ok(p[0] >= 0 && p[0] < s.W && p[1] >= 0 && p[1] < s.H && p[2] >= 0 && p[2] < s.Lg,
+      `entity inside schematic bounds (${p.join(',')})`);
+  }
 
   // Sign texts: every sign has 4 JSON messages on front and back.
   const be = s.root.BlockEntities.__list;
@@ -195,6 +206,16 @@ function checkChapter(ch) {
   }
   ok(darkOnPath === 0, `spawn->gate walk fully lit (dark columns: ${darkOnPath})`);
 
+  let keepLights = 0;
+  for (let x = 53; x <= 67; x++) {
+    for (let y = GROUND + 1; y <= GROUND + 6; y++) {
+      for (let z = 53; z <= 67; z++) {
+        if (lightBlocks.has(bare(s.at(x, y, z)))) keepLights++;
+      }
+    }
+  }
+  ok(keepLights >= 4, `keep interior has at least four light sources (${keepLights})`);
+
   // Chapter-specific markers.
   if (ch === 1) {
     // Rubble: count non-air blocks sitting on the keep floor (interior only).
@@ -207,17 +228,27 @@ function checkChapter(ch) {
   if (ch >= 3) {
     ok(is(s.at(69, GROUND + 10, 56), 'minecraft:sea_lantern'), `ch${ch} drowned spire crown`);
     ok(is(s.at(69, GROUND + 5, 56), 'minecraft:water'), `ch${ch} drowned spire water core`);
-    for (const [x, z] of [[21, 21], [99, 21], [99, 99], [21, 99]]) {
-      ok(is(s.at(x, GROUND - 20, z), 'minecraft:water'), `ch${ch} waterfall at ${x},${z}`);
+    for (const [x, z] of [[18, 18], [102, 18], [102, 102], [18, 102]]) {
+      ok(is(s.at(x, GROUND, z), 'minecraft:stone_bricks'), `ch${ch} waterfall rim stays solid at ${x},${z}`);
+      ok(is(s.at(x, GROUND - 1, z), 'minecraft:water'), `ch${ch} waterfall source below rim at ${x},${z}`);
+      ok(is(s.at(x, GROUND - 20, z), 'minecraft:water'), `ch${ch} waterfall curtain at ${x},${z}`);
     }
   }
   if (ch >= 4) {
     for (const [x, z] of [[56, 56], [64, 56], [56, 64], [64, 64]]) {
-      ok(is(s.at(x, GROUND + 1, z), 'minecraft:campfire'), `ch${ch} ember hearth at ${x},${z}`);
+      ok(s.at(x, GROUND + 1, z).includes('minecraft:campfire') && s.at(x, GROUND + 1, z).includes('lit=false'),
+        `ch${ch} ember hearth is unlit and safe at ${x},${z}`);
+      ok(is(s.at(x, GROUND - 1, z), 'minecraft:shroomlight'), `ch${ch} ember hearth has hidden light at ${x},${z}`);
     }
   }
   if (ch === 5) {
     ok(is(s.at(60, GROUND + 6, 76), 'minecraft:beacon'), 'ch5 beacon beam source under crystal');
+    for (let x = 59; x <= 61; x++) for (let z = 75; z <= 77; z++) {
+      ok(is(s.at(x, GROUND + 5, z), 'minecraft:gold_block'), `ch5 beacon base ${x},${z}`);
+    }
+    for (let y = GROUND + 7; y < s.H; y++) {
+      ok(s.at(60, y, 76) === 'minecraft:air', `ch5 beacon beam clear at y=${y}`);
+    }
   }
   return s;
 }

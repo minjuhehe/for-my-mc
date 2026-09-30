@@ -75,18 +75,16 @@ function buildChapter(ch) {
 }
 
 // ---------------------------------------------------------------------------
-// WEOffset: so `//paste` at your feet puts the SPAWN block under the player.
-// WorldEdit computes paste origin = target - WEOffset. Schematic block (0,0,0)
-// corresponds to world (0,16,0). We want schematic spawn (60,81,108) to land on
-// the paste target (player pos). WEOffset = spawnWorldPos relative to schematic
-// min corner, in "paste space" (offset applied by WorldEdit):
-//   weOffsetX = 60, weOffsetY = 81 - 16 = 65, weOffsetZ = 108
+// WEOffset is min - clipboardOrigin in WorldEdit's Sponge v2 format. The
+// schematic min is (0,0,0), so a negative spawn vector makes the clipboard
+// origin equal to the Arrival Terrace spawn. `//paste` then puts that exact
+// block at the player's feet.
 function metaFor(ch) {
   return {
     name: `LostSky_lobby_ch${ch}`,
     author: 'LostSkyBuilder',
     dataVersion: 3953, // MC 1.21
-    weOffset: [L.SPAWN.x, L.SPAWN.y - 16, L.SPAWN.z],
+    weOffset: [-L.SPAWN.x, -L.SPAWN.y, -L.SPAWN.z],
   };
 }
 

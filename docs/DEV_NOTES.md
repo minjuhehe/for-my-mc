@@ -149,15 +149,16 @@ WorldEdit offset that places the Arrival Terrace spawn pad at the paste point.
 
 Deployment order:
 
-1. Install a Java 21 compatible Multiverse-Core and VoidGen alongside the
-   tested WorldEdit 7.4.5.
+1. Install Java 21 compatible Multiverse-Core, VoidGen and WorldGuard alongside
+   the tested WorldEdit 7.4.5.
 2. Create a separate void world named `lobby`.
 3. Copy `lobby/schematics/*.schem` to `plugins/WorldEdit/schematics/`.
 4. Paste `lobby_ch1` at the intended spawn position, then set Essentials spawn.
-5. Paste the matching full schematic when a later chapter unlocks.
+5. Protect the complete `lobby` world with WorldGuard's `__global__` region.
+6. Paste the matching full schematic without `-a` when a later chapter unlocks.
 
 Run `node lobby/tools/test_lobby.js` after any generator change. The current
-suite has 998 checks. Back up the lobby world before every paste and keep it
+suite has 1,087 checks. Back up the lobby world before every paste and keep it
 whitelist-only until a WorldGuard region is configured. Exact coordinates,
 paste behavior and the live-server checklist are in
 `lobby/LOBBY_HANDOFF.md` and `lobby/docs/LOBBY_IMPORT.md`.

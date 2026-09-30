@@ -71,10 +71,7 @@ function decodeVarints(bytes, count) {
       result |= (b & 0x7f) << shift;
       shift += 7;
     } while (b & 0x80);
-    const neg = result & 1;
-    let v = result >> 1;
-    if (neg) v = ~v; // zigzag decode (32-bit safe variant)
-    out.push(v | 0);
+    out.push(result >>> 0);
   }
   return out;
 }
@@ -105,6 +102,11 @@ function run() {
   ok(root.Palette['minecraft:stone'] !== undefined, 'stone in palette');
   ok(Array.isArray(root.BlockData.__byteArray), 'BlockData is byte array');
   assertEq(root.BlockData.__byteArray.length, 48, '48 blocks serialized');
+  assertEq(
+    Array.from(encodeVarIntArray(Uint32Array.from([0, 1, 127, 128, 255, 300]))).join(','),
+    '0,1,127,128,1,255,1,172,2',
+    'plain unsigned LEB128 matches WorldEdit canonical bytes'
+  );
   const decoded = decodeVarints(root.BlockData.__byteArray, 48);
   assertEq(decoded.length, 48, '48 varints decoded');
   // index = (y*4 + z)*4 + x -> block at (1,1,1) = (1*4+1)*4+1 = 21

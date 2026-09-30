@@ -1,0 +1,24 @@
+name: Lobby schematic tests
+
+on:
+  push:
+    paths:
+      - "lobby/**"
+      - ".github/workflows/lobby-tests.yml"
+  pull_request:
+    paths:
+      - "lobby/**"
+      - ".github/workflows/lobby-tests.yml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node lobby/tools/generate.js
+      - run: node lobby/tools/render.js
+      - run: node lobby/tools/test_nbt.js
+      - run: node lobby/tools/test_lobby.js

@@ -215,7 +215,7 @@ function keep(w, ch) {
       }
     }
   }
-  if (ch >= 4) {
+  {
     for (const [lx, lz] of [[55, 55], [65, 55], [55, 65], [65, 65]]) {
       w.set(lx, y + 3, lz, B.LANTERN_HANGING);
       w.set(lx, y + 4, lz, B.CHAIN);
@@ -311,18 +311,20 @@ function chapterAtmosphere(w, ch) {
     // arrival terrace and Hall of Relics. The heads are lit and framed so the
     // feature reads clearly from both above and below the island.
     for (const [wx, wz, ix, iz] of [
-      [21, 21, 1, 1], [99, 21, -1, 1],
-      [99, 99, -1, -1], [21, 99, 1, -1],
+      [18, 18, 1, 1], [102, 18, -1, 1],
+      [102, 102, -1, -1], [18, 102, 1, -1],
     ]) {
       w.set(wx + ix, y, wz + iz, B.SEA_LANTERN);
       w.set(wx + ix * 2, y, wz + iz * 2, B.PRISMARINE_BRICKS);
-      // Three uneven lanes form a natural curtain instead of a blue pipe.
+      // Three uneven lanes form a natural curtain below a solid rim. Water
+      // starts under the walkable surface, so there is no hole to fall into.
       const tx = -iz, tz = ix;
       const depths = [27, 34, 30];
       for (let lane = -1; lane <= 1; lane++) {
         const lx = wx + tx * lane, lz = wz + tz * lane;
-        w.set(lx, y, lz, B.WATER);
-        for (let wy = y - 1; wy >= y - depths[lane + 1]; wy--) {
+        w.set(lx, y, lz, B.STONE_BRICKS);
+        w.set(lx, y - 1, lz, B.WATER);
+        for (let wy = y - 2; wy >= y - depths[lane + 1]; wy--) {
           w.set(lx, wy, lz, B.WATER_FALLING);
         }
       }
@@ -333,8 +335,9 @@ function chapterAtmosphere(w, ch) {
     // Four low hearths make the Ember Halls literal without redstone or
     // entities. Polished blackstone isolates the fire from greenery.
     for (const [hx, hz] of [[56, 56], [64, 56], [56, 64], [64, 64]]) {
+      w.set(hx, y - 1, hz, B.SHROOMLIGHT);
       w.set(hx, y, hz, B.POLISHED_BLACKSTONE_BRICKS);
-      w.set(hx, y + 1, hz, B.CAMPFIRE);
+      w.set(hx, y + 1, hz, B.CAMPFIRE_UNLIT);
     }
   }
 }
@@ -378,18 +381,24 @@ function altar(w, ch) {
 
   // Floating amethyst crystal above the altar (dim in ch1, beacon beam ch5).
   const cy = y + 8;
-  w.set(x, cy, z, B.BUDDING_AMETHYST);
-  w.set(x, cy + 1, z, B.AMETHYST_BLOCK);
-  w.set(x, cy - 1, z, B.AMETHYST_CLUSTER);
-  if (ch >= 3) {
-    // small orbiting shards
-    w.set(x + 1, cy, z, B.AMETHYST_CLUSTER);
-    w.set(x - 1, cy + 1, z, B.AMETHYST_CLUSTER);
-  }
   if (ch >= 5) {
-    // beacon under the crystal for the beam
+    // A valid 3x3 mineral base powers the beacon. The amethyst is a ring,
+    // leaving the complete centre column clear for the beam.
+    w.fill(x - 1, cy - 3, z - 1, x + 1, cy - 3, z + 1, B.GOLD_BLOCK);
     w.set(x, cy - 2, z, B.BEACON);
-    w.set(x, cy - 3, z, B.AMETHYST_BLOCK);
+    for (const [dx, dz] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+      w.set(x + dx, cy, z + dz, B.AMETHYST_BLOCK);
+      w.set(x + dx, cy + 1, z + dz, B.AMETHYST_CLUSTER);
+    }
+  } else {
+    w.set(x, cy, z, B.BUDDING_AMETHYST);
+    w.set(x, cy + 1, z, B.AMETHYST_BLOCK);
+    w.set(x, cy - 1, z, B.AMETHYST_CLUSTER);
+    if (ch >= 3) {
+      // small orbiting shards
+      w.set(x + 1, cy, z, B.AMETHYST_CLUSTER);
+      w.set(x - 1, cy + 1, z, B.AMETHYST_CLUSTER);
+    }
   }
 
   // Light around the dais: hidden glowstone in the pedestal + corner lamps ch2+.

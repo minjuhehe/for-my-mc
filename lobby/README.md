@@ -10,7 +10,7 @@ Run everything with plain Node (no dependencies):
 node tools/generate.js      # build all 5 chapter schematics -> schematics/
 node tools/generate.js --only 1   # rebuild just chapter 1
 node tools/render.js        # PNG previews (top-down + cross-section) -> preview/
-node tools/test_lobby.js    # 998-check test suite against the .schem artifacts
+node tools/test_lobby.js    # 1,087-check test suite against the .schem artifacts
 node tools/test_nbt.js      # low-level NBT/schematic round-trip smoke test
 ```
 
