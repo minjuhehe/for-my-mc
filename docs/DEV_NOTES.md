@@ -246,6 +246,14 @@ page with JavaScript turned off.
 
 ## New MineLan instance (2026-10-01)
 
+Pending migration: compact shared spawn plus `/is city` team restoration.
+skript-reflect 2.6.3 loaded after restart; `lostsky_cities` created/protected.
+New spawn schematic uploaded but NOT pasted. City script had one coordinate
+parse error, fixed locally; latest Java paste error handling also needs a live
+reload. Authentication expired before re-upload/validation. Current server
+still has the previous restored shared hub. Local chapter tests: 1,087 passed;
+NBT smoke test passed. Do not report team city behavior as live yet.
+
 Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.
 WorldEdit 7.4.5 and WorldGuard 7.0.17 FAILED on Java 21 (class version 69).
 Use WorldEdit 7.4.2 and WorldGuard 7.0.16 (class version 65). The former

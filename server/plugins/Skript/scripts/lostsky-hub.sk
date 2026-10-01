@@ -6,6 +6,7 @@ options:
 function skyHubMenu(p: player):
     set {_inv} to chest inventory with 3 rows named "&3Lost Sky | เมืองท่ากลาง"
     set slot 10 of {_inv} to grass block named "&aเกาะของคุณ" with lore "&7สร้างเกาะใหม่ หรือกลับเกาะของทีม" and "&eคลิกเพื่อใช้ /is"
+    set slot 11 of {_inv} to stone bricks named "&dเมืองฟื้นฟูของทีม" with lore "&7แยกจาก spawn กลางและเกาะที่คุณสร้าง" and "&eคลิกเปิด /is city"
     set slot 12 of {_inv} to book named "&bวิธีเริ่มเล่น" with lore "&7สร้างเกาะ ชวนเพื่อน และพัฒนาเมืองทีม" and "&eคลิกอ่านคู่มือ"
     set slot 14 of {_inv} to compass named "&6กลับ spawn กลาง" with lore "&7พบผู้เล่นคนอื่นที่เมืองท่ากลาง" and "&eคลิกเพื่อกลับ spawn"
     set slot 16 of {_inv} to barrier named "&cปิดเมนู"
@@ -17,7 +18,7 @@ function skyHubGuide(p: player):
     send "&f1. &a/is &7สร้างเกาะ หรือกลับเกาะของทีม" to {_p}
     send "&f2. &a/is team invite <ชื่อเพื่อน> &7ชวนเพื่อนเข้าทีม" to {_p}
     send "&f3. &7ทำฟาร์ม หาอุปกรณ์ และสร้างเมืองของทีมคุณ" to {_p}
-    send "&f4. &7ระบบฟื้นฟูเมืองแยกทีมกำลังพัฒนา" to {_p}
+    send "&f4. &d/is city &7เปิดเมนูเมืองฟื้นฟูของทีม" to {_p}
     send "&e/spawn &7กลับเมืองท่ากลาง   &e/menu &7เปิดเมนู" to {_p}
 
 command /hub:
@@ -46,6 +47,9 @@ on right click on entity:
     else if uncolored name of clicked entity is "Island Captain":
         cancel event
         skyHubMenu(player)
+    else if uncolored name of clicked entity is "City Architect":
+        cancel event
+        execute player command "city"
 
 on inventory click:
     if {lostskyhub::menu::%uuid of player%} is not set:
@@ -59,6 +63,8 @@ on inventory click:
     close player's inventory
     if {_choice} is 10:
         execute player command "is"
+    else if {_choice} is 11:
+        execute player command "city"
     else if {_choice} is 12:
         skyHubGuide(player)
     else if {_choice} is 14:

@@ -19,6 +19,7 @@ that addon pinned to 2.9.0.
 | ↳ Challenges addon | 1.8.1 | required | Weekly challenges |
 | ↳ MagicCobblestoneGenerator addon | 2.9.0 | required | Generator tiers per chapter; compatible with BentoBox 3.17.0 |
 | Skript | 2.16.2 | required | Runs `scripts/lostsky.sk` |
+| skript-reflect | 2.6.3 | required for team cities | BentoBox team identity and WorldEdit city placement; loaded live, city behavior pending validation |
 | VaultUnlocked (Modrinth) | 2.20.3 | required | Drop-in replacement for Vault, the economy bridge Skript + BentoBox use. Original Vault (SpigotMC, by MilkBowl) also works |
 | EssentialsX (+ EssentialsX Spawn) | 2.22.0 | required | Economy, `/spawn`, basics |
 | EssentialsX Chat | 2.22.0 | required | Shows LuckPerms title prefixes in chat |

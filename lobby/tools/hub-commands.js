@@ -20,14 +20,14 @@ function text(x, y, z, content, color = 'aqua', scale = 1) {
 }
 npc(-4.5, -8.5, 'Lost Sky Guide', 'librarian');
 npc(4.5, -8.5, 'Island Captain', 'cartographer');
+npc(32.5, -18.5, 'City Architect', 'mason');
 text(0.5, 104.8, -9.5, 'LOST SKY\nเมืองท่ากลาง', 'gold', 1.4);
 text(-4.5, 102.8, -8.5, 'ผู้แนะนำการเล่น\nคลิกขวาเพื่อเปิดเมนู');
 text(4.5, 102.8, -8.5, 'เดินทางสู่เกาะของคุณ\nคลิกขวาเพื่อเปิดเมนู', 'green');
 text(0.5, 102.5, -17.5, '/spawn กลับเมืองท่า\n/menu เปิดเมนูได้ทุกที่', 'white');
-text(0.5, 104.5, -29.5, 'สร้างเกาะ • รวมทีม • ฟื้นฟูเมือง\nความคืบหน้าเมืองทีมกำลังพัฒนา', 'yellow');
-text(45.5, 103.5, -48.5, 'ประตูสู่เกาะของทีม\nใช้ /is เพื่อเริ่มต้น', 'green');
-text(-50.5, 103.5, -48.5, 'ท่าเรือสำรวจ\nกิจกรรมซากโบราณกำลังเตรียมเปิด', 'aqua');
-text(0.5, 104, -74.5, 'หอประวัติศาสตร์ Lost Sky\nพื้นที่ส่วนกลางสำหรับทุกทีม', 'gold');
+text(32.5, 102.8, -18.5, 'เมืองฟื้นฟูของทีม\nคลิกขวา หรือ /is city', 'light_purple');
+text(-31.5, 103.5, -18.5, 'เกาะของคุณ\nใช้ /is เพื่อกลับเกาะ', 'green');
+text(0.5, 103.5, -58.5, 'ท่าเรือสำรวจ\nกิจกรรมกำลังเตรียมเปิด', 'aqua');
 cmds.push(
   'rg flag __global__ -w lobby mob-spawning deny',
   'execute in minecraft:lobby run minecraft:gamerule minecraft:advance_time false',

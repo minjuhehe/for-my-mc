@@ -90,7 +90,7 @@ function metaFor(ch) {
 
 function main() {
   if (process.argv.includes('--hub')) {
-    const w = buildChapter(5);
+    const w = require('./hub')();
     for (const sign of w.signs) w.set(sign.x, sign.y, sign.z, B.AIR);
     w.signs = [];
     w.entities = [];
@@ -98,7 +98,7 @@ function main() {
     w.saveSchematic(path.join(OUT_DIR, 'spawn_hub.schem'), {
       ...metaFor(5), name: 'LostSky_shared_spawn',
     });
-    console.log('Shared spawn generated: restored city, no story signs or relic frames.');
+    console.log('New travel plaza generated, separate from restoration cities.');
     return;
   }
   const onlyArg = process.argv.includes('--only');

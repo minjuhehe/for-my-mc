@@ -1,0 +1,200 @@
+# Team cities keyed by BentoBox island ID, not player name or team owner.
+# Requires skript-reflect 2.6.3, BentoBox and WorldEdit.
+import:
+    world.bentobox.bentobox.BentoBox
+    org.bukkit.Bukkit
+    java.io.File
+    java.io.FileInputStream
+    com.sk89q.worldedit.WorldEdit
+    com.sk89q.worldedit.bukkit.BukkitAdapter
+    com.sk89q.worldedit.extent.clipboard.io.BuiltInClipboardFormat
+    com.sk89q.worldedit.session.ClipboardHolder
+    com.sk89q.worldedit.math.BlockVector3
+    com.sk89q.worldedit.function.operation.Operations
+
+function skyCityKey(p: player) :: text:
+    set {_world} to Bukkit.getWorld("bskyblock_world")
+    set {_manager} to BentoBox.getInstance().getIslandsManager()
+    set {_island} to {_manager}.getIsland({_world}, {_p}.getUniqueId())
+    if {_island} is not set:
+        return ""
+    return {_island}.getUniqueId()
+
+function skyCityBuild(slot: number, chapter: number) :: boolean:
+    set {_world} to Bukkit.getWorld("lostsky_cities")
+    if {_world} is not set:
+        return false
+    set {_file} to new File("plugins/WorldEdit/schematics/lobby_ch%{_chapter}%.schem")
+    if {_file}.exists() is false:
+        return false
+    set {_stream} to new FileInputStream({_file})
+    set {_format} to BuiltInClipboardFormat.SPONGE_V2_SCHEMATIC
+    set {_reader} to {_format}.getReader({_stream})
+    set {_clipboard} to try {_reader}.read()
+    {_reader}.close()
+    if {_clipboard} is not set:
+        return false
+    set {_adapted} to BukkitAdapter.adapt({_world})
+    set {_session} to WorldEdit.getInstance().newEditSession({_adapted})
+    {_session}.setFastMode(true)
+    set {_holder} to new ClipboardHolder({_clipboard})
+    set {_x} to {_slot} * 512
+    set {_target} to BlockVector3.at({_x}, 100, 0)
+    set {_paste} to {_holder}.createPaste({_session})
+    {_paste}.to({_target})
+    {_paste}.ignoreAirBlocks(false)
+    {_paste}.copyEntities(false)
+    set {_operation} to {_paste}.build()
+    try Operations.complete({_operation})
+    set {_pasteError} to last java error
+    {_session}.close()
+    {_holder}.close()
+    if {_pasteError} is set:
+        send "[Lost Sky] City paste failed: %{_pasteError}%" to console
+        return false
+    set {_floor} to {_world}.getBlockAt({_x}, 99, 0)
+    if "%{_floor}.getType()%" is "CHISELED_QUARTZ_BLOCK":
+        return true
+    return false
+
+function skyCityGo(p: player):
+    set {_key} to skyCityKey({_p})
+    if {_key} is "":
+        send "&3[Lost Sky] &eสร้างเกาะหรือเข้าทีมก่อนด้วย /is" to {_p}
+        stop
+    if {skycity::ready::%{_key}%} is not true:
+        if {skycity::building} is true:
+            send "&3[Lost Sky] &eกำลังเตรียมเมือง กรุณาลองอีกครั้ง" to {_p}
+            stop
+        if {skycity::slot::%{_key}%} is not set:
+            add 1 to {skycity::next}
+            set {skycity::slot::%{_key}%} to {skycity::next}
+        set {skycity::building} to true
+        send "&3[Lost Sky] &eกำลังสร้างเมืองซากโบราณของทีมคุณ..." to {_p}
+        set {_ok} to skyCityBuild({skycity::slot::%{_key}%}, 1)
+        delete {skycity::building}
+        if {_ok} is not true:
+            send "&3[Lost Sky] &cเตรียมเมืองไม่สำเร็จ กรุณาแจ้งแอดมิน" to {_p}
+            stop
+        set {skycity::chapter::%{_key}%} to 1
+        set {skycity::points::%{_key}%} to 0
+        set {skycity::ready::%{_key}%} to true
+    set {_x} to {skycity::slot::%{_key}%} * 512 + 0.5
+    teleport {_p} to location({_x}, 100, 0.5, world "lostsky_cities", 180, 0)
+    set fall distance of {_p} to 0
+    send "&3[Lost Sky] &aเมืองของทีม — บท %{skycity::chapter::%{_key}%}% &7| /city เปิดเมนูฟื้นฟู" to {_p}
+
+function skyCityMenu(p: player):
+    set {_key} to skyCityKey({_p})
+    if {_key} is "":
+        send "&3[Lost Sky] &eสร้างเกาะหรือเข้าทีมก่อนด้วย /is" to {_p}
+        stop
+    set {_chapter} to {skycity::chapter::%{_key}%} ? 1
+    set {_points} to {skycity::points::%{_key}%} ? 0
+    set {_inv} to chest inventory with 3 rows named "&5Lost Sky | เมืองของทีม"
+    set slot 10 of {_inv} to ender pearl named "&aไปเมืองของทีม" with lore "&7วาร์ปไปพื้นที่ฟื้นฟูของทีมคุณ"
+    set slot 12 of {_inv} to book named "&eบท %{_chapter}% | Relic %{_points}%" with lore "&7เป้าสะสม: 100 / 300 / 600 / 1000" and "&7ความคืบหน้าแยกจากทีมอื่น"
+    set slot 14 of {_inv} to amethyst shard named "&dบริจาค Relic เพื่อฟื้นฟู" with lore "&7ถือ Relic ในมือหลักแล้วกดปุ่มนี้" and "&7เมื่อถึงเป้า เมืองจะเปลี่ยนเป็นบทถัดไป"
+    set slot 16 of {_inv} to compass named "&bกลับ spawn กลาง"
+    set {skycity::menu::%uuid of {_p}%} to {_inv}
+    open {_inv} to {_p}
+
+function skyCityDonate(p: player):
+    set {_key} to skyCityKey({_p})
+    if {_key} is "":
+        stop
+    if {skycity::ready::%{_key}%} is not true:
+        send "&3[Lost Sky] &eเข้าเมืองครั้งแรกด้วย /city go ก่อน" to {_p}
+        stop
+    set {_chapter} to {skycity::chapter::%{_key}%}
+    if {_chapter} >= 5:
+        send "&3[Lost Sky] &aเมืองทีมฟื้นฟูครบแล้ว!" to {_p}
+        stop
+    set {_value} to relicValue({_p}'s tool)
+    if {_value} <= 0:
+        send "&3[Lost Sky] &eถือ Relic ของ Lost Sky ในมือหลักก่อน" to {_p}
+        stop
+    if {skycity::building} is true:
+        send "&3[Lost Sky] &eกำลังฟื้นฟูเมือง กรุณาลองใหม่" to {_p}
+        stop
+    set {_newpoints} to {skycity::points::%{_key}%} + {_value}
+    set {_next} to {_chapter} + 1
+    set {_goal} to {lostsky::goal::%{_next}%}
+    if {_newpoints} >= {_goal}:
+        set {skycity::building} to true
+        # Move visitors clear before replacing the prefab. Their island stays intact.
+        set {_cx} to {skycity::slot::%{_key}%} * 512
+        loop all players:
+            if name of loop-player's world is "lostsky_cities":
+                set {_dx} to x-coordinate of loop-player - {_cx}
+                if {_dx} is between -65 and 65:
+                    teleport loop-player to location(0.5, 100, 0.5, world "lobby", 180, 0)
+        set {_ok} to skyCityBuild({skycity::slot::%{_key}%}, {_next})
+        delete {skycity::building}
+        if {_ok} is not true:
+            send "&3[Lost Sky] &cฟื้นฟูไม่สำเร็จ Relic ยังอยู่ในมือคุณ" to {_p}
+            stop
+        set {skycity::chapter::%{_key}%} to {_next}
+        send "&3[Lost Sky] &6เมืองของทีมฟื้นฟูเป็นบท %{_next}% แล้ว!" to {_p}
+    remove 1 of {_p}'s tool from {_p}'s inventory
+    set {skycity::points::%{_key}%} to {_newpoints}
+    send "&3[Lost Sky] &aบริจาคสำเร็จ +%{_value}% | รวม %{_newpoints}%" to {_p}
+
+command /city [<text>]:
+    executable by: players
+    trigger:
+        if arg-1 is "go":
+            skyCityGo(player)
+        else if arg-1 is "donate":
+            skyCityDonate(player)
+        else:
+            skyCityMenu(player)
+
+# Add exact aliases without replacing BentoBox's /is command or its subcommands.
+on command:
+    if full command is "is city" or "island city":
+        cancel event
+        skyCityMenu(player)
+    else if full command is "is city go" or "island city go":
+        cancel event
+        skyCityGo(player)
+
+on inventory click:
+    if {skycity::menu::%uuid of player%} is not set:
+        stop
+    if player's current inventory is not {skycity::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skycity::menu::%uuid of player%}:
+        stop
+    set {_choice} to index of event-slot
+    close player's inventory
+    if {_choice} is 10:
+        skyCityGo(player)
+    else if {_choice} is 14:
+        skyCityDonate(player)
+    else if {_choice} is 16:
+        execute player command "essentials:spawn"
+
+on inventory drag:
+    if {skycity::menu::%uuid of player%} is set:
+        if player's current inventory is {skycity::menu::%uuid of player%}:
+            cancel event
+
+on inventory close:
+    if event-inventory is {skycity::menu::%uuid of player%}:
+        delete {skycity::menu::%uuid of player%}
+
+on quit:
+    delete {skycity::menu::%uuid of player%}
+
+on load:
+    delete {skycity::menu::*}
+    delete {skycity::building}
+
+every 10 ticks:
+    loop all players:
+        if name of loop-player's world is "lostsky_cities":
+            if y-coordinate of loop-player is below 45:
+                teleport loop-player to location(0.5, 100, 0.5, world "lobby", 180, 0)
+                set fall distance of loop-player to 0

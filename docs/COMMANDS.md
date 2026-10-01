@@ -41,6 +41,14 @@ Shared hub additions (`lostsky-hub.sk`, draft until live tests):
 | `/menu`, `/skymenu` | Open the shared harbour menu | none | lostsky-hub.sk | draft |
 | `/skyguide` | Show the Thai starting guide | none | lostsky-hub.sk | draft |
 
+Team city commands (`lostsky-city.sk`):
+
+| Command | What it does | Permission | Source | Status |
+|---------|--------------|------------|--------|--------|
+| `/city`, `/is city` | Open team restoration menu | island membership | lostsky-city.sk | draft |
+| `/city go`, `/is city go` | Prepare and warp to the team's city | island membership | lostsky-city.sk | draft |
+| `/city donate` | Donate held relic to the team's restoration | island membership | lostsky-city.sk | draft |
+
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
 | `/spawn` | Return to shared harbour in lobby | `essentials.spawn` | EssentialsSpawn | live |

@@ -1,14 +1,14 @@
 # Shared spawn / team cities
 
-The public `lobby` world is a restored sky harbour shared by all players.
-It remains independent of any team's story chapter. Existing five chapter
-schematics are retained as design material for future team cities.
+The replacement public `lobby` is a compact floating travel plaza with
+three connected pavilions. Team restoration belongs to `lostsky_cities`.
+See TEAM_CITIES.md for the `/is city` menu and separate team progression.
 
 ## Interaction design
 
-Replace the 24 old story signs with eight short floating headings and two
+Replace the old story signs with seven short floating headings and three
 stationary villager guides. Right-click either guide to open a three-row
-menu: own island, starting guide, return to spawn, close. `/menu` opens it
+menu: own island, team city, starting guide, return to spawn, close. `/menu` opens it
 from anywhere. The menu cancels inventory clicks and drags while open.
 
 Use native Minecraft text displays and villagers plus installed Skript;
@@ -32,7 +32,7 @@ Sources consulted:
    `//schem load spawn_hub.schem sponge.2`, then `//paste`.
 6. Run `node lobby/tools/hub-commands.js` and run the generated console
    commands in `lobby/docs/HUB_CONSOLE_COMMANDS.txt` sequentially.
-   Mob spawning is temporarily allowed for the two guides, then denied again.
+   Mob spawning is temporarily allowed for the three guides, then denied again.
    Gamerules use the namespaced snake_case names required by 1.21.11.
 7. At the arrival terrace, run `/setspawn` and `/mv setspawn`. Essentials
    owns `/spawn`; default group needs `essentials.spawn`. `/hub` and
@@ -42,7 +42,7 @@ Sources consulted:
 
 ## Current scope
 
-The restored hub is installed on MineLan server 9623747d. The script reloads
+The PREVIOUS restored hub is installed on MineLan server 9623747d. The script reloads
 successfully; two villager guides and eight Thai text displays were verified
 from live entity data. Arrival floor and removed sign positions pass live
 block checks. GUI clicks and drags still need a player interaction test.
@@ -50,7 +50,8 @@ block checks. GUI clicks and drags still need a player interaction test.
 arrival terrace. Latest script reload (join/respawn handlers) passed live.
 Visitors arrive in the hub on login; deaths within lobby respawn there and
 falling below Y45 triggers a return to the terrace. Island deaths are unchanged.
-The existing `lostsky.sk` still has server-wide progress. Team-owned chapters,
-relic donation and city restoration are a separate migration and are not
-implemented by this hub change. Never connect global chapter unlocks to
-re-pasting the shared spawn.
+The replacement plaza schematic has been uploaded but not pasted yet.
+The new city script needs another live reload after its coordinate condition
+and error handling fixes. MineLan authentication expired during deployment.
+Team creation, warp, donation and chapter replacement remain unverified.
+Never connect global chapter unlocks to re-pasting the shared spawn.

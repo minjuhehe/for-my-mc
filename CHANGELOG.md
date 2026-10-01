@@ -14,6 +14,16 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.6.0: Separate travel spawn and team city plots (2026-10-01)
+
+Rebuilt public spawn as a compact compass plaza with three travel pavilions.
+Moved the five restoration maps into per-team plots in `lostsky_cities`.
+Added `/city`, `/city go`, `/city donate`, `/is city`, `/is city go` and a
+team city menu button. Cities follow the BentoBox island ID, preserving
+team sharing and ownership transfers. Added skript-reflect 2.6.3 for the
+BentoBox/WorldEdit API connection. Team relic totals and visual chapter
+replacement are separate from the original server-wide prototype.
+
 ## 0.5.0: Shared harbour spawn (2026-10-01)
 
 Prepared an independent restored-city spawn schematic without story signs
