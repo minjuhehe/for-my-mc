@@ -14,6 +14,16 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.5.0: Shared harbour spawn (2026-10-01)
+
+Prepared an independent restored-city spawn schematic without story signs
+or relic item frames. Added native floating headings and two villager guides
+opening a Thai Skript menu. Added `/hub` and `/lobby` aliases for Essentials
+spawn, `/menu` (`/skymenu`) and `/skyguide`. Added void rescue in lobby and
+inventory click/drag protection. `/spawn` remains EssentialsSpawn with a
+default-group permission. Team city progression is planned separately; the
+existing server-wide donation script is not migrated by this change.
+
 ## 0.4.3: Live lobby import correction (2026-10-01)
 
 Imported chapter 1 into the new lobby. Use `//schem load lobby_ch1.schem

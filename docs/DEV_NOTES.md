@@ -1,5 +1,10 @@
 # Developer Notes
 
+Current direction: shared public spawn and independently restored team
+cities. See `SHARED_SPAWN.md`. `lostsky-hub.sk` supplies hub navigation and
+menus; `lostsky.sk` below remains the earlier server-wide prototype until
+the team-progress migration. Never re-paste shared spawn on story unlocks.
+
 Read this before you change anything. It explains how the game is put
 together, so you can change one part without breaking another.
 

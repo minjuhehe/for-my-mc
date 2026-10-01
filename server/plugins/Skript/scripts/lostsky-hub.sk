@@ -1,0 +1,99 @@
+# Shared public spawn. Team city progression is separate from this hub.
+# /spawn is provided by EssentialsSpawn; /hub and /lobby use the same spawn.
+options:
+    hub-prefix: &3[Lost Sky]&r
+
+function skyHubMenu(p: player):
+    set {_inv} to chest inventory with 3 rows named "&3Lost Sky | เมืองท่ากลาง"
+    set slot 10 of {_inv} to grass block named "&aเกาะของคุณ" with lore "&7สร้างเกาะใหม่ หรือกลับเกาะของทีม" and "&eคลิกเพื่อใช้ /is"
+    set slot 12 of {_inv} to book named "&bวิธีเริ่มเล่น" with lore "&7สร้างเกาะ ชวนเพื่อน และพัฒนาเมืองทีม" and "&eคลิกอ่านคู่มือ"
+    set slot 14 of {_inv} to compass named "&6กลับ spawn กลาง" with lore "&7พบผู้เล่นคนอื่นที่เมืองท่ากลาง" and "&eคลิกเพื่อกลับ spawn"
+    set slot 16 of {_inv} to barrier named "&cปิดเมนู"
+    set {lostskyhub::menu::%uuid of {_p}%} to {_inv}
+    open {_inv} to {_p}
+
+function skyHubGuide(p: player):
+    send "{@hub-prefix} &bยินดีต้อนรับสู่เมืองท่ากลาง!" to {_p}
+    send "&f1. &a/is &7สร้างเกาะ หรือกลับเกาะของทีม" to {_p}
+    send "&f2. &a/is team invite <ชื่อเพื่อน> &7ชวนเพื่อนเข้าทีม" to {_p}
+    send "&f3. &7ทำฟาร์ม หาอุปกรณ์ และสร้างเมืองของทีมคุณ" to {_p}
+    send "&f4. &7ระบบฟื้นฟูเมืองแยกทีมกำลังพัฒนา" to {_p}
+    send "&e/spawn &7กลับเมืองท่ากลาง   &e/menu &7เปิดเมนู" to {_p}
+
+command /hub:
+    aliases: /lobby
+    executable by: players
+    trigger:
+        execute player command "essentials:spawn"
+
+command /menu:
+    aliases: /skymenu
+    executable by: players
+    trigger:
+        skyHubMenu(player)
+
+command /skyguide:
+    executable by: players
+    trigger:
+        skyHubGuide(player)
+
+on right click on entity:
+    if name of player's world is not "lobby":
+        stop
+    if uncolored name of clicked entity is "Lost Sky Guide":
+        cancel event
+        skyHubMenu(player)
+    else if uncolored name of clicked entity is "Island Captain":
+        cancel event
+        skyHubMenu(player)
+
+on inventory click:
+    if {lostskyhub::menu::%uuid of player%} is not set:
+        stop
+    if player's current inventory is not {lostskyhub::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {lostskyhub::menu::%uuid of player%}:
+        stop
+    set {_choice} to index of event-slot
+    close player's inventory
+    if {_choice} is 10:
+        execute player command "is"
+    else if {_choice} is 12:
+        skyHubGuide(player)
+    else if {_choice} is 14:
+        execute player command "essentials:spawn"
+
+on inventory drag:
+    if {lostskyhub::menu::%uuid of player%} is set:
+        if player's current inventory is {lostskyhub::menu::%uuid of player%}:
+            cancel event
+
+on inventory close:
+    if event-inventory is {lostskyhub::menu::%uuid of player%}:
+        delete {lostskyhub::menu::%uuid of player%}
+
+on quit:
+    delete {lostskyhub::menu::%uuid of player%}
+
+on load:
+    delete {lostskyhub::menu::*}
+
+# Prevent falling off the shared floating island from killing visitors.
+every 10 ticks:
+    loop all players:
+        if name of loop-player's world is "lobby":
+            if y-coordinate of loop-player is below 45:
+                teleport loop-player to location(0.5, 100, 0.5, world "lobby", 180, 0)
+                set fall distance of loop-player to 0
+
+on join:
+    wait 1 second
+    if player is online:
+        teleport player to location(0.5, 100, 0.5, world "lobby", 180, 0)
+        set fall distance of player to 0
+        send "{@hub-prefix} &b/menu &7เปิดเมนูเมืองท่า | &b/spawn &7กลับ spawn" to player
+
+on respawn:
+    if name of player's world is "lobby":
+        set respawn location to location(0.5, 100, 0.5, world "lobby", 180, 0)

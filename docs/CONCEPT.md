@@ -1,5 +1,14 @@
 # Game Concept — Lost Sky Civilisation
 
+## Current design (2026-10-01)
+
+Use a shared public sky harbour for spawn. Each island team will restore
+its own city and progress through its own five chapters, so new teams can
+start from chapter 1 at any time. The harbour is independent of team progress.
+Hub navigation is being installed; team progression itself is still planned.
+See `SHARED_SPAWN.md`. The server-wide chapters and totals below describe
+the earlier prototype, not the intended final team-based design.
+
 ## Story (the pitch players see)
 
 Long ago a civilisation lived in the sky around a great **Sky Citadel**. It

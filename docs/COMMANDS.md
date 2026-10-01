@@ -33,9 +33,17 @@ Columns:
 
 ### General (from EssentialsX)
 
+Shared hub additions (`lostsky-hub.sk`, draft until live tests):
+
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
-| `/spawn` | Go to spawn | `essentials.spawn` | EssentialsX | planned |
+| `/hub`, `/lobby` | Return to shared spawn via Essentials | `essentials.spawn` | lostsky-hub.sk | live |
+| `/menu`, `/skymenu` | Open the shared harbour menu | none | lostsky-hub.sk | draft |
+| `/skyguide` | Show the Thai starting guide | none | lostsky-hub.sk | draft |
+
+| Command | What it does | Permission | Source | Status |
+|---------|--------------|------------|--------|--------|
+| `/spawn` | Return to shared harbour in lobby | `essentials.spawn` | EssentialsSpawn | live |
 | `/bal` | Check money | `essentials.balance` | EssentialsX | planned |
 | `/pay <player> <amount>` | Send money | `essentials.pay` | EssentialsX | planned |
 
