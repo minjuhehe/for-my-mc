@@ -23,10 +23,10 @@ that addon pinned to 2.9.0.
 | EssentialsX (+ EssentialsX Spawn) | 2.22.0 | required | Economy, `/spawn`, basics |
 | EssentialsX Chat | 2.22.0 | required | Shows LuckPerms title prefixes in chat |
 | LuckPerms | 5.5.71 | required | Permission groups |
-| WorldEdit | 7.4.5 | required | Pasting ruins and the Citadel |
-| Multiverse-Core | not installed | required (lobby) | Creates and manages the separate `lobby` world; check it runs on Java 21 |
-| VoidGen | not installed | required (lobby) | Generator for the empty-sky `lobby` world; check it runs on Java 21 |
-| WorldGuard | not installed | required before opening | Protects the lobby region (other worlds aren't covered by `spawn-protection`) |
+| WorldEdit | 7.4.2 | required | Pasting ruins and the Citadel |
+| Multiverse-Core | 5.8.1 | required (lobby) | Creates and manages the separate `lobby` world; check it runs on Java 21 |
+| VoidGen | 2.3.8 | required (lobby) | Generator for the empty-sky `lobby` world; check it runs on Java 21 |
+| WorldGuard | 7.0.16 | required before opening | Protects the lobby region (other worlds aren't covered by `spawn-protection`) |
 | CoreProtect | 24.1 | recommended | Grief logging / rollback |
 | MythicMobs | not installed | later | Ruin guardians, chapter bosses |
 | DecentHolograms | not installed | later | Relic progress hologram at the Citadel |

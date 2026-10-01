@@ -9,7 +9,7 @@ a chapter unlocks.
 
 | Plugin | Version | Why |
 |--------|---------|-----|
-| WorldEdit | **7.4.5** (as planned in `server/PLUGINS.md`) | pasting the schematics |
+| WorldEdit | **7.4.2** (as planned in `server/PLUGINS.md`) | pasting the schematics |
 | Multiverse-Core | 4 or 5 | creating + managing the `lobby` void world |
 | VoidGen | latest for 1.21.x | empty-sky world generator |
 | EssentialsX | latest | `/setspawn`, `spawn-on-join` |

@@ -150,7 +150,7 @@ WorldEdit offset that places the Arrival Terrace spawn pad at the paste point.
 Deployment order:
 
 1. Install Java 21 compatible Multiverse-Core, VoidGen and WorldGuard alongside
-   the tested WorldEdit 7.4.5.
+   the tested WorldEdit 7.4.2.
 2. Create a separate void world named `lobby`.
 3. Copy `lobby/schematics/*.schem` to `plugins/WorldEdit/schematics/`.
 4. Paste `lobby_ch1` at the intended spawn position, then set Essentials spawn.
@@ -238,3 +238,13 @@ page with JavaScript turned off.
 - Custom messages start with the `{@prefix}` option.
 - Change a status to `live` only after testing it on a real server.
 - Every change gets a `CHANGELOG.md` entry.
+
+## New MineLan instance (2026-10-01)
+
+Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.
+WorldEdit 7.4.5 and WorldGuard 7.0.17 FAILED on Java 21 (class version 69).
+Use WorldEdit 7.4.2 and WorldGuard 7.0.16 (class version 65). The former
+7.4.5 compatibility statement was incorrect.
+Lobby exists with the 15 documented global protection flags. Config has
+high-frequency-flags enabled. In-game protection and schematic paste still
+require a player test; keep whitelist on.

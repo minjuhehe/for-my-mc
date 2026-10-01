@@ -14,6 +14,14 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.4.2: New server recovery and Java 21 correction (2026-10-01)
+
+Restored the pinned SkyBlock plugins, Lost Sky script and five schematics to
+new MineLan server 9623747d. Corrected WorldEdit to 7.4.2 and WorldGuard to
+7.0.16 after live logs proved the newer jars require Java 25. Created lobby
+and saved all 15 global protection flags. Enabled high-frequency flags.
+Player commands unchanged. Lobby paste and non-OP test remain pending.
+
 ## 0.4.1: WorldEdit compatibility and lobby safety fixes (2026-10-01)
 
 **Why:** an independent GLM review found that the generated block palette used
