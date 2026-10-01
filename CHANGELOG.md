@@ -14,6 +14,15 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.4.3: Live lobby import correction (2026-10-01)
+
+Imported chapter 1 into the new lobby. Use `//schem load lobby_ch1.schem
+sponge.2` before `//paste`: an extensionless filename fails validation,
+and the default reader selects v3 for our v2 files. Corrected the invalid
+`minecraft:chiseled_quartz` palette entry to `minecraft:chiseled_quartz_block`
+in all five chapters, including the spawn pad. Regenerated schematics and
+passed all 1,087 lobby checks plus the NBT smoke test. Player commands unchanged.
+
 ## 0.4.2: New server recovery and Java 21 correction (2026-10-01)
 
 Restored the pinned SkyBlock plugins, Lost Sky script and five schematics to

@@ -236,9 +236,9 @@ node tools/test_lobby.js          # run all 1,087 checks
 1. Paper 1.21.x + WorldEdit 7.4.5 + Multiverse-Core 4/5 + VoidGen + EssentialsX.
 2. `/mv create lobby normal -g VoidGen` (MV4) or `--generator VoidGen` (MV5).
 3. Copy `schematics/*.schem` → `plugins/WorldEdit/schematics/`.
-4. Fly to the island centre spot → `//schem load lobby_ch1` → `//paste`
+4. Fly to the island centre spot → `//schem load lobby_ch1.schem sponge.2` → `//paste`
    (spawn pad appears under you).
 5. `/setspawn` on the pad. Configure Essentials `spawn-on-join`.
-6. On chapter unlocks: `//schem load lobby_ch<n>` → `//paste` (full island
+6. On chapter unlocks: `//schem load lobby_ch<n>.schem sponge.2` → `//paste` (full island
    replacement; all constants stay put).
 7. Back up the world before each paste; paste with few players online.

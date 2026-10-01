@@ -99,7 +99,7 @@ function checkChapter(ch) {
 
   // Spawn terrace: quartz pad under spawn, floor paved, welcome sign block.
   ok(is(s.at(59, GROUND, 107), 'minecraft:smooth_quartz'), 'spawn pad quartz');
-  ok(is(s.at(60, GROUND, 108), 'minecraft:chiseled_quartz'), 'spawn pad centre');
+  ok(is(s.at(60, GROUND, 108), 'minecraft:chiseled_quartz_block'), 'spawn pad centre');
   ok(s.at(52, GROUND, 105) !== 'minecraft:air', 'terrace floor');
   ok(is(s.at(55, GROUND + 1, 112), 'minecraft:oak_sign'), 'welcome sign block');
   ok(is(s.at(60, GROUND + 1, 113), 'minecraft:oak_sign'), 'testing sign block');

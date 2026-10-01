@@ -248,3 +248,5 @@ Use WorldEdit 7.4.2 and WorldGuard 7.0.16 (class version 65). The former
 Lobby exists with the 15 documented global protection flags. Config has
 high-frequency-flags enabled. In-game protection and schematic paste still
 require a player test; keep whitelist on.
+
+Live lobby import succeeded using //schem load lobby_ch1.schem sponge.2. Default format selects v3 and fails on these v2 files. Corrected chiseled_quartz_block in all five schematics after a live palette warning. Verify spawn floor at (0,99,0), pillar (0,100,-32), lectern (0,102,-32). Non-OP protection test remains pending.

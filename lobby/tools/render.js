@@ -85,7 +85,7 @@ const COLORS = {
   'calcite': [223, 224, 220],
   'smooth_quartz': [235, 231, 224],
   'quartz_pillar': [238, 234, 226],
-  'chiseled_quartz': [232, 228, 220],
+  'chiseled_quartz_block': [232, 228, 220],
   'gravel': [131, 127, 126],
   'amethyst_block': [133, 91, 214],
   'budding_amethyst': [146, 105, 224],

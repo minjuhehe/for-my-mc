@@ -14,7 +14,7 @@ const BLOCKS = {
   CALCITE: { name: 'minecraft:calcite' },
   SMOOTH_QUARTZ: { name: 'minecraft:smooth_quartz' },
   QUARTZ_PILLAR: { name: 'minecraft:quartz_pillar' },
-  CHISELED_QUARTZ: { name: 'minecraft:chiseled_quartz' },
+  CHISELED_QUARTZ: { name: 'minecraft:chiseled_quartz_block' },
   STONE_BRICKS: { name: 'minecraft:stone_bricks' },
   MOSSY_STONE_BRICKS: { name: 'minecraft:mossy_stone_bricks' },
   CRACKED_STONE_BRICKS: { name: 'minecraft:cracked_stone_bricks' },

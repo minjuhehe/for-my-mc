@@ -44,7 +44,7 @@ to the server:
 Fly to where the island's centre should sit, then:
 
 ```
-//schem load lobby_ch1
+//schem load lobby_ch1.schem sponge.2
 //paste
 ```
 
@@ -73,7 +73,7 @@ keep gate — the lectern on the quartz pillar) and save it there.
 When `/lsunlock` opens chapter *n*:
 
 ```
-//schem load lobby_ch<n>
+//schem load lobby_ch<n>.schem sponge.2
 //paste
 ```
 
