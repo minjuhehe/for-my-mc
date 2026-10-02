@@ -17,7 +17,7 @@ function npc(x, z, name, profession) {
   cmds.push(`execute in minecraft:lobby run minecraft:summon minecraft:villager ${x} 100 ${z} {Tags:["lostsky_hub"],CustomName:{text:${JSON.stringify(name)}},CustomNameVisible:0b,NoAI:1b,Silent:1b,Invulnerable:1b,PersistenceRequired:1b,NoGravity:1b,Rotation:[0f,0f],VillagerData:{type:"minecraft:plains",profession:"minecraft:${profession}",level:5}}`);
 }
 function text(x, y, z, content, color = 'aqua', scale = 1) {
-  cmds.push(`execute in minecraft:lobby run minecraft:summon minecraft:text_display ${x} ${y} ${z} {Tags:["lostsky_hub"],billboard:"center",text:{text:${JSON.stringify(content)},color:"${color}"},background:1073741824,shadow:1b,line_width:260,view_range:0.5f,brightness:{block:15,sky:15},transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,0f,1f],scale:[${scale}f,${scale}f,${scale}f],right_rotation:[0f,0f,0f,1f]}}`);
+  cmds.push(`execute in minecraft:lobby run minecraft:summon minecraft:text_display ${x} ${y} ${z} {Tags:["lostsky_hub"],billboard:"center",text:{text:${JSON.stringify(content)},color:"${color}"},background:1711276032,shadow:0b,default_background:0b,see_through:0b,text_opacity:-1b,line_width:260,view_range:0.5f,brightness:{block:15,sky:15},transformation:{translation:[0f,0f,0f],left_rotation:[0f,0f,0f,1f],scale:[${scale}f,${scale}f,${scale}f],right_rotation:[0f,0f,0f,1f]}}`);
 }
 npc(-4.5, -8.5, 'Lost Sky Guide', 'librarian');
 npc(4.5, -8.5, 'Island Captain', 'cartographer');
@@ -35,7 +35,7 @@ text(-35.5, 104, -59.5, 'ตลาดผัก\nคลิก NPC หรือ /m
 text(36.5, 104, -59.5, 'ร้านวัสดุ\nคลิก NPC หรือ /skyshop', 'aqua');
 text(-35.5, 104, -15.5, 'หอเควสต์\nคลิก NPC หรือ /skyquests', 'light_purple');
 text(36.5, 104, -15.5, 'โซนเติมเงิน\nคลิก NPC หรือ /topup', 'gold');
-text(0.5, 104, -36, 'LOST SKY PLAZA\nตลาดผัก · ร้านค้า · เควสต์ · เมืองของทีม', 'aqua');
+text(0.5, 105, -32, 'LOST SKY PLAZA\nตลาดผัก · ร้านค้า · เควสต์ · เมืองของทีม', 'aqua');
 cmds.push(
   'rg flag __global__ -w lobby mob-spawning deny',
   'execute in minecraft:lobby run minecraft:gamerule minecraft:advance_time false',

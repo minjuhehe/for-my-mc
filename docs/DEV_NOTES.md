@@ -324,3 +324,5 @@ high-frequency-flags enabled. In-game protection and schematic paste still
 require a player test; keep whitelist on.
 
 Live lobby import succeeded using //schem load lobby_ch1.schem sponge.2. Default format selects v3 and fails on these v2 files. Corrected chiseled_quartz_block in all five schematics after a live palette warning. Verify spawn floor at (0,99,0), pillar (0,100,-32), lectern (0,102,-32). Non-OP protection test remains pending.
+
+2026-10-03: Player confirms required Thai resource pack loads. For floating-label artifacts, disabled text_display shadows and added opaque background; moved plaza label from (0.5,104,-36) to (0.5,105,-32) to clear fountain pillar. Applied via tagged entity data merge; client visual confirmation pending.

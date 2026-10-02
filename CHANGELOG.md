@@ -396,3 +396,5 @@ Notes for developers:
 - Relics are identified by the lore line `Lost Sky Relic`, not the name.
 - Chapter unlocks only broadcast for now. Content unlocking is a TODO.
 - Ruins are placed by hand with WorldEdit + `/lostsky setruin`.
+
+- Lobby label repair: disable display shadows, improve background contrast, and move plaza heading clear of the central pillar. Player visual retest pending.
