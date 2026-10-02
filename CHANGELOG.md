@@ -14,6 +14,32 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.7.1: Website for the hub, team cities and top-up notice (2026-10-02)
+
+**Why:** the design moved to one shared hub with four zones and a separate
+restoration city for every team. The website still described a single
+server-wide Citadel.
+
+Changed (website only):
+- Hub section: the real hub render (`website/assets/spawn-market.png`),
+  zone key with roof colours, crop market and supplies price tables, and
+  the two 24-hour delivery quests. All marked รอทดสอบ (awaiting playtest).
+- Team section: island vs team city comparison, five chapter tabs with
+  team goals 100/300/600/1000. No wording about a shared server city.
+- Map gallery: hub render + five team city renders
+  (`website/assets/maps/city-ch1.png` … `city-ch5.png`), labelled as
+  renders, with Thai alt text.
+- Top-up section: clearly "not open". No forms, prices or payment details.
+- Commands: 18 player commands in 4 filter groups (hub, shops and quests,
+  island, team city). `/spawn` and `/hub` are shown as tested, the rest as
+  awaiting playtest. The old server-wide `/chapter`, `/donate`, `/citadel`,
+  `/relics` and `/ruin` are no longer listed for players.
+- Status: Paper 1.21.11 and the private whitelist test shown as confirmed.
+  No IP, Discord, player counts or opening date.
+- `docs/DEV_NOTES.md` section 5 rewritten for the new content rules.
+
+No commands changed. Server scripts and lobby files were not touched.
+
 ## 0.7.0: Public town zones and delivery quests (2026-10-03)
 
 New floating town has a fountain plaza, green crop market, cyan supplies

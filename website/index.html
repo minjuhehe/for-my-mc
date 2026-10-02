@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Lost Sky</title>
-<meta name="description" content="Lost Sky เซิร์ฟเวอร์ Minecraft แนว Skyblock ที่มีเนื้อเรื่อง สะสมโบราณวัตถุจากซากปรักหักพังลอยฟ้า เพื่อฟื้นฟู Sky Citadel ตอนนี้อยู่ระหว่างพัฒนา ยังไม่เปิดให้เล่น">
+<meta name="description" content="Lost Sky เซิร์ฟเวอร์ Minecraft แนว SkyBlock เล่นเป็นทีม สร้างเกาะของทีม และฟื้นฟูเมืองโบราณของทีมตัวเองด้วยโบราณวัตถุ ตอนนี้ทดสอบภายในแบบ whitelist ยังไม่เปิดสาธารณะ">
 <meta name="theme-color" content="#CCDAE8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#172039" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
@@ -30,11 +30,12 @@
     <ul class="nav-links" id="nav-links">
       <li><a href="#intro">แนะนำ</a></li>
       <li><a href="#status">สถานะ</a></li>
+      <li><a href="#hub">ฮับ</a></li>
+      <li><a href="#team">ทีมและเมือง</a></li>
+      <li><a href="#gallery">แผนที่</a></li>
       <li><a href="#start">เริ่มเล่น</a></li>
-      <li><a href="#story">เรื่องราว</a></li>
-      <li><a href="#relics">โบราณวัตถุ</a></li>
-      <li><a href="#rules">กฎ</a></li>
       <li><a href="#commands">คำสั่ง</a></li>
+      <li><a href="#topup">เติมเงิน</a></li>
       <li><a href="#faq">คำถาม</a></li>
     </ul>
   </nav>
@@ -46,25 +47,25 @@
   <div class="hero" id="intro">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <span class="badge b-draft">กำลังพัฒนา · ยังไม่เปิดให้เล่น</span>
+        <span class="badge b-draft">ทดสอบภายในแบบ whitelist · ยังไม่เปิดสาธารณะ</span>
         <h1>Lost <span>Sky</span></h1>
-        <p class="lede">เมืองลอยฟ้าโบราณพังทลายลงสู่ความว่างเปล่า วันนี้ซากของมันกำลังลอยกลับขึ้นมา เริ่มจากเกาะเล็ก ๆ ของคุณเอง ออกสำรวจซากปรักหักพัง แล้วนำโบราณวัตถุกลับมาฟื้นฟู Sky Citadel ร่วมกับผู้เล่นทั้งเซิร์ฟ</p>
+        <p class="lede">SkyBlock ที่เล่นเป็นทีม สร้างเกาะลอยฟ้าของทีม ขายผลผลิต ทำภารกิจส่งของ แล้วนำโบราณวัตถุไปฟื้นฟู<strong>เมืองโบราณของทีมคุณเอง</strong> ทีละบทจนเมืองกลับมาสมบูรณ์</p>
         <div class="address" role="group" aria-labelledby="addr-label">
           <div class="address-row">
             <strong id="addr-label">ที่อยู่เซิร์ฟเวอร์</strong>
-            <span class="badge b-wait">รอประกาศ</span>
+            <span class="badge b-wait">ยังไม่ประกาศสาธารณะ</span>
           </div>
-          <small>ยังไม่มี IP สำหรับเข้าเล่น จะประกาศบนหน้านี้เมื่อทดสอบระบบเกมครบและเจ้าของเซิร์ฟยืนยันแล้ว ช่องทางติดต่อ (เช่น Discord) ก็รอประกาศเช่นกัน</small>
+          <small>ตอนนี้เป็นการทดสอบภายในสำหรับคนใน whitelist เท่านั้น ที่อยู่สำหรับผู้เล่นทั่วไปและช่องทางติดต่อจะประกาศบนหน้านี้เมื่อพร้อมเปิด</small>
         </div>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#story">อ่านเรื่องราว</a>
-          <a class="btn btn-ghost" href="#start">ดูวิธีเริ่มเล่น</a>
+          <a class="btn btn-primary" href="#hub">สำรวจฮับ</a>
+          <a class="btn btn-ghost" href="#team">ดูระบบทีมและเมือง</a>
         </div>
       </div>
 
       <div class="hero-art">
         <svg class="sky-art" viewBox="0 0 480 380" role="img" aria-labelledby="art-title">
-          <title id="art-title">ภาพวาดเกาะลอยฟ้า มีซาก Sky Citadel และผลึกสีม่วงเรืองแสงอยู่บนเกาะใหญ่ตรงกลาง</title>
+          <title id="art-title">ภาพวาดเกาะลอยฟ้า มีซากเมืองโบราณและผลึกสีม่วงเรืองแสงอยู่บนเกาะใหญ่ตรงกลาง</title>
           <defs>
             <symbol id="isle" viewBox="0 0 120 64">
               <rect x="0" y="0" width="120" height="8" style="fill:var(--grass)"/>
@@ -75,25 +76,18 @@
               <rect x="52" y="48" width="16" height="10" style="fill:var(--stone-lt)"/>
             </symbol>
           </defs>
-
           <g class="drift"><rect class="cloud" x="20" y="36" width="96" height="16" rx="8"/><rect class="cloud" x="44" y="24" width="48" height="16" rx="8"/></g>
           <g class="drift d2"><rect class="cloud" x="330" y="300" width="110" height="16" rx="8"/><rect class="cloud" x="360" y="288" width="54" height="16" rx="8"/></g>
-
-          <!-- small island, left, with a tree -->
           <g class="float d1">
             <use href="#isle" x="18" y="170" width="112" height="60"/>
             <rect x="66" y="146" width="8" height="24" style="fill:var(--dirt)"/>
             <rect x="52" y="122" width="36" height="28" style="fill:var(--grass)"/>
           </g>
-
-          <!-- small island, right, with a broken pillar -->
           <g class="float d2">
             <use href="#isle" x="362" y="92" width="96" height="51"/>
             <rect x="400" y="58" width="16" height="34" class="ruin"/>
             <rect x="396" y="52" width="24" height="8" class="ruin"/>
           </g>
-
-          <!-- main island with the Citadel ruins -->
           <g class="float">
             <circle class="glow pulse" cx="240" cy="112" r="44"/>
             <use href="#isle" x="112" y="226" width="256" height="136"/>
@@ -111,8 +105,6 @@
             <polygon class="crystal" points="240,76 256,108 240,140 224,108"/>
             <polygon points="240,76 248,108 240,140" style="fill:#EDE4FF;opacity:.55"/>
           </g>
-
-          <!-- a relic shard drifting up -->
           <g class="float d1"><polygon class="crystal" points="96,300 104,312 96,324 88,312"/></g>
         </svg>
       </div>
@@ -124,65 +116,276 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">สถานะตอนนี้</span>
-        <h2 id="status-h">อะไรพร้อมแล้ว อะไรยังเป็นแผน</h2>
-        <p class="muted">Lost Sky ยังอยู่ระหว่างพัฒนา ระบบเกมยังไม่ได้ทดสอบครบ ข้อมูลในหน้านี้มาจากเอกสารออกแบบ และอาจเปลี่ยนก่อนเปิดจริง</p>
+        <h2 id="status-h">อะไรพร้อมแล้ว อะไรยังรอทดสอบ</h2>
+        <p class="muted">Lost Sky ยังไม่เปิดให้เล่นทั่วไป ตอนนี้ทีมงานทดสอบภายในกับคนใน whitelist ระบบส่วนใหญ่ยังไม่ผ่านการทดสอบเล่นจริง และรายละเอียดอาจเปลี่ยน</p>
       </div>
       <div class="status-grid">
         <div class="status-card">
-          <h3>ตัดสินใจแล้ว</h3>
+          <h3>ยืนยันแล้ว</h3>
           <ul>
-            <li><span class="badge b-ok">ยืนยันแล้ว</span> แนวเกม Skyblock ที่มีเนื้อเรื่อง 5 บท ฟื้นฟู Sky Citadel ด้วยโบราณวัตถุ</li>
-            <li><span class="badge b-ok">ยืนยันแล้ว</span> เว็บนี้ใช้แนะนำเซิร์ฟเท่านั้น ไม่มีระบบสมัครสมาชิก ไม่มีร้านเติมเงิน</li>
+            <li><span class="badge b-ok">ยืนยันแล้ว</span> เซิร์ฟเวอร์รัน Paper 1.21.11 (Java Edition)</li>
+            <li><span class="badge b-ok">ยืนยันแล้ว</span> ทุกทีมมีเมืองฟื้นฟูของตัวเอง แยกจากทีมอื่น และแยกจากเกาะที่สร้างเอง</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/spawn</code> และ <code>/hub</code> พากลับฮับได้ในการทดสอบภายใน</li>
           </ul>
         </div>
         <div class="status-card">
-          <h3>ทำแล้ว แต่ยังไม่ได้ทดสอบ</h3>
+          <h3>กำลังติดตั้ง · รอทดสอบเล่น</h3>
           <ul>
-            <li><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span> สคริปต์เนื้อเรื่อง: บท, การบริจาคโบราณวัตถุ, วาร์ป Citadel, ซากปรักหักพัง และฉายา</li>
-            <li><span class="badge b-plan">แผนช่วงทดสอบ</span> ทีมละ 4 คน, ปิด PvP, Java Edition, เข้าเล่นด้วย whitelist</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ฮับใหม่: น้ำพุกลางลานและ 4 โซน</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ตลาดพืชผล, ร้านเสบียง และภารกิจส่งของรายวัน</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> เมนูฮับ (<code>/menu</code>) และคำสั่งเมืองของทีม (<code>/city</code>)</li>
           </ul>
         </div>
         <div class="status-card">
-          <h3>ยังรอประกาศ</h3>
+          <h3>ยังไม่เปิด · รอประกาศ</h3>
           <ul>
-            <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟเวอร์และช่องทางติดต่อ</li>
-            <li><span class="badge b-wait">รอประกาศ</span> วันเปิด และความยาวของแต่ละซีซัน</li>
+            <li><span class="badge b-wait">ยังไม่เปิด</span> ห้องเติมเงิน ไม่มีการรับชำระเงินใด ๆ</li>
+            <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟสาธารณะ, ช่องทางติดต่อ และวันเปิด</li>
             <li><span class="badge b-wait">รอประกาศ</span> จะรองรับ Bedrock (มือถือ, คอนโซล) หรือไม่</li>
           </ul>
         </div>
       </div>
       <div class="legend" aria-label="ความหมายของป้ายสถานะ">
-        <span><span class="badge b-ok">ยืนยันแล้ว</span> ตัดสินใจแล้ว</span>
-        <span><span class="badge b-draft">ร่าง</span> เขียนแล้ว ยังไม่ทดสอบในเกม</span>
+        <span><span class="badge b-ok">ยืนยันแล้ว</span> ตัดสินใจหรือทดสอบแล้ว</span>
+        <span><span class="badge b-draft">รอทดสอบ</span> ติดตั้งหรือเขียนแล้ว ยังไม่ผ่านการทดสอบเล่น</span>
         <span><span class="badge b-plan">แผน</span> ตั้งใจไว้ อาจเปลี่ยน</span>
-        <span><span class="badge b-wait">รอประกาศ</span> ยังไม่มีข้อมูล</span>
+        <span><span class="badge b-wait">รอประกาศ</span> ยังไม่มีข้อมูลหรือยังไม่เปิด</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ วิธีเล่น (ภาพรวม) ============ -->
+  <!-- ============ เล่นยังไง ============ -->
   <section id="how" aria-labelledby="how-h">
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">เล่นยังไง</span>
-        <h2 id="how-h">เกาะของคุณ Citadel ของทุกคน</h2>
+        <h2 id="how-h">สามที่ที่คุณจะใช้เวลาด้วย</h2>
       </div>
       <div class="loop">
         <div class="loop-item">
+          <code>/spawn</code>
+          <h3>ฮับกลาง</h3>
+          <p>ลานกลางที่ทุกคนใช้ร่วมกันและมีระบบป้องกัน ขายพืชผล ซื้อเสบียง และรับภารกิจส่งของรายวัน</p>
+        </div>
+        <div class="loop-item">
           <code>/is</code>
-          <h3>ปลูกสร้างเกาะของตัวเอง</h3>
-          <p>เริ่มบนเกาะลอยฟ้าเล็ก ๆ ทำฟาร์ม สร้างเครื่องปั่นหิน และขยายเกาะไปพร้อมเพื่อนร่วมทีม</p>
+          <h3>เกาะของทีม</h3>
+          <p>เกาะ SkyBlock ที่ทีมสร้างเองได้อิสระ ทำฟาร์ม ปั่นหิน ขยายเกาะ ชวนเพื่อนเข้าทีมได้</p>
         </div>
         <div class="loop-item">
-          <code>/ruin</code>
-          <h3>ออกสำรวจซากปรักหักพัง</h3>
-          <p>ตามแผน ทุก 2 ชั่วโมงจะมีซากปรักหักพังเปิดให้วาร์ปไปสำรวจ 45 นาที มีหีบสมบัติ มอนสเตอร์ ปริศนา และโบราณวัตถุ</p>
+          <code>/city go</code>
+          <h3>เมืองฟื้นฟูของทีม</h3>
+          <p>เมืองโบราณที่เป็นของทีมคุณเท่านั้น บริจาคโบราณวัตถุเพื่อซ่อมเมืองทีละบท เมืองถูกป้องกันไว้ ไม่ใช่พื้นที่สร้างอิสระ</p>
         </div>
-        <div class="loop-item">
-          <code>/donate</code>
-          <h3>นำโบราณวัตถุกลับมา</h3>
-          <p>มอบให้ Sky Citadel เพื่อรับแต้มและเงินในเกม แต้มของทุกคนรวมกันจะปลดล็อกบทถัดไปของเนื้อเรื่องให้ทั้งเซิร์ฟ</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ฮับ ============ -->
+  <section id="hub" aria-labelledby="hub-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">ฮับกลาง</span>
+        <h2 id="hub-h">น้ำพุกลางลานและสี่โซน</h2>
+        <p class="muted">ฮับเป็นพื้นที่สาธารณะเดียวของเซิร์ฟ ทุกคนใช้ร่วมกัน และมีระบบป้องกันการทุบหรือวางบล็อก พิมพ์ <code>/spawn</code> เพื่อกลับฮับ หรือ <code>/menu</code> เพื่อเปิดเมนูฮับได้จากทุกที่</p>
+      </div>
+
+      <div class="hub-layout">
+        <figure class="hub-map">
+          <a href="assets/spawn-market.png"><img src="assets/spawn-market.png" width="692" height="438" alt="ภาพเรนเดอร์ฮับกลาง: เกาะลอยฟ้าที่มีน้ำพุสีฟ้าอยู่กลางลานหินสีขาว ทางเดินแยกออกสี่ทิศ รอบลานมีศาลาหลังคาสีต่าง ๆ คือ หลังคาสีเขียวของตลาดพืชผล หลังคาสีฟ้าอมเขียวของร้านเสบียง หลังคาสีม่วงของโถงภารกิจ หลังคาสีทองของห้องเติมเงิน และศาลาหลังคาสีเขียวอ่อนของจุดไปเมืองของทีม มีต้นไม้ แปลงผัก และซุ้มทางเข้าอยู่ตามขอบเกาะ"></a>
+          <figcaption>ภาพเรนเดอร์จากไฟล์แผนที่ฮับจริง ยังรอติดตั้งและทดสอบในเกม กดที่ภาพเพื่อเปิดขนาดเต็ม</figcaption>
+        </figure>
+
+        <div class="zones">
+          <a class="zone-link" href="#zone-market"><i class="sw sw-market" aria-hidden="true"></i><code>/market</code><span>ตลาดพืชผล (หลังคาสีเขียว) · ขายผลผลิต</span></a>
+          <a class="zone-link" href="#zone-shop"><i class="sw sw-shop" aria-hidden="true"></i><code>/skyshop</code><span>ร้านเสบียง (หลังคาสีฟ้าอมเขียว) · ซื้อของเริ่มต้น</span></a>
+          <a class="zone-link" href="#zone-quests"><i class="sw sw-quest" aria-hidden="true"></i><code>/skyquests</code><span>โถงภารกิจ (หลังคาสีม่วง) · ส่งของทุก 24 ชั่วโมง</span></a>
+          <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ห้องเติมเงิน (หลังคาสีทอง) · ยังไม่เปิด</span></a>
+          <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของทีมคุณ</span></a>
+          <p class="muted small">ราคาและรางวัลด้านล่างคือค่าที่กำลังติดตั้ง ยังไม่ผ่านการทดสอบเล่น และอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม</p>
         </div>
+      </div>
+
+      <div class="zone-grid">
+        <article class="zone-card" id="zone-market" aria-labelledby="zm-h">
+          <div class="zone-head">
+            <h3 id="zm-h">ตลาดพืชผล</h3>
+            <span class="badge b-draft">รอทดสอบ</span>
+          </div>
+          <p class="muted"><code>/market</code> · ขายพืชผลจากเกาะเพื่อรับเงินในเกม</p>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">ราคารับซื้อพืชผล</caption>
+              <thead><tr><th scope="col">ขาย</th><th scope="col" class="num">จำนวน</th><th scope="col" class="num">ได้รับ</th></tr></thead>
+              <tbody>
+                <tr><td>ข้าวสาลี <span class="en">Wheat</span></td><td class="num">32</td><td class="num">$32</td></tr>
+                <tr><td>แครอท <span class="en">Carrot</span></td><td class="num">32</td><td class="num">$24</td></tr>
+                <tr><td>มันฝรั่ง <span class="en">Potato</span></td><td class="num">32</td><td class="num">$24</td></tr>
+                <tr><td>บีทรูท <span class="en">Beetroot</span></td><td class="num">32</td><td class="num">$32</td></tr>
+                <tr><td>ฟักทอง <span class="en">Pumpkin</span></td><td class="num">8</td><td class="num">$40</td></tr>
+                <tr><td>แตงโมชิ้น <span class="en">Melon Slice</span></td><td class="num">32</td><td class="num">$16</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="zone-card" id="zone-shop" aria-labelledby="zs-h">
+          <div class="zone-head">
+            <h3 id="zs-h">ร้านเสบียง</h3>
+            <span class="badge b-draft">รอทดสอบ</span>
+          </div>
+          <p class="muted"><code>/skyshop</code> · ซื้อของที่เกาะใหม่มักขาด</p>
+          <div class="table-wrap">
+            <table>
+              <caption class="sr-only">ราคาสินค้าในร้านเสบียง</caption>
+              <thead><tr><th scope="col">ซื้อ</th><th scope="col" class="num">จำนวน</th><th scope="col" class="num">ราคา</th></tr></thead>
+              <tbody>
+                <tr><td>หินก้อน <span class="en">Cobblestone</span></td><td class="num">32</td><td class="num">$32</td></tr>
+                <tr><td>ดิน <span class="en">Dirt</span></td><td class="num">32</td><td class="num">$64</td></tr>
+                <tr><td>ท่อนไม้โอ๊ก <span class="en">Oak Log</span></td><td class="num">16</td><td class="num">$96</td></tr>
+                <tr><td>กระจก <span class="en">Glass</span></td><td class="num">16</td><td class="num">$64</td></tr>
+                <tr><td>เมล็ดข้าวสาลี <span class="en">Wheat Seeds</span></td><td class="num">16</td><td class="num">$16</td></tr>
+                <tr><td>คบเพลิง <span class="en">Torch</span></td><td class="num">16</td><td class="num">$24</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="zone-card" id="zone-quests" aria-labelledby="zq-h">
+          <div class="zone-head">
+            <h3 id="zq-h">ภารกิจส่งของ</h3>
+            <span class="badge b-draft">รอทดสอบ</span>
+          </div>
+          <p class="muted"><code>/skyquests</code> · ส่งของตามที่กำหนดเพื่อรับเงินและเศษผลึก ทำซ้ำได้ทุก 24 ชั่วโมง นับแยกต่อผู้เล่นแต่ละคน</p>
+          <ul class="quest-list">
+            <li>
+              <div><b>ส่งข้าวสาลี 64 ชิ้น</b><span class="en">Wheat × 64</span></div>
+              <div class="reward"><span>$100</span><span>+ เศษผลึกสามัญ 2 ชิ้น</span></div>
+            </li>
+            <li>
+              <div><b>ส่งหินก้อน 128 ก้อน</b><span class="en">Cobblestone × 128</span></div>
+              <div class="reward"><span>$80</span><span>+ เศษผลึกสามัญ 2 ชิ้น</span></div>
+            </li>
+          </ul>
+          <p class="muted small">เศษผลึกสามัญ (Common Shard) ใช้บริจาคฟื้นฟูเมืองของทีมได้ ดูส่วน <a href="#relics">โบราณวัตถุ</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ทีมและเมือง ============ -->
+  <section id="team" aria-labelledby="team-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">เล่นเป็นทีม</span>
+        <h2 id="team-h">เกาะของทีม กับเมืองฟื้นฟูของทีม</h2>
+        <p class="muted">ทุกทีมบนเกาะ BentoBox มีสองที่แยกกัน ที่หนึ่งสร้างเองได้อิสระ อีกที่เป็นเมืองโบราณที่ซ่อมด้วยโบราณวัตถุ แต่ละทีมมีเมืองของตัวเอง ไม่ได้ใช้เมืองร่วมกับทั้งเซิร์ฟ</p>
+      </div>
+
+      <div class="compare">
+        <article class="compare-card">
+          <h3>เกาะของทีม</h3>
+          <dl>
+            <dt>คำสั่ง</dt><dd><code>/is</code></dd>
+            <dt>สร้างบล็อก</dt><dd>ได้อิสระ ทุบและวางได้ทั้งเกาะ</dd>
+            <dt>ใช้ทำอะไร</dt><dd>ฟาร์ม, ปั่นหิน, เก็บของ, บ้านของทีม</dd>
+            <dt>สมาชิก</dt><dd>ชวนเพื่อนด้วย <code>/is team invite</code> (แผน: สูงสุด 4 คนต่อทีม)</dd>
+          </dl>
+        </article>
+        <article class="compare-card">
+          <h3>เมืองฟื้นฟูของทีม</h3>
+          <dl>
+            <dt>คำสั่ง</dt><dd><code>/is city</code> หรือ <code>/city</code> เปิดเมนู · <code>/city go</code> วาร์ปไปเมือง</dd>
+            <dt>สร้างบล็อก</dt><dd>ไม่ได้ เมืองเป็นแผนที่สำเร็จรูปที่ถูกป้องกันไว้</dd>
+            <dt>ใช้ทำอะไร</dt><dd>บริจาคโบราณวัตถุด้วย <code>/city donate</code> เพื่อซ่อมเมืองทีละบท</dd>
+            <dt>ของใคร</dt><dd>ของทีมคุณเท่านั้น สมาชิกในทีมใช้เมืองเดียวกัน ถ้าย้ายไปอยู่ทีมอื่นจะเข้าเมืองของทีมใหม่แทน</dd>
+          </dl>
+        </article>
+      </div>
+
+      <div class="sec-head sub">
+        <h3 class="h-sub">ห้าบทของการฟื้นฟูเมือง</h3>
+        <p class="muted">แต้มโบราณวัตถุที่สมาชิกในทีมบริจาคจะสะสมรวมกันเป็นของทีม เมื่อถึงเป้าหมาย เมืองของทีมจะถูกแทนที่ด้วยเวอร์ชันที่ซ่อมแล้วของบทถัดไป ทีมอื่นไม่ได้รับผลด้วย</p>
+      </div>
+
+      <div class="chapters">
+        <div class="tablist" role="tablist" aria-label="เลือกบท">
+          <button class="tab" role="tab" id="tab-1" aria-controls="ch-1" aria-selected="true"><span class="num">1</span><span class="tname">ซากเมือง</span></button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="ch-2" aria-selected="false" tabindex="-1"><span class="num">2</span><span class="tname">รากแห่งศิลา</span></button>
+          <button class="tab" role="tab" id="tab-3" aria-controls="ch-3" aria-selected="false" tabindex="-1"><span class="num">3</span><span class="tname">หอคอยสายน้ำ</span></button>
+          <button class="tab" role="tab" id="tab-4" aria-controls="ch-4" aria-selected="false" tabindex="-1"><span class="num">4</span><span class="tname">โถงถ่านเพลิง</span></button>
+          <button class="tab" role="tab" id="tab-5" aria-controls="ch-5" aria-selected="false" tabindex="-1"><span class="num">5</span><span class="tname">เมืองคืนชีพ</span></button>
+        </div>
+        <div class="panels">
+          <div class="panel" role="tabpanel" id="ch-1" aria-labelledby="tab-1" tabindex="0">
+            <span class="en">Chapter 1 · The Awakening</span>
+            <h4>บทที่ 1 ซากเมือง</h4>
+            <div class="goal"><span class="muted">แต้มสะสมของทีม</span><b>0</b><span>(เริ่มต้น)</span></div>
+            <p>ครั้งแรกที่ใช้ <code>/city go</code> ระบบจะเตรียมเมืองบทที่ 1 ให้ทีม หอคอยพังทลาย กองหิน และผลึกอเมทิสต์ที่ยังหรี่แสง</p>
+          </div>
+          <div class="panel" role="tabpanel" id="ch-2" aria-labelledby="tab-2" tabindex="0">
+            <span class="en">Chapter 2 · Roots of Stone</span>
+            <h4>บทที่ 2 รากแห่งศิลา</h4>
+            <div class="goal"><span class="muted">แต้มสะสมของทีม</span><b>100</b><span>แต้ม</span></div>
+            <p>กำแพงชั้นล่างถูกสร้างขึ้นใหม่ รากหินและมอสเกาะตามขอบเกาะ สวนเล็ก ๆ เริ่มกลับมา</p>
+          </div>
+          <div class="panel" role="tabpanel" id="ch-3" aria-labelledby="tab-3" tabindex="0">
+            <span class="en">Chapter 3 · The Drowned Spire</span>
+            <h4>บทที่ 3 หอคอยสายน้ำ</h4>
+            <div class="goal"><span class="muted">แต้มสะสมของทีม</span><b>300</b><span>แต้ม</span></div>
+            <p>น้ำตกไหลจากขอบเกาะลงสู่ทะเลเมฆ และหอคอยที่พันด้วยสายน้ำตั้งขึ้นกลางเมือง</p>
+          </div>
+          <div class="panel" role="tabpanel" id="ch-4" aria-labelledby="tab-4" tabindex="0">
+            <span class="en">Chapter 4 · Ember Halls</span>
+            <h4>บทที่ 4 โถงถ่านเพลิง</h4>
+            <div class="goal"><span class="muted">แต้มสะสมของทีม</span><b>600</b><span>แต้ม</span></div>
+            <p>โถงชั้นล่างสว่างด้วยตะเกียงและถ่านไฟ มีรายละเอียดหินดำประดับทอง</p>
+          </div>
+          <div class="panel final" role="tabpanel" id="ch-5" aria-labelledby="tab-5" tabindex="0">
+            <span class="en">Chapter 5 · The Citadel Rises</span>
+            <h4>บทที่ 5 เมืองคืนชีพ</h4>
+            <div class="goal"><span class="muted">แต้มสะสมของทีม</span><b>1000</b><span>แต้ม</span></div>
+            <p>เมืองของทีมกลับมาสมบูรณ์ หอคอยสูงตระหง่าน มงกุฎทองบนป้อม และผลึกส่องลำแสงขึ้นฟ้า</p>
+          </div>
+        </div>
+      </div>
+      <p class="season-note">ระบบเมืองของทีมยังรอทดสอบเล่น: การสร้างเมือง, การวาร์ป, การบริจาค และการเปลี่ยนบท ส่วนรางวัลอื่นของแต่ละบท (นอกจากหน้าตาเมือง) ยังอยู่ระหว่างออกแบบ</p>
+    </div>
+  </section>
+
+  <!-- ============ โบราณวัตถุ ============ -->
+  <section id="relics" aria-labelledby="relics-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">โบราณวัตถุ</span>
+        <h2 id="relics-h">ของที่ใช้ซ่อมเมืองของทีม</h2>
+        <p class="muted">ถือโบราณวัตถุไว้ในมือหลัก แล้วพิมพ์ <code>/city donate</code> แต้มจะเข้าเมืองของทีมคุณ</p>
+      </div>
+      <div class="relics">
+        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1" class="px-a"/><rect x="3" y="1" width="1" height="1" class="px-a"/><rect x="4" y="1" width="1" height="1" class="px-A"/><rect x="3" y="2" width="1" height="1" class="px-a"/><rect x="4" y="2" width="1" height="1" class="px-A"/><rect x="5" y="2" width="1" height="1" class="px-a"/><rect x="2" y="3" width="1" height="1" class="px-a"/><rect x="3" y="3" width="1" height="1" class="px-A"/><rect x="4" y="3" width="1" height="1" class="px-A"/><rect x="5" y="3" width="1" height="1" class="px-a"/><rect x="2" y="4" width="1" height="1" class="px-a"/><rect x="3" y="4" width="1" height="1" class="px-A"/><rect x="4" y="4" width="1" height="1" class="px-a"/><rect x="2" y="5" width="1" height="1" class="px-a"/><rect x="3" y="5" width="1" height="1" class="px-a"/><rect x="1" y="6" width="1" height="1" class="px-a"/><rect x="2" y="6" width="1" height="1" class="px-a"/></svg><h3>เศษผลึกสามัญ</h3><span class="pts"><span>Common Shard</span><b>1 แต้ม</b></span><p>รางวัลจากภารกิจส่งของรายวัน <span class="badge b-draft">รอทดสอบ</span></p></article>
+        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="1" y="1" width="1" height="1" class="px-s"/><rect x="2" y="1" width="1" height="1" class="px-s"/><rect x="3" y="1" width="1" height="1" class="px-s"/><rect x="4" y="1" width="1" height="1" class="px-s"/><rect x="5" y="1" width="1" height="1" class="px-s"/><rect x="6" y="1" width="1" height="1" class="px-s"/><rect x="1" y="2" width="1" height="1" class="px-s"/><rect x="2" y="2" width="1" height="1" class="px-S"/><rect x="3" y="2" width="1" height="1" class="px-s"/><rect x="4" y="2" width="1" height="1" class="px-S"/><rect x="5" y="2" width="1" height="1" class="px-S"/><rect x="6" y="2" width="1" height="1" class="px-s"/><rect x="1" y="3" width="1" height="1" class="px-s"/><rect x="2" y="3" width="1" height="1" class="px-s"/><rect x="3" y="3" width="1" height="1" class="px-s"/><rect x="4" y="3" width="1" height="1" class="px-s"/><rect x="5" y="3" width="1" height="1" class="px-s"/><rect x="6" y="3" width="1" height="1" class="px-s"/><rect x="1" y="4" width="1" height="1" class="px-s"/><rect x="2" y="4" width="1" height="1" class="px-S"/><rect x="3" y="4" width="1" height="1" class="px-S"/><rect x="4" y="4" width="1" height="1" class="px-s"/><rect x="5" y="4" width="1" height="1" class="px-S"/><rect x="6" y="4" width="1" height="1" class="px-s"/><rect x="1" y="5" width="1" height="1" class="px-s"/><rect x="2" y="5" width="1" height="1" class="px-s"/><rect x="3" y="5" width="1" height="1" class="px-s"/><rect x="4" y="5" width="1" height="1" class="px-s"/><rect x="5" y="5" width="1" height="1" class="px-s"/><rect x="6" y="5" width="1" height="1" class="px-s"/><rect x="1" y="6" width="1" height="1" class="px-s"/><rect x="2" y="6" width="1" height="1" class="px-S"/><rect x="3" y="6" width="1" height="1" class="px-s"/><rect x="4" y="6" width="1" height="1" class="px-s"/><rect x="5" y="6" width="1" height="1" class="px-S"/><rect x="6" y="6" width="1" height="1" class="px-s"/><rect x="1" y="7" width="1" height="1" class="px-s"/><rect x="2" y="7" width="1" height="1" class="px-s"/><rect x="3" y="7" width="1" height="1" class="px-s"/><rect x="4" y="7" width="1" height="1" class="px-s"/><rect x="5" y="7" width="1" height="1" class="px-s"/><rect x="6" y="7" width="1" height="1" class="px-s"/></svg><h3>แผ่นศิลาสลัก</h3><span class="pts"><span>Carved Tablet</span><b>3 แต้ม</b></span><p>แหล่งที่มากำลังออกแบบ <span class="badge b-plan">แผน</span></p></article>
+        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="1" width="1" height="1" class="px-c"/><rect x="3" y="1" width="1" height="1" class="px-c"/><rect x="4" y="1" width="1" height="1" class="px-c"/><rect x="5" y="1" width="1" height="1" class="px-c"/><rect x="1" y="2" width="1" height="1" class="px-c"/><rect x="2" y="2" width="1" height="1" class="px-C"/><rect x="3" y="2" width="1" height="1" class="px-C"/><rect x="4" y="2" width="1" height="1" class="px-c"/><rect x="5" y="2" width="1" height="1" class="px-c"/><rect x="6" y="2" width="1" height="1" class="px-c"/><rect x="1" y="3" width="1" height="1" class="px-c"/><rect x="2" y="3" width="1" height="1" class="px-C"/><rect x="3" y="3" width="1" height="1" class="px-a"/><rect x="4" y="3" width="1" height="1" class="px-a"/><rect x="5" y="3" width="1" height="1" class="px-c"/><rect x="6" y="3" width="1" height="1" class="px-c"/><rect x="1" y="4" width="1" height="1" class="px-c"/><rect x="2" y="4" width="1" height="1" class="px-c"/><rect x="3" y="4" width="1" height="1" class="px-a"/><rect x="4" y="4" width="1" height="1" class="px-a"/><rect x="5" y="4" width="1" height="1" class="px-c"/><rect x="6" y="4" width="1" height="1" class="px-c"/><rect x="1" y="5" width="1" height="1" class="px-c"/><rect x="2" y="5" width="1" height="1" class="px-c"/><rect x="3" y="5" width="1" height="1" class="px-c"/><rect x="4" y="5" width="1" height="1" class="px-c"/><rect x="5" y="5" width="1" height="1" class="px-c"/><rect x="6" y="5" width="1" height="1" class="px-c"/><rect x="2" y="6" width="1" height="1" class="px-c"/><rect x="3" y="6" width="1" height="1" class="px-c"/><rect x="4" y="6" width="1" height="1" class="px-c"/><rect x="5" y="6" width="1" height="1" class="px-c"/></svg><h3>แกนโบราณ</h3><span class="pts"><span>Ancient Core</span><b>10 แต้ม</b></span><p>แหล่งที่มากำลังออกแบบ <span class="badge b-plan">แผน</span></p></article>
+        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="1" y="2" width="1" height="1" class="px-g"/><rect x="3" y="2" width="1" height="1" class="px-g"/><rect x="4" y="2" width="1" height="1" class="px-g"/><rect x="6" y="2" width="1" height="1" class="px-g"/><rect x="1" y="3" width="1" height="1" class="px-g"/><rect x="2" y="3" width="1" height="1" class="px-g"/><rect x="3" y="3" width="1" height="1" class="px-g"/><rect x="4" y="3" width="1" height="1" class="px-g"/><rect x="5" y="3" width="1" height="1" class="px-g"/><rect x="6" y="3" width="1" height="1" class="px-g"/><rect x="1" y="4" width="1" height="1" class="px-g"/><rect x="2" y="4" width="1" height="1" class="px-G"/><rect x="3" y="4" width="1" height="1" class="px-g"/><rect x="4" y="4" width="1" height="1" class="px-g"/><rect x="5" y="4" width="1" height="1" class="px-G"/><rect x="6" y="4" width="1" height="1" class="px-g"/><rect x="1" y="5" width="1" height="1" class="px-g"/><rect x="2" y="5" width="1" height="1" class="px-g"/><rect x="3" y="5" width="1" height="1" class="px-g"/><rect x="4" y="5" width="1" height="1" class="px-g"/><rect x="5" y="5" width="1" height="1" class="px-g"/><rect x="6" y="5" width="1" height="1" class="px-g"/><rect x="1" y="6" width="1" height="1" class="px-G"/><rect x="2" y="6" width="1" height="1" class="px-G"/><rect x="3" y="6" width="1" height="1" class="px-G"/><rect x="4" y="6" width="1" height="1" class="px-G"/><rect x="5" y="6" width="1" height="1" class="px-G"/><rect x="6" y="6" width="1" height="1" class="px-G"/></svg><h3>เศษมงกุฎ</h3><span class="pts"><span>Crown Fragment</span><b>25 แต้ม</b></span><p>แหล่งที่มากำลังออกแบบ <span class="badge b-plan">แผน</span></p></article>
+      </div>
+      <p class="relic-note">โบราณวัตถุของจริงจะมีบรรทัด <strong>Lost Sky Relic</strong> อยู่ใต้ชื่อไอเท็ม ไอเท็มทั่วไปหรือไอเท็มที่แค่เปลี่ยนชื่อด้วยทั่งจะบริจาคไม่ได้</p>
+    </div>
+  </section>
+
+  <!-- ============ แกลเลอรีแผนที่ ============ -->
+  <section id="gallery" aria-labelledby="gallery-h">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">แผนที่</span>
+        <h2 id="gallery-h">แกลเลอรีแผนที่</h2>
+        <p class="muted">ทุกภาพเป็นภาพเรนเดอร์จากไฟล์แผนที่จริง (ฮับ และเมืองของทีมทั้งห้าบท) ไม่ใช่ภาพถ่ายจากในเกม กดที่ภาพเพื่อเปิดขนาดเต็ม</p>
+      </div>
+      <div class="gallery">
+        <figure class="shot wide"><a href="assets/spawn-market.png"><img src="assets/spawn-market.png" width="692" height="438" loading="lazy" alt="ภาพเรนเดอร์ฮับกลางมุมสูง: น้ำพุสีฟ้ากลางลานหินขาว ทางเดินสี่ทิศ และศาลาหลังคาสีเขียว ฟ้าอมเขียว ม่วง ทอง และเขียวอ่อน ล้อมรอบลานบนเกาะลอยฟ้า"></a><figcaption><b>ฮับกลาง</b> ลานน้ำพุและโซนร้านค้า</figcaption></figure>
+        <figure class="shot"><a href="assets/maps/city-ch1.png"><img src="assets/maps/city-ch1.png" width="772" height="468" loading="lazy" alt="ภาพเรนเดอร์เมืองบทที่ 1: เกาะลอยฟ้าทรงกลม ซากป้อมหินตรงกลาง ทางเดินหินจากจุดเกิดด้านล่าง และอาคารหลังคาเรียบด้านหลัง"></a><figcaption><b>เมืองบทที่ 1</b> ซากเมือง</figcaption></figure>
+        <figure class="shot"><a href="assets/maps/city-ch2.png"><img src="assets/maps/city-ch2.png" width="772" height="468" loading="lazy" alt="ภาพเรนเดอร์เมืองบทที่ 2: กำแพงป้อมตรงกลางถูกสร้างขึ้นใหม่ล้อมลานด้านใน"></a><figcaption><b>เมืองบทที่ 2</b> รากแห่งศิลา</figcaption></figure>
+        <figure class="shot"><a href="assets/maps/city-ch3.png"><img src="assets/maps/city-ch3.png" width="772" height="468" loading="lazy" alt="ภาพเรนเดอร์เมืองบทที่ 3: ป้อมมีหลังคา และมีน้ำตกสีน้ำเงินไหลลงจากขอบและใต้เกาะ"></a><figcaption><b>เมืองบทที่ 3</b> หอคอยสายน้ำ</figcaption></figure>
+        <figure class="shot"><a href="assets/maps/city-ch4.png"><img src="assets/maps/city-ch4.png" width="772" height="468" loading="lazy" alt="ภาพเรนเดอร์เมืองบทที่ 4: ป้อมหินดำเปิดหลังคาเห็นโถงด้านใน พร้อมน้ำตกรอบเกาะ"></a><figcaption><b>เมืองบทที่ 4</b> โถงถ่านเพลิง</figcaption></figure>
+        <figure class="shot"><a href="assets/maps/city-ch5.png"><img src="assets/maps/city-ch5.png" width="772" height="468" loading="lazy" alt="ภาพเรนเดอร์เมืองบทที่ 5: ป้อมที่ซ่อมสมบูรณ์ มีหอคอยสี่มุมและแท่นสีทองตรงกลาง"></a><figcaption><b>เมืองบทที่ 5</b> เมืองคืนชีพ</figcaption></figure>
       </div>
     </div>
   </section>
@@ -197,122 +400,26 @@
       </div>
       <div class="start-grid">
         <ol class="steps">
-          <li><strong>มี Minecraft: Java Edition</strong><span>เล่นบน PC, Mac หรือ Linux ช่วงทดสอบวางแผนรองรับ Java เท่านั้น</span></li>
-          <li><strong>รอประกาศที่อยู่เซิร์ฟเวอร์</strong><span>ตอนนี้ยังไม่มี IP สำหรับเข้าเล่น จะประกาศบนหน้านี้</span></li>
-          <li><strong>ขอเข้า whitelist</strong><span>ส่งชื่อผู้เล่น Minecraft ให้ทีมงานผ่านช่องทางที่จะประกาศพร้อมกับที่อยู่เซิร์ฟ</span></li>
-          <li><strong>เพิ่มเซิร์ฟในเกม</strong><span>Multiplayer → Add Server → ใส่ที่อยู่ที่ประกาศ → Done</span></li>
-          <li><strong>พิมพ์ <code>/is</code> เพื่อสร้างเกาะ</strong><span>จากนั้นพิมพ์ <code>/chapter</code> เพื่อดูว่าเนื้อเรื่องไปถึงบทไหนแล้ว</span></li>
+          <li><strong>มี Minecraft: Java Edition</strong><span>เปิดเกมเวอร์ชัน 1.21.11 ให้ตรงกับเซิร์ฟเวอร์</span></li>
+          <li><strong>รอประกาศเปิดสาธารณะ</strong><span>ตอนนี้เข้าได้เฉพาะคนใน whitelist ช่วงทดสอบภายใน</span></li>
+          <li><strong>เข้าเซิร์ฟแล้วเริ่มที่ฮับ</strong><span>เปิดเมนูด้วย <code>/menu</code> หรือกลับฮับด้วย <code>/spawn</code></span></li>
+          <li><strong>สร้างเกาะของทีมด้วย <code>/is</code></strong><span>ชวนเพื่อนเข้าทีมด้วย <code>/is team invite</code></span></li>
+          <li><strong>ไปเมืองของทีมด้วย <code>/city go</code></strong><span>ทำภารกิจที่ฮับเพื่อรับเศษผลึก แล้วใช้ <code>/city donate</code> ซ่อมเมือง</span></li>
         </ol>
         <div class="facts">
           <div class="address-row">
-            <h3>ค่าที่วางแผนไว้</h3>
-            <span class="badge b-plan">แผนช่วงทดสอบ</span>
+            <h3>ค่าที่ใช้อยู่และค่าที่วางแผนไว้</h3>
           </div>
           <dl>
-            <dt>รุ่นเกม</dt><dd>Java Edition</dd>
-            <dt>เวอร์ชัน</dt><dd>1.21.x (จะยืนยันอีกครั้งตอนประกาศเปิด)</dd>
-            <dt>บัญชี</dt><dd>บัญชี Microsoft ของแท้</dd>
-            <dt>ทีม</dt><dd>สูงสุด 4 คนต่อเกาะ</dd>
-            <dt>PvP</dt><dd>ปิดทุกพื้นที่</dd>
-            <dt>การเข้าเล่น</dt><dd>whitelist เท่านั้น</dd>
+            <dt>รุ่นเกม</dt><dd>Java Edition <span class="badge b-ok">ยืนยันแล้ว</span></dd>
+            <dt>เวอร์ชัน</dt><dd>1.21.11 <span class="badge b-ok">ยืนยันแล้ว</span></dd>
+            <dt>การเข้าเล่น</dt><dd>whitelist ช่วงทดสอบภายใน <span class="badge b-ok">ยืนยันแล้ว</span></dd>
+            <dt>ทีม</dt><dd>สูงสุด 4 คนต่อเกาะ <span class="badge b-plan">แผน</span></dd>
+            <dt>PvP</dt><dd>ปิดทุกพื้นที่ <span class="badge b-plan">แผน</span></dd>
             <dt>ม็อดฝั่งผู้เล่น</dt><dd><span class="ok">ใช้ได้:</span> ม็อดเพิ่มความลื่น (เช่น Sodium), shader, minimap</dd>
             <dt><span class="sr-only">ม็อดที่ห้าม</span></dt><dd><span class="no">ห้าม:</span> โปรแกรมโกง, X-ray, auto-clicker, การ dupe ของ</dd>
           </dl>
-          <p class="muted">ค่าเหล่านี้มาจากเอกสารออกแบบ ยังไม่ได้ยืนยันว่าเซิร์ฟเวอร์จริงตั้งค่าตรงกัน</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ เรื่องราว / บท ============ -->
-  <section id="story" aria-labelledby="story-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">เรื่องราว</span>
-        <h2 id="story-h">ห้าบทสู่ Sky Citadel</h2>
-      </div>
-      <div class="lore">
-        <p>นานมาแล้ว มีอารยธรรมหนึ่งอาศัยอยู่บนท้องฟ้ารอบป้อมปราการใหญ่ชื่อ Sky Citadel วันหนึ่งทุกอย่างแตกออกเป็นเสี่ยงและร่วงหล่นสู่ความว่างเปล่า</p>
-        <p>บัดนี้ชิ้นส่วนของมันกำลังลอยกลับขึ้นมา คุณตื่นขึ้นบนเกาะเล็ก ๆ ข้างซากป้อม ค้นหาโบราณวัตถุ นำกลับมาคืน และปลุก Citadel ให้ฟื้นคืนชีพอีกครั้ง</p>
-        <p class="muted">แต่ละบทจะปลดล็อกให้ทุกคนพร้อมกัน เมื่อแต้มโบราณวัตถุที่ผู้เล่นทั้งเซิร์ฟบริจาครวมกันถึงเป้าหมาย ตัวเลขเป้าหมายเป็นค่าเบื้องต้น และอาจปรับตามจำนวนผู้เล่น</p>
-      </div>
-
-      <div class="chapters">
-        <div class="tablist" role="tablist" aria-label="เลือกบท">
-          <button class="tab" role="tab" id="tab-1" aria-controls="ch-1" aria-selected="true"><span class="num">1</span><span class="tname">การตื่นขึ้น</span></button>
-          <button class="tab" role="tab" id="tab-2" aria-controls="ch-2" aria-selected="false" tabindex="-1"><span class="num">2</span><span class="tname">รากแห่งศิลา</span></button>
-          <button class="tab" role="tab" id="tab-3" aria-controls="ch-3" aria-selected="false" tabindex="-1"><span class="num">3</span><span class="tname">หอคอยใต้น้ำ</span></button>
-          <button class="tab" role="tab" id="tab-4" aria-controls="ch-4" aria-selected="false" tabindex="-1"><span class="num">4</span><span class="tname">โถงถ่านเพลิง</span></button>
-          <button class="tab" role="tab" id="tab-5" aria-controls="ch-5" aria-selected="false" tabindex="-1"><span class="num">5</span><span class="tname">Citadel คืนชีพ</span></button>
-        </div>
-        <div class="panels">
-          <div class="panel" role="tabpanel" id="ch-1" aria-labelledby="tab-1" tabindex="0">
-            <span class="en">Chapter 1 · The Awakening</span>
-            <h3>บทที่ 1 การตื่นขึ้น</h3>
-            <div class="goal"><span class="muted">เป้าหมาย</span><b>เริ่มต้น</b><span class="badge b-plan">แผน</span></div>
-            <p>ทุกคนเริ่มบนเกาะเล็ก ๆ ของตัวเอง ซากป้อมยังเงียบสงบ</p>
-            <ul><li>เกาะพื้นฐาน</li><li>เครื่องปั่นหิน (cobblestone generator)</li><li>ซากปรักหักพังระดับ 1</li></ul>
-          </div>
-          <div class="panel" role="tabpanel" id="ch-2" aria-labelledby="tab-2" tabindex="0">
-            <span class="en">Chapter 2 · Roots of Stone</span>
-            <h3>บทที่ 2 รากแห่งศิลา</h3>
-            <div class="goal"><span class="muted">เป้าหมาย</span><b>100</b><span>แต้ม</span><span class="badge b-plan">ตัวเลขเบื้องต้น</span></div>
-            <p>รากหินโบราณเริ่มงอกกลับเข้าหาเกาะ นำแร่และผืนดินใหม่มาด้วย</p>
-            <ul><li>เครื่องปั่นแร่ระดับ 2</li><li>ไบโอมป่าและทุ่งหญ้าบนเกาะ</li><li>ซากปรักหักพังระดับ 2</li></ul>
-          </div>
-          <div class="panel" role="tabpanel" id="ch-3" aria-labelledby="tab-3" tabindex="0">
-            <span class="en">Chapter 3 · The Drowned Spire</span>
-            <h3>บทที่ 3 หอคอยใต้น้ำ</h3>
-            <div class="goal"><span class="muted">เป้าหมาย</span><b>300</b><span>แต้ม</span><span class="badge b-plan">ตัวเลขเบื้องต้น</span></div>
-            <p>ยอดหอคอยที่จมอยู่ใต้ทะเลเมฆโผล่ขึ้นมา พร้อมความลับของมหาสมุทรลอยฟ้า</p>
-            <ul><li>ไบโอมมหาสมุทร</li><li>โบราณวัตถุจากการตกปลา</li><li>อัปเกรดขนาดเกาะ +1</li><li>ซากปรักหักพังระดับ 3</li></ul>
-          </div>
-          <div class="panel" role="tabpanel" id="ch-4" aria-labelledby="tab-4" tabindex="0">
-            <span class="en">Chapter 4 · Ember Halls</span>
-            <h3>บทที่ 4 โถงถ่านเพลิง</h3>
-            <div class="goal"><span class="muted">เป้าหมาย</span><b>600</b><span>แต้ม</span><span class="badge b-plan">ตัวเลขเบื้องต้น</span></div>
-            <p>โถงใต้ป้อมที่ยังคุกรุ่นด้วยไฟเก่าถูกเปิดออก ผู้พิทักษ์ตัวแรกกำลังรออยู่</p>
-            <ul><li>ไบโอม Nether</li><li>เครื่องปั่นลาวาและ blaze</li><li>ซากปรักหักพังระดับ 4 มีมินิบอส</li></ul>
-          </div>
-          <div class="panel final" role="tabpanel" id="ch-5" aria-labelledby="tab-5" tabindex="0">
-            <span class="en">Chapter 5 · The Citadel Rises</span>
-            <h3>บทที่ 5 Citadel คืนชีพ</h3>
-            <div class="goal"><span class="muted">เป้าหมาย</span><b>1000</b><span>แต้ม</span><span class="badge b-plan">ตัวเลขเบื้องต้น</span></div>
-            <p>Sky Citadel ลอยขึ้นอีกครั้ง ศึกสุดท้ายจะตัดสินว่าท้องฟ้าจะกลับมาสงบหรือไม่</p>
-            <ul><li>ไบโอมท้องฟ้าแบบ End</li><li>คราฟต์ปีก elytra ได้</li><li>บอสใหญ่ประจำซีซัน</li></ul>
-          </div>
-        </div>
-      </div>
-      <p class="season-note">ตามแบบที่วางไว้ เมื่อบอสบทที่ 5 ถูกปราบ ซีซันจะจบลง เกาะจะรีเซ็ต แต่ฉายาและของตกแต่งยังอยู่ ความยาวของซีซันยังไม่ได้กำหนด</p>
-    </div>
-  </section>
-
-  <!-- ============ โบราณวัตถุ ============ -->
-  <section id="relics" aria-labelledby="relics-h">
-    <div class="wrap">
-      <div class="sec-head">
-        <span class="eyebrow">โบราณวัตถุ</span>
-        <h2 id="relics-h">สิ่งที่ต้องนำกลับมา</h2>
-        <p class="muted">ถือโบราณวัตถุไว้ในมือหลัก แล้วพิมพ์ <code>/donate</code> ที่ใดก็ได้เพื่อมอบให้ Citadel</p>
-      </div>
-      <div class="relics">
-        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="4" y="0" width="1" height="1" class="px-a"/><rect x="3" y="1" width="1" height="1" class="px-a"/><rect x="4" y="1" width="1" height="1" class="px-A"/><rect x="3" y="2" width="1" height="1" class="px-a"/><rect x="4" y="2" width="1" height="1" class="px-A"/><rect x="5" y="2" width="1" height="1" class="px-a"/><rect x="2" y="3" width="1" height="1" class="px-a"/><rect x="3" y="3" width="1" height="1" class="px-A"/><rect x="4" y="3" width="1" height="1" class="px-A"/><rect x="5" y="3" width="1" height="1" class="px-a"/><rect x="2" y="4" width="1" height="1" class="px-a"/><rect x="3" y="4" width="1" height="1" class="px-A"/><rect x="4" y="4" width="1" height="1" class="px-a"/><rect x="2" y="5" width="1" height="1" class="px-a"/><rect x="3" y="5" width="1" height="1" class="px-a"/><rect x="1" y="6" width="1" height="1" class="px-a"/><rect x="2" y="6" width="1" height="1" class="px-a"/></svg><h3>เศษผลึกสามัญ</h3><span class="pts"><span>Common Shard</span><b>1 แต้ม</b></span><p>พบได้ในหีบของซากปรักหักพังทุกระดับ</p></article>
-        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="1" y="1" width="1" height="1" class="px-s"/><rect x="2" y="1" width="1" height="1" class="px-s"/><rect x="3" y="1" width="1" height="1" class="px-s"/><rect x="4" y="1" width="1" height="1" class="px-s"/><rect x="5" y="1" width="1" height="1" class="px-s"/><rect x="6" y="1" width="1" height="1" class="px-s"/><rect x="1" y="2" width="1" height="1" class="px-s"/><rect x="2" y="2" width="1" height="1" class="px-S"/><rect x="3" y="2" width="1" height="1" class="px-s"/><rect x="4" y="2" width="1" height="1" class="px-S"/><rect x="5" y="2" width="1" height="1" class="px-S"/><rect x="6" y="2" width="1" height="1" class="px-s"/><rect x="1" y="3" width="1" height="1" class="px-s"/><rect x="2" y="3" width="1" height="1" class="px-s"/><rect x="3" y="3" width="1" height="1" class="px-s"/><rect x="4" y="3" width="1" height="1" class="px-s"/><rect x="5" y="3" width="1" height="1" class="px-s"/><rect x="6" y="3" width="1" height="1" class="px-s"/><rect x="1" y="4" width="1" height="1" class="px-s"/><rect x="2" y="4" width="1" height="1" class="px-S"/><rect x="3" y="4" width="1" height="1" class="px-S"/><rect x="4" y="4" width="1" height="1" class="px-s"/><rect x="5" y="4" width="1" height="1" class="px-S"/><rect x="6" y="4" width="1" height="1" class="px-s"/><rect x="1" y="5" width="1" height="1" class="px-s"/><rect x="2" y="5" width="1" height="1" class="px-s"/><rect x="3" y="5" width="1" height="1" class="px-s"/><rect x="4" y="5" width="1" height="1" class="px-s"/><rect x="5" y="5" width="1" height="1" class="px-s"/><rect x="6" y="5" width="1" height="1" class="px-s"/><rect x="1" y="6" width="1" height="1" class="px-s"/><rect x="2" y="6" width="1" height="1" class="px-S"/><rect x="3" y="6" width="1" height="1" class="px-s"/><rect x="4" y="6" width="1" height="1" class="px-s"/><rect x="5" y="6" width="1" height="1" class="px-S"/><rect x="6" y="6" width="1" height="1" class="px-s"/><rect x="1" y="7" width="1" height="1" class="px-s"/><rect x="2" y="7" width="1" height="1" class="px-s"/><rect x="3" y="7" width="1" height="1" class="px-s"/><rect x="4" y="7" width="1" height="1" class="px-s"/><rect x="5" y="7" width="1" height="1" class="px-s"/><rect x="6" y="7" width="1" height="1" class="px-s"/></svg><h3>แผ่นศิลาสลัก</h3><span class="pts"><span>Carved Tablet</span><b>3 แต้ม</b></span><p>ได้จากปริศนาในซากปรักหักพังระดับ 2 ขึ้นไป</p></article>
-        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="2" y="1" width="1" height="1" class="px-c"/><rect x="3" y="1" width="1" height="1" class="px-c"/><rect x="4" y="1" width="1" height="1" class="px-c"/><rect x="5" y="1" width="1" height="1" class="px-c"/><rect x="1" y="2" width="1" height="1" class="px-c"/><rect x="2" y="2" width="1" height="1" class="px-C"/><rect x="3" y="2" width="1" height="1" class="px-C"/><rect x="4" y="2" width="1" height="1" class="px-c"/><rect x="5" y="2" width="1" height="1" class="px-c"/><rect x="6" y="2" width="1" height="1" class="px-c"/><rect x="1" y="3" width="1" height="1" class="px-c"/><rect x="2" y="3" width="1" height="1" class="px-C"/><rect x="3" y="3" width="1" height="1" class="px-a"/><rect x="4" y="3" width="1" height="1" class="px-a"/><rect x="5" y="3" width="1" height="1" class="px-c"/><rect x="6" y="3" width="1" height="1" class="px-c"/><rect x="1" y="4" width="1" height="1" class="px-c"/><rect x="2" y="4" width="1" height="1" class="px-c"/><rect x="3" y="4" width="1" height="1" class="px-a"/><rect x="4" y="4" width="1" height="1" class="px-a"/><rect x="5" y="4" width="1" height="1" class="px-c"/><rect x="6" y="4" width="1" height="1" class="px-c"/><rect x="1" y="5" width="1" height="1" class="px-c"/><rect x="2" y="5" width="1" height="1" class="px-c"/><rect x="3" y="5" width="1" height="1" class="px-c"/><rect x="4" y="5" width="1" height="1" class="px-c"/><rect x="5" y="5" width="1" height="1" class="px-c"/><rect x="6" y="5" width="1" height="1" class="px-c"/><rect x="2" y="6" width="1" height="1" class="px-c"/><rect x="3" y="6" width="1" height="1" class="px-c"/><rect x="4" y="6" width="1" height="1" class="px-c"/><rect x="5" y="6" width="1" height="1" class="px-c"/></svg><h3>แกนโบราณ</h3><span class="pts"><span>Ancient Core</span><b>10 แต้ม</b></span><p>ได้จากผู้พิทักษ์ในซากปรักหักพังระดับ 3 ขึ้นไป</p></article>
-        <article class="relic"><svg viewBox="0 0 8 8" aria-hidden="true"><rect x="1" y="2" width="1" height="1" class="px-g"/><rect x="3" y="2" width="1" height="1" class="px-g"/><rect x="4" y="2" width="1" height="1" class="px-g"/><rect x="6" y="2" width="1" height="1" class="px-g"/><rect x="1" y="3" width="1" height="1" class="px-g"/><rect x="2" y="3" width="1" height="1" class="px-g"/><rect x="3" y="3" width="1" height="1" class="px-g"/><rect x="4" y="3" width="1" height="1" class="px-g"/><rect x="5" y="3" width="1" height="1" class="px-g"/><rect x="6" y="3" width="1" height="1" class="px-g"/><rect x="1" y="4" width="1" height="1" class="px-g"/><rect x="2" y="4" width="1" height="1" class="px-G"/><rect x="3" y="4" width="1" height="1" class="px-g"/><rect x="4" y="4" width="1" height="1" class="px-g"/><rect x="5" y="4" width="1" height="1" class="px-G"/><rect x="6" y="4" width="1" height="1" class="px-g"/><rect x="1" y="5" width="1" height="1" class="px-g"/><rect x="2" y="5" width="1" height="1" class="px-g"/><rect x="3" y="5" width="1" height="1" class="px-g"/><rect x="4" y="5" width="1" height="1" class="px-g"/><rect x="5" y="5" width="1" height="1" class="px-g"/><rect x="6" y="5" width="1" height="1" class="px-g"/><rect x="1" y="6" width="1" height="1" class="px-G"/><rect x="2" y="6" width="1" height="1" class="px-G"/><rect x="3" y="6" width="1" height="1" class="px-G"/><rect x="4" y="6" width="1" height="1" class="px-G"/><rect x="5" y="6" width="1" height="1" class="px-G"/><rect x="6" y="6" width="1" height="1" class="px-G"/></svg><h3>เศษมงกุฎ</h3><span class="pts"><span>Crown Fragment</span><b>25 แต้ม</b></span><p>ได้จากบอสประจำบท</p></article>
-      </div>
-      <p class="relic-note">โบราณวัตถุของจริงจะมีบรรทัด <strong>Lost Sky Relic</strong> อยู่ใต้ชื่อไอเท็ม ไอเท็มที่แค่เปลี่ยนชื่อด้วยทั่งจะไม่นับ</p>
-
-      <div class="titles">
-        <h3>ฉายาจากแต้ม Citadel</h3>
-        <p class="muted">ยิ่งบริจาคมาก ยิ่งได้ฉายาที่แสดงหน้าชื่อในแชต (ฉายาใช้ชื่อภาษาอังกฤษตามที่แสดงในเกม)</p>
-        <ul class="title-list">
-          <li><span>[Wanderer]</span><span class="pts">10 แต้ม</span></li>
-          <li><span>[Relic Seeker]</span><span class="pts">50 แต้ม</span></li>
-          <li><span>[Sky Scholar]</span><span class="pts">150 แต้ม</span></li>
-          <li><span>[Citadel Keeper]</span><span class="pts">400 แต้ม</span></li>
-          <li><span>[Founder] <span class="badge b-plan">แผน</span></span><span class="pts">3 อันดับแรกของซีซัน</span></li>
-        </ul>
       </div>
     </div>
   </section>
@@ -326,12 +433,12 @@
         <p class="muted">กฎเบื้องต้น อาจเพิ่มเติมก่อนเปิดเซิร์ฟ</p>
       </div>
       <ul class="rules">
-        <li><b>ห้ามแกล้งทำลายหรือขโมย</b><span>เกาะมีระบบป้องกัน และมีบันทึกการวางและทุบบล็อกไว้ตรวจสอบ</span></li>
-        <li><b>แบ่งกันใช้ซากปรักหักพัง</b><span>ห้ามปิดทางเข้า ห้ามดักผู้เล่นอื่น ห้ามทำลายปริศนา</span></li>
+        <li><b>ห้ามแกล้งทำลายหรือขโมย</b><span>เกาะ ฮับ และเมืองของทีมมีระบบป้องกัน และมีบันทึกการวางและทุบบล็อกไว้ตรวจสอบ</span></li>
+        <li><b>ฮับเป็นของทุกคน</b><span>ห้ามขวางทางเดิน ห้ามสแปมในโซนร้านค้าและภารกิจ</span></li>
         <li><b>ห้ามโกงหรือใช้บั๊ก</b><span>ถ้าเจอบั๊กหรือวิธี dupe ของ ให้แจ้งทีมงาน</span></li>
-        <li><b>ไม่มี PvP</b><span>ตามแผนช่วงทดสอบ PvP ปิดทุกพื้นที่ รวมถึงในซากปรักหักพัง</span></li>
+        <li><b>ไม่มี PvP</b><span>ตามแผน PvP ปิดทุกพื้นที่</span></li>
         <li><b>สุภาพในแชต</b><span>ห้ามพูดจาเกลียดชัง สแปม หรือโฆษณา</span></li>
-        <li><b>หนึ่งคนหนึ่งบัญชี</b><span>ห้ามใช้บัญชีสำรองฟาร์มโบราณวัตถุ</span></li>
+        <li><b>หนึ่งคนหนึ่งบัญชี</b><span>ห้ามใช้บัญชีสำรองทำภารกิจหรือฟาร์มรางวัลซ้ำ</span></li>
       </ul>
     </div>
   </section>
@@ -342,30 +449,55 @@
       <div class="sec-head">
         <span class="eyebrow">คำสั่งผู้เล่น</span>
         <h2 id="commands-h">คำสั่งที่ใช้ในเกม</h2>
-        <p class="muted">ยังไม่มีคำสั่งไหนผ่านการทดสอบในเกม ป้ายข้างคำสั่งบอกสถานะล่าสุด</p>
+        <p class="muted">ป้ายข้างคำสั่งบอกสถานะล่าสุด คำสั่งที่ยังไม่ผ่านการทดสอบเล่นอาจเปลี่ยน</p>
       </div>
       <div class="filters" role="group" aria-label="กรองคำสั่ง" hidden>
         <button class="chip" type="button" data-filter="all" aria-pressed="true">ทั้งหมด</button>
-        <button class="chip" type="button" data-filter="story" aria-pressed="false">เนื้อเรื่อง</button>
+        <button class="chip" type="button" data-filter="hub" aria-pressed="false">ฮับ</button>
+        <button class="chip" type="button" data-filter="shop" aria-pressed="false">ร้านค้าและภารกิจ</button>
         <button class="chip" type="button" data-filter="island" aria-pressed="false">เกาะ</button>
-        <button class="chip" type="button" data-filter="general" aria-pressed="false">ทั่วไป</button>
+        <button class="chip" type="button" data-filter="city" aria-pressed="false">เมืองของทีม</button>
       </div>
       <ul class="cmd-list">
-        <li class="cmd" data-group="story"><code>/chapter</code><div class="desc"><span>ดูบทปัจจุบัน แต้มรวมของเซิร์ฟ และเป้าหมายถัดไป</span><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span></div><button class="copy" type="button" data-copy="/chapter" aria-label="คัดลอกคำสั่ง /chapter">คัดลอก</button></li>
-        <li class="cmd" data-group="story"><code>/donate</code><div class="desc"><span>มอบโบราณวัตถุที่ถืออยู่ในมือหลักให้ Citadel</span><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span></div><button class="copy" type="button" data-copy="/donate" aria-label="คัดลอกคำสั่ง /donate">คัดลอก</button></li>
-        <li class="cmd" data-group="story"><code>/relics</code><div class="desc"><span>ดูแต้ม Citadel และฉายาของตัวเอง</span><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span></div><button class="copy" type="button" data-copy="/relics" aria-label="คัดลอกคำสั่ง /relics">คัดลอก</button></li>
-        <li class="cmd" data-group="story"><code>/ruin</code><div class="desc"><span>วาร์ปไปซากปรักหักพังที่เปิดอยู่ (ถ้ามี)</span><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span></div><button class="copy" type="button" data-copy="/ruin" aria-label="คัดลอกคำสั่ง /ruin">คัดลอก</button></li>
-        <li class="cmd" data-group="story"><code>/citadel</code><div class="desc"><span>วาร์ปไป Sky Citadel</span><span class="badge b-draft">ร่าง · ยังไม่ทดสอบ</span></div><button class="copy" type="button" data-copy="/citadel" aria-label="คัดลอกคำสั่ง /citadel">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>สร้างเกาะ หรือวาร์ปกลับเกาะของตัวเอง</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is team invite &lt;ชื่อผู้เล่น&gt;</code><div class="desc"><span>ชวนเพื่อนเข้าทีมเกาะ</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/is team invite " aria-label="คัดลอกคำสั่ง /is team invite">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is sethome</code><div class="desc"><span>ตั้งจุดเกิดบนเกาะ</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/is sethome" aria-label="คัดลอกคำสั่ง /is sethome">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is level</code><div class="desc"><span>คำนวณเลเวลเกาะ</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/is level" aria-label="คัดลอกคำสั่ง /is level">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is top</code><div class="desc"><span>อันดับเกาะ</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/is top" aria-label="คัดลอกคำสั่ง /is top">คัดลอก</button></li>
-        <li class="cmd" data-group="general"><code>/spawn</code><div class="desc"><span>กลับจุดเกิดของเซิร์ฟ</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/spawn" aria-label="คัดลอกคำสั่ง /spawn">คัดลอก</button></li>
-        <li class="cmd" data-group="general"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
-        <li class="cmd" data-group="general"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-plan">วางแผน</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/spawn</code><div class="desc"><span>กลับฮับกลาง</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/spawn" aria-label="คัดลอกคำสั่ง /spawn">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/hub</code><div class="desc"><span>กลับฮับกลาง (ใช้ <code>/lobby</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/hub" aria-label="คัดลอกคำสั่ง /hub">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/menu</code><div class="desc"><span>เปิดเมนูฮับ: เกาะ, เมืองของทีม, คู่มือ และโซนต่าง ๆ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/menu" aria-label="คัดลอกคำสั่ง /menu">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/skyguide</code><div class="desc"><span>อ่านคู่มือเริ่มต้นภาษาไทย</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyguide" aria-label="คัดลอกคำสั่ง /skyguide">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/market</code><div class="desc"><span>เปิดตลาดพืชผล ขายผลผลิตรับเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/market" aria-label="คัดลอกคำสั่ง /market">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านเสบียง ซื้อของด้วยเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>ห้องเติมเงิน ตอนนี้ยังไม่เปิด</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>สร้างเกาะของทีม หรือวาร์ปกลับเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is team invite &lt;ชื่อผู้เล่น&gt;</code><div class="desc"><span>ชวนเพื่อนเข้าทีมเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is team invite " aria-label="คัดลอกคำสั่ง /is team invite">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is sethome</code><div class="desc"><span>ตั้งจุดเกิดบนเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is sethome" aria-label="คัดลอกคำสั่ง /is sethome">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is level</code><div class="desc"><span>คำนวณเลเวลเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is level" aria-label="คัดลอกคำสั่ง /is level">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is top</code><div class="desc"><span>อันดับเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is top" aria-label="คัดลอกคำสั่ง /is top">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city</code><div class="desc"><span>เปิดเมนูเมืองของทีม (ใช้ <code>/is city</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city" aria-label="คัดลอกคำสั่ง /city">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city go</code><div class="desc"><span>วาร์ปไปเมืองของทีม ครั้งแรกจะเตรียมเมืองบทที่ 1 ให้ (ใช้ <code>/is city go</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city go" aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city donate</code><div class="desc"><span>บริจาคโบราณวัตถุที่ถืออยู่ในมือหลักให้เมืองของทีม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city donate" aria-label="คัดลอกคำสั่ง /city donate">คัดลอก</button></li>
       </ul>
       <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- ============ เติมเงิน ============ -->
+  <section id="topup" aria-labelledby="topup-h">
+    <div class="wrap">
+      <div class="topup">
+        <div class="topup-head">
+          <span class="eyebrow">ห้องเติมเงิน</span>
+          <h2 id="topup-h">ยังไม่เปิด</h2>
+          <span class="badge b-wait">ยังไม่เปิดให้ชำระเงิน</span>
+        </div>
+        <p>ในฮับมีโซนห้องเติมเงิน (<code>/topup</code>) เตรียมไว้ แต่ตอนนี้<strong>ยังไม่มีการรับชำระเงินใด ๆ</strong> ไม่มีแพ็กเกจ ไม่มีราคา และไม่มีช่องทางชำระเงิน ทั้งในเกมและบนเว็บนี้</p>
+        <ul class="topup-list">
+          <li>เว็บนี้ไม่มีแบบฟอร์ม และจะไม่ขอรหัสผ่าน ข้อมูลบัตร หรือข้อมูลบัญชีธนาคารของคุณ</li>
+          <li>อย่าโอนเงินให้ใครที่อ้างว่าเป็นทีมงาน Lost Sky ในตอนนี้</li>
+          <li>ถ้าจะเปิดในอนาคต จะประกาศรายละเอียดและเงื่อนไขบนหน้านี้ก่อน</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -377,15 +509,16 @@
         <h2 id="faq-h">ถาม-ตอบ</h2>
       </div>
       <div class="faq">
-        <details><summary>เซิร์ฟเปิดให้เล่นเมื่อไหร่</summary><div><p>ยังไม่มีกำหนด ระบบเกมยังทดสอบไม่ครบ เมื่อพร้อมจะประกาศวันเปิดบนหน้านี้</p></div></details>
-        <details><summary>IP หรือที่อยู่เซิร์ฟเวอร์คืออะไร</summary><div><p>ยังไม่ประกาศ จะแสดงในส่วน "ที่อยู่เซิร์ฟเวอร์" ด้านบนเมื่อเจ้าของเซิร์ฟยืนยันแล้ว</p></div></details>
-        <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ แผนช่วงทดสอบรองรับเฉพาะ Java Edition</p></div></details>
-        <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง ใช้ Minecraft ปกติได้เลย ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ตามแผน แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>
-        <details><summary>เล่นกับเพื่อนได้กี่คน</summary><div><p>แผนตอนนี้คือสูงสุด 4 คนต่อเกาะ ใช้คำสั่ง <code>/is team invite</code> เพื่อชวนเพื่อน</p></div></details>
-        <details><summary>มี PvP ไหม</summary><div><p>ตามแผนช่วงทดสอบ PvP ปิดทุกพื้นที่</p></div></details>
-        <details><summary>มีเติมเงิน, VIP หรือระบบสมาชิกไหม</summary><div><p>ไม่มี เว็บนี้ใช้แนะนำเซิร์ฟอย่างเดียว ไม่มีระบบสมัครสมาชิกหรือร้านค้า</p></div></details>
-        <details><summary>ตัวเลขแต้มในแต่ละบทจะเปลี่ยนไหม</summary><div><p>อาจเปลี่ยน ตัวเลขตอนนี้เป็นค่าเบื้องต้น จะปรับให้เหมาะกับจำนวนผู้เล่นจริง</p></div></details>
-        <details><summary>จบซีซันแล้วเกิดอะไรขึ้น</summary><div><p>ตามแบบที่วางไว้ เมื่อบอสบทที่ 5 ถูกปราบ ซีซันจะจบ เกาะรีเซ็ต แต่ฉายาและของตกแต่งยังอยู่ ความยาวซีซันยังไม่ได้กำหนด</p></div></details>
+        <details><summary>เซิร์ฟเปิดให้เล่นเมื่อไหร่</summary><div><p>ยังไม่มีกำหนด ตอนนี้ทดสอบภายในเฉพาะคนใน whitelist เมื่อพร้อมจะประกาศวันเปิดบนหน้านี้</p></div></details>
+        <details><summary>ที่อยู่เซิร์ฟเวอร์คืออะไร</summary><div><p>ยังไม่ประกาศสำหรับผู้เล่นทั่วไป จะแสดงในส่วน "ที่อยู่เซิร์ฟเวอร์" ด้านบนเมื่อเปิดสาธารณะ</p></div></details>
+        <details><summary>เมืองฟื้นฟูใช้ร่วมกับทั้งเซิร์ฟไหม</summary><div><p>ไม่ ทุกทีมมีเมืองของตัวเอง แต้มที่ทีมบริจาคใช้ซ่อมเมืองของทีมนั้นเท่านั้น ทีมอื่นไม่ได้รับผล</p></div></details>
+        <details><summary>สร้างบ้านในเมืองฟื้นฟูได้ไหม</summary><div><p>ไม่ได้ เมืองถูกป้องกันไว้และเปลี่ยนตามบท สร้างอิสระได้บนเกาะของทีม (<code>/is</code>)</p></div></details>
+        <details><summary>ถ้าย้ายไปอยู่ทีมอื่น เมืองจะเป็นยังไง</summary><div><p>เมืองผูกกับเกาะของทีม ถ้าคุณเข้าร่วมเกาะของทีมอื่น <code>/city go</code> จะพาไปเมืองของทีมใหม่ เมืองของทีมเดิมยังอยู่กับทีมเดิม</p></div></details>
+        <details><summary>ภารกิจส่งของทำได้บ่อยแค่ไหน</summary><div><p>แต่ละภารกิจทำได้ 1 ครั้งต่อผู้เล่นทุก 24 ชั่วโมง ระบบนี้ยังรอทดสอบเล่น</p></div></details>
+        <details><summary>ราคาในตลาดและร้านจะเปลี่ยนไหม</summary><div><p>อาจเปลี่ยน ราคาตอนนี้เป็นค่าที่กำลังติดตั้ง จะปรับหลังทดสอบเล่น</p></div></details>
+        <details><summary>มีเติมเงินหรือ VIP ไหม</summary><div><p>ยังไม่เปิด ไม่มีการรับชำระเงิน แพ็กเกจ หรือราคาใด ๆ ในตอนนี้ ดูรายละเอียดในส่วน <a href="#topup">ห้องเติมเงิน</a></p></div></details>
+        <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ ตอนนี้ทดสอบกับ Java Edition</p></div></details>
+        <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง ใช้ Minecraft ปกติได้เลย ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>
       </div>
     </div>
   </section>
@@ -394,7 +527,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <p>Lost Sky เป็นเซิร์ฟเวอร์ Minecraft ที่ทำโดยแฟน ไม่เกี่ยวข้องกับ Mojang หรือ Microsoft</p>
-    <p>ข้อมูลอ้างอิงจากเอกสารออกแบบของโปรเจกต์ · อัปเดตหน้านี้ล่าสุด 29 กันยายน 2026</p>
+    <p>ข้อมูลอ้างอิงจากเอกสารออกแบบและผลทดสอบภายในของโปรเจกต์ · อัปเดตหน้านี้ล่าสุด 2 ตุลาคม 2026</p>
     <p><a href="#intro">กลับขึ้นด้านบน</a></p>
   </div>
 </footer>

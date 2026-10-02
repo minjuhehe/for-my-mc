@@ -118,7 +118,9 @@
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        var id = entry.target.id === 'how' ? 'intro' : entry.target.id;
+        // Sections without their own menu link highlight the nearest one.
+        var alias = { how: 'intro', relics: 'team', rules: 'start' };
+        var id = alias[entry.target.id] || entry.target.id;
         navLinks.forEach(function (a) { a.removeAttribute('aria-current'); });
         if (byId[id]) byId[id].setAttribute('aria-current', 'true');
       });
