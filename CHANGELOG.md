@@ -398,3 +398,5 @@ Notes for developers:
 - Ruins are placed by hand with WorldEdit + `/lostsky setruin`.
 
 - Lobby label repair: disable display shadows, improve background contrast, and move plaza heading clear of the central pillar. Player visual retest pending.
+
+- Follow-up: use minecraft:uniform specifically for lobby text displays after shadow-only adjustment failed; preserve ThaiFontFix for client UI.

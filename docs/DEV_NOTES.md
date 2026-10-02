@@ -326,3 +326,5 @@ require a player test; keep whitelist on.
 Live lobby import succeeded using //schem load lobby_ch1.schem sponge.2. Default format selects v3 and fails on these v2 files. Corrected chiseled_quartz_block in all five schematics after a live palette warning. Verify spawn floor at (0,99,0), pillar (0,100,-32), lectern (0,102,-32). Non-OP protection test remains pending.
 
 2026-10-03: Player confirms required Thai resource pack loads. For floating-label artifacts, disabled text_display shadows and added opaque background; moved plaza label from (0.5,104,-36) to (0.5,105,-32) to clear fountain pillar. Applied via tagged entity data merge; client visual confirmation pending.
+
+The shadow-only change did not resolve the player's red/black Thai glyphs. Applied minecraft:uniform to all10 tagged text components at02:14:33; command log confirms all updates. Corrected actual original plaza position z=-35.5 (integer teleport centering); live move confirmed to (0.5,105,-31.5). Suspected TTF/shader incompatibility, consistent with Iris issue3251, not yet proven on this client. Awaiting player retest.
