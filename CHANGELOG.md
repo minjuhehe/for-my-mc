@@ -434,3 +434,7 @@ Notes for developers:
 - English floating NPC labels now use the default font with bold styling for readability.
 
 - Install EconomyShopGUI catalog and empty sell-on-close GUI, unify hub/NPC entry points via /market and /skyshop, route /sell to sellgui. NPC labels made bold. Island selection work pending.
+
+- Clarify hover tooltips with Buy and Sell prices from EconomyShopGUI; owner confirms both GUIs open.
+
+- Remove floating-label backgrounds at owner request; keep bold English lettering.

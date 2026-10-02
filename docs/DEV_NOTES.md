@@ -347,3 +347,7 @@ The shadow-only change did not resolve the player's red/black Thai glyphs. Appli
 English labels use default font and bold; Thai font workaround is no longer needed for these labels.
 
 2026-10-03: Installed EconomyShopGUI6.16.3 from official CurseForge file7423771, MD5 0326da94b07ec43c53e2ba66320ba3a5. Startup verified1.21.11, English,16 config sections /14 economy sections, Vault+Essentials linked. Uses generated default catalog (prices differ from old6-item script). /sell intercepted to namespaced sellgui; /market and /skyshop routed to plugin. Actual transactions pending player test. Island-selector development assigned to Claude based on native concurrent islands; no selector deployment yet.
+
+Shop tooltip language: left-click-buy now Buy: %buyPrice%, right-click-sell Sell: %sellPrice%, using actual plugin pricing placeholders. Owner confirms /shop and /sell GUIs open; sale amount/return behavior not yet confirmed. Named/lore Relics remain protected by ESGUI component matching (only repair_cost ignored).
+
+Floating-label background now transparent (background0, default_background false).
