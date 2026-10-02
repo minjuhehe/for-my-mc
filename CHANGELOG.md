@@ -430,3 +430,5 @@ Notes for developers:
 - Follow-up: use minecraft:uniform specifically for lobby text displays after shadow-only adjustment failed; preserve ThaiFontFix for client UI.
 
 - Player-facing Lost Sky menus, command messages and10 lobby labels now use English. Commands, prices, rewards and saved progress are unchanged. Required ThaiFontFix remains enabled at the owner's request for future resource-pack expansion.
+
+- English floating NPC labels now use the default font with bold styling for readability.

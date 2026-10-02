@@ -343,3 +343,5 @@ Live lobby import succeeded using //schem load lobby_ch1.schem sponge.2. Default
 The shadow-only change did not resolve the player's red/black Thai glyphs. Applied minecraft:uniform to all10 tagged text components at02:14:33; command log confirms all updates. Corrected actual original plaza position z=-35.5 (integer teleport centering); live move confirmed to (0.5,105,-31.5). Suspected TTF/shader incompatibility, consistent with Iris issue3251, not yet proven on this client. Awaiting player retest.
 
 2026-10-03: English player UI replaces Thai strings in hub, market and city scripts and floating labels. Resource pack remains required; do not clear pack properties. Website language remains separate. Vanilla item names and translated third-party plugin output may follow each client's language.
+
+English labels use default font and bold; Thai font workaround is no longer needed for these labels.
