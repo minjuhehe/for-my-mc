@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-02T18:33:58.697Z
+Run: 2026-10-02T19:20:38.439Z
 
-**94/94 passed**
+**104/104 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-02T18:33:58.697Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (670 elements)
+- ✅ text contrast meets WCAG AA (709 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-02T18:33:58.697Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (670 elements)
+- ✅ text contrast meets WCAG AA (709 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-02T18:33:58.697Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (670 elements)
+- ✅ text contrast meets WCAG AA (709 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-02T18:33:58.697Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (670 elements)
+- ✅ text contrast meets WCAG AA (709 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -87,7 +87,17 @@ Run: 2026-10-02T18:33:58.697Z
 - ✅ top-up has no technical wording
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
-- ✅ player commerce/warp not marked tested
+- ✅ commands marked tested = /spawn, /hub, /menu, /city go
+- ✅ commands marked partly tested = /skyshop, /skyquests
+- ✅ /market, /topup, /city donate and island commands still awaiting test
+- ✅ quests: builder tested, farmer (wheat) awaiting test
+- ✅ tested card has only the verified results
+- ✅ pending card lists crop selling, wheat quest, 24h reset, full bag, multi-member teams, floating text, map decoration
+- ✅ map decoration marked unfinished in gallery
+- ✅ join steps explain the required font pack and the Server Resource Packs setting
+- ✅ game UI language stated as English; in-game guide not called Thai
+- ✅ English in-game quest names shown
+- ✅ no "nothing to download" claim
 - ✅ no blanket one-account rule; alt-account rule is about quest rewards
 - ✅ market prices match the script
 - ✅ shop prices match the script

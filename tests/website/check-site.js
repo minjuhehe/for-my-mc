@@ -208,7 +208,24 @@ const NAV_STATE = () => {
   check('top-up has no technical wording', !/แบบฟอร์ม|form|backend|HTML/i.test(topup));
   check('footer date is 3 October 2026', /อัปเดตหน้านี้ล่าสุด 3 ตุลาคม 2026/.test(await page.textContent('footer')));
   check('hub shown as installed, not "not pasted"', /ติดตั้งแล้ว/.test(await page.textContent('#status')) && !/ยังไม่ได้วาง|ยังไม่ติดตั้ง|รอติดตั้ง/.test(text));
-  check('player commerce/warp not marked tested', (await page.$$eval('.cmd', ls => ls.filter(l => /ทดสอบแล้ว/.test(l.textContent)).map(l => l.querySelector('code').textContent))).join(',') === '/spawn,/hub');
+  // Status badges must match docs/PLAYTEST_20261003.md exactly.
+  const badges = await page.$$eval('.cmd', ls => Object.fromEntries(ls.map(l => [l.querySelector('code').textContent, l.querySelector('.badge').textContent])));
+  const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
+  check('commands marked tested = /spawn, /hub, /menu, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/city go', JSON.stringify(badges));
+  check('commands marked partly tested = /skyshop, /skyquests', byBadge('ทดสอบบางส่วน') === '/skyshop,/skyquests', JSON.stringify(badges));
+  check('/market, /topup, /city donate and island commands still awaiting test', ['/market', '/topup', '/city', '/city donate', '/is', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
+  check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
+  const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
+  check('tested card has only the verified results', /\$32[\s\S]*32 ก้อน/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|ทุกทีม|หลายคน/.test(tested), tested.slice(0, 200));
+  const pending = await page.$$eval('.status-card', cs => cs[2].textContent);
+  check('pending card lists crop selling, wheat quest, 24h reset, full bag, multi-member teams, floating text, map decoration', ['ขายพืชผล', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'ทีมหลายคน', 'ข้อความลอย', 'การตกแต่งแผนที่'].every(w => pending.includes(w)));
+  check('map decoration marked unfinished in gallery', /การตกแต่งแผนที่ยังไม่เสร็จ/.test(await page.textContent('#gallery')));
+  const start = await page.textContent('#start');
+  check('join steps explain the required font pack and the Server Resource Packs setting', /ยอมรับแพ็กฟอนต์ไทย/.test(start) && /Server Resource Packs/.test(start) && /Enabled หรือ Prompt/.test(start));
+  check('game UI language stated as English; in-game guide not called Thai', /เมนูและข้อความในเกมเป็นภาษาอังกฤษ/.test(text) && !/คู่มือ[^<]{0,20}ภาษาไทย/.test(text));
+  check('English in-game quest names shown', /Harbor Supplies/.test(await page.textContent('#zone-quests')) && /Apprentice Builder/.test(await page.textContent('#zone-quests')));
+  check('no "nothing to download" claim', !/ไม่ต้อง[^.]{0,20}ดาวน์โหลดอะไร/.test(text));
   check('no blanket one-account rule; alt-account rule is about quest rewards', !/หนึ่งคนหนึ่งบัญชี/.test(text) && /บัญชีสำรอง[\s\S]{0,40}รางวัล/.test(await page.textContent('#rules')));
   check('market prices match the script', /\$32[\s\S]*\$24[\s\S]*\$24[\s\S]*\$32[\s\S]*\$40[\s\S]*\$16/.test(await page.textContent('#zone-market')));
   check('shop prices match the script', /\$32[\s\S]*\$64[\s\S]*\$96[\s\S]*\$64[\s\S]*\$16[\s\S]*\$24/.test(await page.textContent('#zone-shop')));

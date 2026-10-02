@@ -204,8 +204,21 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   green, cyan, purple, gold. A team city pavilion leads to `/city go`.
   `/spawn` (and `/hub`, `/lobby`) return to the hub, and `/menu` opens it.
   The hub is shown as **installed** (zones, 7 guide NPCs, protection
-  verified on the server). Trading, quests, `/menu` and `/city go` are shown
-  as **awaiting a player test** until someone tests them in game.
+  verified on the server).
+- **Player-test badges follow `docs/PLAYTEST_20261003.md` only.** As of
+  2026-10-03 (one owner account): tested = `/spawn`, `/hub`, `/menu`,
+  `/city go`; partly tested = `/skyshop` (one cobblestone purchase, $32 → 32
+  blocks; refuses without money) and `/skyquests` (builder quest: 128
+  cobblestone → $80 + 2 genuine shards, immediate retry blocked). Everything
+  else stays รอทดสอบ: crop selling, farmer quest, 24-hour expiry, full bag,
+  GUI drag/shift-click, multi-member teams, donation, chapter change.
+- **Join steps** explain the required ThaiFontFix pack
+  (`docs/RESOURCE_PACK.md`): accept the prompt; if it never appears, set
+  Server Resource Packs to Enabled or Prompt. Floating hub text is "being
+  adjusted" and map decoration "unfinished"; don't claim either is done.
+- **In-game UI is English** (since Codex `037447b`); the website stays
+  Thai. Show English in-game names where players need to match them
+  (quest names, menu examples). The font pack stays required.
 - **Prices and rewards** shown in tables must match `lostsky-market.sk`.
   If the script changes, update `#zone-market`, `#zone-shop` and
   `#zone-quests` in the same commit.

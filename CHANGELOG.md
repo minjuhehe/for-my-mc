@@ -3,6 +3,34 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.7.6: Website player-test results, font pack join steps, English game UI (2026-10-03)
+
+**Why:** first player tests (`docs/PLAYTEST_20261003.md`) and the required
+Thai font pack (`docs/RESOURCE_PACK.md`).
+
+Changed (website and its checks only):
+- Status: new "tested with a player" card with the exact results (one owner
+  account): `/menu` opens; `/city go` reaches the team's own city; one
+  cobblestone purchase charged $32 and gave 32; builder quest gave $80 + 2
+  genuine shards and blocked an immediate retry. Still awaiting tests: crop
+  selling, farmer quest, real 24-hour reset, full bag, multi-member teams,
+  donation, chapter change. Floating text and map decoration: being worked on.
+- Commands: `/menu` and `/city go` tested; `/skyshop` and `/skyquests`
+  partly tested (new "ทดสอบบางส่วน" badge and legend entry).
+- Hub: per-quest badges (builder tested, farmer awaiting) and the English
+  in-game quest names (Harbor Supplies, Apprentice Builder).
+- English game UI (Codex 037447b): status, join steps and a new FAQ say the
+  game's menus are in English while the website stays Thai. `/skyguide` no
+  longer described as a Thai guide. The font pack is still required.
+- Join steps + FAQ: accept the ThaiFontFix pack; how to enable Server
+  Resource Packs if the prompt doesn't appear. Removed "nothing to download".
+- Checks (`tests/website/check-site.js`, 104 total): badges must match the
+  playtest doc, untested items must stay untested, pack steps present,
+  decoration marked unfinished. Verified by planting false claims (caught).
+
+Unchanged: top-up closed, no payments, no IP. No commands changed. Server
+scripts and lobby files not touched.
+
 ## 0.7.5: Required Thai font pack and quest check (2026-10-03)
 
 - Selected ThaiFontFix1.0.8, author-declared Java1.21.11 compatibility,
