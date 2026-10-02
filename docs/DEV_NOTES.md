@@ -309,6 +309,11 @@ market/quest income before supplies purchases; no default starting balance
 was changed. A one-off $32 game-currency grant supported one verified purchase:
 balance $32 -> $0 and inventory cobblestone count32. Evidence/remaining cases
 are in PLAYTEST_20261003.md.
+Builder quest reward/cooldown retry now passed owner interaction and balance/
+inventory verification. Default essentials.balance added after denied /money.
+One required ThaiFontFix1.0.8 pack is configured through server.properties;
+direct CDN URL, SHA1 and rollback steps are in RESOURCE_PACK.md. No pack plugin
+or additional texture packs are needed. Client font rendering remains a test.
 
 Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.
 WorldEdit 7.4.5 and WorldGuard 7.0.17 FAILED on Java 21 (class version 69).

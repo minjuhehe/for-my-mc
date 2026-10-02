@@ -50,6 +50,7 @@ cmds.push(
   'rg flag __global__ -w lobby block-trampling deny',
   'rg flag __global__ -w lobby pvp deny',
   'lp group default permission set essentials.spawn true',
+  'lp group default permission set essentials.balance true',
   'lp group default permission set bskyblock.island true',
   'skript reload lostsky-hub',
   'skript reload lostsky-market',

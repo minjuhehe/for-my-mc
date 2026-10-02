@@ -3,6 +3,16 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.7.5: Required Thai font pack and quest check (2026-10-03)
+
+- Selected ThaiFontFix1.0.8, author-declared Java1.21.11 compatibility,
+  direct author CDN download with verified SHA1. Required server pack setup
+  documented in RESOURCE_PACK.md; client join/render test pending.
+- Builder delivery reward verified: $80, two genuine Common Shards, consumed
+  128 cobblestone. Owner confirms immediate retry refuses until24hours.
+- Added default essentials.balance permission after /money was denied.
+  No balance-other or administrative money permissions granted.
+
 ## 0.7.4: Restore package and player city warp (2026-10-03)
 
 - Player confirmed the supplies menu rejects a purchase with insufficient

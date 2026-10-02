@@ -64,7 +64,7 @@ Team city commands (`lostsky-city.sk`):
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
 | `/spawn` | Return to shared harbour in lobby | `essentials.spawn` | EssentialsSpawn | live |
-| `/bal` | Check money | `essentials.balance` | EssentialsX | planned |
+| `/bal`, `/money` | Check own money | `essentials.balance` | EssentialsX | permission installed; player retest pending |
 | `/pay <player> <amount>` | Send money | `essentials.pay` | EssentialsX | planned |
 
 ## Admin commands
