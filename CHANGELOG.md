@@ -432,3 +432,5 @@ Notes for developers:
 - Player-facing Lost Sky menus, command messages and10 lobby labels now use English. Commands, prices, rewards and saved progress are unchanged. Required ThaiFontFix remains enabled at the owner's request for future resource-pack expansion.
 
 - English floating NPC labels now use the default font with bold styling for readability.
+
+- Install EconomyShopGUI catalog and empty sell-on-close GUI, unify hub/NPC entry points via /market and /skyshop, route /sell to sellgui. NPC labels made bold. Island selection work pending.

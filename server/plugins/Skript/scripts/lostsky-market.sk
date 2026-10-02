@@ -82,12 +82,12 @@ function skyTownTopup(p: player):
 command /market:
     executable by: players
     trigger:
-        skyTownMenu(player, "farm")
+        execute player command "economyshopgui:sellgui"
 
 command /skyshop:
     executable by: players
     trigger:
-        skyTownMenu(player, "shop")
+        execute player command "economyshopgui:shop"
 
 command /skyquests:
     executable by: players
@@ -104,10 +104,10 @@ on right click on entity:
         stop
     if uncolored name of clicked entity is "Farm Merchant":
         cancel event
-        skyTownMenu(player, "farm")
+        execute player command "economyshopgui:sellgui"
     else if uncolored name of clicked entity is "Supply Merchant":
         cancel event
-        skyTownMenu(player, "shop")
+        execute player command "economyshopgui:shop"
     else if uncolored name of clicked entity is "Quest Keeper":
         cancel event
         skyTownMenu(player, "quests")
@@ -178,3 +178,9 @@ on quit:
 on load:
     delete {skytown::menu::*}
     delete {skytown::kind::*}
+
+# Route /sell to the deposit GUI, avoiding Essentials instant hand sales.
+on command:
+    if command is "sell":
+        cancel event
+        execute player command "economyshopgui:sellgui"

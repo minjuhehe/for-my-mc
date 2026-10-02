@@ -114,3 +114,5 @@ These run automatically. If you rename a plugin or change these, update the scri
 | `default` | all player permissions above |
 | `mod` | `default` + `coreprotect.inspect`, `essentials.kick`, `essentials.mute` |
 | `admin` | everything, including `lostsky.admin` |
+
+/shop: full EconomyShopGUI catalog. /sell and /sellgui: deposit items into empty GUI, close to sell; unsellable items returned. /market now opens the same sell GUI and /skyshop opens the main shop. Hub market and shop buttons/NPCs use these same paths.
