@@ -11,6 +11,18 @@ Columns:
 
 ## Player commands
 
+### Public town (`lostsky-market.sk`)
+
+| Command | What it does | Permission | Source | Status |
+|---------|--------------|------------|--------|--------|
+| `/market` | Sell crops for in-game money | none | lostsky-market.sk | draft |
+| `/skyshop` | Buy building supplies with in-game money | none | lostsky-market.sk | draft |
+| `/skyquests` | Submit delivery quests every 24 hours | none | lostsky-market.sk | draft |
+| `/topup` | Show official payment information; currently closed | none | lostsky-market.sk | draft |
+
+Console-only `/lshubbuild` places the shared spawn schematic via WorldEdit.
+Save and preserve a lobby backup before using it; it replaces existing blocks.
+
 ### Island (from BentoBox / BSkyBlock)
 
 | Command | What it does | Permission | Source | Status |

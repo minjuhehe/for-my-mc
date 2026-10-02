@@ -14,6 +14,17 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.7.0: Public town zones and delivery quests (2026-10-03)
+
+New floating town has a fountain plaza, green crop market, cyan supplies
+shop, purple quest hall, gold top-up lounge and team city pavilion.
+Adds `/market`, `/skyshop`, `/skyquests`, `/topup` and console-only
+`/lshubbuild`. Hub menu links all zones. Crop sales and supplies use
+Essentials/Vault in-game money. Two delivery quests grant money and relics
+once per UUID every 24 hours. Payment URL remains unset until provided;
+no real-money collection or fake checkout. Actual schematic preview is
+available for the website. Live validation pending deployment.
+
 ## 0.6.0: Separate travel spawn and team city plots (2026-10-01)
 
 Rebuilt public spawn as a compact compass plaza with three travel pavilions.

@@ -246,6 +246,17 @@ page with JavaScript turned off.
 
 ## New MineLan instance (2026-10-01)
 
+2026-10-03: public town replacement has four commerce/quest/lounge zones.
+`lostsky-market.sk` provides inventory-identity protected GUIs. Trade
+operations check money/items/capacity before changing inventories.
+`skytown::quest::<uuid>::<key>` stores last completion for 24-hour cooldown;
+preserve these in backups. `skytown::menu/kind` are temporary, cleared on
+close/quit/load. Relic rewards reuse `relicItem` from lostsky.sk.
+`topup-url` is unset; payment lounge announces closed until configured.
+`/lshubbuild` is console-only and delegates to chapter 0 of skyCityBuild:
+world lobby, spawn_hub.schem, origin (0,100,0). World clone
+`lobby_pre_market_20261003` preserves old lobby before replacement.
+
 Pending migration: compact shared spawn plus `/is city` team restoration.
 skript-reflect 2.6.3 loaded after restart; `lostsky_cities` created/protected.
 New spawn schematic uploaded but NOT pasted. City script had one coordinate
