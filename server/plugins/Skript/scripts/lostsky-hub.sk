@@ -10,7 +10,7 @@ function skyHubMenu(p: player):
     set slot 12 of {_inv} to book named "&bวิธีเริ่มเล่น" with lore "&7สร้างเกาะ ชวนเพื่อน และพัฒนาเมืองทีม" and "&eคลิกอ่านคู่มือ"
     set slot 14 of {_inv} to compass named "&6กลับ spawn กลาง" with lore "&7พบผู้เล่นคนอื่นที่เมืองท่ากลาง" and "&eคลิกเพื่อกลับ spawn"
     set slot 19 of {_inv} to wheat named "&aตลาดผัก" with lore "&7ขายผลผลิต รับเงินเกม"
-    set slot 21 of {_inv} to chest named "&bร้านวัสดุ" with lore "&7ซื้อของด้วยเงินเกม"
+    set slot 21 of {_inv} to chest named "&bร้านเสบียง (ซื้อวัสดุ)" with lore "&7ซื้อของด้วยเงินเกม" and "&eหาเงินจากตลาดผักและเควสต์"
     set slot 23 of {_inv} to enchanted book named "&dเควสต์เมืองท่า" with lore "&7ส่งของ รับเงินและ Relic"
     set slot 25 of {_inv} to gold ingot named "&6โซนเติมเงิน" with lore "&7ดูช่องทางทางการ"
     set slot 31 of {_inv} to barrier named "&cปิดเมนู"
@@ -21,8 +21,9 @@ function skyHubGuide(p: player):
     send "{@hub-prefix} &bยินดีต้อนรับสู่เมืองท่ากลาง!" to {_p}
     send "&f1. &a/is &7สร้างเกาะ หรือกลับเกาะของทีม" to {_p}
     send "&f2. &a/is team invite <ชื่อเพื่อน> &7ชวนเพื่อนเข้าทีม" to {_p}
-    send "&f3. &7ทำฟาร์ม หาอุปกรณ์ และสร้างเมืองของทีมคุณ" to {_p}
-    send "&f4. &d/is city &7เปิดเมนูเมืองฟื้นฟูของทีม" to {_p}
+    send "&f3. &a/market &7ขายผลผลิต หรือ &a/skyquests &7ส่งของเพื่อหาเงินเกม" to {_p}
+    send "&f4. &b/skyshop &7ซื้อวัสดุด้วยเงินเกม | &b/bal &7ดูยอดเงิน" to {_p}
+    send "&f5. &d/is city &7เปิดเมนูเมืองฟื้นฟูของทีม" to {_p}
     send "&e/spawn &7กลับเมืองท่ากลาง   &e/menu &7เปิดเมนู" to {_p}
 
 command /hub:

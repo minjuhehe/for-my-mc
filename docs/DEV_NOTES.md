@@ -304,6 +304,11 @@ Owner `/city go` was verified from live entity position/dimension at
 (1024.5,100,0.5) in lostsky_cities. Real-player commerce, multi-member city
 identity/isolation and non-OP protection still need testing.
 Owner estimates map at 20% and requests decoration paused; see DOT_HANDOFF.md.
+Player reports supplies GUI rejects insufficient funds. Hub guide now explains
+market/quest income before supplies purchases; no default starting balance
+was changed. A one-off $32 game-currency grant supported one verified purchase:
+balance $32 -> $0 and inventory cobblestone count32. Evidence/remaining cases
+are in PLAYTEST_20261003.md.
 
 Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.
 WorldEdit 7.4.5 and WorldGuard 7.0.17 FAILED on Java 21 (class version 69).

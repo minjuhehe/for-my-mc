@@ -5,6 +5,11 @@ commands** it touched. Newest first.
 
 ## 0.7.4: Restore package and player city warp (2026-10-03)
 
+- Player confirmed the supplies menu rejects a purchase with insufficient
+  money. Added clearer shop name and /skyguide earning-money steps; $32 of
+  test currency provided for one cobblestone purchase. Live balance $32 -> $0
+  and inventory32 cobblestones confirmed success; hub reload passed. Detailed
+  evidence and remaining cases are in PLAYTEST_20261003.md.
 - Verified owner `/city go` reaches the team world at Y100 using live entity
   position and dimension. Multi-member identity and donation are still pending.
 - Corrected outdated spawn/city installation guides to the installed market

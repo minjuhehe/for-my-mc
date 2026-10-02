@@ -16,7 +16,7 @@ Columns:
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
 | `/market` | Sell crops for in-game money | none | lostsky-market.sk | draft |
-| `/skyshop` | Buy building supplies with in-game money | none | lostsky-market.sk | draft |
+| `/skyshop` | Buy building supplies with in-game money | none | lostsky-market.sk | live: one cobblestone purchase; edge cases pending |
 | `/skyquests` | Submit delivery quests every 24 hours | none | lostsky-market.sk | draft |
 | `/topup` | Show official payment information; currently closed | none | lostsky-market.sk | draft |
 
@@ -50,8 +50,8 @@ Shared hub additions (`lostsky-hub.sk`, draft until live tests):
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
 | `/hub`, `/lobby` | Return to shared spawn via Essentials | `essentials.spawn` | lostsky-hub.sk | live |
-| `/menu`, `/skymenu` | Open the shared harbour menu | none | lostsky-hub.sk | draft |
-| `/skyguide` | Show the Thai starting guide | none | lostsky-hub.sk | draft |
+| `/menu`, `/skymenu` | Open the shared harbour menu | none | lostsky-hub.sk | `/menu` live: supplies route; other routes pending |
+| `/skyguide` | Show starting steps, earning money via market/quests, supplies and balance | none | lostsky-hub.sk | draft |
 
 Team city commands (`lostsky-city.sk`):
 
