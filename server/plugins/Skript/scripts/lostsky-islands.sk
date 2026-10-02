@@ -1,0 +1,325 @@
+# Island selector: one island = one team. A player may belong to several
+# islands (own or as a team member); each island has its own restoration city.
+#
+# Requires skript-reflect 2.6.3, BentoBox 3.17.0, BSkyBlock 1.20.0.
+# Plain /is opens this selector through BSkyBlock's own config:
+#   bskyblock.command.default-action: /islands
+#   bskyblock.command.new-player-action: /islands
+# Every /is subcommand stays native. See docs/ISLAND_SELECTOR.md.
+#
+# Identity rules:
+# - An island is identified ONLY by its BentoBox unique ID (Island.getUniqueId()).
+# - The stored choice {skyisland::selected::<player uuid>} is re-validated on
+#   every action: the island must exist, not be deleted, be in the BSkyBlock
+#   world, and the player must be in its team (MEMBER rank or higher).
+# - Slot numbers are display positions only (oldest island first). They are
+#   resolved to an island ID at the moment of the click/command and never stored.
+import:
+    world.bentobox.bentobox.BentoBox
+    world.bentobox.bentobox.api.user.User
+    org.bukkit.Bukkit
+
+options:
+    island-world: bskyblock_world
+    # Slots always shown, even if the native limit is lower (they show as locked).
+    min-slots: 3
+    # Most slots the menu can show in one row.
+    max-slots: 7
+    prefix: &3[Lost Sky]
+
+# ---------------------------------------------------------------------------
+# Lookups (BentoBox API, verified against BentoBox 3.17.0 source)
+# ---------------------------------------------------------------------------
+
+# Island IDs the player is a team member of, oldest first.
+# IslandsManager.getIslands(World, UUID) returns them sorted by creation date.
+# Filtered with Island.inTeam(UUID) so coop/trusted/visitor ranks never count.
+function skyIslandIds(p: player) :: texts:
+    set {_world} to Bukkit.getWorld("{@island-world}")
+    if {_world} is not set:
+        return {_none::*}
+    set {_uuid} to {_p}.getUniqueId()
+    set {_list} to BentoBox.getInstance().getIslandsManager().getIslands({_world}, {_uuid})
+    loop ...{_list}:
+        set {_island} to loop-value
+        if {_island}.isDeleted() is false:
+            if {_island}.inTeam({_uuid}) is true:
+                add {_island}.getUniqueId() to {_ids::*}
+    return {_ids::*}
+
+# The Island object for an ID, only if this player may act on it.
+function skyIslandFor(p: player, id: text) :: object:
+    if {_id} is not set:
+        return {_none}
+    if {_id} is "":
+        return {_none}
+    set {_found} to BentoBox.getInstance().getIslandsManager().getIslandById({_id})
+    if {_found}.isPresent() is false:
+        return {_none}
+    set {_island} to {_found}.get()
+    if {_island}.isDeleted() is true:
+        return {_none}
+    if {_island}.getWorld() is not set:
+        return {_none}
+    if {_island}.getWorld().getName() is not "{@island-world}":
+        return {_none}
+    if {_island}.inTeam({_p}.getUniqueId()) is not true:
+        return {_none}
+    return {_island}
+
+# The active island ID for this player, or "" if they have none.
+# Order: stored choice (if still valid) -> BentoBox primary island the player
+# is a member of -> oldest member island. The result is stored.
+function skyIslandSelected(p: player) :: text:
+    set {_stored} to {skyisland::selected::%uuid of {_p}%}
+    if skyIslandFor({_p}, {_stored}) is set:
+        return {_stored}
+    set {_ids::*} to skyIslandIds({_p})
+    if size of {_ids::*} is 0:
+        delete {skyisland::selected::%uuid of {_p}%}
+        return ""
+    set {_pick} to {_ids::1}
+    loop {_ids::*}:
+        set {_island} to skyIslandFor({_p}, loop-value)
+        if {_island} is set:
+            if {_island}.isPrimary({_p}.getUniqueId()) is true:
+                set {_pick} to loop-value
+    set {skyisland::selected::%uuid of {_p}%} to {_pick}
+    return {_pick}
+
+# Island ID at display position n (1 = oldest), or "".
+function skyIslandAtSlot(p: player, n: number) :: text:
+    set {_ids::*} to skyIslandIds({_p})
+    if {_n} < 1:
+        return ""
+    if {_n} > size of {_ids::*}:
+        return ""
+    return {_ids::%{_n}%}
+
+# Make an island the active one. Also sets it as BentoBox's primary island so
+# native /is subcommands follow the choice (when not standing on another island).
+function skyIslandSelect(p: player, id: text) :: boolean:
+    set {_island} to skyIslandFor({_p}, {_id})
+    if {_island} is not set:
+        return false
+    set {skyisland::selected::%uuid of {_p}%} to {_id}
+    BentoBox.getInstance().getIslandsManager().setPrimaryIsland({_p}.getUniqueId(), {_island})
+    return true
+
+# Native island limit: permission bskyblock.island.number.<n>, else the
+# BSkyBlock world.concurrent-islands setting (same rule as /is create).
+function skyIslandLimit(p: player) :: number:
+    set {_world} to Bukkit.getWorld("{@island-world}")
+    if {_world} is not set:
+        return 1
+    set {_default} to BentoBox.getInstance().getIWM().getWorldSettings({_world}).getConcurrentIslands()
+    set {_limit} to User.getInstance({_p}.getUniqueId()).getPermissionValue("bskyblock.island.number", {_default})
+    # A negative permission value means unlimited in BentoBox.
+    if {_limit} < 0:
+        return {@max-slots}
+    return {_limit}
+
+function skyIslandLabel(p: player, id: text, n: number) :: text:
+    set {_island} to skyIslandFor({_p}, {_id})
+    if {_island} is set:
+        set {_name} to {_island}.getName()
+        if {_name} is set:
+            if "%{_name}%" is not "":
+                return "%{_name}%"
+    return "Island %{_n}%"
+
+function skyIslandRole(p: player, island: object) :: text:
+    set {_rank} to {_island}.getRank({_p}.getUniqueId())
+    if {_rank} >= 1000:
+        return "Owner"
+    if {_rank} >= 900:
+        return "Sub-owner"
+    return "Member"
+
+# ---------------------------------------------------------------------------
+# Menus
+# ---------------------------------------------------------------------------
+
+function skyIslandOpen(p: player, inv: inventory, kind: text):
+    set {skyisland::menu::%uuid of {_p}%} to {_inv}
+    set {skyisland::kind::%uuid of {_p}%} to {_kind}
+    open {_inv} to {_p}
+
+function skyIslandMenu(p: player):
+    delete {skyisland::slot::%uuid of {_p}%::*}
+    set {_ids::*} to skyIslandIds({_p})
+    set {_count} to size of {_ids::*}
+    set {_limit} to skyIslandLimit({_p})
+    set {_selected} to skyIslandSelected({_p})
+    set {_shown} to max({@min-slots}, {_count})
+    if {_shown} > {@max-slots}:
+        set {_shown} to {@max-slots}
+    set {_inv} to chest inventory with 3 rows named "&2Lost Sky | Your Islands"
+    loop {_shown} times:
+        set {_n} to loop-number
+        # Three slots sit in the middle (11, 13, 15); more fill the row 10-16.
+        if {_shown} <= 3:
+            set {_pos} to 9 + 2 * {_n}
+        else:
+            set {_pos} to 9 + {_n}
+        if {_n} <= {_count}:
+            set {_id} to {_ids::%{_n}%}
+            set {_island} to skyIslandFor({_p}, {_id})
+            set {_label} to skyIslandLabel({_p}, {_id}, {_n})
+            set {_lore::*} to "&7Role: &f%skyIslandRole({_p}, {_island})%", "&7Team: &f%{_island}.getMemberSet().size()% member(s)" and "&7City: &fChapter %{skycity::chapter::%{_id}%} ? 0%"
+            if {_id} is {_selected}:
+                add "&aActive island" to {_lore::*}
+            add "&eClick for actions" to {_lore::*}
+            set slot {_pos} of {_inv} to grass block named "&a%{_n}%. %{_label}%" with lore {_lore::*}
+            delete {_lore::*}
+            set {skyisland::slot::%uuid of {_p}%::%{_pos}%} to {_id}
+        else if {_n} <= {_limit}:
+            set slot {_pos} of {_inv} to lime stained glass pane named "&f%{_n}%. Empty Slot" with lore "&7Create a new island here" and "&7A new island starts a separate team" and "&eClick to create"
+            set {skyisland::slot::%uuid of {_p}%::%{_pos}%} to "new"
+        else:
+            set slot {_pos} of {_inv} to gray stained glass pane named "&7%{_n}%. Locked Slot" with lore "&7You can have up to %{_limit}% island(s)"
+            set {skyisland::slot::%uuid of {_p}%::%{_pos}%} to "locked"
+    if {_count} > {@max-slots}:
+        set slot 4 of {_inv} to paper named "&eMore islands" with lore "&7Showing the oldest {@max-slots} of %{_count}%" and "&7Use /is go <name> for the others"
+    set slot 18 of {_inv} to compass named "&bReturn to Spawn"
+    set slot 22 of {_inv} to barrier named "&cClose Menu"
+    skyIslandOpen({_p}, {_inv}, "list")
+
+function skyIslandActions(p: player, id: text):
+    set {_island} to skyIslandFor({_p}, {_id})
+    if {_island} is not set:
+        send "{@prefix} &cYou are no longer in that island's team." to {_p}
+        skyIslandMenu({_p})
+        stop
+    set {_ids::*} to skyIslandIds({_p})
+    set {_n} to 1
+    loop {_ids::*}:
+        if loop-value is {_id}:
+            set {_n} to loop-index parsed as number
+    set {_label} to skyIslandLabel({_p}, {_id}, {_n})
+    set {skyisland::target::%uuid of {_p}%} to {_id}
+    set {_inv} to chest inventory with 3 rows named "&2Lost Sky | %{_label}%"
+    set slot 11 of {_inv} to ender pearl named "&aGo to Island" with lore "&7Teleport to this island's home" and "&7Also makes it your active island"
+    set slot 13 of {_inv} to stone bricks named "&dRestoration City" with lore "&7Visit this island's own city" and "&7Chapter %{skycity::chapter::%{_id}%} ? 0% | Relic %{skycity::points::%{_id}%} ? 0%"
+    set slot 15 of {_inv} to book named "&eCity Menu" with lore "&7Donate relics to this island's city"
+    set slot 18 of {_inv} to arrow named "&7Back to Your Islands"
+    set slot 22 of {_inv} to barrier named "&cClose Menu"
+    skyIslandOpen({_p}, {_inv}, "island")
+
+function skyIslandConfirm(p: player):
+    set {_inv} to chest inventory with 3 rows named "&2Lost Sky | Create Island?"
+    set slot 11 of {_inv} to lime concrete named "&aCreate Island" with lore "&7Opens the island creator" and "&7(choose a design if several are offered)"
+    set slot 13 of {_inv} to paper named "&eBefore you create" with lore "&7A new island is a separate team." and "&7Your other islands keep their own teams" and "&7and their own restoration cities."
+    set slot 15 of {_inv} to red concrete named "&cCancel"
+    skyIslandOpen({_p}, {_inv}, "confirm")
+
+# ---------------------------------------------------------------------------
+# Actions
+# ---------------------------------------------------------------------------
+
+# Teleport with the BentoBox API for this exact island:
+# IslandsManager.homeTeleportAsync(Island, User) uses island.getHome("") and
+# sets it primary on success. (The no-name /is go resolves the island from the
+# player's location first, so it could pick a different island.)
+function skyIslandGo(p: player, id: text):
+    set {_island} to skyIslandFor({_p}, {_id})
+    if {_island} is not set:
+        send "{@prefix} &cYou are no longer in that island's team." to {_p}
+        stop
+    set {_manager} to BentoBox.getInstance().getIslandsManager()
+    set {_user} to User.getInstance({_p}.getUniqueId())
+    if {_manager}.isGoingHome({_user}) is true:
+        send "{@prefix} &eYou are already being teleported." to {_p}
+        stop
+    skyIslandSelect({_p}, {_id})
+    {_manager}.homeTeleportAsync({_island}, {_user})
+
+function skyIslandCreate(p: player):
+    # BentoBox makes a newly created island the player's primary island
+    # (NewIsland), so forgetting the stored choice selects it next time.
+    delete {skyisland::selected::%uuid of {_p}%}
+    # Native command: limit checks, blueprint panel and messages stay BentoBox's.
+    execute player command "bskyblock:island create"
+
+command /islands:
+    aliases: /myislands
+    executable by: players
+    trigger:
+        skyIslandMenu(player)
+
+on inventory click:
+    if {skyisland::menu::%uuid of player%} is not set:
+        stop
+    if player's current inventory is not {skyisland::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skyisland::menu::%uuid of player%}:
+        stop
+    set {_slot} to index of event-slot
+    set {_kind} to {skyisland::kind::%uuid of player%}
+    if {_slot} is 22:
+        close player's inventory
+        stop
+    if {_kind} is "list":
+        if {_slot} is 18:
+            close player's inventory
+            execute player command "essentials:spawn"
+            stop
+        set {_value} to {skyisland::slot::%uuid of player%::%{_slot}%}
+        if {_value} is not set:
+            stop
+        if {_value} is "locked":
+            send "{@prefix} &7That slot is locked." to player
+            stop
+        if {_value} is "new":
+            skyIslandConfirm(player)
+            stop
+        skyIslandActions(player, {_value})
+    else if {_kind} is "island":
+        set {_id} to {skyisland::target::%uuid of player%}
+        if {_slot} is 18:
+            skyIslandMenu(player)
+            stop
+        if {_slot} is 11:
+            close player's inventory
+            skyIslandGo(player, {_id})
+        else if {_slot} is 13:
+            close player's inventory
+            if skyIslandSelect(player, {_id}) is true:
+                skyCityGo(player)
+            else:
+                send "{@prefix} &cYou are no longer in that island's team." to player
+        else if {_slot} is 15:
+            if skyIslandSelect(player, {_id}) is true:
+                skyCityMenu(player)
+            else:
+                close player's inventory
+                send "{@prefix} &cYou are no longer in that island's team." to player
+    else if {_kind} is "confirm":
+        if {_slot} is 11:
+            close player's inventory
+            skyIslandCreate(player)
+        else if {_slot} is 15:
+            skyIslandMenu(player)
+
+on inventory drag:
+    if {skyisland::menu::%uuid of player%} is set:
+        if player's current inventory is {skyisland::menu::%uuid of player%}:
+            cancel event
+
+on inventory close:
+    if event-inventory is {skyisland::menu::%uuid of player%}:
+        delete {skyisland::menu::%uuid of player%}
+        delete {skyisland::kind::%uuid of player%}
+
+on quit:
+    delete {skyisland::menu::%uuid of player%}
+    delete {skyisland::kind::%uuid of player%}
+    delete {skyisland::target::%uuid of player%}
+    delete {skyisland::slot::%uuid of player%::*}
+
+on load:
+    delete {skyisland::menu::*}
+    delete {skyisland::kind::*}
+    delete {skyisland::target::*}
+    delete {skyisland::slot::*}

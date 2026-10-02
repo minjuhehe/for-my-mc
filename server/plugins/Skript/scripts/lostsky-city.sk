@@ -1,5 +1,7 @@
 # Team cities keyed by BentoBox island ID, not player name or team owner.
 # Requires skript-reflect 2.6.3, BentoBox and WorldEdit.
+# The island comes from lostsky-islands.sk (validated active island), so a
+# player in several island teams reaches the city of the island they chose.
 import:
     world.bentobox.bentobox.BentoBox
     org.bukkit.Bukkit
@@ -13,13 +15,25 @@ import:
     com.sk89q.worldedit.function.operation.Operations
     com.sk89q.worldedit.util.SideEffectSet
 
+# Active island ID (re-validated: exists, BSkyBlock world, player in team).
+# Before multi-island support this used IslandsManager.getIsland(world, uuid),
+# which returns the island the player is standing on first; for players with a
+# single island both give the same ID, so existing city data still matches.
 function skyCityKey(p: player) :: text:
-    set {_world} to Bukkit.getWorld("bskyblock_world")
-    set {_manager} to BentoBox.getInstance().getIslandsManager()
-    set {_island} to {_manager}.getIsland({_world}, {_p}.getUniqueId())
-    if {_island} is not set:
-        return ""
-    return {_island}.getUniqueId()
+    return skyIslandSelected({_p})
+
+# Optional slot argument from /city <slot>, /city go <slot>, /is city [go] <slot>.
+# Resolves the display position to an island ID now; only the ID is stored.
+function skyCityPick(p: player, slot: text) :: boolean:
+    set {_n} to {_slot} parsed as integer
+    if {_n} is not set:
+        send "&3[Lost Sky] &eUse a slot number, e.g. /city go 2" to {_p}
+        return false
+    set {_id} to skyIslandAtSlot({_p}, {_n})
+    if {_id} is "":
+        send "&3[Lost Sky] &eYou have no island in slot %{_n}%. Use /islands to see them." to {_p}
+        return false
+    return skyIslandSelect({_p}, {_id})
 
 function skyCityBuild(slot: number, chapter: number) :: boolean:
     set {_world} to Bukkit.getWorld("lostsky_cities")
@@ -118,6 +132,7 @@ function skyCityMenu(p: player):
     set {_chapter} to {skycity::chapter::%{_key}%} ? 1
     set {_points} to {skycity::points::%{_key}%} ? 0
     set {_inv} to chest inventory with 3 rows named "&5Lost Sky | Team City"
+    set slot 22 of {_inv} to grass block named "&aChoose Island" with lore "&7This menu is for your active island" and "&7Each island has its own city" and "&eClick to switch"
     set slot 10 of {_inv} to ender pearl named "&aVisit Team City" with lore "&7Travel to your team restoration area"
     set slot 12 of {_inv} to book named "&eChapter %{_chapter}% | Relic %{_points}%" with lore "&7Milestones: 100 / 300 / 600 / 1000" and "&7Progress is shared only with your team"
     set slot 14 of {_inv} to amethyst shard named "&dDonate Relics" with lore "&7Hold a Relic in your main hand and click" and "&7Reach a milestone to unlock the next chapter"
@@ -166,24 +181,42 @@ function skyCityDonate(p: player):
     set {skycity::points::%{_key}%} to {_newpoints}
     send "&3[Lost Sky] &aDonation accepted +%{_value}% | Total %{_newpoints}%" to {_p}
 
-command /city [<text>]:
+# /city            menu for the active island
+# /city <slot>     choose island in that slot, then menu
+# /city go [slot]  warp to the (chosen) island's city
+# /city donate     donate to the active island's city
+function skyCityCommand(p: player, a: text, b: text):
+    if {_a} is "go":
+        if {_b} is not "":
+            if skyCityPick({_p}, {_b}) is false:
+                stop
+        skyCityGo({_p})
+    else if {_a} is "donate":
+        skyCityDonate({_p})
+    else if {_a} is "":
+        skyCityMenu({_p})
+    else:
+        if skyCityPick({_p}, {_a}) is false:
+            stop
+        skyCityMenu({_p})
+
+command /city [<text>] [<text>]:
     executable by: players
     trigger:
-        if arg-1 is "go":
-            skyCityGo(player)
-        else if arg-1 is "donate":
-            skyCityDonate(player)
-        else:
-            skyCityMenu(player)
+        skyCityCommand(player, arg-1 ? "", arg-2 ? "")
 
-# Add exact aliases without replacing BentoBox's /is command or its subcommands.
+# Exact aliases without replacing BentoBox's /is command or its other subcommands:
+# /is city, /is city <slot>, /is city go, /is city go <slot> (and /island ...).
 on command:
-    if full command is "is city" or "island city":
-        cancel event
-        skyCityMenu(player)
-    else if full command is "is city go" or "island city go":
-        cancel event
-        skyCityGo(player)
+    set {_parts::*} to (full command) split at " "
+    if {_parts::1} is not "is" or "island":
+        stop
+    if {_parts::2} is not "city":
+        stop
+    if size of {_parts::*} > 4:
+        stop
+    cancel event
+    skyCityCommand(player, {_parts::3} ? "", {_parts::4} ? "")
 
 on inventory click:
     if {skycity::menu::%uuid of player%} is not set:
@@ -201,6 +234,8 @@ on inventory click:
         skyCityDonate(player)
     else if {_choice} is 16:
         execute player command "essentials:spawn"
+    else if {_choice} is 22:
+        skyIslandMenu(player)
 
 on inventory drag:
     if {skycity::menu::%uuid of player%} is set:

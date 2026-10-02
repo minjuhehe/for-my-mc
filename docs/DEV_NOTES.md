@@ -145,6 +145,29 @@ they've reached a new title, runs
 prefix in chat. Thresholds are in `titleFor()` and must match the
 table in `docs/CONCEPT.md`.
 
+## 3c. Island selector (one island = one team)
+
+`lostsky-islands.sk` (draft) lets a player hold several islands, each its own
+team and its own restoration city. Full design, required BSkyBlock config and
+API evidence: `docs/ISLAND_SELECTOR.md`. Offline checks:
+`node tests/islands/check-islands.js`.
+
+Saved variables:
+
+| Variable | Meaning |
+|----------|---------|
+| `{skyisland::selected::<player uuid>}` | Active island **ID** (BentoBox `Island.getUniqueId()`), re-validated on every use. Persistent; keep in backups |
+| `{skyisland::menu/kind/target/slot::...}` | Temporary menu state; cleared on close/quit/load |
+
+`lostsky-city.sk` now gets its key from `skyIslandSelected()` instead of
+`IslandsManager.getIsland(world, uuid)` (which prefers the island the player
+stands on). City data stays keyed by island ID; nothing was migrated or reset.
+Reload `lostsky-islands` before `lostsky-city`.
+
+**Before players accept team invites:** BSkyBlock
+`world.disallow-team-member-islands` must be `false`, otherwise accepting an
+invite deletes the player's islands (BentoBox 3.17.0 source).
+
 ## 4. Lobby schematics
 
 The generated lobby lives in `lobby/`. `lobby/tools/generate.js` is the source

@@ -3,6 +3,35 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.0: Island selector, one island = one team (2026-10-03)
+
+**Why:** the owner wants players to hold several islands, each a separate
+team with its own restoration city, and `/is` to open a selection menu first.
+
+Added (draft, not loaded on the server yet):
+- `lostsky-islands.sk`: Your Islands menu (`/islands`, and plain `/is` once
+  BSkyBlock `default-action`/`new-player-action` are set to `/islands`).
+  Island slot -> Go to Island / Restoration City / City Menu; empty slot ->
+  create confirmation -> native `bskyblock:island create`; locked slots above
+  the native limit. Active island stored as BentoBox island ID and
+  re-validated (exists, BSkyBlock world, player in team) on every action.
+- `lostsky-city.sk`: city key = active island; `/city <slot>`,
+  `/city go [slot]`, `/is city [slot]`, `/is city go [slot]`; Choose Island
+  button. Existing city data (keyed by island ID) unchanged.
+- `docs/ISLAND_SELECTOR.md`: required config (`concurrent-islands: 3`,
+  `disallow-team-member-islands: false`), API evidence, limits, live test
+  checklist, rollback.
+- `tests/islands/check-islands.js`: 70 offline checks against BentoBox 3.17.0
+  and BSkyBlock 1.20.0 source (API signatures, behaviour facts), script
+  structure, identity/safety rules, docs.
+
+Found in BentoBox source: with the default `disallow-team-member-islands:
+true`, accepting a team invite deletes the player's existing islands.
+
+Commands added: `/islands` (`/myislands`); slot argument for `/city`,
+`/city go`, `/is city`, `/is city go`. No other `/is` subcommand changed.
+Hub, market and shop scripts not touched. No server commands were run.
+
 ## 0.7.6: Website player-test results, font pack join steps, English game UI (2026-10-03)
 
 **Why:** first player tests (`docs/PLAYTEST_20261003.md`) and the required

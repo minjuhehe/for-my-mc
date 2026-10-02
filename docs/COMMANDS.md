@@ -57,9 +57,20 @@ Team city commands (`lostsky-city.sk`):
 
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
-| `/city`, `/is city` | Open team restoration menu | island membership | lostsky-city.sk | draft |
-| `/city go`, `/is city go` | Prepare and warp to the team's city | island membership | lostsky-city.sk | `/city go` live for owner; alias/team tests pending |
-| `/city donate` | Donate held relic to the team's restoration | island membership | lostsky-city.sk | draft |
+| `/city`, `/is city` | Open the restoration menu of the active island | island membership | lostsky-city.sk | draft |
+| `/city <slot>`, `/is city <slot>` | Choose the island in that selector slot, then open its menu | island membership | lostsky-city.sk | draft (selector) |
+| `/city go`, `/is city go` | Prepare and warp to the active island's city | island membership | lostsky-city.sk | `/city go` live for owner (before selector); alias/team tests pending |
+| `/city go <slot>`, `/is city go <slot>` | Choose the island in that slot, then warp to its city | island membership | lostsky-city.sk | draft (selector) |
+| `/city donate` | Donate held relic to the active island's city | island membership | lostsky-city.sk | draft |
+
+Island selector (`lostsky-islands.sk`, see `docs/ISLAND_SELECTOR.md`):
+
+| Command | What it does | Permission | Source | Status |
+|---------|--------------|------------|--------|--------|
+| `/is` (no arguments) | Opens Your Islands, via BSkyBlock `default-action`/`new-player-action: /islands` | `bskyblock.island` | BSkyBlock config + lostsky-islands.sk | draft; config not applied yet |
+| `/islands`, `/myislands` | Your Islands: island slots (go / city / city menu), create confirmation, locked slots | none | lostsky-islands.sk | draft |
+
+All other `/is` subcommands stay native BentoBox.
 
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
