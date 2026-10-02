@@ -11,6 +11,7 @@ import:
     com.sk89q.worldedit.session.ClipboardHolder
     com.sk89q.worldedit.math.BlockVector3
     com.sk89q.worldedit.function.operation.Operations
+    com.sk89q.worldedit.util.SideEffectSet
 
 function skyCityKey(p: player) :: text:
     set {_world} to Bukkit.getWorld("bskyblock_world")
@@ -40,7 +41,10 @@ function skyCityBuild(slot: number, chapter: number) :: boolean:
         return false
     set {_adapted} to BukkitAdapter.adapt({_world})
     set {_session} to WorldEdit.getInstance().newEditSession({_adapted})
-    {_session}.setFastMode(true)
+    # Protected prefabs do not need post-edit physics simulation. Disabling
+    # buffering avoids retaining every air cell for simulation on close.
+    {_session}.setSideEffectApplier(SideEffectSet.none())
+    {_session}.disableBuffering()
     set {_holder} to new ClipboardHolder({_clipboard})
     set {_x} to {_slot} * 512
     set {_target} to BlockVector3.at({_x}, 100, 0)
@@ -52,7 +56,6 @@ function skyCityBuild(slot: number, chapter: number) :: boolean:
     try Operations.complete({_operation})
     set {_pasteError} to last java error
     {_session}.close()
-    {_holder}.close()
     if {_pasteError} is set:
         send "[Lost Sky] City paste failed: %{_pasteError}%" to console
         return false

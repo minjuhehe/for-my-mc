@@ -291,13 +291,17 @@ close/quit/load. Relic rewards reuse `relicItem` from lostsky.sk.
 world lobby, spawn_hub.schem, origin (0,100,0). World clone
 `lobby_pre_market_20261003` preserves old lobby before replacement.
 
-Pending migration: compact shared spawn plus `/is city` team restoration.
-skript-reflect 2.6.3 loaded after restart; `lostsky_cities` created/protected.
-New spawn schematic uploaded but NOT pasted. City script had one coordinate
-parse error, fixed locally; latest Java paste error handling also needs a live
-reload. Authentication expired before re-upload/validation. Current server
-still has the previous restored shared hub. Local chapter tests: 1,087 passed;
-NBT smoke test passed. Do not report team city behavior as live yet.
+Migration checkpoint, 2026-10-03: shared market spawn pasted successfully;
+five floor/roof checks, seven NPC identities and global flags verified.
+skript-reflect 2.6.3 loaded; `lostsky_cities` created/protected. Hub, city and
+market scripts reload successfully. Local chapter tests: 1,087 passed.
+Console-only `/lstownselftest` verifies isolated inventory/relic cases;
+`/lscityselftest` verifies chapter 1 -> 5 -> 1 replacement in reserved slot 0.
+Both passed live; player slots begin at 1. WorldEdit paste uses
+SideEffectSet.none() and disableBuffering(), replacing deprecated fast mode
+which caused a long main-thread pause. Repeat paste test passed after fix.
+Real-player commerce, team warp and non-OP protection still need testing.
+Owner estimates map at 20% and requests decoration paused; see DOT_HANDOFF.md.
 
 Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.
 WorldEdit 7.4.5 and WorldGuard 7.0.17 FAILED on Java 21 (class version 69).

@@ -3,6 +3,18 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.7.3: Live hub verification and project handoff (2026-10-03)
+
+- Pasted the market hub; verified five zone floor/roof checks and seven NPCs.
+- Setup commands load chunks before entity placement and remove forced chunks
+  afterwards; global spawn protection includes crop trampling and chest access.
+- Fixed city paste side effects/buffering to avoid the observed server pause.
+- Added isolated console tests `/lstownselftest` and `/lscityselftest`; both
+  passed live. Real player trades, quests and city warp remain pending.
+- Chapter signs now route to team-city commands instead of old global progress.
+- Recorded owner's estimate of 20% map completion and deferred decoration.
+  Prepared Your dot handoff; no dot creation or external GLM connection claimed.
+
 ## Next (planned, not built)
 
 - Ruin loot restocking (a loot plugin, or re-pasting with WorldEdit).

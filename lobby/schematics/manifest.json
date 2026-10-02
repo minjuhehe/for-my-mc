@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-01T09:44:35.925Z",
+  "generated": "2026-10-02T18:19:56.161Z",
   "dataVersion": 3953,
   "mcVersion": "1.21.x",
   "size": {
@@ -33,7 +33,7 @@
       "palette": 62,
       "signs": 24,
       "frames": 4,
-      "ms": 62
+      "ms": 60
     },
     {
       "ch": 2,
@@ -43,7 +43,7 @@
       "palette": 61,
       "signs": 24,
       "frames": 4,
-      "ms": 46
+      "ms": 50
     },
     {
       "ch": 3,
@@ -53,7 +53,7 @@
       "palette": 67,
       "signs": 24,
       "frames": 4,
-      "ms": 39
+      "ms": 42
     },
     {
       "ch": 4,
@@ -63,7 +63,7 @@
       "palette": 72,
       "signs": 24,
       "frames": 4,
-      "ms": 45
+      "ms": 41
     },
     {
       "ch": 5,
@@ -73,7 +73,7 @@
       "palette": 73,
       "signs": 24,
       "frames": 4,
-      "ms": 40
+      "ms": 43
     }
   ]
 }

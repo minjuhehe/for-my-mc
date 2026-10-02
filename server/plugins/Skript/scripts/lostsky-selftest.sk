@@ -1,0 +1,64 @@
+# Console-only, isolated inventories. Never changes player money or items.
+command /lstownselftest:
+    executable by: console
+    trigger:
+        set {_inv} to chest inventory with 6 rows
+        set slot 0 of {_inv} to 64 cobblestones
+        set slot 1 of {_inv} to 64 cobblestones
+        set {_goods} to cobblestone
+        set amount of {_goods} to 128
+        if {_inv} does not contain {_goods}:
+            send "[Lost Sky TEST] FAIL: multi-stack quest count"
+            stop
+        remove {_goods} from {_inv}
+        if {_inv} contains cobblestone:
+            send "[Lost Sky TEST] FAIL: multi-stack removal"
+            stop
+        set {_relic} to relicItem("shard")
+        if relicValue({_relic}) is not 1:
+            send "[Lost Sky TEST] FAIL: quest relic identity"
+            stop
+        set {_fake} to amethyst shard named "&bCommon Shard"
+        if relicValue({_fake}) is not 0:
+            send "[Lost Sky TEST] FAIL: fake relic accepted"
+            stop
+        set amount of {_relic} to 2
+        if {_inv} cannot hold {_relic}:
+            send "[Lost Sky TEST] FAIL: empty inventory capacity"
+            stop
+        loop integers from 0 to 53:
+            set slot loop-number of {_inv} to 64 stones
+        if {_inv} can hold {_relic}:
+            send "[Lost Sky TEST] FAIL: full inventory capacity"
+            stop
+        send "[Lost Sky TEST] PASS: multi-stack count/removal, genuine/fake relic, empty/full capacity"
+
+# Slot zero is reserved for diagnostic maps; player cities start at slot one.
+command /lscityselftest:
+    executable by: console
+    trigger:
+        if {skycity::building} is true:
+            send "[Lost Sky TEST] Busy; retry later"
+            stop
+        loop all players:
+            if name of loop-player's world is "lostsky_cities":
+                set {_dx} to x-coordinate of loop-player
+                if {_dx} is between -65 and 65:
+                    send "[Lost Sky TEST] Diagnostic plot has a visitor; retry later"
+                    stop
+        set {skycity::building} to true
+        set {_one} to skyCityBuild(0, 1)
+        set {_five} to skyCityBuild(0, 5)
+        if block at location(0, 104, -32, world "lostsky_cities") is not gold block:
+            delete {skycity::building}
+            send "[Lost Sky TEST] FAIL: chapter 5 gold beacon base"
+            stop
+        set {_reset} to skyCityBuild(0, 1)
+        delete {skycity::building}
+        if {_one} is true:
+            if {_five} is true:
+                if {_reset} is true:
+                    if block at location(0, 104, -32, world "lostsky_cities") is air:
+                        send "[Lost Sky TEST] PASS: city chapter 1 -> 5 -> 1, removed old gold blocks, retained spawn floor"
+                        stop
+        send "[Lost Sky TEST] FAIL: city replacement or cleanup"

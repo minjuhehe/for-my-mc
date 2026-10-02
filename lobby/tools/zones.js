@@ -143,10 +143,10 @@ function tutorialPath(w) {
   // Five stops along the west side (x=55..56), one every ~4 z.
   const stops = [
     { z: 98, sign: ['§6/is', '§7get your', '§7own island', ''], display: 'island' },
-    { z: 94, sign: ['§6/ruin', '§7drifting ruins', '§7dock to the west', ''], display: 'ruin' },
+    { z: 94, sign: ['§6/skyquests', '§7delivery quests', '§7earn relic shards', ''], display: 'ruin' },
     { z: 90, sign: ['§6Relics', '§7donate them at', '§7the altar ahead', ''], display: 'relic' },
-    { z: 86, sign: ['§6/donate', '§7at the amethyst', '§7altar', ''], display: 'altar' },
-    { z: 84, sign: ['§6/chapter', '§7watch the story', '§7unfold', ''], display: 'chapter' },
+    { z: 86, sign: ['§6/city donate', '§7hold your relic', '§7to restore the city', ''], display: 'altar' },
+    { z: 84, sign: ['§6/city', '§7your team story', '§7and city progress', ''], display: 'chapter' },
   ];
   for (const s of stops) {
     // sign on a post (fence post + spruce sign block facing east)
@@ -249,7 +249,7 @@ function ruinDock(w) {
   // Dock sign at the island-side entrance, front facing west (toward walker).
   w.set(16, GROUND + 1, 60, B.SPRUCE_FENCE);
   w.set(16, GROUND + 2, 60, B.SPRUCE_SIGN_W);
-  w.addSign(16, GROUND + 2, 60, 'W', ['§6Ruin Dock', '§7drifting ruins', '§7arrive here', '§8/ruin']);
+  w.addSign(16, GROUND + 2, 60, 'W', ['§6Ruin Dock', '§7take town quests', '§7to earn relics', '§8/skyquests']);
 }
 
 // ---------------------------------------------------------------------------

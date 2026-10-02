@@ -88,6 +88,16 @@ Team city commands (`lostsky-city.sk`):
 | `/bsbadmin ...` | Island admin tools | `bskyblock.admin.*` | BSkyBlock | planned |
 | `/co inspect` | Check who broke/placed blocks | `coreprotect.inspect` | CoreProtect | planned |
 
+## Isolated server checks (console only)
+
+| Command | Purpose | Source | Status |
+|---------|---------|--------|--------|
+| `lstownselftest` | Multi-stack removal, relic authenticity and inventory capacity using temporary inventories | lostsky-selftest.sk | live; passed |
+| `lscityselftest` | Chapter 1 -> 5 -> 1 paste in reserved slot 0; refuses occupied fixture | lostsky-selftest.sk | live; passed |
+
+These checks do not replace player tests of trades, quest cooldowns, team warp
+or lobby protection. Players cannot run them.
+
 ## Commands the script runs by itself (console)
 
 These run automatically. If you rename a plugin or change these, update the script.

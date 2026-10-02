@@ -73,7 +73,8 @@ function skyTownQuest(p: player, key: text, goods: itemtype, count: number, rewa
     send "{@market-prefix} &aส่งเควสต์สำเร็จ &7+$%{_reward}% และ Common Shard 2 ชิ้น" to {_p}
 
 function skyTownTopup(p: player):
-    if "{@topup-url}" is "unset":
+    set {_url} to "{@topup-url}"
+    if {_url} is "unset":
         send "{@market-prefix} &eยังไม่เปิดรับเงินจริง ช่องทางเติมเงินจะประกาศภายหลัง" to {_p}
     else:
         send formatted "&6ช่องทางเติมเงินทางการ: <link:{@topup-url}>&b[คลิกเปิดเว็บ]<reset>" to {_p}

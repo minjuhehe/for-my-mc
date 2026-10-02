@@ -4,6 +4,7 @@
 const fs = require('fs');
 const path = require('path');
 const cmds = [
+  'execute in minecraft:lobby run minecraft:forceload add -60 -108 60 12',
   'rg flag __global__ -w lobby mob-spawning allow',
   'execute in minecraft:lobby run minecraft:gamerule minecraft:spawn_mobs false',
   'execute in minecraft:lobby run minecraft:kill @e[tag=lostsky_hub]',
@@ -42,11 +43,18 @@ cmds.push(
   'execute in minecraft:lobby run minecraft:gamerule minecraft:advance_weather false',
   'execute in minecraft:lobby run minecraft:weather clear',
   'rg flag __global__ -w lobby invincible allow',
+  'rg flag __global__ -w lobby block-break deny',
+  'rg flag __global__ -w lobby block-place deny',
+  'rg flag __global__ -w lobby interact allow',
+  'rg flag __global__ -w lobby chest-access deny',
+  'rg flag __global__ -w lobby block-trampling deny',
+  'rg flag __global__ -w lobby pvp deny',
   'lp group default permission set essentials.spawn true',
   'lp group default permission set bskyblock.island true',
   'skript reload lostsky-hub',
   'skript reload lostsky-market',
   'save-all flush',
+  'execute in minecraft:lobby run minecraft:forceload remove -60 -108 60 12',
 );
 const out = path.join(__dirname, '../docs/HUB_CONSOLE_COMMANDS.txt');
 fs.writeFileSync(out, cmds.join('\n') + '\n');

@@ -377,7 +377,7 @@ function altar(w, ch) {
   // Lectern explanation sign next to it (standing sign on a fence post).
   w.set(x + 2, y + 1, z + 1, B.SPRUCE_FENCE);
   w.set(x + 2, y + 2, z + 1, B.SPRUCE_SIGN_W);
-  w.addSign(x + 2, y + 2, z + 1, 'W', ['§dDonation Altar', '§7bring relics', '§7and /donate', '§8repair the citadel']);
+  w.addSign(x + 2, y + 2, z + 1, 'W', ['§dTeam City Altar', '§7hold a relic', '§7/city donate', '§8restore your city']);
 
   // Floating amethyst crystal above the altar (dim in ch1, beacon beam ch5).
   const cy = y + 8;
