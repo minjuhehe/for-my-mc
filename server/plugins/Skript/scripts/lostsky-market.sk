@@ -6,25 +6,25 @@ options:
 function skyTownMenu(p: player, kind: text):
     set {_inv} to chest inventory with 3 rows named "&3Lost Sky | %{_kind}%"
     if {_kind} is "farm":
-        set slot 10 of {_inv} to wheat named "&aขายข้าวสาลี 32 ชิ้น" with lore "&7ได้รับ $32"
-        set slot 11 of {_inv} to carrot named "&aขายแครอท 32 ชิ้น" with lore "&7ได้รับ $24"
-        set slot 12 of {_inv} to potato named "&aขายมันฝรั่ง 32 ชิ้น" with lore "&7ได้รับ $24"
-        set slot 13 of {_inv} to beetroot named "&aขายบีทรูต 32 ชิ้น" with lore "&7ได้รับ $32"
-        set slot 14 of {_inv} to pumpkin named "&aขายฟักทอง 8 บล็อก" with lore "&7ได้รับ $40"
-        set slot 15 of {_inv} to melon slice named "&aขายแตงโม 32 ชิ้น" with lore "&7ได้รับ $16"
+        set slot 10 of {_inv} to wheat named "&aSell 32 Wheat" with lore "&7Receive $32"
+        set slot 11 of {_inv} to carrot named "&aSell 32 Carrots" with lore "&7Receive $24"
+        set slot 12 of {_inv} to potato named "&aSell 32 Potatoes" with lore "&7Receive $24"
+        set slot 13 of {_inv} to beetroot named "&aSell 32 Beetroot" with lore "&7Receive $32"
+        set slot 14 of {_inv} to pumpkin named "&aSell 8 Pumpkins" with lore "&7Receive $40"
+        set slot 15 of {_inv} to melon slice named "&aSell 32 Melon Slices" with lore "&7Receive $16"
     else if {_kind} is "shop":
-        set slot 10 of {_inv} to cobblestone named "&bซื้อหิน 32 บล็อก" with lore "&7ราคา $32"
-        set slot 11 of {_inv} to dirt named "&bซื้อดิน 32 บล็อก" with lore "&7ราคา $64"
-        set slot 12 of {_inv} to oak log named "&bซื้อไม้โอ๊ก 16 บล็อก" with lore "&7ราคา $96"
-        set slot 13 of {_inv} to glass named "&bซื้อกระจก 16 บล็อก" with lore "&7ราคา $64"
-        set slot 14 of {_inv} to wheat seeds named "&bซื้อเมล็ดข้าว 16 ชิ้น" with lore "&7ราคา $16"
-        set slot 15 of {_inv} to torch named "&bซื้อคบไฟ 16 ชิ้น" with lore "&7ราคา $24"
+        set slot 10 of {_inv} to cobblestone named "&bBuy 32 Cobblestone" with lore "&7Price $32"
+        set slot 11 of {_inv} to dirt named "&bBuy 32 Dirt" with lore "&7Price $64"
+        set slot 12 of {_inv} to oak log named "&bBuy 16 Oak Logs" with lore "&7Price $96"
+        set slot 13 of {_inv} to glass named "&bBuy 16 Glass" with lore "&7Price $64"
+        set slot 14 of {_inv} to wheat seeds named "&bBuy 16 Wheat Seeds" with lore "&7Price $16"
+        set slot 15 of {_inv} to torch named "&bBuy 16 Torches" with lore "&7Price $24"
     else if {_kind} is "quests":
-        set slot 11 of {_inv} to wheat named "&eเสบียงเมืองท่า" with lore "&7ส่งข้าวสาลี 64 ชิ้น" and "&aรางวัล $100 + Common Shard 2 ชิ้น" and "&7ทำได้ทุก 24 ชั่วโมง"
-        set slot 15 of {_inv} to cobblestone named "&eช่างก่อสร้างฝึกหัด" with lore "&7ส่งหิน cobblestone 128 บล็อก" and "&aรางวัล $80 + Common Shard 2 ชิ้น" and "&7ทำได้ทุก 24 ชั่วโมง"
+        set slot 11 of {_inv} to wheat named "&eHarbor Supplies" with lore "&7Deliver 64 Wheat" and "&aReward: $100 + 2 Common Shards" and "&7Available every 24 hours"
+        set slot 15 of {_inv} to cobblestone named "&eApprentice Builder" with lore "&7Deliver 128 Cobblestone" and "&aReward: $80 + 2 Common Shards" and "&7Available every 24 hours"
     else if {_kind} is "topup":
-        set slot 13 of {_inv} to gold ingot named "&6โซนเติมเงิน" with lore "&7คลิกเพื่อดูช่องทางทางการ" and "&7เงินเกมแยกจากเงินจริง"
-    set slot 22 of {_inv} to barrier named "&cปิดเมนู"
+        set slot 13 of {_inv} to gold ingot named "&6Supporter Shop" with lore "&7Click for official information" and "&7In-game money is separate from real money"
+    set slot 22 of {_inv} to barrier named "&cClose Menu"
     set {skytown::menu::%uuid of {_p}%} to {_inv}
     set {skytown::kind::%uuid of {_p}%} to {_kind}
     open {_inv} to {_p}
@@ -34,50 +34,50 @@ function skyTownTrade(p: player, goods: itemtype, count: number, price: number, 
     set amount of {_stack} to {_count}
     if {_buy} is true:
         if {_p}'s balance < {_price}:
-            send "{@market-prefix} &cเงินเกมไม่พอ ต้องใช้ $%{_price}%" to {_p}
+            send "{@market-prefix} &cNot enough money. Required: $%{_price}%" to {_p}
             stop
         if {_p}'s inventory cannot hold {_stack}:
-            send "{@market-prefix} &cกระเป๋าเต็ม กรุณาเว้นที่ก่อนซื้อ" to {_p}
+            send "{@market-prefix} &cInventory full. Make room before buying." to {_p}
             stop
         remove {_price} from {_p}'s balance
         give {_stack} to {_p}
-        send "{@market-prefix} &bซื้อสำเร็จ &7(-$%{_price}%)" to {_p}
+        send "{@market-prefix} &bPurchase complete &7(-$%{_price}%)" to {_p}
     else:
         if {_p}'s inventory does not contain {_stack}:
-            send "{@market-prefix} &cของไม่พอ ต้องมี %{_count}% ชิ้น" to {_p}
+            send "{@market-prefix} &cNot enough items. Required: %{_count}%" to {_p}
             stop
         remove {_stack} from {_p}'s inventory
         add {_price} to {_p}'s balance
-        send "{@market-prefix} &aขายสำเร็จ &7(+$%{_price}%)" to {_p}
+        send "{@market-prefix} &aSale complete &7(+$%{_price}%)" to {_p}
 
 function skyTownQuest(p: player, key: text, goods: itemtype, count: number, reward: number):
     if {skytown::quest::%uuid of {_p}%::%{_key}%} is set:
         set {_elapsed} to difference between now and {skytown::quest::%uuid of {_p}%::%{_key}%}
         if {_elapsed} < 24 hours:
-            send "{@market-prefix} &eรับรางวัลเควสต์นี้แล้ว กลับมาเมื่อครบ 24 ชั่วโมง" to {_p}
+            send "{@market-prefix} &eQuest already completed. Return after 24 hours." to {_p}
             stop
     set {_stack} to {_goods}
     set amount of {_stack} to {_count}
     if {_p}'s inventory does not contain {_stack}:
-        send "{@market-prefix} &eยังส่งเควสต์ไม่ได้ ต้องมี %{_count}% ชิ้น" to {_p}
+        send "{@market-prefix} &eRequired items: %{_count}%" to {_p}
         stop
     set {_relic} to relicItem("shard")
     set amount of {_relic} to 2
     if {_p}'s inventory cannot hold {_relic}:
-        send "{@market-prefix} &cเว้นที่สำหรับรางวัล Relic ก่อน" to {_p}
+        send "{@market-prefix} &cMake room for your Relic reward first" to {_p}
         stop
     set {skytown::quest::%uuid of {_p}%::%{_key}%} to now
     remove {_stack} from {_p}'s inventory
     add {_reward} to {_p}'s balance
     give {_relic} to {_p}
-    send "{@market-prefix} &aส่งเควสต์สำเร็จ &7+$%{_reward}% และ Common Shard 2 ชิ้น" to {_p}
+    send "{@market-prefix} &aQuest complete &7+$%{_reward}% and 2 Common Shards" to {_p}
 
 function skyTownTopup(p: player):
     set {_url} to "{@topup-url}"
     if {_url} is "unset":
-        send "{@market-prefix} &eยังไม่เปิดรับเงินจริง ช่องทางเติมเงินจะประกาศภายหลัง" to {_p}
+        send "{@market-prefix} &ePayments are closed. Official details will be announced later." to {_p}
     else:
-        send formatted "&6ช่องทางเติมเงินทางการ: <link:{@topup-url}>&b[คลิกเปิดเว็บ]<reset>" to {_p}
+        send formatted "&6Official supporter page: <link:{@topup-url}>&b[Open website]<reset>" to {_p}
 
 command /market:
     executable by: players

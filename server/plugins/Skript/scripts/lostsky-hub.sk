@@ -4,27 +4,27 @@ options:
     hub-prefix: &3[Lost Sky]&r
 
 function skyHubMenu(p: player):
-    set {_inv} to chest inventory with 4 rows named "&3Lost Sky | เมืองท่ากลาง"
-    set slot 10 of {_inv} to grass block named "&aเกาะของคุณ" with lore "&7สร้างเกาะใหม่ หรือกลับเกาะของทีม" and "&eคลิกเพื่อใช้ /is"
-    set slot 11 of {_inv} to stone bricks named "&dเมืองฟื้นฟูของทีม" with lore "&7แยกจาก spawn กลางและเกาะที่คุณสร้าง" and "&eคลิกเปิด /is city"
-    set slot 12 of {_inv} to book named "&bวิธีเริ่มเล่น" with lore "&7สร้างเกาะ ชวนเพื่อน และพัฒนาเมืองทีม" and "&eคลิกอ่านคู่มือ"
-    set slot 14 of {_inv} to compass named "&6กลับ spawn กลาง" with lore "&7พบผู้เล่นคนอื่นที่เมืองท่ากลาง" and "&eคลิกเพื่อกลับ spawn"
-    set slot 19 of {_inv} to wheat named "&aตลาดผัก" with lore "&7ขายผลผลิต รับเงินเกม"
-    set slot 21 of {_inv} to chest named "&bร้านเสบียง (ซื้อวัสดุ)" with lore "&7ซื้อของด้วยเงินเกม" and "&eหาเงินจากตลาดผักและเควสต์"
-    set slot 23 of {_inv} to enchanted book named "&dเควสต์เมืองท่า" with lore "&7ส่งของ รับเงินและ Relic"
-    set slot 25 of {_inv} to gold ingot named "&6โซนเติมเงิน" with lore "&7ดูช่องทางทางการ"
-    set slot 31 of {_inv} to barrier named "&cปิดเมนู"
+    set {_inv} to chest inventory with 4 rows named "&3Lost Sky | Sky Harbor"
+    set slot 10 of {_inv} to grass block named "&aYour Island" with lore "&7Create an island or return to your team" and "&eClick to use /is"
+    set slot 11 of {_inv} to stone bricks named "&dTeam City" with lore "&7Your team restoration area" and "&eClick to open /is city"
+    set slot 12 of {_inv} to book named "&bGetting Started" with lore "&7Build an island, invite friends, restore your city" and "&eClick for a quick guide"
+    set slot 14 of {_inv} to compass named "&6Return to Spawn" with lore "&7Meet other players at Sky Harbor" and "&eClick to return to spawn"
+    set slot 19 of {_inv} to wheat named "&aFarm Market" with lore "&7Sell crops for in-game money"
+    set slot 21 of {_inv} to chest named "&bSupply Shop" with lore "&7Buy materials with in-game money" and "&eEarn money from crops and quests"
+    set slot 23 of {_inv} to enchanted book named "&dHarbor Quests" with lore "&7Deliver items for money and Relics"
+    set slot 25 of {_inv} to gold ingot named "&6Supporter Shop" with lore "&7Official information"
+    set slot 31 of {_inv} to barrier named "&cClose Menu"
     set {lostskyhub::menu::%uuid of {_p}%} to {_inv}
     open {_inv} to {_p}
 
 function skyHubGuide(p: player):
-    send "{@hub-prefix} &bยินดีต้อนรับสู่เมืองท่ากลาง!" to {_p}
-    send "&f1. &a/is &7สร้างเกาะ หรือกลับเกาะของทีม" to {_p}
-    send "&f2. &a/is team invite <ชื่อเพื่อน> &7ชวนเพื่อนเข้าทีม" to {_p}
-    send "&f3. &a/market &7ขายผลผลิต หรือ &a/skyquests &7ส่งของเพื่อหาเงินเกม" to {_p}
-    send "&f4. &b/skyshop &7ซื้อวัสดุด้วยเงินเกม | &b/bal &7ดูยอดเงิน" to {_p}
-    send "&f5. &d/is city &7เปิดเมนูเมืองฟื้นฟูของทีม" to {_p}
-    send "&e/spawn &7กลับเมืองท่ากลาง   &e/menu &7เปิดเมนู" to {_p}
+    send "{@hub-prefix} &bWelcome to Sky Harbor!" to {_p}
+    send "&f1. &a/is &7Create an island or return to your team" to {_p}
+    send "&f2. &a/is team invite <player> &7Invite a friend to your team" to {_p}
+    send "&f3. &a/market &7Sell crops or &a/skyquests &7Deliver items to earn money" to {_p}
+    send "&f4. &b/skyshop &7Buy materials with in-game money | &b/bal &7Check your balance" to {_p}
+    send "&f5. &d/is city &7Open the team city menu" to {_p}
+    send "&e/spawn &7Return to Sky Harbor   &e/menu &7Open menu" to {_p}
 
 command /hub:
     aliases: /lobby
@@ -111,7 +111,7 @@ on join:
     if player is online:
         teleport player to location(0.5, 100, 0.5, world "lobby", 180, 0)
         set fall distance of player to 0
-        send "{@hub-prefix} &b/menu &7เปิดเมนูเมืองท่า | &b/spawn &7กลับ spawn" to player
+        send "{@hub-prefix} &b/menu &7Open harbor menu | &b/spawn &7Return to spawn" to player
 
 on respawn:
     if name of player's world is "lobby":

@@ -37,3 +37,5 @@ a different host instance.
 Reference: https://docs.papermc.io/paper/reference/server-properties/
 
 Installed on MineLan server 9623747d on 2026-10-03. Read back all five keys after restart; Java normalized property escaping. Startup reached Done (14.193s) at 02:07:57 ICT with no resource-pack parse warning. Actual client download/rendering and decline tests remain pending.
+
+Owner decision: keep this required pack as the foundation for future packs, even though Lost Sky player-facing server text now uses English.

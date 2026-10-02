@@ -400,3 +400,5 @@ Notes for developers:
 - Lobby label repair: disable display shadows, improve background contrast, and move plaza heading clear of the central pillar. Player visual retest pending.
 
 - Follow-up: use minecraft:uniform specifically for lobby text displays after shadow-only adjustment failed; preserve ThaiFontFix for client UI.
+
+- Player-facing Lost Sky menus, command messages and10 lobby labels now use English. Commands, prices, rewards and saved progress are unchanged. Required ThaiFontFix remains enabled at the owner's request for future resource-pack expansion.

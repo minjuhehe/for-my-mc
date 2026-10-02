@@ -72,7 +72,7 @@ command /lshubbuild:
             stop
         loop all players:
             if name of loop-player's world is "lobby":
-                send "&eกำลังเปลี่ยนเมืองท่ากลาง กรุณารอสักครู่" to loop-player
+                send "&eUpdating Sky Harbor. Please wait." to loop-player
                 teleport loop-player to location(0.5, 140, 0.5, world "lobby")
         set {skycity::building} to true
         set {_ok} to skyCityBuild(0, 0)
@@ -86,21 +86,21 @@ command /lshubbuild:
 function skyCityGo(p: player):
     set {_key} to skyCityKey({_p})
     if {_key} is "":
-        send "&3[Lost Sky] &eสร้างเกาะหรือเข้าทีมก่อนด้วย /is" to {_p}
+        send "&3[Lost Sky] &eCreate or join an island with /is first" to {_p}
         stop
     if {skycity::ready::%{_key}%} is not true:
         if {skycity::building} is true:
-            send "&3[Lost Sky] &eกำลังเตรียมเมือง กรุณาลองอีกครั้ง" to {_p}
+            send "&3[Lost Sky] &eCity preparation is in progress. Try again shortly." to {_p}
             stop
         if {skycity::slot::%{_key}%} is not set:
             add 1 to {skycity::next}
             set {skycity::slot::%{_key}%} to {skycity::next}
         set {skycity::building} to true
-        send "&3[Lost Sky] &eกำลังสร้างเมืองซากโบราณของทีมคุณ..." to {_p}
+        send "&3[Lost Sky] &ePreparing your team city ruins..." to {_p}
         set {_ok} to skyCityBuild({skycity::slot::%{_key}%}, 1)
         delete {skycity::building}
         if {_ok} is not true:
-            send "&3[Lost Sky] &cเตรียมเมืองไม่สำเร็จ กรุณาแจ้งแอดมิน" to {_p}
+            send "&3[Lost Sky] &cCould not prepare your city. Please contact staff." to {_p}
             stop
         set {skycity::chapter::%{_key}%} to 1
         set {skycity::points::%{_key}%} to 0
@@ -108,20 +108,20 @@ function skyCityGo(p: player):
     set {_x} to {skycity::slot::%{_key}%} * 512 + 0.5
     teleport {_p} to location({_x}, 100, 0.5, world "lostsky_cities", 180, 0)
     set fall distance of {_p} to 0
-    send "&3[Lost Sky] &aเมืองของทีม — บท %{skycity::chapter::%{_key}%}% &7| /city เปิดเมนูฟื้นฟู" to {_p}
+    send "&3[Lost Sky] &aTeam City - Chapter %{skycity::chapter::%{_key}%}% &7| /city Open restoration menu" to {_p}
 
 function skyCityMenu(p: player):
     set {_key} to skyCityKey({_p})
     if {_key} is "":
-        send "&3[Lost Sky] &eสร้างเกาะหรือเข้าทีมก่อนด้วย /is" to {_p}
+        send "&3[Lost Sky] &eCreate or join an island with /is first" to {_p}
         stop
     set {_chapter} to {skycity::chapter::%{_key}%} ? 1
     set {_points} to {skycity::points::%{_key}%} ? 0
-    set {_inv} to chest inventory with 3 rows named "&5Lost Sky | เมืองของทีม"
-    set slot 10 of {_inv} to ender pearl named "&aไปเมืองของทีม" with lore "&7วาร์ปไปพื้นที่ฟื้นฟูของทีมคุณ"
-    set slot 12 of {_inv} to book named "&eบท %{_chapter}% | Relic %{_points}%" with lore "&7เป้าสะสม: 100 / 300 / 600 / 1000" and "&7ความคืบหน้าแยกจากทีมอื่น"
-    set slot 14 of {_inv} to amethyst shard named "&dบริจาค Relic เพื่อฟื้นฟู" with lore "&7ถือ Relic ในมือหลักแล้วกดปุ่มนี้" and "&7เมื่อถึงเป้า เมืองจะเปลี่ยนเป็นบทถัดไป"
-    set slot 16 of {_inv} to compass named "&bกลับ spawn กลาง"
+    set {_inv} to chest inventory with 3 rows named "&5Lost Sky | Team City"
+    set slot 10 of {_inv} to ender pearl named "&aVisit Team City" with lore "&7Travel to your team restoration area"
+    set slot 12 of {_inv} to book named "&eChapter %{_chapter}% | Relic %{_points}%" with lore "&7Milestones: 100 / 300 / 600 / 1000" and "&7Progress is shared only with your team"
+    set slot 14 of {_inv} to amethyst shard named "&dDonate Relics" with lore "&7Hold a Relic in your main hand and click" and "&7Reach a milestone to unlock the next chapter"
+    set slot 16 of {_inv} to compass named "&bReturn to Spawn"
     set {skycity::menu::%uuid of {_p}%} to {_inv}
     open {_inv} to {_p}
 
@@ -130,18 +130,18 @@ function skyCityDonate(p: player):
     if {_key} is "":
         stop
     if {skycity::ready::%{_key}%} is not true:
-        send "&3[Lost Sky] &eเข้าเมืองครั้งแรกด้วย /city go ก่อน" to {_p}
+        send "&3[Lost Sky] &eVisit your city with /city go first" to {_p}
         stop
     set {_chapter} to {skycity::chapter::%{_key}%}
     if {_chapter} >= 5:
-        send "&3[Lost Sky] &aเมืองทีมฟื้นฟูครบแล้ว!" to {_p}
+        send "&3[Lost Sky] &aYour team city is fully restored!" to {_p}
         stop
     set {_value} to relicValue({_p}'s tool)
     if {_value} <= 0:
-        send "&3[Lost Sky] &eถือ Relic ของ Lost Sky ในมือหลักก่อน" to {_p}
+        send "&3[Lost Sky] &eHold a Lost Sky Relic in your main hand" to {_p}
         stop
     if {skycity::building} is true:
-        send "&3[Lost Sky] &eกำลังฟื้นฟูเมือง กรุณาลองใหม่" to {_p}
+        send "&3[Lost Sky] &eRestoration is in progress. Try again shortly." to {_p}
         stop
     set {_newpoints} to {skycity::points::%{_key}%} + {_value}
     set {_next} to {_chapter} + 1
@@ -158,13 +158,13 @@ function skyCityDonate(p: player):
         set {_ok} to skyCityBuild({skycity::slot::%{_key}%}, {_next})
         delete {skycity::building}
         if {_ok} is not true:
-            send "&3[Lost Sky] &cฟื้นฟูไม่สำเร็จ Relic ยังอยู่ในมือคุณ" to {_p}
+            send "&3[Lost Sky] &cRestoration failed. Your Relics were not consumed." to {_p}
             stop
         set {skycity::chapter::%{_key}%} to {_next}
-        send "&3[Lost Sky] &6เมืองของทีมฟื้นฟูเป็นบท %{_next}% แล้ว!" to {_p}
+        send "&3[Lost Sky] &6Your team city reached chapter %{_next}%!" to {_p}
     remove 1 of {_p}'s tool from {_p}'s inventory
     set {skycity::points::%{_key}%} to {_newpoints}
-    send "&3[Lost Sky] &aบริจาคสำเร็จ +%{_value}% | รวม %{_newpoints}%" to {_p}
+    send "&3[Lost Sky] &aDonation accepted +%{_value}% | Total %{_newpoints}%" to {_p}
 
 command /city [<text>]:
     executable by: players
