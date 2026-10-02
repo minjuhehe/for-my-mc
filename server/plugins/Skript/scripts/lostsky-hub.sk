@@ -4,12 +4,16 @@ options:
     hub-prefix: &3[Lost Sky]&r
 
 function skyHubMenu(p: player):
-    set {_inv} to chest inventory with 3 rows named "&3Lost Sky | เมืองท่ากลาง"
+    set {_inv} to chest inventory with 4 rows named "&3Lost Sky | เมืองท่ากลาง"
     set slot 10 of {_inv} to grass block named "&aเกาะของคุณ" with lore "&7สร้างเกาะใหม่ หรือกลับเกาะของทีม" and "&eคลิกเพื่อใช้ /is"
     set slot 11 of {_inv} to stone bricks named "&dเมืองฟื้นฟูของทีม" with lore "&7แยกจาก spawn กลางและเกาะที่คุณสร้าง" and "&eคลิกเปิด /is city"
     set slot 12 of {_inv} to book named "&bวิธีเริ่มเล่น" with lore "&7สร้างเกาะ ชวนเพื่อน และพัฒนาเมืองทีม" and "&eคลิกอ่านคู่มือ"
     set slot 14 of {_inv} to compass named "&6กลับ spawn กลาง" with lore "&7พบผู้เล่นคนอื่นที่เมืองท่ากลาง" and "&eคลิกเพื่อกลับ spawn"
-    set slot 16 of {_inv} to barrier named "&cปิดเมนู"
+    set slot 19 of {_inv} to wheat named "&aตลาดผัก" with lore "&7ขายผลผลิต รับเงินเกม"
+    set slot 21 of {_inv} to chest named "&bร้านวัสดุ" with lore "&7ซื้อของด้วยเงินเกม"
+    set slot 23 of {_inv} to enchanted book named "&dเควสต์เมืองท่า" with lore "&7ส่งของ รับเงินและ Relic"
+    set slot 25 of {_inv} to gold ingot named "&6โซนเติมเงิน" with lore "&7ดูช่องทางทางการ"
+    set slot 31 of {_inv} to barrier named "&cปิดเมนู"
     set {lostskyhub::menu::%uuid of {_p}%} to {_inv}
     open {_inv} to {_p}
 
@@ -69,6 +73,14 @@ on inventory click:
         skyHubGuide(player)
     else if {_choice} is 14:
         execute player command "essentials:spawn"
+    else if {_choice} is 19:
+        execute player command "market"
+    else if {_choice} is 21:
+        execute player command "skyshop"
+    else if {_choice} is 23:
+        execute player command "skyquests"
+    else if {_choice} is 25:
+        execute player command "topup"
 
 on inventory drag:
     if {lostskyhub::menu::%uuid of player%} is set:

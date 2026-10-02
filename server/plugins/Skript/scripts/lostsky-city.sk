@@ -22,9 +22,13 @@ function skyCityKey(p: player) :: text:
 
 function skyCityBuild(slot: number, chapter: number) :: boolean:
     set {_world} to Bukkit.getWorld("lostsky_cities")
+    if {_chapter} is 0:
+        set {_world} to Bukkit.getWorld("lobby")
     if {_world} is not set:
         return false
     set {_file} to new File("plugins/WorldEdit/schematics/lobby_ch%{_chapter}%.schem")
+    if {_chapter} is 0:
+        set {_file} to new File("plugins/WorldEdit/schematics/spawn_hub.schem")
     if {_file}.exists() is false:
         return false
     set {_stream} to new FileInputStream({_file})
@@ -56,6 +60,25 @@ function skyCityBuild(slot: number, chapter: number) :: boolean:
     if "%{_floor}.getType()%" is "CHISELED_QUARTZ_BLOCK":
         return true
     return false
+
+command /lshubbuild:
+    executable by: console
+    trigger:
+        if {skycity::building} is true:
+            send "[Lost Sky] Another paste is running."
+            stop
+        loop all players:
+            if name of loop-player's world is "lobby":
+                send "&eกำลังเปลี่ยนเมืองท่ากลาง กรุณารอสักครู่" to loop-player
+                teleport loop-player to location(0.5, 140, 0.5, world "lobby")
+        set {skycity::building} to true
+        set {_ok} to skyCityBuild(0, 0)
+        delete {skycity::building}
+        loop all players:
+            if name of loop-player's world is "lobby":
+                teleport loop-player to location(0.5, 100, 0.5, world "lobby", 180, 0)
+                set fall distance of loop-player to 0
+        send "[Lost Sky] Spawn paste result: %{_ok}%"
 
 function skyCityGo(p: player):
     set {_key} to skyCityKey({_p})

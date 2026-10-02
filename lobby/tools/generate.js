@@ -90,7 +90,7 @@ function metaFor(ch) {
 
 function main() {
   if (process.argv.includes('--hub')) {
-    const w = require('./hub')();
+    const w = require('./hub-market')();
     for (const sign of w.signs) w.set(sign.x, sign.y, sign.z, B.AIR);
     w.signs = [];
     w.entities = [];

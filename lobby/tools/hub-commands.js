@@ -20,14 +20,21 @@ function text(x, y, z, content, color = 'aqua', scale = 1) {
 }
 npc(-4.5, -8.5, 'Lost Sky Guide', 'librarian');
 npc(4.5, -8.5, 'Island Captain', 'cartographer');
-npc(32.5, -18.5, 'City Architect', 'mason');
+npc(0.5, -89.5, 'City Architect', 'mason');
+npc(-35.5, -59.5, 'Farm Merchant', 'farmer');
+npc(36.5, -59.5, 'Supply Merchant', 'toolsmith');
+npc(-35.5, -15.5, 'Quest Keeper', 'librarian');
+npc(36.5, -15.5, 'Sky Concierge', 'cleric');
 text(0.5, 104.8, -9.5, 'LOST SKY\nเมืองท่ากลาง', 'gold', 1.4);
 text(-4.5, 102.8, -8.5, 'ผู้แนะนำการเล่น\nคลิกขวาเพื่อเปิดเมนู');
 text(4.5, 102.8, -8.5, 'เดินทางสู่เกาะของคุณ\nคลิกขวาเพื่อเปิดเมนู', 'green');
 text(0.5, 102.5, -17.5, '/spawn กลับเมืองท่า\n/menu เปิดเมนูได้ทุกที่', 'white');
-text(32.5, 102.8, -18.5, 'เมืองฟื้นฟูของทีม\nคลิกขวา หรือ /is city', 'light_purple');
-text(-31.5, 103.5, -18.5, 'เกาะของคุณ\nใช้ /is เพื่อกลับเกาะ', 'green');
-text(0.5, 103.5, -58.5, 'ท่าเรือสำรวจ\nกิจกรรมกำลังเตรียมเปิด', 'aqua');
+text(0.5, 103.5, -89.5, 'เมืองฟื้นฟูของทีม\nคลิกขวา หรือ /is city', 'light_purple');
+text(-35.5, 104, -59.5, 'ตลาดผัก\nคลิก NPC หรือ /market', 'green');
+text(36.5, 104, -59.5, 'ร้านวัสดุ\nคลิก NPC หรือ /skyshop', 'aqua');
+text(-35.5, 104, -15.5, 'หอเควสต์\nคลิก NPC หรือ /skyquests', 'light_purple');
+text(36.5, 104, -15.5, 'โซนเติมเงิน\nคลิก NPC หรือ /topup', 'gold');
+text(0.5, 104, -36, 'LOST SKY PLAZA\nตลาดผัก · ร้านค้า · เควสต์ · เมืองของทีม', 'aqua');
 cmds.push(
   'rg flag __global__ -w lobby mob-spawning deny',
   'execute in minecraft:lobby run minecraft:gamerule minecraft:advance_time false',
@@ -38,6 +45,7 @@ cmds.push(
   'lp group default permission set essentials.spawn true',
   'lp group default permission set bskyblock.island true',
   'skript reload lostsky-hub',
+  'skript reload lostsky-market',
   'save-all flush',
 );
 const out = path.join(__dirname, '../docs/HUB_CONSOLE_COMMANDS.txt');

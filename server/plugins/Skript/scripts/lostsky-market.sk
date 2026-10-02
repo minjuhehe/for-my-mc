@@ -1,0 +1,179 @@
+# Public town economy: in-game money only. No real payment integration.
+options:
+    market-prefix: &3[Lost Sky]&r
+    topup-url: unset
+
+function skyTownMenu(p: player, kind: text):
+    set {_inv} to chest inventory with 3 rows named "&3Lost Sky | %{_kind}%"
+    if {_kind} is "farm":
+        set slot 10 of {_inv} to wheat named "&aขายข้าวสาลี 32 ชิ้น" with lore "&7ได้รับ $32"
+        set slot 11 of {_inv} to carrot named "&aขายแครอท 32 ชิ้น" with lore "&7ได้รับ $24"
+        set slot 12 of {_inv} to potato named "&aขายมันฝรั่ง 32 ชิ้น" with lore "&7ได้รับ $24"
+        set slot 13 of {_inv} to beetroot named "&aขายบีทรูต 32 ชิ้น" with lore "&7ได้รับ $32"
+        set slot 14 of {_inv} to pumpkin named "&aขายฟักทอง 8 บล็อก" with lore "&7ได้รับ $40"
+        set slot 15 of {_inv} to melon slice named "&aขายแตงโม 32 ชิ้น" with lore "&7ได้รับ $16"
+    else if {_kind} is "shop":
+        set slot 10 of {_inv} to cobblestone named "&bซื้อหิน 32 บล็อก" with lore "&7ราคา $32"
+        set slot 11 of {_inv} to dirt named "&bซื้อดิน 32 บล็อก" with lore "&7ราคา $64"
+        set slot 12 of {_inv} to oak log named "&bซื้อไม้โอ๊ก 16 บล็อก" with lore "&7ราคา $96"
+        set slot 13 of {_inv} to glass named "&bซื้อกระจก 16 บล็อก" with lore "&7ราคา $64"
+        set slot 14 of {_inv} to wheat seeds named "&bซื้อเมล็ดข้าว 16 ชิ้น" with lore "&7ราคา $16"
+        set slot 15 of {_inv} to torch named "&bซื้อคบไฟ 16 ชิ้น" with lore "&7ราคา $24"
+    else if {_kind} is "quests":
+        set slot 11 of {_inv} to wheat named "&eเสบียงเมืองท่า" with lore "&7ส่งข้าวสาลี 64 ชิ้น" and "&aรางวัล $100 + Common Shard 2 ชิ้น" and "&7ทำได้ทุก 24 ชั่วโมง"
+        set slot 15 of {_inv} to cobblestone named "&eช่างก่อสร้างฝึกหัด" with lore "&7ส่งหิน cobblestone 128 บล็อก" and "&aรางวัล $80 + Common Shard 2 ชิ้น" and "&7ทำได้ทุก 24 ชั่วโมง"
+    else if {_kind} is "topup":
+        set slot 13 of {_inv} to gold ingot named "&6โซนเติมเงิน" with lore "&7คลิกเพื่อดูช่องทางทางการ" and "&7เงินเกมแยกจากเงินจริง"
+    set slot 22 of {_inv} to barrier named "&cปิดเมนู"
+    set {skytown::menu::%uuid of {_p}%} to {_inv}
+    set {skytown::kind::%uuid of {_p}%} to {_kind}
+    open {_inv} to {_p}
+
+function skyTownTrade(p: player, goods: itemtype, count: number, price: number, buy: boolean):
+    set {_stack} to {_goods}
+    set amount of {_stack} to {_count}
+    if {_buy} is true:
+        if {_p}'s balance < {_price}:
+            send "{@market-prefix} &cเงินเกมไม่พอ ต้องใช้ $%{_price}%" to {_p}
+            stop
+        if {_p}'s inventory cannot hold {_stack}:
+            send "{@market-prefix} &cกระเป๋าเต็ม กรุณาเว้นที่ก่อนซื้อ" to {_p}
+            stop
+        remove {_price} from {_p}'s balance
+        give {_stack} to {_p}
+        send "{@market-prefix} &bซื้อสำเร็จ &7(-$%{_price}%)" to {_p}
+    else:
+        if {_p}'s inventory does not contain {_stack}:
+            send "{@market-prefix} &cของไม่พอ ต้องมี %{_count}% ชิ้น" to {_p}
+            stop
+        remove {_stack} from {_p}'s inventory
+        add {_price} to {_p}'s balance
+        send "{@market-prefix} &aขายสำเร็จ &7(+$%{_price}%)" to {_p}
+
+function skyTownQuest(p: player, key: text, goods: itemtype, count: number, reward: number):
+    if {skytown::quest::%uuid of {_p}%::%{_key}%} is set:
+        set {_elapsed} to difference between now and {skytown::quest::%uuid of {_p}%::%{_key}%}
+        if {_elapsed} < 24 hours:
+            send "{@market-prefix} &eรับรางวัลเควสต์นี้แล้ว กลับมาเมื่อครบ 24 ชั่วโมง" to {_p}
+            stop
+    set {_stack} to {_goods}
+    set amount of {_stack} to {_count}
+    if {_p}'s inventory does not contain {_stack}:
+        send "{@market-prefix} &eยังส่งเควสต์ไม่ได้ ต้องมี %{_count}% ชิ้น" to {_p}
+        stop
+    set {_relic} to relicItem("shard")
+    set amount of {_relic} to 2
+    if {_p}'s inventory cannot hold {_relic}:
+        send "{@market-prefix} &cเว้นที่สำหรับรางวัล Relic ก่อน" to {_p}
+        stop
+    set {skytown::quest::%uuid of {_p}%::%{_key}%} to now
+    remove {_stack} from {_p}'s inventory
+    add {_reward} to {_p}'s balance
+    give {_relic} to {_p}
+    send "{@market-prefix} &aส่งเควสต์สำเร็จ &7+$%{_reward}% และ Common Shard 2 ชิ้น" to {_p}
+
+function skyTownTopup(p: player):
+    if "{@topup-url}" is "unset":
+        send "{@market-prefix} &eยังไม่เปิดรับเงินจริง ช่องทางเติมเงินจะประกาศภายหลัง" to {_p}
+    else:
+        send formatted "&6ช่องทางเติมเงินทางการ: <link:{@topup-url}>&b[คลิกเปิดเว็บ]<reset>" to {_p}
+
+command /market:
+    executable by: players
+    trigger:
+        skyTownMenu(player, "farm")
+
+command /skyshop:
+    executable by: players
+    trigger:
+        skyTownMenu(player, "shop")
+
+command /skyquests:
+    executable by: players
+    trigger:
+        skyTownMenu(player, "quests")
+
+command /topup:
+    executable by: players
+    trigger:
+        skyTownMenu(player, "topup")
+
+on right click on entity:
+    if name of player's world is not "lobby":
+        stop
+    if uncolored name of clicked entity is "Farm Merchant":
+        cancel event
+        skyTownMenu(player, "farm")
+    else if uncolored name of clicked entity is "Supply Merchant":
+        cancel event
+        skyTownMenu(player, "shop")
+    else if uncolored name of clicked entity is "Quest Keeper":
+        cancel event
+        skyTownMenu(player, "quests")
+    else if uncolored name of clicked entity is "Sky Concierge":
+        cancel event
+        skyTownMenu(player, "topup")
+
+on inventory click:
+    if {skytown::menu::%uuid of player%} is not set:
+        stop
+    if player's current inventory is not {skytown::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skytown::menu::%uuid of player%}:
+        stop
+    set {_slot} to index of event-slot
+    set {_kind} to {skytown::kind::%uuid of player%}
+    close player's inventory
+    if {_kind} is "farm":
+        if {_slot} is 10:
+            skyTownTrade(player, wheat, 32, 32, false)
+        else if {_slot} is 11:
+            skyTownTrade(player, carrot, 32, 24, false)
+        else if {_slot} is 12:
+            skyTownTrade(player, potato, 32, 24, false)
+        else if {_slot} is 13:
+            skyTownTrade(player, beetroot, 32, 32, false)
+        else if {_slot} is 14:
+            skyTownTrade(player, pumpkin, 8, 40, false)
+        else if {_slot} is 15:
+            skyTownTrade(player, melon slice, 32, 16, false)
+    else if {_kind} is "shop":
+        if {_slot} is 10:
+            skyTownTrade(player, cobblestone, 32, 32, true)
+        else if {_slot} is 11:
+            skyTownTrade(player, dirt, 32, 64, true)
+        else if {_slot} is 12:
+            skyTownTrade(player, oak log, 16, 96, true)
+        else if {_slot} is 13:
+            skyTownTrade(player, glass, 16, 64, true)
+        else if {_slot} is 14:
+            skyTownTrade(player, wheat seeds, 16, 16, true)
+        else if {_slot} is 15:
+            skyTownTrade(player, torch, 16, 24, true)
+    else if {_kind} is "quests":
+        if {_slot} is 11:
+            skyTownQuest(player, "farmer", wheat, 64, 100)
+        else if {_slot} is 15:
+            skyTownQuest(player, "builder", cobblestone, 128, 80)
+    else if {_kind} is "topup":
+        if {_slot} is 13:
+            skyTownTopup(player)
+
+on inventory drag:
+    if {skytown::menu::%uuid of player%} is set:
+        if player's current inventory is {skytown::menu::%uuid of player%}:
+            cancel event
+
+on inventory close:
+    if event-inventory is {skytown::menu::%uuid of player%}:
+        delete {skytown::menu::%uuid of player%}
+        delete {skytown::kind::%uuid of player%}
+
+on quit:
+    delete {skytown::menu::%uuid of player%}
+    delete {skytown::kind::%uuid of player%}
+
+on load:
+    delete {skytown::menu::*}
+    delete {skytown::kind::*}

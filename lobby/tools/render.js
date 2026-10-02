@@ -56,6 +56,17 @@ function writePng(file, width, height, rgba) {
 // ---- palette ------------------------------------------------------------------
 // name -> [r, g, b]; derived names fall back to base name.
 const COLORS = {
+  'green_concrete': [73,109,37],
+  'cyan_concrete': [21,119,136],
+  'purple_concrete': [111,52,167],
+  'yellow_concrete': [230,173,40],
+  'green_wool': [86,114,38],
+  'cyan_wool': [29,137,145],
+  'farmland': [114,77,44],
+  'carrots': [111,153,49],
+  'potatoes': [121,157,53],
+  'wheat': [207,186,63],
+  'beetroots': [144,81,62],
   'air': null,
   'grass_block': [98, 158, 68],
   'dirt': [134, 96, 67],
