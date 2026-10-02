@@ -58,7 +58,7 @@ Team city commands (`lostsky-city.sk`):
 | Command | What it does | Permission | Source | Status |
 |---------|--------------|------------|--------|--------|
 | `/city`, `/is city` | Open team restoration menu | island membership | lostsky-city.sk | draft |
-| `/city go`, `/is city go` | Prepare and warp to the team's city | island membership | lostsky-city.sk | draft |
+| `/city go`, `/is city go` | Prepare and warp to the team's city | island membership | lostsky-city.sk | `/city go` live for owner; alias/team tests pending |
 | `/city donate` | Donate held relic to the team's restoration | island membership | lostsky-city.sk | draft |
 
 | Command | What it does | Permission | Source | Status |

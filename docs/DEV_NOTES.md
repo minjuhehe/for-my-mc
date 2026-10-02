@@ -300,7 +300,9 @@ Console-only `/lstownselftest` verifies isolated inventory/relic cases;
 Both passed live; player slots begin at 1. WorldEdit paste uses
 SideEffectSet.none() and disableBuffering(), replacing deprecated fast mode
 which caused a long main-thread pause. Repeat paste test passed after fix.
-Real-player commerce, team warp and non-OP protection still need testing.
+Owner `/city go` was verified from live entity position/dimension at
+(1024.5,100,0.5) in lostsky_cities. Real-player commerce, multi-member city
+identity/isolation and non-OP protection still need testing.
 Owner estimates map at 20% and requests decoration paused; see DOT_HANDOFF.md.
 
 Server 9623747d uses Paper 1.21.11 build 132 / Java 21, 8 GB RAM.

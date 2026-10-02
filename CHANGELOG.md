@@ -3,6 +3,15 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.7.4: Restore package and player city warp (2026-10-03)
+
+- Verified owner `/city go` reaches the team world at Y100 using live entity
+  position and dimension. Multi-member identity and donation are still pending.
+- Corrected outdated spawn/city installation guides to the installed market
+  hub. Refreshed local reinstall ZIPs with the current market, hub, city and
+  selftest scripts plus all schematics; verified required ZIP entries.
+- The packages contain setup files, not player/world/database backups.
+
 ## 0.7.3: Live hub verification and project handoff (2026-10-03)
 
 - Pasted the market hub; verified five zone floor/roof checks and seven NPCs.

@@ -1,9 +1,12 @@
 # Team restoration cities
 
-The intended replacement travel plaza uses `lobby`; its paste is pending.
+The shared market spawn uses `lobby`; it is installed.
 Restoration maps use `lostsky_cities`, with one plot per active BentoBox
-island/team. The world and protection exist; city script reload and runtime
-validation are pending after MineLan sign-in expired.
+island/team. The world and protection exist; city script reload passed.
+Console-only chapter replacement test (1 -> 5 -> 1, reserved plot 0) passed.
+Owner `/city go` reached `lostsky_cities` at (1024.5,100,0.5), confirmed
+by live entity data. Team identity/isolation, alias and donation tests remain
+pending; this single-account warp does not prove those cases.
 
 - `/is city` or `/city`: open the team city menu.
 - `/is city go` or `/city go`: prepare chapter 1 on first use, then teleport.
