@@ -196,13 +196,16 @@ Thai-language info page. Static files, no build step, no backend, no forms.
 GitHub Pages on every push to `main` that touches `website/`. Pages must be
 set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
 
-### What the site describes (as of 2026-10-02)
+### What the site describes (as of 2026-10-03)
 
 - **One shared, protected hub** with a central fountain and four zones:
   crop market `/market`, supplies shop `/skyshop`, delivery quests
   `/skyquests`, top-up lounge `/topup`. Roof colours on the render:
   green, cyan, purple, gold. A team city pavilion leads to `/city go`.
   `/spawn` (and `/hub`, `/lobby`) return to the hub, and `/menu` opens it.
+  The hub is shown as **installed** (zones, 7 guide NPCs, protection
+  verified on the server). Trading, quests, `/menu` and `/city go` are shown
+  as **awaiting a player test** until someone tests them in game.
 - **Prices and rewards** shown in tables must match `lostsky-market.sk`.
   If the script changes, update `#zone-market`, `#zone-shop` and
   `#zone-quests` in the same commit.
@@ -229,6 +232,8 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   - `b-wait`: รอประกาศ / ยังไม่เปิด (no information yet, or not open).
 - **Commands follow `docs/COMMANDS.md`:** `live` → ทดสอบแล้ว, anything
   else → รอทดสอบ. Change a badge only after a real in-game test.
+- Rules ban alt accounts only for collecting duplicate quest rewards. The
+  owner plays on two accounts, so there is no one-person-one-account rule.
 - Team size 4 and PvP off are shown as **แผน**. Paper 1.21.11 and the
   whitelist test are shown as confirmed.
 - Map images are renders of the schematic files, and the captions say so.
@@ -252,7 +257,11 @@ commands in the docs or scripts, **update the website in the same commit**.
 
 ### Testing before a push
 
-Serve the folder (`python3 -m http.server -d website 8765`) and check:
+Run `node tests/website/check-site.js` (see `tests/website/README.md`).
+It covers everything below and writes a report with screenshots. Update its
+content checks when the server status or prices change.
+
+Manual equivalent: serve the folder (`python3 -m http.server -d website 8765`) and check:
 desktop (1280px) and phone (390px) widths in light and dark mode, no
 sideways scrolling, every image loads, every `#link` and file link works,
 the mobile menu (open, link, Escape), chapter tabs with the keyboard,

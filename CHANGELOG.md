@@ -14,6 +14,32 @@ commands** it touched. Newest first.
 - Import the generated lobby into the `lobby` void world.
 - Apply and verify the documented WorldGuard flags before players join.
 
+## 0.7.2: Website review fixes (2026-10-03)
+
+**Why:** owner review of 0.7.1, plus new server status (hub pasted, NPCs and
+protection verified, scripts reload and self-test pass).
+
+Changed (website only):
+- Status: hub shown as installed (all five zones, 7 guide NPCs, area
+  protection). Trading, quests, `/menu` and `/city go` shown as installed
+  but awaiting a player test. Only `/spawn` and `/hub` are marked tested.
+- Rules: replaced "one person, one account" with "no alt accounts to collect
+  duplicate quest rewards".
+- Top-up: shorter, player-facing text. Still closed, with no prices or
+  payment details.
+- Footer date: 3 October 2026.
+- Fixed: status-card sentences with commands were broken onto separate lines.
+- Menu: switches to the menu button below 72em (follows the reader's font
+  size) and wraps instead of clipping if links ever don't fit.
+- Chapter tabs on phones now show chapter names, not just numbers.
+
+Added:
+- `tests/website/check-site.js` + README + `REPORT.md` (94 checks): layout,
+  contrast of every text element, clipping, header at 17 widths, menu jumps,
+  content rules, interaction, reduced motion, no-JS.
+
+No commands changed. Server scripts and lobby files were not touched.
+
 ## 0.7.1: Website for the hub, team cities and top-up notice (2026-10-02)
 
 **Why:** the design moved to one shared hub with four zones and a separate

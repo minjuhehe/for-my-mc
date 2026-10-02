@@ -137,7 +137,10 @@ code, kbd, .mono { font-family: var(--mono); font-size: 0.92em; }
   background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius);
   font: 700 0.95rem/1 var(--body); cursor: pointer;
 }
-.nav-links { display: flex; gap: 4px; margin: 0 0 0 auto; padding: 0; list-style: none; }
+.brand { flex: none; }
+/* Wraps to a second row instead of clipping if the links ever don't fit
+   (larger default font, wider web font, browser zoom). */
+.nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 2px 4px; min-width: 0; margin: 0 0 0 auto; padding: 0; list-style: none; }
 .nav-links a {
   display: block; padding: 8px 10px; border-radius: var(--radius);
   color: var(--ink-soft); font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap;
@@ -145,7 +148,7 @@ code, kbd, .mono { font-family: var(--mono); font-size: 0.92em; }
 .nav-links a:hover { color: var(--ink); background: var(--panel-2); }
 .nav-links a[aria-current="true"] { color: var(--accent); background: var(--panel-2); }
 
-@media (max-width: 860px) {
+@media (max-width: 72em) {
   .js .nav-toggle { display: inline-flex; align-items: center; gap: 8px; }
   .nav { flex-wrap: wrap; }
   .js .nav-links {
@@ -209,7 +212,8 @@ section + section { border-top: 1px solid var(--line); }
 .status-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .status-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 12px; align-content: start; }
 .status-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
-.status-card li { display: grid; gap: 4px; }
+.status-card li { display: block; }
+.status-card li > .badge { display: flex; margin-bottom: 4px; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-top: 20px; font-size: 0.92rem; color: var(--ink-soft); }
 .legend span { display: inline-flex; align-items: center; gap: 8px; }
 
@@ -270,12 +274,13 @@ html:not(.js) .tablist { display: none; }
 html:not(.js) .chapters { grid-template-columns: 1fr; }
 html:not(.js) .panels { display: grid; gap: 16px; }
 @media (max-width: 760px) {
-  .chapters { grid-template-columns: 1fr; }
-  .tablist { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .tab { grid-template-columns: 1fr; justify-items: center; text-align: center; padding: 8px 4px; }
-  .tab .tname { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .tab[aria-selected="true"] { box-shadow: inset 0 -4px 0 var(--accent); }
+  /* Stacked list with names on phones too: numbers alone are hard to read. */
+  .chapters { grid-template-columns: 1fr; gap: 16px; }
+  .tablist { grid-template-columns: 1fr 1fr; }
+  .tab { min-height: 48px; }
+  .tab:last-child { grid-column: 1 / -1; }
 }
+
 .season-note { margin-top: 20px; color: var(--ink-soft); }
 
 /* Relics */

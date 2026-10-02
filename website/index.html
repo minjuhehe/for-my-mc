@@ -125,15 +125,16 @@
           <ul>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> เซิร์ฟเวอร์รัน Paper 1.21.11 (Java Edition)</li>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> ทุกทีมมีเมืองฟื้นฟูของตัวเอง แยกจากทีมอื่น และแยกจากเกาะที่สร้างเอง</li>
+            <li><span class="badge b-ok">ติดตั้งแล้ว</span> ฮับกลางอยู่ในเซิร์ฟแล้ว ครบทั้งห้าโซน มี NPC ผู้นำทาง 7 ตัว และระบบป้องกันพื้นที่</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/spawn</code> และ <code>/hub</code> พากลับฮับได้ในการทดสอบภายใน</li>
           </ul>
         </div>
         <div class="status-card">
-          <h3>กำลังติดตั้ง · รอทดสอบเล่น</h3>
+          <h3>ติดตั้งแล้ว · รอทดสอบกับผู้เล่น</h3>
           <ul>
-            <li><span class="badge b-draft">รอทดสอบ</span> ฮับใหม่: น้ำพุกลางลานและ 4 โซน</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> ตลาดพืชผล, ร้านเสบียง และภารกิจส่งของรายวัน</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> เมนูฮับ (<code>/menu</code>) และคำสั่งเมืองของทีม (<code>/city</code>)</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ซื้อขายในตลาดพืชผลและร้านเสบียง</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ส่งของในภารกิจรายวัน</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> เมนูฮับ (<code>/menu</code>) และการวาร์ปไปเมืองของทีม (<code>/city go</code>)</li>
           </ul>
         </div>
         <div class="status-card">
@@ -146,8 +147,8 @@
         </div>
       </div>
       <div class="legend" aria-label="ความหมายของป้ายสถานะ">
-        <span><span class="badge b-ok">ยืนยันแล้ว</span> ตัดสินใจหรือทดสอบแล้ว</span>
-        <span><span class="badge b-draft">รอทดสอบ</span> ติดตั้งหรือเขียนแล้ว ยังไม่ผ่านการทดสอบเล่น</span>
+        <span><span class="badge b-ok">ยืนยันแล้ว</span> ตัดสินใจ ติดตั้ง หรือทดสอบแล้ว</span>
+        <span><span class="badge b-draft">รอทดสอบ</span> ติดตั้งแล้ว ยังไม่ได้ทดสอบกับผู้เล่นจริง</span>
         <span><span class="badge b-plan">แผน</span> ตั้งใจไว้ อาจเปลี่ยน</span>
         <span><span class="badge b-wait">รอประกาศ</span> ยังไม่มีข้อมูลหรือยังไม่เปิด</span>
       </div>
@@ -193,7 +194,7 @@
       <div class="hub-layout">
         <figure class="hub-map">
           <a href="assets/spawn-market.png"><img src="assets/spawn-market.png" width="692" height="438" alt="ภาพเรนเดอร์ฮับกลาง: เกาะลอยฟ้าที่มีน้ำพุสีฟ้าอยู่กลางลานหินสีขาว ทางเดินแยกออกสี่ทิศ รอบลานมีศาลาหลังคาสีต่าง ๆ คือ หลังคาสีเขียวของตลาดพืชผล หลังคาสีฟ้าอมเขียวของร้านเสบียง หลังคาสีม่วงของโถงภารกิจ หลังคาสีทองของห้องเติมเงิน และศาลาหลังคาสีเขียวอ่อนของจุดไปเมืองของทีม มีต้นไม้ แปลงผัก และซุ้มทางเข้าอยู่ตามขอบเกาะ"></a>
-          <figcaption>ภาพเรนเดอร์จากไฟล์แผนที่ฮับจริง ยังรอติดตั้งและทดสอบในเกม กดที่ภาพเพื่อเปิดขนาดเต็ม</figcaption>
+          <figcaption>ภาพเรนเดอร์จากไฟล์แผนที่ฮับที่ติดตั้งในเซิร์ฟแล้ว (ไม่ใช่ภาพถ่ายจากในเกม) กดที่ภาพเพื่อเปิดขนาดเต็ม</figcaption>
         </figure>
 
         <div class="zones">
@@ -202,7 +203,7 @@
           <a class="zone-link" href="#zone-quests"><i class="sw sw-quest" aria-hidden="true"></i><code>/skyquests</code><span>โถงภารกิจ (หลังคาสีม่วง) · ส่งของทุก 24 ชั่วโมง</span></a>
           <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ห้องเติมเงิน (หลังคาสีทอง) · ยังไม่เปิด</span></a>
           <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของทีมคุณ</span></a>
-          <p class="muted small">ราคาและรางวัลด้านล่างคือค่าที่กำลังติดตั้ง ยังไม่ผ่านการทดสอบเล่น และอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม</p>
+          <p class="muted small">ราคาและรางวัลด้านล่างคือค่าที่ตั้งไว้ในเซิร์ฟแล้ว ยังไม่ได้ทดสอบซื้อขายกับผู้เล่นจริง และอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม</p>
         </div>
       </div>
 
@@ -210,7 +211,7 @@
         <article class="zone-card" id="zone-market" aria-labelledby="zm-h">
           <div class="zone-head">
             <h3 id="zm-h">ตลาดพืชผล</h3>
-            <span class="badge b-draft">รอทดสอบ</span>
+            <span class="badge b-draft">รอทดสอบกับผู้เล่น</span>
           </div>
           <p class="muted"><code>/market</code> · ขายพืชผลจากเกาะเพื่อรับเงินในเกม</p>
           <div class="table-wrap">
@@ -232,7 +233,7 @@
         <article class="zone-card" id="zone-shop" aria-labelledby="zs-h">
           <div class="zone-head">
             <h3 id="zs-h">ร้านเสบียง</h3>
-            <span class="badge b-draft">รอทดสอบ</span>
+            <span class="badge b-draft">รอทดสอบกับผู้เล่น</span>
           </div>
           <p class="muted"><code>/skyshop</code> · ซื้อของที่เกาะใหม่มักขาด</p>
           <div class="table-wrap">
@@ -254,7 +255,7 @@
         <article class="zone-card" id="zone-quests" aria-labelledby="zq-h">
           <div class="zone-head">
             <h3 id="zq-h">ภารกิจส่งของ</h3>
-            <span class="badge b-draft">รอทดสอบ</span>
+            <span class="badge b-draft">รอทดสอบกับผู้เล่น</span>
           </div>
           <p class="muted"><code>/skyquests</code> · ส่งของตามที่กำหนดเพื่อรับเงินและเศษผลึก ทำซ้ำได้ทุก 24 ชั่วโมง นับแยกต่อผู้เล่นแต่ละคน</p>
           <ul class="quest-list">
@@ -438,7 +439,7 @@
         <li><b>ห้ามโกงหรือใช้บั๊ก</b><span>ถ้าเจอบั๊กหรือวิธี dupe ของ ให้แจ้งทีมงาน</span></li>
         <li><b>ไม่มี PvP</b><span>ตามแผน PvP ปิดทุกพื้นที่</span></li>
         <li><b>สุภาพในแชต</b><span>ห้ามพูดจาเกลียดชัง สแปม หรือโฆษณา</span></li>
-        <li><b>หนึ่งคนหนึ่งบัญชี</b><span>ห้ามใช้บัญชีสำรองทำภารกิจหรือฟาร์มรางวัลซ้ำ</span></li>
+        <li><b>ห้ามใช้บัญชีสำรองรับรางวัลซ้ำ</b><span>ห้ามใช้บัญชีอื่นทำภารกิจส่งของเพื่อเก็บรางวัลซ้ำ</span></li>
       </ul>
     </div>
   </section>
@@ -489,13 +490,13 @@
         <div class="topup-head">
           <span class="eyebrow">ห้องเติมเงิน</span>
           <h2 id="topup-h">ยังไม่เปิด</h2>
-          <span class="badge b-wait">ยังไม่เปิดให้ชำระเงิน</span>
+          <span class="badge b-wait">ยังไม่รับชำระเงิน</span>
         </div>
-        <p>ในฮับมีโซนห้องเติมเงิน (<code>/topup</code>) เตรียมไว้ แต่ตอนนี้<strong>ยังไม่มีการรับชำระเงินใด ๆ</strong> ไม่มีแพ็กเกจ ไม่มีราคา และไม่มีช่องทางชำระเงิน ทั้งในเกมและบนเว็บนี้</p>
+        <p>ตอนนี้ยังไม่มีแพ็กเกจ ราคา หรือช่องทางชำระเงิน โซนเติมเงินในฮับ (<code>/topup</code>) จะแจ้งว่ายังไม่เปิดเช่นกัน</p>
         <ul class="topup-list">
-          <li>เว็บนี้ไม่มีแบบฟอร์ม และจะไม่ขอรหัสผ่าน ข้อมูลบัตร หรือข้อมูลบัญชีธนาคารของคุณ</li>
-          <li>อย่าโอนเงินให้ใครที่อ้างว่าเป็นทีมงาน Lost Sky ในตอนนี้</li>
-          <li>ถ้าจะเปิดในอนาคต จะประกาศรายละเอียดและเงื่อนไขบนหน้านี้ก่อน</li>
+          <li>เมื่อเปิด จะประกาศช่องทางทางการบนหน้านี้และใน <code>/topup</code> ก่อนเท่านั้น</li>
+          <li>ทีมงานจะไม่ขอรหัสผ่านหรือข้อมูลบัตรของคุณ</li>
+          <li>อย่าโอนเงินให้ใครที่อ้างว่าเป็นทีมงานในตอนนี้</li>
         </ul>
       </div>
     </div>
@@ -527,7 +528,7 @@
 <footer class="site-footer">
   <div class="wrap">
     <p>Lost Sky เป็นเซิร์ฟเวอร์ Minecraft ที่ทำโดยแฟน ไม่เกี่ยวข้องกับ Mojang หรือ Microsoft</p>
-    <p>ข้อมูลอ้างอิงจากเอกสารออกแบบและผลทดสอบภายในของโปรเจกต์ · อัปเดตหน้านี้ล่าสุด 2 ตุลาคม 2026</p>
+    <p>ข้อมูลอ้างอิงจากเอกสารออกแบบและผลทดสอบภายในของโปรเจกต์ · อัปเดตหน้านี้ล่าสุด 3 ตุลาคม 2026</p>
     <p><a href="#intro">กลับขึ้นด้านบน</a></p>
   </div>
 </footer>
