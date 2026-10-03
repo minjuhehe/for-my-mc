@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.2: Live supporter verification and reload safety (2026-10-03)
+
+Corrected Skript validation syntax, deployed storefront and tested non-OP preview,
+locked titles, console-only grants, replay/conflict refusal, no rank downgrade
+and reconnect persistence. Close menus on unload/reload. Added bounded console
+supporttestclear fixture cleanup and diagnostic profile packet inspection.
+
 ## 0.9.1: Website supporter store preview (2026-10-03)
 
 Website and checks only, from 0.9.0 and `docs/SUPPORTER_STORE.md`. `#topup`

@@ -74,12 +74,16 @@ command /supportgrant <player> <text> <text>:
         set {_p} to arg-1
         set {_sku} to lowercase arg-2
         set {_order} to arg-3
-        if {_order} does not match regex "[A-Za-z0-9_-]{6,64}":
+        if {_order}.matches("[A-Za-z0-9_-]{6,64}") is false:
             send "[Lost Sky] Invalid order ID: use 6-64 letters, digits, underscore or hyphen."
             stop
         set {_tier} to skySupportTier({_sku})
         if {_tier} is 0:
-            if {_sku} is not "tag_builder" and {_sku} is not "tag_farmer" and {_sku} is not "tag_explorer":
+            set {_validSku} to false
+            loop "tag_builder", "tag_farmer", "tag_explorer":
+                if {_sku} is loop-value:
+                    set {_validSku} to true
+            if {_validSku} is false:
                 send "[Lost Sky] Unknown SKU. sky / aurora / nova / tag_builder / tag_farmer / tag_explorer"
                 stop
         set {_id} to uuid of {_p}
@@ -106,6 +110,23 @@ command /supportgrant <player> <text> <text>:
         skySupportApply({_p})
         send "&6[Lost Sky] &aCosmetic unlocked: %{_sku}%. Use /style." to {_p}
         send "[Lost Sky] Fulfilled %{_order}%: %{_sku}% for %name of {_p}% (cosmetic only)."
+
+command /supporttestclear <player>:
+    executable by: console
+    trigger:
+        set {_p} to arg-1
+        set {_name} to name of {_p}
+        if {_name}.matches("LostSkyTest[A-Z0-9]*") is false:
+            send "[Lost Sky] Diagnostic accounts only."
+            stop
+        delete {skysupport::tier::%uuid of {_p}%}
+        delete {skysupport::owned::%uuid of {_p}%::*}
+        delete {skysupport::selected::%uuid of {_p}%}
+        loop "LS_TEST_NOVA1", "LS_TEST_SKY1", "LS_TEST_TAG1":
+            if {skysupport::order::%loop-value%::player} is uuid of {_p}:
+                delete {skysupport::order::%loop-value%::*}
+        skySupportApply({_p})
+        send "[Lost Sky] Diagnostic entitlements cleared."
 
 on inventory click:
     if player's current inventory is not {skysupport::menu::%uuid of player%}:
@@ -158,5 +179,13 @@ on quit:
     delete {skysupport::page::%uuid of player%}
 
 on load:
+    loop all players:
+        if loop-player's current inventory is {skysupport::menu::%uuid of loop-player%}:
+            close loop-player's inventory
     delete {skysupport::menu::*}
     delete {skysupport::page::*}
+
+on unload:
+    loop all players:
+        if loop-player's current inventory is {skysupport::menu::%uuid of loop-player%}:
+            close loop-player's inventory

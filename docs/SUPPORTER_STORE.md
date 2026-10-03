@@ -1,5 +1,12 @@
 # Supporter storefront preview
 
+Live17:11 ICT,3October2026. Non-OP test account opened /topup and /style;
+product click charged nothing, player supportgrant refused, locked title refused.
+Console NOVA grant succeeded; same order replay skipped, conflicting SKU rejected.
+Later SKY grant did not downgrade NOVA. Explorer title equipped and persisted
+across reconnect with NOVA gold player-list display. Human screenshot/chat visual
+review and full server-restart persistence are still untested.
+
 Owner chose prepare first, payment channel later. No checkout, payment QR,
 currency top-up or billing is enabled. Prices below are proposed THB one-time
 cosmetic packages, not currently purchasable. In-game dollars remain separate.
@@ -33,6 +40,9 @@ unverified screenshots, browser requests or client-reported payment callbacks.
 Saved Skript keys: skysupport::tier/owned/selected keyed by player UUID;
 skysupport::order keyed by order ID with UUID/SKU/time. menu/page are temporary
 and cleared on load/quit/close. Normal Skript variable storage persists them.
+Menus close on script unload/reload to prevent untracked inventory icons.
+Console supporttestclear ONLINE_PLAYER is restricted to LostSkyTest... diagnostic
+accounts; clears fixture entitlements and three fixed LS_TEST_* order records.
 Crash consistency, refund/revoke workflow and account-name spoof protection
 are not complete. Current offline-mode server requires authenticated account
 protection before paid entitlements are offered.

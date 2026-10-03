@@ -51,6 +51,7 @@ async function action(command) {
       if (!String(command.text).startsWith('/')) throw Error('Only explicit game commands accepted');
       bot.chat(command.text); break;
     case 'inventory': emit('inventory', bot.inventory.slots.map(describe)); break;
+    case 'profile': emit('profile', { username, displayName: bot.players[username]?.displayName }); break;
     case 'summary': {
       const window = bot.currentWindow || bot.inventory;
       emit('summary', { inventoryStart: window.inventoryStart, items: window.slots
