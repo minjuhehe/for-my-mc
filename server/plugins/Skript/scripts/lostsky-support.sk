@@ -1,0 +1,162 @@
+# Cosmetic storefront preview. No payment endpoint and no in-game-money purchase.
+# Console grants are for verified external orders or isolated testing only.
+function skySupportTier(sku: text) :: number:
+    if {_sku} is "sky":
+        return 1
+    if {_sku} is "aurora":
+        return 2
+    if {_sku} is "nova":
+        return 3
+    return 0
+
+function skySupportApply(p: player):
+    set {_id} to uuid of {_p}
+    set {_tier} to {skysupport::tier::%{_id}%} ? 0
+    set {_prefix} to ""
+    set {_color} to "&f"
+    if {_tier} is 1:
+        set {_prefix} to "&b[SKY] "
+        set {_color} to "&b"
+    else if {_tier} is 2:
+        set {_prefix} to "&d[AURORA] "
+        set {_color} to "&d"
+    else if {_tier} >= 3:
+        set {_prefix} to "&6[NOVA] "
+        set {_color} to "&6"
+    set {_tag} to {skysupport::selected::%{_id}%} ? "none"
+    if {_tag} is not "none":
+        if {skysupport::owned::%{_id}%::tag_%{_tag}%} is true:
+            set {_prefix} to "%{_prefix}%&7[%{_tag}%] "
+    set display name of {_p} to colored "%{_prefix}%%{_color}%%name of {_p}%&r"
+    set tab list name of {_p} to display name of {_p}
+
+function skySupportMenu(p: player):
+    set {_inv} to chest inventory with 3 rows named "&6Lost Sky | Supporter Preview"
+    set slot 4 of {_inv} to book named "&ePreview - Payments Closed" with lore "&7Proposed prices in Thai Baht" and "&7Permanent cosmetic unlocks" and "&7No gameplay power or money included" and "&cNothing here charges your account"
+    set slot 10 of {_inv} to diamond named "&bSKY - THB 99" with lore "&7Cyan SKY prefix and name" and "&7Visible name in chat and player list" and "&ePreview only - not for purchase yet"
+    set slot 12 of {_inv} to amethyst shard named "&dAURORA - THB 199" with lore "&7Purple AURORA prefix and name" and "&7Includes Builder title unlock" and "&ePreview only - not for purchase yet"
+    set slot 14 of {_inv} to nether star named "&6NOVA - THB 399" with lore "&7Gold NOVA prefix and name" and "&7Includes all three title unlocks" and "&ePreview only - not for purchase yet"
+    set slot 16 of {_inv} to name tag named "&aTitle Collection - THB 39 each" with lore "&7Builder / Farmer / Explorer" and "&7Choose one unlocked title with /style" and "&7Account-bound cosmetic; not a sellable item" and "&ePreview only - not for purchase yet"
+    set slot 22 of {_inv} to emerald named "&aYour Wardrobe" with lore "&7View and equip unlocked titles"
+    set {skysupport::menu::%uuid of {_p}%} to {_inv}
+    set {skysupport::page::%uuid of {_p}%} to "store"
+    open {_inv} to {_p}
+
+function skySupportWardrobe(p: player):
+    set {_inv} to chest inventory with 3 rows named "&6Lost Sky | Your Wardrobe"
+    set {_id} to uuid of {_p}
+    set slot 10 of {_inv} to barrier named "&fNo Title" with lore "&7Keep your rank and hide your title"
+    set {_slot} to 12
+    loop "builder", "farmer", "explorer":
+        if {skysupport::owned::%{_id}%::tag_%loop-value%} is true:
+            set slot {_slot} of {_inv} to name tag named "&a%loop-value% - Unlocked" with lore "&eClick to equip"
+        else:
+            set slot {_slot} of {_inv} to gray dye named "&7%loop-value% - Locked" with lore "&7View the supporter preview"
+        add 2 to {_slot}
+    set slot 22 of {_inv} to arrow named "&eBack to Supporter Preview"
+    set {skysupport::menu::%{_id}%} to {_inv}
+    set {skysupport::page::%{_id}%} to "wardrobe"
+    open {_inv} to {_p}
+
+command /supporter:
+    executable by: players
+    trigger:
+        skySupportMenu(player)
+
+command /style:
+    executable by: players
+    trigger:
+        skySupportWardrobe(player)
+
+command /supportgrant <player> <text> <text>:
+    executable by: console
+    trigger:
+        set {_p} to arg-1
+        set {_sku} to lowercase arg-2
+        set {_order} to arg-3
+        if {_order} does not match regex "[A-Za-z0-9_-]{6,64}":
+            send "[Lost Sky] Invalid order ID: use 6-64 letters, digits, underscore or hyphen."
+            stop
+        set {_tier} to skySupportTier({_sku})
+        if {_tier} is 0:
+            if {_sku} is not "tag_builder" and {_sku} is not "tag_farmer" and {_sku} is not "tag_explorer":
+                send "[Lost Sky] Unknown SKU. sky / aurora / nova / tag_builder / tag_farmer / tag_explorer"
+                stop
+        set {_id} to uuid of {_p}
+        if {skysupport::order::%{_order}%::player} is set:
+            if {skysupport::order::%{_order}%::player} is {_id}:
+                if {skysupport::order::%{_order}%::sku} is {_sku}:
+                    send "[Lost Sky] Order already fulfilled; no duplicate grant."
+                    stop
+            send "[Lost Sky] Order ID conflict; no grant."
+            stop
+        # Synchronous, no waits; UUID identity is from the connected player.
+        if {_tier} > ({skysupport::tier::%{_id}%} ? 0):
+            set {skysupport::tier::%{_id}%} to {_tier}
+        if {_tier} >= 2:
+            set {skysupport::owned::%{_id}%::tag_builder} to true
+        if {_tier} >= 3:
+            set {skysupport::owned::%{_id}%::tag_farmer} to true
+            set {skysupport::owned::%{_id}%::tag_explorer} to true
+        if {_tier} is 0:
+            set {skysupport::owned::%{_id}%::%{_sku}%} to true
+        set {skysupport::order::%{_order}%::player} to {_id}
+        set {skysupport::order::%{_order}%::sku} to {_sku}
+        set {skysupport::order::%{_order}%::time} to now
+        skySupportApply({_p})
+        send "&6[Lost Sky] &aCosmetic unlocked: %{_sku}%. Use /style." to {_p}
+        send "[Lost Sky] Fulfilled %{_order}%: %{_sku}% for %name of {_p}% (cosmetic only)."
+
+on inventory click:
+    if player's current inventory is not {skysupport::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skysupport::menu::%uuid of player%}:
+        stop
+    set {_page} to {skysupport::page::%uuid of player%}
+    set {_slot} to index of event-slot
+    close player's inventory
+    if {_page} is "store":
+        if {_slot} is 22:
+            skySupportWardrobe(player)
+        else:
+            send "&6[Lost Sky] &ePreview only. Payments are closed; no money was charged."
+    else if {_slot} is 22:
+        skySupportMenu(player)
+    else:
+        set {_tag} to "none"
+        if {_slot} is 12:
+            set {_tag} to "builder"
+        else if {_slot} is 14:
+            set {_tag} to "farmer"
+        else if {_slot} is 16:
+            set {_tag} to "explorer"
+        else if {_slot} is not 10:
+            stop
+        if {_tag} is not "none":
+            if {skysupport::owned::%uuid of player%::tag_%{_tag}%} is not true:
+                send "&6[Lost Sky] &eThis title is locked."
+                stop
+        set {skysupport::selected::%uuid of player%} to {_tag}
+        skySupportApply(player)
+        send "&6[Lost Sky] &aTitle updated."
+
+on inventory drag:
+    if player's current inventory is {skysupport::menu::%uuid of player%}:
+        cancel event
+
+on inventory close:
+    if event-inventory is {skysupport::menu::%uuid of player%}:
+        delete {skysupport::menu::%uuid of player%}
+        delete {skysupport::page::%uuid of player%}
+
+on join:
+    skySupportApply(player)
+
+on quit:
+    delete {skysupport::menu::%uuid of player%}
+    delete {skysupport::page::%uuid of player%}
+
+on load:
+    delete {skysupport::menu::*}
+    delete {skysupport::page::*}

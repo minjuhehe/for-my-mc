@@ -18,7 +18,10 @@ Columns:
 | `/market` | Sell crops for in-game money | none | lostsky-market.sk | draft |
 | `/skyshop` | Buy building supplies with in-game money | none | lostsky-market.sk | live: one cobblestone purchase; edge cases pending |
 | `/skyquests` | Submit delivery quests every 24 hours | none | lostsky-market.sk | draft |
-| `/topup` | Show official payment information; currently closed | none | lostsky-market.sk | draft |
+| `/topup` | Open supporter storefront preview; payments closed | none | lostsky-market.sk | preview |
+| `/supporter` | Preview proposed ranks and title products | none | lostsky-support.sk | preview |
+| `/style` | Equip an unlocked cosmetic title | none | lostsky-support.sk | test pending |
+| `supportgrant <online-player> <sku> <order-id>` | Grant cosmetic entitlement once per order ID | console only | lostsky-support.sk | test pending |
 
 Console-only `/lshubbuild` places the shared spawn schematic via WorldEdit.
 Save and preserve a lobby backup before using it; it replaces existing blocks.

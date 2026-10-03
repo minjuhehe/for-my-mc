@@ -1,5 +1,12 @@
 # Developer Notes
 
+Supporter preview: lostsky-support.sk owns UUID-keyed tier/title entitlements,
+selected title and fulfillment-ID records. /topup and Sky Concierge route to
+/supporter; /style applies cosmetic display/tab names. Console supportgrant
+requires connected player and deduplicates order IDs. No billing connected;
+read SUPPORTER_STORE.md before integrating payments. No LuckPerms staff or
+gameplay permissions are granted by these display ranks.
+
 03Oct2026 16:48 ICT: LostSkyWorth1.1.1 live, clean startup. Non-OP diagnostic
 client verified actual sale payouts, named/damaged items, container contents and
 Relic return.1504-material live coverage check and garden queue self-test passed.

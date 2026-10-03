@@ -97,7 +97,7 @@ command /skyquests:
 command /topup:
     executable by: players
     trigger:
-        skyTownMenu(player, "topup")
+        execute player command "supporter"
 
 on right click on entity:
     if name of player's world is not "lobby":
@@ -113,7 +113,7 @@ on right click on entity:
         skyTownMenu(player, "quests")
     else if uncolored name of clicked entity is "Sky Concierge":
         cancel event
-        skyTownMenu(player, "topup")
+        execute player command "supporter"
 
 on inventory click:
     if {skytown::menu::%uuid of player%} is not set:

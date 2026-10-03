@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.0: Supporter storefront preview (2026-10-03)
+
+Added three cosmetic rank packages and three account-bound titles, proposed THB
+prices, wardrobe and console-only idempotent entitlement grants. Owner chose
+payment channel later: no checkout or currency charging. /topup and Concierge
+route to /supporter; /style equips titles; supportgrant is console-only.
+
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
