@@ -3,6 +3,18 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.9: Website for live universal sale evidence (2026-10-03)
+
+Website and checks only, from 0.8.8 evidence. `/sell` now ทดสอบแล้ว: non-OP
+payout matched quotes (named/damaged items, Shulker contents), Relic and
+Relic bundle returned, 1,504-material coverage check passed. Removed the old
+payout/Relic-return pending claims. Inventory prices split: data sent to the
+game verified, on-screen look still รอตรวจด้วยตา. Pending: economy failure
+and restart with the box open. Garden: server self-test passed; player
+visual, restart persistence and multi-team isolation pending. Checks 112
+(planted false claims caught). No IP, top-up closed, map unfinished. No
+commands changed; no server files touched.
+
 ## 0.8.8: Live universal sale verification (2026-10-03)
 
 Deployed LostSkyWorth1.1.1 and verified clean startup. Temporary non-OP client

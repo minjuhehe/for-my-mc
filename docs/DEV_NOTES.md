@@ -249,6 +249,15 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   Restoration Garden prototype (`/cityprojects [go|donate]`, 25 Stone
   Bricks / 8 Grass Block / 4 Oak Log): donation accepted, visual change
   pending. Full-city incremental restoration stays a future plan.
+- **2026-10-03 update 2 (after 959ff62):** `/sell` (LostSkyWorth 1.1.1) is
+  ทดสอบแล้ว: a non-OP client was paid the quoted amounts, incl. named/damaged
+  items and Shulker contents; a genuine Relic and a Relic bundle were
+  returned; the 1,504-material coverage check passed (coverage, not a sale of
+  every type). Inventory prices are verified from the data sent to the
+  client only, so they are รอตรวจด้วยตา until a person looks on screen.
+  Still รอทดสอบ: economy failure and restart with the box open. Garden:
+  server self-test passed 3 stages; player donation visual, restart
+  persistence and multi-team isolation pending. Checks: 112.
 - **Shop prices are not on the website.** The shop is EconomyShopGUI's
   default catalog (`docs/SHOP.md`); the site tells players to read prices in
   game. The old six-item price tables were removed. Quest rewards stay.

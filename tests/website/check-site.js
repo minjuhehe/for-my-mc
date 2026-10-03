@@ -211,15 +211,15 @@ const NAV_STATE = () => {
   // Status badges must match docs/PLAYTEST_20261003.md exactly.
   const badges = await page.$$eval('.cmd', ls => Object.fromEntries(ls.map(l => [l.querySelector('code').textContent, l.querySelector('.badge').textContent])));
   const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
-  check('commands marked tested = /spawn, /hub, /menu, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/is,/city go', JSON.stringify(badges));
+  check('commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/sell,/is,/city go', JSON.stringify(badges));
   check('commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/cityprojects donate', JSON.stringify(badges));
-  check('new /sell box, garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test', ['/sell', '/cityprojects', '/cityprojects go', '/topup', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  check('garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/topup', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
   const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
   check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
   const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
-  check('tested card: only verified results (shop opens, old box paid, garden donation taken, selector, builder quest)', /\/shop[\s\S]*รุ่นก่อนหน้า/.test(tested) && /สวนฟื้นฟู[\s\S]*รับวัสดุ/.test(tested) && /\/is[\s\S]*Restoration City/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/\$32|ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|หลายเกาะ|หลายคน|จำนวนเงิน|รุ่นใหม่|เห็นสวน|Sell each/.test(tested), tested.slice(0, 300));
+  check('tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test', /ไม่ใช่ OP/.test(tested) && /\/sell[\s\S]*ได้เงินตรง/.test(tested) && /Shulker/.test(tested) && /ถุงที่มีโบราณวัตถุ/.test(tested) && /1,504[\s\S]*ไม่ได้ขายจริงทุกชนิด/.test(tested) && /ทดสอบอัตโนมัติ/.test(tested) && /\/is[\s\S]*Restoration City/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/\$32|ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|หลายเกาะ|หลายคน|เห็นสวน|หน้าจอ|รีสตาร์ท/.test(tested), tested.slice(0, 300));
   const pending = await page.$$eval('.status-card', cs => cs[2].textContent);
-  check('pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration', ['กล่องขายรุ่นใหม่', 'การจ่ายเงินจริง', 'ราคาที่แสดงในกระเป๋า', 'คืนโบราณวัตถุ', 'เห็นสวนเปลี่ยน', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'สร้างหลายเกาะ', 'ทีมหลายคน', 'แยกเมือง', 'การตกแต่งแผนที่'].every(w => pending.includes(w)), pending.slice(0, 300));
+  check('pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration', ['ยังไม่มีคนดูบนหน้าจอ', 'ระบบเงินขัดข้อง', 'เห็นสวนเปลี่ยน', 'หลังรีสตาร์ท', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'สร้างหลายเกาะ', 'ทีมหลายคน', 'แยกเมือง', 'การตกแต่งแผนที่'].every(w => pending.includes(w)), pending.slice(0, 300));
   check('map decoration marked unfinished in gallery', /การตกแต่งแผนที่ยังไม่เสร็จ/.test(await page.textContent('#gallery')));
   const start = await page.textContent('#start');
   check('join steps explain the required font pack and the Server Resource Packs setting', /ยอมรับแพ็กฟอนต์ไทย/.test(start) && /Server Resource Packs/.test(start) && /Enabled หรือ Prompt/.test(start));
@@ -228,12 +228,15 @@ const NAV_STATE = () => {
   check('no "nothing to download" claim', !/ไม่ต้อง[^.]{0,20}ดาวน์โหลดอะไร/.test(text));
   check('no blanket one-account rule; alt-account rule is about quest rewards', !/หนึ่งคนหนึ่งบัญชี/.test(text) && /บัญชีสำรอง[\s\S]{0,40}รางวัล/.test(await page.textContent('#rules')));
   const shopText = await page.textContent('#zone-market') + await page.textContent('#zone-shop');
-  check('old fixed shop/market price tables removed (only the $0.01 fallback appears)', !/\$(?!0\.01)\d/.test(shopText) && (await page.$$('#zone-market table, #zone-shop table')).length === 0);
+  const cardsNoEvidence = await page.$$eval('#zone-market, #zone-shop', cs => cs.map(c => { const k = c.cloneNode(true); k.querySelectorAll('.checklist').forEach(x => x.remove()); return k.textContent; }).join(' '));
+  check('old fixed shop/market price tables removed (outside test-evidence lists, only the $0.01 fallback appears)', !/\$(?!0\.01)\d/.test(cardsNoEvidence) && (await page.$$('#zone-market table, #zone-shop table')).length === 0);
   check('prices: inventory-only Sell each / Sell stack, shop icons hide prices, defaults may change', /Sell each/.test(shopText) && /Sell stack/.test(shopText) && /ไม่แสดงราคา/.test(shopText) && /ราคาเริ่มต้น/.test(shopText));
   check('sell box: shop price, plain-material price, then $0.01 fallback; Relic containers returned whole', /ราคาร้านค้าก่อน/.test(shopText) && /แบบธรรมดา/.test(shopText) && /\$0\.01/.test(shopText) && /คืนทั้งใบ/.test(shopText));
-  check('new sell box not claimed as tested (card badge awaiting test)', (await page.$eval('#zone-market .zone-head .badge', b => b.textContent)) === 'รอทดสอบ');
+  check('sell box card tested; failure/restart cases still awaiting test', (await page.$eval('#zone-market .zone-head .badge', b => b.textContent)) === 'ทดสอบแล้ว' && /รอทดสอบ[\s\S]*ระบบเงินขัดข้อง/.test(await page.textContent('#zone-market')));
+  check('inventory price display: packet evidence separate from human visual review', /ตรวจจากข้อมูล/.test(shopText) && /รอตรวจด้วยตา[\s\S]*หน้าจอจริง/.test(shopText) && !/ทดสอบแล้ว[^<]{0,40}หน้าจอ/.test(shopText));
+  check('no pending claim left for universal payout or Relic return', !/รอทดสอบ[^<]{0,60}(การจ่ายเงินจริง|คืนโบราณวัตถุ)/.test(text) && !/จ่ายเงินของกล่องรุ่นใหม่ยังรอ/.test(text));
   const garden = await page.textContent('#garden');
-  check('garden prototype: 3 stages 25 Stone Bricks / 8 Grass Block / 4 Oak Log, commands, visual change pending', /Stone Bricks 25/.test(garden) && /Grass Block 8/.test(garden) && /Oak Log 4/.test(garden) && /\/cityprojects go/.test(garden) && /รอทดสอบ[\s\S]*เห็นสวนเปลี่ยน/.test(garden));
+  check('garden prototype: 3 stages 25 Stone Bricks / 8 Grass Block / 4 Oak Log, commands, visual change pending', /Stone Bricks 25/.test(garden) && /Grass Block 8/.test(garden) && /Oak Log 4/.test(garden) && /\/cityprojects go/.test(garden) && /ทดสอบอัตโนมัติ/.test(garden) && /รอทดสอบ[\s\S]*เห็นสวนเปลี่ยน[\s\S]*หลังรีสตาร์ท/.test(garden));
   check('sell box explains close-to-sell and Relic return', /ปิดหน้าต่าง/.test(shopText) && /โบราณวัตถุขายไม่ได้/.test(shopText));
   const team = await page.textContent('#team');
   check('team section: 1 island = 1 team, up to 3 islands incl. memberships, own city per island', /1 เกาะ = 1 ทีม/.test(team) && /สูงสุด 3 เกาะ/.test(team) && /รวมเกาะที่/.test(team) && /\/city go 2/.test(team));

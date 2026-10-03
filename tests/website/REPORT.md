@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-03T03:12:26.751Z
+Run: 2026-10-03T09:58:14.641Z
 
-**110/110 passed**
+**112/112 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (749 elements)
+- ✅ text contrast meets WCAG AA (764 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (749 elements)
+- ✅ text contrast meets WCAG AA (764 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (749 elements)
+- ✅ text contrast meets WCAG AA (764 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (749 elements)
+- ✅ text contrast meets WCAG AA (764 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -87,11 +87,11 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ top-up has no technical wording
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
-- ✅ commands marked tested = /spawn, /hub, /menu, /is, /city go
+- ✅ commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go
 - ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate
-- ✅ new /sell box, garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test
+- ✅ garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
-- ✅ tested card: only verified results (shop opens, old box paid, garden donation taken, selector, builder quest)
+- ✅ tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test
 - ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
 - ✅ map decoration marked unfinished in gallery
 - ✅ join steps explain the required font pack and the Server Resource Packs setting
@@ -99,10 +99,12 @@ Run: 2026-10-03T03:12:26.751Z
 - ✅ English in-game quest names shown
 - ✅ no "nothing to download" claim
 - ✅ no blanket one-account rule; alt-account rule is about quest rewards
-- ✅ old fixed shop/market price tables removed (only the $0.01 fallback appears)
+- ✅ old fixed shop/market price tables removed (outside test-evidence lists, only the $0.01 fallback appears)
 - ✅ prices: inventory-only Sell each / Sell stack, shop icons hide prices, defaults may change
 - ✅ sell box: shop price, plain-material price, then $0.01 fallback; Relic containers returned whole
-- ✅ new sell box not claimed as tested (card badge awaiting test)
+- ✅ sell box card tested; failure/restart cases still awaiting test
+- ✅ inventory price display: packet evidence separate from human visual review
+- ✅ no pending claim left for universal payout or Relic return
 - ✅ garden prototype: 3 stages 25 Stone Bricks / 8 Grass Block / 4 Oak Log, commands, visual change pending
 - ✅ sell box explains close-to-sell and Relic return
 - ✅ team section: 1 island = 1 team, up to 3 islands incl. memberships, own city per island
