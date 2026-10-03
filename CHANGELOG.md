@@ -3,6 +3,10 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.2: Inventory hover sell prices (2026-10-03)
+
+Added LostSkyWorth1.0.0 with ProtocolLib: English per-item and stack sell quotes from EconomyShopGUI on cloned display items. Original item data stays unchanged; no new commands or permissions. Owner confirms ordinary selling earns money; exact amounts and Relic return remain pending. Source and build instructions retained. Client hover verification pending.
+
 ## 0.8.1: Website for the new shop, island selector and playtest results (2026-10-03)
 
 **Why:** EconomyShopGUI replaced the six-item script shop, the island

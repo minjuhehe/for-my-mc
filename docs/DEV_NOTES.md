@@ -389,3 +389,6 @@ Native BSkyBlock live config saved: new-player-action/default-action /islands, c
 Saved accepted incremental restoration design in docs/INCREMENTAL_RESTORATION.md; implementation deferred at owner request. Resume shop transactions and multi-island/team checks first.
 
 Local island check initially failed because its native-command assertion still expected the old invalid event-player syntax. Corrected to explicit function parameter;70/70 checks passed. This is separate from actual live Skript parsing and owner flow confirmation.
+
+2026-10-03: Owner confirms ordinary sell-GUI transaction earns money (amount not measured). Added LostSkyWorth1.0.0 display-only inventory prices via ProtocolLib and ESGUI player-aware item matching. English unit/stack quotes, cloned packets/items, no saved variables or commands. Creative/spectator disabled to avoid client creative-item lore persistence. HoverWorth fork rejected because its material/config matching ignores custom names/lore; Simple Worth has fixed Portuguese labels. Website update2a23497 pulled; exact values and Relic return remain pending.
+Live09:25:35 verified ProtocolLib5.5.0-SNAPSHOT-583353e and LostSkyWorth1.0.0 enabled; Done09:25:39, no ERROR/Exception in inspected startup. Own reproducible Java21 build passed. Client hover/stack behavior still awaiting owner test.

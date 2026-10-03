@@ -1,0 +1,6 @@
+name: LostSkyWorth
+version: '1.0.0'
+main: net.lostsky.worth.LostSkyWorth
+api-version: '1.21'
+depend: [ProtocolLib, EconomyShopGUI]
+description: Display-only sell prices from the live shop; original items stay unchanged.
