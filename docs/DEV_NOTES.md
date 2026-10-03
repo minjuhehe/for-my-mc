@@ -1,5 +1,11 @@
 # Developer Notes
 
+03Oct2026 16:48 ICT: LostSkyWorth1.1.1 live, clean startup. Non-OP diagnostic
+client verified actual sale payouts, named/damaged items, container contents and
+Relic return.1504-material live coverage check and garden queue self-test passed.
+Temporary inventory/balance cleared and whitelist access removed. See
+PLAYTEST_20261003.md; preserve owner city/island progress.
+
 Current direction: shared public spawn and independently restored team
 cities. See `SHARED_SPAWN.md`. `lostsky-hub.sk` supplies hub navigation and
 menus; `lostsky.sk` below remains the earlier server-wide prototype until

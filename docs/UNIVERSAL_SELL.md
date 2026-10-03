@@ -1,12 +1,18 @@
 # Universal selling and inventory-only hover prices
 
-Live: LostSkyWorth1.1.0, alongside ProtocolLib and ESGUI6.16.3. Startup verified
-03Oct2026 09:58 ICT: all plugins/scripts enabled, Done15.488s, no ERROR/Exception
-in inspected startup. JAR filename still LostSkyWorth-1.0.0.jar (legacy filename).
+Live: LostSkyWorth1.1.1, alongside ProtocolLib and ESGUI6.16.3. Startup verified
+03Oct2026 16:37 ICT: scripts loaded without errors, Done15.376s.
+JAR filename remains LostSkyWorth-1.0.0.jar (legacy filename).
+All inventory-bearing block-item containers are included. Replace the existing
+JAR when updating; never install two LostSkyWorth JARs.
 
-Staged:1.1.1 includes all inventory-bearing block-item containers, extending1.1.0
-which handles shulkers and bundles. It builds but was not uploaded because panel
-login expired. Replace the existing JAR; never install two LostSkyWorth JARs.
+Live client evidence:32 stone quoted and paid$5.76; ordinary unmapped sword paid
+$0.01;2 renamed stone plus damaged pickaxe paid$0.37; shulker with32 stone quoted
+and paid$5.77. Genuine Relic and Relic-containing bundle returned. Test balance
+progressed0 ->5.76 ->5.77 ->6.14 ->11.91, then was reset to0 during cleanup.
+Server coverage diagnostic passed1504 materials with the live test player.
+Packet inspection found inventory quotes and no added quotes on sampled top-menu
+icons. Human visual review and economy-failure/crash tests remain outstanding.
 
 ## Behavior
 
@@ -43,15 +49,15 @@ total and wallet remain visible; individual shop icon prices are hidden.
 
 ## Validation and remaining work
 
-Owner confirmed an ordinary sale earned money in the previous ESGUI sell box.
-This doesn't verify universal-seller payout. Java21 build passed.597 standalone
+Live universal-seller payout and Relic/container returns verified as above.
+Java21 build passed.597 standalone
 slot-boundary checks passed (9..54-slot menus, own inventory, direct inventory and
 cursor exclusion). Existing island checker still70/70 after city alias changes.
-lsworthcheck was sent before logout; result not retrieved. It checks all vanilla
+lsworthcheck passed with the live temporary player. It checks all vanilla
 item materials, Relic/bundled-Relic guards, stack totals and slot filtering. With
 an online player it queries live shop pricing; otherwise only fallback is tested.
-Real payout, client display, container sale/return and restart-close behavior
-remain pending. No temporary test client was whitelisted or connected.
+Manual visual review, restart-close behavior and failed deposit handling remain
+pending. Temporary account inventory/balance/whitelist cleaned.
 
 Build using server/plugins/LostSkyWorth/build.ps1 with Java21, ProtocolLib.jar and
 Spigot API1.21.11. Output LostSkyWorth.jar. Stop server and replace old JAR (rename

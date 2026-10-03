@@ -17,9 +17,24 @@ const describe = item => item ? {
 } : null;
 bot.on('resourcePack', () => {
   // Mineflayer acknowledges the protocol; it does not render/apply the pack.
-  bot.acceptResourcePack();
+  // Modern packs are acknowledged below, including the downloaded state.
+  if (!bot.supportFeature('resourcePackUsesUUID')) {
+    setImmediate(() => bot.acceptResourcePack());
+  }
   emit('resourcePack', 'Acknowledged by headless client; no visual/font test');
 });
+bot._client.on('state', state => emit('protocolState', state));
+bot._client.on('add_resource_pack', data => {
+  // Use the UUID string from the packet for modern configuration acknowledgements.
+  bot._client.write('resource_pack_receive', { uuid: data.uuid, result: 3 });
+  bot._client.write('resource_pack_receive', { uuid: data.uuid, result: 4 });
+  bot._client.write('resource_pack_receive', { uuid: data.uuid, result: 0 });
+});
+if (process.env.LOSTSKY_PROTOCOL_TRACE === '1') {
+  bot._client.on('packet', (_data, meta) => {
+    if (bot._client.state === 'configuration') emit('configurationPacket', meta.name);
+  });
+}
 bot.once('spawn', () => { ready = true; emit('ready', { username, version: bot.version }); });
 bot.on('messagestr', message => emit('chat', message));
 bot.on('windowOpen', window => emit('windowOpen', { id: window.id, title: window.title,
@@ -36,6 +51,13 @@ async function action(command) {
       if (!String(command.text).startsWith('/')) throw Error('Only explicit game commands accepted');
       bot.chat(command.text); break;
     case 'inventory': emit('inventory', bot.inventory.slots.map(describe)); break;
+    case 'summary': {
+      const window = bot.currentWindow || bot.inventory;
+      emit('summary', { inventoryStart: window.inventoryStart, items: window.slots
+        .filter(Boolean).map(item => ({ slot: item.slot, name: item.name, count: item.count,
+          lore: (item.components || []).filter(part => part.type === 'lore') })) });
+      break;
+    }
     case 'window': emit('window', bot.currentWindow ? {
       title: bot.currentWindow.title, inventoryStart: bot.currentWindow.inventoryStart,
       slots: bot.currentWindow.slots.map(describe)

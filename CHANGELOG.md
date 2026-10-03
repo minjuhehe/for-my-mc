@@ -3,6 +3,15 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.8: Live universal sale verification (2026-10-03)
+
+Deployed LostSkyWorth1.1.1 and verified clean startup. Temporary non-OP client
+confirmed inventory quotes, stone payout, named/damaged sales, shulker contents,
+and Relic/bundle return. Coverage diagnostic passed1504 item materials with a
+live player; garden self-test passed. Cleared test inventory/balance and removed
+whitelist access. Diagnostic client now sends modern pack downloaded status and
+supports compact item summaries. No public game commands changed.
+
 ## 0.8.7: Saved deployment/test handoff (2026-10-03)
 
 Added NEXT_SESSION with exact live1.1.0 vs staged1.1.1 state, login blocker, test plan and private-data precautions. Website110checks are Claude-reported; source pulled and local preview restarted. No game command changed.

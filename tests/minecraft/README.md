@@ -1,7 +1,8 @@
-# Controlled Minecraft diagnostics — prepared, not run
+# Controlled Minecraft diagnostics
 
 Mineflayer4.39.0 supports the server's1.21.11. Dependencies are installed locally
-under ignored outputs/mc-testbot; no test client has connected yet. Use only a
+under ignored outputs/mc-testbot. Live tests ran3October2026; see the playtest
+document for evidence and remaining cases. Use only a
 temporary LostSkyTest... account, explicitly add it to whitelist, and remove it
 after testing. Never impersonate the owner's accounts or grant OP. No actions run
 until explicit stdin input. Pass server address privately as command arguments;
@@ -9,12 +10,16 @@ do not commit it. Offline authentication matches this server's current mode.
 
 Set LOSTSKY_MINEFLAYER_PATH to the absolute node_modules/mineflayer directory.
 Run node tests/minecraft/client.cjs HOST PORT LostSkyTest.
+Use an interactive terminal (exec_command tty=true) to keep stdin open. Modern
+configuration packs receive accepted/downloaded/loaded protocol acknowledgments.
+LOSTSKY_PROTOCOL_TRACE=1 prints configuration packet names only.
 Send one JSON object per stdin line, e.g.:
 
 ```json
 {"action":"chat","text":"/sell"}
 {"action":"window"}
 {"action":"inventory"}
+{"action":"summary"}
 {"action":"click","slot":54,"mouse":0,"mode":0}
 {"action":"close"}
 {"action":"equip","item":"stone_bricks"}

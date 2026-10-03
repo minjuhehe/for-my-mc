@@ -1,51 +1,36 @@
-# Next session: current Lost Sky state, 3 October 2026
+# Next session: Lost Sky state, 3 October 2026
 
-Owner went to sleep and authorized autonomous work. MineLan session expired after
-the09:58 deployment. Do not claim the remaining upload or real-client tests ran.
+LostSkyWorth1.1.1 deployed; clean16:37 startup, all scripts loaded without errors.
+MineLan signed in again. Server running at16:48 ICT.
 
-## Already live
+## Live verification
 
-- LostSkyWorth1.1.0 universal close-to-sell box (legacy JAR filename1.0.0).
-- Public /sell /sellgui /market and merchant/menu routes to /lssell.
-- Inventory-only quotes, no top-menu/cursor quote injection. ESGUI catalog item
-  prices removed from lore-arrangement; confirmation total remains visible.
-- Garden delivery count, stage-completion notifications, menu refresh and explicit
-  separate-garden warp. /city projects [go] aliases installed.
-- Clean09:58 startup; direct Minecraft status ping later confirms Paper1.21.11,
-  zero online players. Server wasn't stopped when MineLan logged out.
+- Non-OP LostSkyTest client tested actual payouts:32 stone$5.76, sword$0.01,
+  renamed stone/damaged pickaxe$0.37, shulker containing32 stone$5.77.
+- Genuine Relic and Relic-containing bundle returned. Total balance$11.91.
+- Inventory-only quotes observed; sampled shop top icons have no added prices.
+- lsworthcheck passed1504 materials with live player. This is price coverage,
+  not1504 individually completed sales.
+- Garden3-stage placement/arrival-floor self-test passed and cleaned fixtures.
+- Test inventory cleared, balance reset0, whitelist removed. No island created.
+- Earlier local checks:597 packet slot cases and70 island static checks.
 
-## Prepared, not deployed/tested
+## Continue
 
-- Local1.1.1 universal seller prices contents of all inventory-bearing block-item
-  containers, extending live shulker/bundle handling. Java build passed.
-- Patch ZIP in workspace outputs/lostsky-universal-update-20261003.zip. Read its
-  README. It is an update, not a world/player backup. Replace existing JAR;
-  don't install a second copy. Preserve Skript variables and existing worlds.
-- lsworthcheck was sent before session expired, but its output wasn't retrieved.
-- Controlled Mineflayer client installed and syntax checked. No temporary player
-  whitelisted or connected. Read tests/minecraft/README.md before using it.
+1. Human visual review, project partial charging/surplus, island-specific warp
+   and restart persistence using isolated fixtures. Preserve owner progress.
+2. Multiple islands/teams, membership removal and city isolation.
+3. Update website badges: universal payout now verified; no public deployment.
+   Claude previously reported110 checks onb3834e4/e36dfea.
+4. Failed economy deposit and restart-close returns are untested. No durable
+   crash journal. Garden is a prototype, not the full city remake.
 
-## Verified locally / by owner
+Read tests/minecraft/README.md. Use tty=true, temporary LostSkyTest... only.
+Modern configuration needs accepted/downloaded/loaded pack statuses. Headless
+acknowledgment does not prove fonts rendered. Never impersonate Ravnwastaken or
+Ravnclaw. Keep server address/raw player data out of repository and website.
 
--597 standalone inventory/menu slot checks;70 existing island checks.
-- Owner confirms project donations accept items, not yet visual changes.
-- Earlier owner confirms ESGUI selling earns money. New universal payout pending.
-- Website updated by Claude:110 checks reported passed, commit b3834e4 plus
-  changelog renumber e36dfea pulled locally. Not publicly deployed. Local preview
-  listens on127.0.0.1:8765; restart if the process has exited.
-
-## Resume order after MineLan sign-in
-
-1. Inspect latest log for lsworthcheck and runtime errors; preserve evidence.
-2. Back up, replace the JAR with staged1.1.1, restart normally, confirm clean startup.
-3. Run lsworthcheck with an online temporary test account for actual shop quotes.
-4. Test inventory lore vs top-menu icons, real /sell balance delta, Relic return,
-   container-content value/guard, damaged/named ordinary items and failure return.
-5. Test garden partial donation, surplus untouched, correct stage blocks and warp,
-   saved progress after restart. Use separate fixtures; don't reset owner progress.
-6. Test multi-island teams, membership removal and city separation next. Decoration
-   and full-city project maps remain deferred; garden is a small mechanism prototype.
-
-Owner's test account is Ravnwastaken; Ravnclaw is also owned by the user. Never
-impersonate either with the diagnostic client. Keep server address and raw player
-data out of public website/repository.
+Patch outputs/lostsky-universal-update-20261003.zip is not a world backup.
+Replace existing legacy JAR, never install duplicates. Reconstructed rollback
+source in outputs/worth-rollback-1.1.0 is not a downloaded server artifact.
+Host backup slots were full; no backups deleted and no fresh full backup made.
