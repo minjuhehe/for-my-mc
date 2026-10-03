@@ -3,7 +3,7 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
-## 0.8.2: Website for universal selling and the Restoration Garden (2026-10-03)
+## 0.8.6: Website for universal selling and the Restoration Garden (2026-10-03)
 
 Website and checks only. Sell card: 54-slot `/sell` box, price order (shop ->
 plain material -> $0.01), Relic/container return, awaiting payout test. Prices
