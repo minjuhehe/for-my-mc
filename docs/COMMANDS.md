@@ -127,3 +127,12 @@ These run automatically. If you rename a plugin or change these, update the scri
 | `admin` | everything, including `lostsky.admin` |
 
 /shop: full EconomyShopGUI catalog. /sell and /sellgui: deposit items into empty GUI, close to sell; unsellable items returned. /market now opens the same sell GUI and /skyshop opens the main shop. Hub market and shop buttons/NPCs use these same paths.
+
+## Incremental garden prototype
+
+| Command | Purpose | Permission | Status |
+|---|---|---|---|
+| /cityprojects | Selected island's garden project menu; also via /city | player command, no additional node | installed prototype |
+| /cityprojects donate | Donate required plain blocks from main hand | same | player test pending |
+| /cityprojects go | Visit garden after foundation is finished | same | player test pending |
+| lsprojectselftest | Diagnostic slot0 queued build and cleanup | console only | isolated check |

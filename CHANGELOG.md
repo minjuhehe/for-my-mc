@@ -3,6 +3,10 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.3: First gradual restoration project (2026-10-03)
+
+Added a small garden prototype separate from chapter prefabs:25 stone bricks,8 grass blocks,4 oak logs across three stages. Partial donations use only remaining plain hand items; funded stages place blocks gradually with saved queue/cursor. Added /cityprojects [go|donate], /city menu entry and console-only lsprojectselftest. No money reward or full-city replacement. Player inventory and multi-team tests remain pending.
+
 ## 0.8.2: Inventory hover sell prices (2026-10-03)
 
 Added LostSkyWorth1.0.0 with ProtocolLib: English per-item and stack sell quotes from EconomyShopGUI on cloned display items. Original item data stays unchanged; no new commands or permissions. Owner confirms ordinary selling earns money; exact amounts and Relic return remain pending. Source and build instructions retained. Client hover verification pending.

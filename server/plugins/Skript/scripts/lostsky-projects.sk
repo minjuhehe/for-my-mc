@@ -1,0 +1,273 @@
+# First incremental restoration project. Separate footprint from chapter prefabs.
+# All progress uses the stable, validated BentoBox island ID.
+import:
+    org.bukkit.Bukkit
+    org.bukkit.Material
+
+function skyProjectNeed(stage: number) :: number:
+    if {_stage} is 1:
+        return 25
+    if {_stage} is 2:
+        return 8
+    if {_stage} is 3:
+        return 4
+    return 0
+
+function skyProjectMaterial(stage: number) :: text:
+    if {_stage} is 1:
+        return "STONE_BRICKS"
+    if {_stage} is 2:
+        return "GRASS_BLOCK"
+    return "OAK_LOG"
+
+function skyProjectMenu(p: player):
+    set {_id} to skyCityKey({_p})
+    if {_id} is "":
+        send "&3[Lost Sky] &eCreate or join an island first." to {_p}
+        stop
+    set {_stage} to ({skyproject::complete::%{_id}%} ? 0) + 1
+    set {_paid} to {skyproject::paid::%{_id}%::%{_stage}%} ? 0
+    set {_need} to skyProjectNeed({_stage})
+    set {_material} to skyProjectMaterial({_stage})
+    set {_inv} to chest inventory with 3 rows named "&2Lost Sky | Garden Project"
+    set slot 10 of {_inv} to book named "&aRestoration Garden" with lore "&7One small project for your selected island" and "&7Foundation > Planters > Tree stumps"
+    if {_stage} > 3:
+        set slot 13 of {_inv} to emerald named "&aProject Complete" with lore "&7Your team restored the garden!"
+    else if {skyproject::active::%{_id}%} is set:
+        set slot 13 of {_inv} to clock named "&eBuilding Stage %{_stage}%" with lore "&7Blocks are being placed gradually" and "&7No more materials needed for this stage"
+    else:
+        set slot 13 of {_inv} to chest named "&eDonate Materials" with lore "&7Stage %{_stage}%: %{_material}%" and "&7Delivered: %{_paid}% / %{_need}%" and "&7Hold plain required blocks in your hand" and "&eClick to donate only what is still needed"
+    set slot 16 of {_inv} to ender pearl named "&bVisit Garden" with lore "&7Available once the foundation is finished"
+    set slot 22 of {_inv} to arrow named "&eBack to City"
+    set {skyproject::menu::%uuid of {_p}%} to {_inv}
+    set {skyproject::menu-island::%uuid of {_p}%} to {_id}
+    open {_inv} to {_p}
+
+function skyProjectDonate(p: player):
+    set {_id} to skyCityKey({_p})
+    if {_id} is "":
+        stop
+    if {skycity::ready::%{_id}%} is not true:
+        send "&3[Lost Sky] &eVisit your city with /city go first." to {_p}
+        stop
+    if {skyproject::reserved::%{_id}%} is not true:
+        set {_world} to Bukkit.getWorld("lostsky_cities")
+        if {_world} is not set:
+            stop
+        set {_cx} to {skycity::slot::%{_id}%} * 512
+        loop integers from 96 to 100:
+            set {_x} to {_cx} + loop-number
+            loop integers from 0 to 4:
+                set {_z} to loop-number-2
+                loop integers from 99 to 101:
+                    if {_world}.getBlockAt({_x}, loop-number-3, {_z}).getType().isAir() is false:
+                        send "&3[Lost Sky] &cGarden area is occupied. Contact staff; no items taken." to {_p}
+                        stop
+        set {skyproject::reserved::%{_id}%} to true
+    if {skyproject::active::%{_id}%} is set:
+        send "&3[Lost Sky] &eThis stage is already building." to {_p}
+        stop
+    set {_stage} to ({skyproject::complete::%{_id}%} ? 0) + 1
+    if {_stage} > 3:
+        send "&3[Lost Sky] &aThe garden is complete." to {_p}
+        stop
+    set {_held} to {_p}'s tool
+    set {_type} to skyProjectMaterial({_stage})
+    if "%{_held}.getType()%" is not {_type}:
+        send "&3[Lost Sky] &eHold %{_type}% to donate." to {_p}
+        stop
+    # Do not consume named, enchanted or lore-bearing special items.
+    if {_held}.hasItemMeta() is true:
+        send "&3[Lost Sky] &eUse plain blocks; special items cannot be donated." to {_p}
+        stop
+    set {_paid} to {skyproject::paid::%{_id}%::%{_stage}%} ? 0
+    set {_remaining} to skyProjectNeed({_stage}) - {_paid}
+    set {_take} to min({_remaining}, amount of {_held})
+    if {_take} <= 0:
+        stop
+    # No wait between validating, taking the exact hand stack and recording credit.
+    set {_left} to amount of {_held} - {_take}
+    if {_left} is 0:
+        set {_p}'s tool to air
+    else:
+        set amount of {_held} to {_left}
+        set {_p}'s tool to {_held}
+    add {_take} to {skyproject::paid::%{_id}%::%{_stage}%}
+    send "&3[Lost Sky] &aDelivered %{_take}% %{_type}%." to {_p}
+    if {skyproject::paid::%{_id}%::%{_stage}%} >= skyProjectNeed({_stage}):
+        set {skyproject::active::%{_id}%} to {_id}
+        set {skyproject::cursor::%{_id}%} to 0
+        send "&3[Lost Sky] &aStage funded! Construction has started." to {_p}
+
+function skyProjectGo(p: player):
+    set {_id} to skyCityKey({_p})
+    if {_id} is "":
+        stop
+    if ({skyproject::complete::%{_id}%} ? 0) < 1:
+        send "&3[Lost Sky] &eFinish the foundation before visiting." to {_p}
+        stop
+    set {_world} to Bukkit.getWorld("lostsky_cities")
+    if {_world} is not set:
+        stop
+    set {_x} to {skycity::slot::%{_id}%} * 512 + 98
+    if "%{_world}.getBlockAt({_x}, 99, 2).getType()%" is not "STONE_BRICKS":
+        send "&3[Lost Sky] &cGarden arrival floor is missing. Contact staff." to {_p}
+        stop
+    teleport {_p} to location({_x} + 0.5, 100, 2.5, world "lostsky_cities")
+    set fall distance of {_p} to 0
+
+# Returns false if world/plot is unavailable. Cursor advances only after placement.
+# Footprint: x = city center + 96..100, z = 0..4, y = 99..101.
+# Existing chapter prefabs occupy +/-65; this project never pastes over them.
+function skyProjectPlace(id: text, stage: number, n: number) :: boolean:
+    set {_world} to Bukkit.getWorld("lostsky_cities")
+    if {_world} is not set:
+        return false
+    if {skycity::slot::%{_id}%} is not set:
+        return false
+    set {_cx} to {skycity::slot::%{_id}%} * 512
+    set {_y} to 99
+    if {_stage} is 1:
+        set {_x} to {_cx} + 96 + mod({_n}, 5)
+        set {_z} to floor({_n} / 5)
+    else if {_stage} is 2:
+        set {_x} to {_cx} + 96 + mod({_n}, 4)
+        set {_z} to 0
+        if {_n} >= 4:
+            set {_z} to 4
+        set {_y} to 100
+    else:
+        set {_x} to {_cx} + 96
+        if mod({_n}, 2) is 1:
+            set {_x} to {_cx} + 99
+        set {_z} to 0
+        if {_n} >= 2:
+            set {_z} to 4
+        set {_y} to 101
+    set {_material} to Material.valueOf(skyProjectMaterial({_stage}))
+    {_world}.getBlockAt({_x}, {_y}, {_z}).setType({_material}, false)
+    return true
+
+every 5 ticks:
+    set {_budget} to 5
+    loop {skyproject::active::*}:
+        if {_budget} <= 0:
+            stop loop
+        set {_id} to loop-value
+        set {_stage} to ({skyproject::complete::%{_id}%} ? 0) + 1
+        if {_stage} > 3:
+            delete {skyproject::active::%{_id}%}
+        else:
+            set {_cursor} to {skyproject::cursor::%{_id}%} ? 0
+            if skyProjectPlace({_id}, {_stage}, {_cursor}) is true:
+                add 1 to {skyproject::cursor::%{_id}%}
+                subtract 1 from {_budget}
+                if {skyproject::cursor::%{_id}%} >= skyProjectNeed({_stage}):
+                    set {skyproject::complete::%{_id}%} to {_stage}
+                    delete {skyproject::active::%{_id}%}
+
+command /cityprojects [<text>]:
+    executable by: players
+    trigger:
+        if arg-1 is "go":
+            skyProjectGo(player)
+        else if arg-1 is "donate":
+            skyProjectDonate(player)
+        else:
+            skyProjectMenu(player)
+
+on inventory click:
+    if player's current inventory is not {skyproject::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skyproject::menu::%uuid of player%}:
+        stop
+    set {_choice} to index of event-slot
+    set {_bound} to {skyproject::menu-island::%uuid of player%}
+    if skyCityKey(player) is not {_bound}:
+        close player's inventory
+        send "&3[Lost Sky] &eYour selected island changed. Reopen the project menu."
+        stop
+    close player's inventory
+    if {_choice} is 13:
+        skyProjectDonate(player)
+    else if {_choice} is 16:
+        skyProjectGo(player)
+    else if {_choice} is 22:
+        skyCityMenu(player)
+
+on inventory drag:
+    if player's current inventory is {skyproject::menu::%uuid of player%}:
+        cancel event
+
+on inventory close:
+    if event-inventory is {skyproject::menu::%uuid of player%}:
+        delete {skyproject::menu::%uuid of player%}
+        delete {skyproject::menu-island::%uuid of player%}
+
+on quit:
+    delete {skyproject::menu::%uuid of player%}
+    delete {skyproject::menu-island::%uuid of player%}
+
+on load:
+    delete {skyproject::menu::*}
+    delete {skyproject::menu-island::*}
+    # Paid totals, completed stages, active queues and cursors deliberately persist.
+
+# Reserved slot 0 only; refuses any existing block or nearby visitor.
+command /lsprojectselftest:
+    executable by: console
+    trigger:
+        set {_world} to Bukkit.getWorld("lostsky_cities")
+        if {_world} is not set:
+            send "[Lost Sky PROJECT TEST] FAIL: missing city world"
+            stop
+        loop all players:
+            if name of loop-player's world is "lostsky_cities":
+                if x-coordinate of loop-player is between 85 and 110:
+                    send "[Lost Sky PROJECT TEST] Refusing occupied diagnostic area"
+                    stop
+        loop integers from 96 to 100:
+            set {_x} to loop-number
+            loop integers from 0 to 4:
+                set {_z} to loop-number-2
+                loop integers from 99 to 101:
+                    if {_world}.getBlockAt({_x}, loop-number-3, {_z}).getType().isAir() is false:
+                        send "[Lost Sky PROJECT TEST] Refusing non-empty diagnostic footprint"
+                        stop
+        set {_id} to "__garden_diagnostic__"
+        if {skyproject::active::%{_id}%} is set:
+            send "[Lost Sky PROJECT TEST] Already running"
+            stop
+        set {skycity::slot::%{_id}%} to 0
+        set {skyproject::complete::%{_id}%} to 0
+        set {_ok} to true
+        loop integers from 1 to 3:
+            set {_stage} to loop-number
+            set {skyproject::paid::%{_id}%::%{_stage}%} to skyProjectNeed({_stage})
+            set {skyproject::cursor::%{_id}%} to 0
+            set {skyproject::active::%{_id}%} to {_id}
+            wait 8 seconds
+            if {skyproject::complete::%{_id}%} is not {_stage}:
+                set {_ok} to false
+            if {skyproject::active::%{_id}%} is set:
+                set {_ok} to false
+                delete {skyproject::active::%{_id}%}
+        if "%{_world}.getBlockAt(98, 99, 2).getType()%" is not "STONE_BRICKS":
+            set {_ok} to false
+        if "%{_world}.getBlockAt(97, 100, 4).getType()%" is not "GRASS_BLOCK":
+            set {_ok} to false
+        if "%{_world}.getBlockAt(99, 101, 4).getType()%" is not "OAK_LOG":
+            set {_ok} to false
+        # Clean only the previously-empty diagnostic footprint, never a player city.
+        loop integers from 96 to 100:
+            set {_x} to loop-number
+            loop integers from 0 to 4:
+                set {_z} to loop-number-2
+                loop integers from 99 to 101:
+                    {_world}.getBlockAt({_x}, loop-number-3, {_z}).setType(Material.AIR, false)
+        delete {skycity::slot::%{_id}%}
+        delete {skyproject::complete::%{_id}%}
+        delete {skyproject::cursor::%{_id}%}
+        delete {skyproject::paid::%{_id}%::*}
+        send "[Lost Sky PROJECT TEST] Result: %{_ok}% (3 funded stages, queued placement, safe arrival floor, cleanup)"

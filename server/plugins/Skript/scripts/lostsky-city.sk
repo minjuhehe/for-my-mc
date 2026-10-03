@@ -137,6 +137,7 @@ function skyCityMenu(p: player):
     set slot 12 of {_inv} to book named "&eChapter %{_chapter}% | Relic %{_points}%" with lore "&7Milestones: 100 / 300 / 600 / 1000" and "&7Progress is shared only with your team"
     set slot 14 of {_inv} to amethyst shard named "&dDonate Relics" with lore "&7Hold a Relic in your main hand and click" and "&7Reach a milestone to unlock the next chapter"
     set slot 16 of {_inv} to compass named "&bReturn to Spawn"
+    set slot 20 of {_inv} to oak sapling named "&aRestoration Projects" with lore "&7Restore a small garden with building materials" and "&eClick to view your team's project"
     set {skycity::menu::%uuid of {_p}%} to {_inv}
     open {_inv} to {_p}
 
@@ -234,6 +235,8 @@ on inventory click:
         skyCityDonate(player)
     else if {_choice} is 16:
         execute player command "essentials:spawn"
+    else if {_choice} is 20:
+        skyProjectMenu(player)
     else if {_choice} is 22:
         skyIslandMenu(player)
 
