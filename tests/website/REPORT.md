@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-03T02:17:42.935Z
+Run: 2026-10-03T03:12:26.751Z
 
-**107/107 passed**
+**110/110 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (696 elements)
+- ✅ text contrast meets WCAG AA (749 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (696 elements)
+- ✅ text contrast meets WCAG AA (749 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (696 elements)
+- ✅ text contrast meets WCAG AA (749 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (696 elements)
+- ✅ text contrast meets WCAG AA (749 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -88,10 +88,10 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
 - ✅ commands marked tested = /spawn, /hub, /menu, /is, /city go
-- ✅ commands marked partly tested = /shop, /skyshop, /sell, /skyquests (menus open; transactions pending)
-- ✅ /topup, /city, /city donate, /city go <slot>, team and money commands still awaiting test
+- ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate
+- ✅ new /sell box, garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
-- ✅ tested card: only verified results (menus open, selector flow, builder quest)
+- ✅ tested card: only verified results (shop opens, old box paid, garden donation taken, selector, builder quest)
 - ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
 - ✅ map decoration marked unfinished in gallery
 - ✅ join steps explain the required font pack and the Server Resource Packs setting
@@ -99,11 +99,14 @@ Run: 2026-10-03T02:17:42.935Z
 - ✅ English in-game quest names shown
 - ✅ no "nothing to download" claim
 - ✅ no blanket one-account rule; alt-account rule is about quest rewards
-- ✅ old fixed shop/market price tables removed (no $ prices in market or shop)
-- ✅ shop prices: told to check in game, default prices may change
-- ✅ sell box explains close-to-sell, returns, and warns about relics
+- ✅ old fixed shop/market price tables removed (only the $0.01 fallback appears)
+- ✅ prices: inventory-only Sell each / Sell stack, shop icons hide prices, defaults may change
+- ✅ sell box: shop price, plain-material price, then $0.01 fallback; Relic containers returned whole
+- ✅ new sell box not claimed as tested (card badge awaiting test)
+- ✅ garden prototype: 3 stages 25 Stone Bricks / 8 Grass Block / 4 Oak Log, commands, visual change pending
+- ✅ sell box explains close-to-sell and Relic return
 - ✅ team section: 1 island = 1 team, up to 3 islands incl. memberships, own city per island
-- ✅ incremental restoration only as an unbuilt future plan
+- ✅ full-city incremental restoration only as an unbuilt future plan; garden is the only prototype
 - ✅ quest rewards and 24-hour reset shown
 - ✅ team goals are 0/100/300/600/1000
 
@@ -122,11 +125,11 @@ Run: 2026-10-03T02:17:42.935Z
 
 ## Command filters and copy
 
-- ✅ 20 commands listed
+- ✅ 23 commands listed
 - ✅ filter "hub" shows 4 commands
 - ✅ filter "shop" shows 7 commands
 - ✅ filter "island" shows 5 commands
-- ✅ filter "city" shows 4 commands
+- ✅ filter "city" shows 7 commands
 - ✅ filter works with the keyboard
 - ✅ copy button copies /city go
 - ✅ copy button copies /sell
@@ -145,7 +148,7 @@ Run: 2026-10-03T02:17:42.935Z
 
 - ✅ reduced motion turns off all animation
 - ✅ no-JS: all 5 chapters readable
-- ✅ no-JS: all 20 commands readable
+- ✅ no-JS: all 23 commands readable
 - ✅ no-JS: menu links reachable
 - ✅ no-JS: copy and filter buttons hidden
 - ✅ no-JS: no horizontal scroll

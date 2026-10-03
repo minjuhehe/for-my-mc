@@ -3,6 +3,17 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.2: Website for universal selling and the Restoration Garden (2026-10-03)
+
+Website and checks only. Sell card: 54-slot `/sell` box, price order (shop ->
+plain material -> $0.01), Relic/container return, awaiting payout test. Prices
+now described as inventory-only (Sell each / Sell stack); shop icons hide
+them. Team section: Restoration Garden prototype (3 stages, `/cityprojects`,
+donation accepted, visual change pending); full-city version still a plan.
+Commands 20 -> 23 (`/cityprojects`, `donate`, `go`); `/sell` back to
+awaiting test. Checks 110, incl. planted false claims (caught). No IP, top-up
+closed, map unfinished. No server scripts touched.
+
 ## 0.8.5: Prepared controlled in-game diagnostic client (2026-10-03)
 
 Added stdin-driven Mineflayer test client and fixture/cleanup instructions. Restricted temporary account names; no auto world actions or owner impersonation. Syntax check passed. Dependency installed locally, but whitelist/connection/live tests were not performed after panel logout. No player command changed.

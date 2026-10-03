@@ -125,7 +125,8 @@
           <ul>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> เซิร์ฟเวอร์รัน Paper 1.21.11 (Java Edition)</li>
             <li><span class="badge b-ok">ติดตั้งแล้ว</span> ฮับกลางอยู่ในเซิร์ฟแล้ว ครบทั้งห้าโซน มี NPC ผู้นำทาง 7 ตัว และระบบป้องกันพื้นที่</li>
-            <li><span class="badge b-ok">ติดตั้งแล้ว</span> ร้านค้าแบบแยกหมวด (<code>/shop</code>) และช่องขายของ (<code>/sell</code>)</li>
+            <li><span class="badge b-ok">ติดตั้งแล้ว</span> ร้านค้าแบบแยกหมวด (<code>/shop</code>) และกล่องขายของทุกชนิด (<code>/sell</code>)</li>
+            <li><span class="badge b-ok">ติดตั้งแล้ว</span> สวนฟื้นฟู: ต้นแบบโครงการซ่อมเมืองทีละขั้น 3 ขั้น</li>
             <li><span class="badge b-ok">ติดตั้งแล้ว</span> เมนูเลือกเกาะ: 1 เกาะ = 1 ทีม สูงสุด 3 เกาะต่อคน แต่ละเกาะมีเมืองฟื้นฟูของตัวเอง</li>
             <li><span class="badge b-ok">ติดตั้งแล้ว</span> แพ็กฟอนต์ไทย ThaiFontFix ผู้เล่นยืนยันว่าใช้งานได้</li>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> เมนูและข้อความในเกมเป็นภาษาอังกฤษ (เว็บนี้เป็นภาษาไทย)</li>
@@ -138,14 +139,16 @@
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/spawn</code> และ <code>/hub</code> พากลับฮับ</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/menu</code> เปิดเมนูฮับได้</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/is</code> เปิดเมนูเลือกเกาะ และปุ่ม Restoration City พาไปเมืองของเกาะนั้น</li>
-            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/shop</code> และ <code>/sell</code> เปิดเมนูได้</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/shop</code> เปิดร้านได้ และกล่องขายรุ่นก่อนหน้าขายของได้เงินจริง</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> บริจาควัสดุเข้าสวนฟื้นฟู: ระบบรับวัสดุแล้ว</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> ภารกิจส่งหิน 128 ก้อน: ได้ $80 และเศษผลึกสามัญของจริง 2 ชิ้น ส่งซ้ำทันทีถูกปฏิเสธจนกว่าจะครบ 24 ชั่วโมง</li>
           </ul>
         </div>
         <div class="status-card">
           <h3>ยังรอทดสอบ · ยังไม่เปิด</h3>
           <ul>
-            <li><span class="badge b-draft">รอทดสอบ</span> ซื้อขายจริงในร้านและช่องขาย: จำนวนเงิน และการคืนโบราณวัตถุ</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> กล่องขายรุ่นใหม่: การจ่ายเงินจริง ราคาที่แสดงในกระเป๋า และการคืนโบราณวัตถุหรือกล่องที่มีโบราณวัตถุ</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> สวนฟื้นฟู: เห็นสวนเปลี่ยนในเกมหลังบริจาค</li>
             <li><span class="badge b-draft">รอทดสอบ</span> ภารกิจส่งข้าวสาลี การรีเซ็ตหลังครบ 24 ชั่วโมงจริง และกรณีกระเป๋าเต็ม</li>
             <li><span class="badge b-draft">รอทดสอบ</span> สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
             <li><span class="badge b-draft">กำลังทำ</span> การตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
@@ -212,26 +215,26 @@
           <a class="zone-link" href="#zone-quests"><i class="sw sw-quest" aria-hidden="true"></i><code>/skyquests</code><span>โถงภารกิจ (หลังคาสีม่วง) · ส่งของทุก 24 ชั่วโมง</span></a>
           <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ห้องเติมเงิน (หลังคาสีทอง) · ยังไม่เปิด</span></a>
           <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของเกาะที่เลือก</span></a>
-          <p class="muted small">ราคาของร้านค้าดูได้ในเกมบนไอเท็มแต่ละชิ้น ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม เมนูในเกมเป็นภาษาอังกฤษ</p>
+          <p class="muted small">ราคาขายแสดงบนไอเท็มในกระเป๋าของคุณ (Sell each / Sell stack) ไม่ได้แสดงบนไอคอนร้าน ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม เมนูในเกมเป็นภาษาอังกฤษ</p>
         </div>
       </div>
 
       <div class="zone-grid">
         <article class="zone-card" id="zone-market" aria-labelledby="zm-h">
           <div class="zone-head">
-            <h3 id="zm-h">ตลาด · ช่องขายของ</h3>
-            <span class="badge b-ok">ทดสอบบางส่วน</span>
+            <h3 id="zm-h">ตลาด · กล่องขายของ</h3>
+            <span class="badge b-draft">รอทดสอบ</span>
           </div>
-          <p class="muted"><code>/sell</code>, <code>/sellgui</code> หรือ <code>/market</code> · เปิดช่องว่างสำหรับใส่ของที่จะขาย</p>
+          <p class="muted"><code>/sell</code>, <code>/sellgui</code> หรือ <code>/market</code> · เปิดกล่องเปล่า 54 ช่อง ขายของได้แทบทุกอย่าง</p>
           <ol class="howto">
-            <li>ใส่ของที่ต้องการขายลงในช่อง</li>
-            <li>ปิดหน้าต่าง ระบบจะขายของที่รับซื้อและจ่ายเป็นเงินในเกม</li>
-            <li>ของที่ขายไม่ได้จะถูกคืนให้</li>
+            <li>ใส่ของที่ต้องการขายลงในกล่อง</li>
+            <li>ปิดหน้าต่าง ระบบจะขายและจ่ายเป็นเงินในเกม</li>
+            <li>ราคา: ใช้ราคาร้านค้าก่อน ถ้าไม่มีใช้ราคาของวัสดุแบบธรรมดา ถ้ายังไม่มีได้ชิ้นละ $0.01</li>
           </ol>
-          <p class="note">อย่าใส่โบราณวัตถุลงช่องขาย ระบบออกแบบให้คืนโบราณวัตถุ แต่ยังไม่ได้ทดสอบ</p>
+          <p class="note">โบราณวัตถุขายไม่ได้ ระบบจะคืนให้ และกล่องหรือถุงที่มีโบราณวัตถุอยู่ข้างในจะถูกคืนทั้งใบ (ยังรอทดสอบกับผู้เล่น)</p>
           <ul class="checklist">
-            <li><span class="badge b-ok">ทดสอบแล้ว</span> เปิดช่องขายได้</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> จำนวนเงินที่ได้ และการคืนของ</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> กล่องขายรุ่นก่อนหน้าขายของได้เงินจริง</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> กล่องรุ่นใหม่: การจ่ายเงินจริงและการคืนของ</li>
           </ul>
         </article>
 
@@ -242,13 +245,14 @@
           </div>
           <p class="muted"><code>/shop</code> หรือ <code>/skyshop</code> · ร้านแบบแยกหมวดหมู่ ทั้งซื้อและขาย</p>
           <ul class="plain">
-            <li>เลือกหมวด แล้วดูราคาซื้อและราคาขายบนไอเท็มแต่ละชิ้นในเกม</li>
+            <li>ไอคอนในร้านไม่แสดงราคาทีละชิ้นแล้ว ยอดรวมจะแสดงตอนยืนยันการซื้อ</li>
+            <li>ราคาขายดูได้ที่ไอเท็มในกระเป๋าของคุณ: Sell each (ต่อชิ้น) และ Sell stack (ทั้งกอง)</li>
             <li>ตอนนี้ใช้ราคาเริ่มต้นของระบบร้านค้า อาจปรับก่อนเปิด</li>
             <li>NPC พ่อค้าในฮับเปิดร้านเดียวกันนี้</li>
           </ul>
           <ul class="checklist">
             <li><span class="badge b-ok">ทดสอบแล้ว</span> เปิดร้านและดูหมวดได้</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> การซื้อขายจริงและจำนวนเงิน</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> การซื้อจริง จำนวนเงิน และราคาที่แสดงในกระเป๋า</li>
           </ul>
         </article>
 
@@ -352,7 +356,24 @@
         </div>
       </div>
       <p class="season-note">ทดสอบแล้ว: <code>/is</code> → Restoration City พาไปเมืองของเกาะที่เลือก (บัญชีเดียว) ยังรอทดสอบ: สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท ส่วนรางวัลอื่นของแต่ละบท (นอกจากหน้าตาเมือง) ยังอยู่ระหว่างออกแบบ</p>
-      <p class="season-note"><span class="badge b-plan">แผนในอนาคต</span> แนวคิดซ่อมเมืองทีละโครงการด้วยวัสดุ (เช่น สะพาน ตลาด สวน) ออกแบบไว้แล้วแต่ยังไม่ได้สร้าง ระบบบทแบบปัจจุบันยังใช้อยู่</p>
+      <div class="garden" id="garden">
+        <div class="zone-head">
+          <h3 class="h-sub">สวนฟื้นฟู (ต้นแบบ)</h3>
+          <span class="badge b-ok">ทดสอบบางส่วน</span>
+        </div>
+        <p class="muted">โครงการเล็ก ๆ ที่แต่ละเกาะซ่อมทีละขั้นด้วยวัสดุ อยู่ข้างเมืองของเกาะ แยกจากเมืองตามบทเดิม ไม่มีรางวัลเป็นเงิน</p>
+        <ol class="howto">
+          <li><b>ฐาน</b>: Stone Bricks 25 ก้อน</li>
+          <li><b>กระบะต้นไม้</b>: Grass Block 8 ก้อน</li>
+          <li><b>ตอไม้</b>: Oak Log 4 ท่อน</li>
+        </ol>
+        <p>ไปเมืองของเกาะครั้งแรกด้วย <code>/city go</code> ก่อน แล้วเปิดโครงการด้วย <code>/cityprojects</code> (หรือ <code>/city projects</code>) ถือวัสดุธรรมดาไว้ในมือแล้วกด Donate Materials หรือพิมพ์ <code>/cityprojects donate</code> ระบบรับเฉพาะจำนวนที่ยังขาด เมื่อฐานเสร็จแล้ว <code>/cityprojects go</code> จะพาไปดูสวน</p>
+        <ul class="checklist">
+          <li><span class="badge b-ok">ทดสอบแล้ว</span> บริจาควัสดุ ระบบรับของแล้ว</li>
+          <li><span class="badge b-draft">รอทดสอบ</span> เห็นสวนเปลี่ยนในเกม และการใช้กับทีมหลายคน</li>
+        </ul>
+      </div>
+      <p class="season-note"><span class="badge b-plan">แผนในอนาคต</span> การซ่อมทั้งเมืองทีละโครงการ (เช่น สะพาน ตลาด ศาลา) ยังไม่ได้สร้าง ตอนนี้มีแค่สวนต้นแบบด้านบน ระบบบทแบบปัจจุบันยังใช้อยู่</p>
     </div>
   </section>
 
@@ -471,9 +492,9 @@
         <li class="cmd" data-group="hub"><code>/hub</code><div class="desc"><span>กลับฮับกลาง (ใช้ <code>/lobby</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/hub" aria-label="คัดลอกคำสั่ง /hub">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/menu</code><div class="desc"><span>เปิดเมนูฮับ: เกาะ, เมืองของเกาะ, คู่มือ และโซนต่าง ๆ</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/menu" aria-label="คัดลอกคำสั่ง /menu">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/skyguide</code><div class="desc"><span>อ่านคู่มือเริ่มต้น (Getting Started)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyguide" aria-label="คัดลอกคำสั่ง /skyguide">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/shop</code><div class="desc"><span>เปิดร้านค้าแบบแยกหมวด ซื้อและขาย (เปิดเมนูได้แล้ว การซื้อขายจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/shop" aria-label="คัดลอกคำสั่ง /shop">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/shop</code><div class="desc"><span>เปิดร้านค้าแบบแยกหมวด ราคาขายดูได้ที่ไอเท็มในกระเป๋า (เปิดร้านได้แล้ว การซื้อจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/shop" aria-label="คัดลอกคำสั่ง /shop">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านค้าเดียวกับ <code>/shop</code></span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดช่องขายของ ใส่ของแล้วปิดหน้าต่างเพื่อขาย (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้ เปิดได้แล้ว การขายจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดกล่องขายของ 54 ช่อง ใส่ของแล้วปิดหน้าต่างเพื่อขาย โบราณวัตถุจะถูกคืน (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง (ทดสอบแล้วกับภารกิจส่งหิน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>ห้องเติมเงิน ตอนนี้ยังไม่เปิด</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
@@ -487,6 +508,9 @@
         <li class="cmd" data-group="city"><code>/city go</code><div class="desc"><span>วาร์ปไปเมืองของเกาะที่เลือกอยู่ ครั้งแรกจะเตรียมเมืองบทที่ 1 ให้</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/city go" aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
         <li class="cmd" data-group="city"><code>/city go &lt;ช่อง&gt;</code><div class="desc"><span>เลือกเกาะในช่องนั้นของเมนู <code>/is</code> แล้ววาร์ปไปเมืองของเกาะนั้น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city go " aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
         <li class="cmd" data-group="city"><code>/city donate</code><div class="desc"><span>บริจาคโบราณวัตถุที่ถืออยู่ในมือหลักให้เมืองของเกาะที่เลือก</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city donate" aria-label="คัดลอกคำสั่ง /city donate">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/cityprojects</code><div class="desc"><span>เปิดโครงการสวนฟื้นฟูของเกาะที่เลือก (ใช้ <code>/city projects</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/cityprojects" aria-label="คัดลอกคำสั่ง /cityprojects">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/cityprojects donate</code><div class="desc"><span>บริจาควัสดุที่ถืออยู่ให้ขั้นปัจจุบันของสวน (ระบบรับของแล้ว การเห็นสวนเปลี่ยนยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/cityprojects donate" aria-label="คัดลอกคำสั่ง /cityprojects donate">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/cityprojects go</code><div class="desc"><span>ไปดูสวนฟื้นฟู ใช้ได้หลังฐานเสร็จ (ใช้ <code>/city projects go</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/cityprojects go" aria-label="คัดลอกคำสั่ง /cityprojects go">คัดลอก</button></li>
       </ul>
       <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
     </div>
@@ -526,8 +550,9 @@
         <details><summary>มีได้กี่เกาะ</summary><div><p>สูงสุด 3 เกาะต่อคน นับรวมเกาะที่คุณเป็นสมาชิกทีม แต่ละเกาะคือทีมแยกกันและมีเมืองฟื้นฟูของตัวเอง เปิดเมนู <code>/is</code> เพื่อเลือกเกาะ</p></div></details>
         <details><summary>ถ้าเข้าร่วมทีมของเพื่อน เกาะเดิมจะหายไหม</summary><div><p>ไม่ เซิร์ฟตั้งค่าให้เก็บเกาะเดิมไว้ เกาะของเพื่อนจะเพิ่มเข้ามาเป็นอีกช่องในเมนู <code>/is</code> ถ้ายังมีช่องว่างเหลือ ระบบนี้ยังรอทดสอบกับผู้เล่นหลายคน</p></div></details>
         <details><summary>ภารกิจส่งของทำได้บ่อยแค่ไหน</summary><div><p>แต่ละภารกิจทำได้ 1 ครั้งต่อผู้เล่นทุก 24 ชั่วโมง ระบบนี้ยังรอทดสอบเล่น</p></div></details>
-        <details><summary>ดูราคาร้านค้าได้ที่ไหน</summary><div><p>ในเกม เปิด <code>/shop</code> แล้วดูราคาซื้อและราคาขายบนไอเท็มแต่ละชิ้น ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด</p></div></details>
-        <details><summary>ขายของยังไง</summary><div><p>พิมพ์ <code>/sell</code> (หรือ <code>/market</code>) ใส่ของที่จะขายลงช่อง แล้วปิดหน้าต่าง ของที่ขายไม่ได้จะถูกคืน อย่าใส่โบราณวัตถุลงไป ระบบการขายจริงยังรอทดสอบ</p></div></details>
+        <details><summary>ดูราคาได้ที่ไหน</summary><div><p>ราคาขายแสดงบนไอเท็มในกระเป๋าของคุณ (Sell each ต่อชิ้น, Sell stack ทั้งกอง) ไอคอนในร้านไม่แสดงราคาทีละชิ้น ยอดรวมการซื้อจะแสดงตอนยืนยัน ตอนนี้เป็นราคาเริ่มต้นและอาจปรับก่อนเปิด</p></div></details>
+        <details><summary>ขายของยังไง</summary><div><p>พิมพ์ <code>/sell</code> (หรือ <code>/market</code>) ใส่ของลงกล่อง แล้วปิดหน้าต่าง ของที่ไม่มีในร้านก็ขายได้ในราคาชิ้นละ $0.01 โบราณวัตถุและกล่องที่มีโบราณวัตถุข้างในจะถูกคืน การจ่ายเงินของกล่องรุ่นใหม่ยังรอทดสอบ</p></div></details>
+        <details><summary>สวนฟื้นฟูคืออะไร</summary><div><p>ต้นแบบโครงการซ่อมเมืองทีละขั้นของแต่ละเกาะ บริจาค Stone Bricks 25, Grass Block 8 และ Oak Log 4 ผ่าน <code>/cityprojects</code> ยังเป็นต้นแบบเล็ก ๆ การซ่อมทั้งเมืองแบบนี้ยังเป็นแผนในอนาคต</p></div></details>
         <details><summary>มีเติมเงินหรือ VIP ไหม</summary><div><p>ยังไม่เปิด ไม่มีการรับชำระเงิน แพ็กเกจ หรือราคาใด ๆ ในตอนนี้ ดูรายละเอียดในส่วน <a href="#topup">ห้องเติมเงิน</a></p></div></details>
         <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ ตอนนี้ทดสอบกับ Java Edition</p></div></details>
         <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง เซิร์ฟใช้แพ็กฟอนต์ไทย ThaiFontFix ซึ่งเกมจะโหลดให้เองตอนเข้าเล่น แค่กดยอมรับ ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>

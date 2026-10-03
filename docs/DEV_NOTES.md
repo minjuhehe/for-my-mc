@@ -235,6 +235,14 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   return pending) and `/skyquests` (builder quest only). Everything else
   stays รอทดสอบ: farmer quest, 24-hour expiry, full bag, creating several
   islands, multi-member teams, team isolation, donation, chapter change.
+- **2026-10-03 update:** `/sell` is the universal 54-slot box (LostSkyWorth
+  1.1.0, `docs/UNIVERSAL_SELL.md`): shop price -> plain-material price ->
+  $0.01; Relics and Relic containers returned. Shown as รอทดสอบ until a
+  player test of its payout (only the older ESGUI box paid out). Prices are
+  shown in player inventory (Sell each / Sell stack), not on shop icons.
+  Restoration Garden prototype (`/cityprojects [go|donate]`, 25 Stone
+  Bricks / 8 Grass Block / 4 Oak Log): donation accepted, visual change
+  pending. Full-city incremental restoration stays a future plan.
 - **Shop prices are not on the website.** The shop is EconomyShopGUI's
   default catalog (`docs/SHOP.md`); the site tells players to read prices in
   game. The old six-item price tables were removed. Quest rewards stay.

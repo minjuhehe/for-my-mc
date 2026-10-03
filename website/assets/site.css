@@ -411,6 +411,8 @@ td .en { display: block; }
 .checklist li { display: flex; gap: 8px; align-items: baseline; }
 .checklist li > .badge { flex: none; }
 
+.garden { margin-top: 32px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 12px; }
+
 /* ---------- Team ---------- */
 .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .compare-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 10px; align-content: start; }
