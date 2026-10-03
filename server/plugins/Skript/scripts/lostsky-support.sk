@@ -74,7 +74,7 @@ command /supportgrant <player> <text> <text>:
         set {_p} to arg-1
         set {_sku} to lowercase arg-2
         set {_order} to arg-3
-        if {_order}.matches("[A-Za-z0-9_-]{6,64}") is false:
+        if {_order}.matches("[A-Za-z0-9_-]{6,64}") is not true:
             send "[Lost Sky] Invalid order ID: use 6-64 letters, digits, underscore or hyphen."
             stop
         set {_tier} to skySupportTier({_sku})
@@ -115,8 +115,8 @@ command /supporttestclear <player>:
     executable by: console
     trigger:
         set {_p} to arg-1
-        set {_name} to name of {_p}
-        if {_name}.matches("LostSkyTest[A-Z0-9]*") is false:
+        set {_name} to {_p}.getName()
+        if {_name}.matches("LostSkyTest[A-Z0-9]*") is not true:
             send "[Lost Sky] Diagnostic accounts only."
             stop
         delete {skysupport::tier::%uuid of {_p}%}

@@ -1,5 +1,11 @@
 # Supporter storefront preview
 
+Final17:24/17:25 reloads clean after exact-source replacement in server editor.
+Invalid order ID refused, valid grant and duplicate replay rechecked; open menu
+closed on reload. Cleanup validated using canonical Bukkit player name with no
+reflection error. Temporary whitelist/entitlements removed. /supporter directly
+opened the preview in the final client check as well.
+
 Live17:11 ICT,3October2026. Non-OP test account opened /topup and /style;
 product click charged nothing, player supportgrant refused, locked title refused.
 Console NOVA grant succeeded; same order replay skipped, conflicting SKU rejected.

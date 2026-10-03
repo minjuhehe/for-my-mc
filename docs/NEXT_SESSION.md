@@ -8,7 +8,9 @@ console-only idempotent grants. Tested NOVA/title unlock and reconnect retention
 locked title refusal, player grant refusal, order replay/conflict and no downgrade.
 Test data cleaned17:16. Payments remain closed by owner's choice; proposed prices
 and product list in SUPPORTER_STORE.md. Website8eec695 catalog preview pulled;
-Claude reports122 checks; final partial-test badge sync in progress aftera00d1a3.
+Claude reports122 initial checks; final partial-test badge sync9688f4c pulled.
+Final17:24/17:25 supporter reloads clean; exact-source editor verification avoids
+duplicate content. Invalid order validation and menu-close-on-reload verified.
 
 ## Live verification
 

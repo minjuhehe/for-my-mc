@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.4: Exact live source and fail-closed validation (2026-10-03)
+
+Replaced duplicate server-editor contents with verified exact source; canonical
+player name for bounded diagnostic cleanup, order validation fails closed.
+Final17:24/17:25 reloads clean; invalid order refused, valid grant/replay checked,
+open preview closes on reload. Test entitlements/whitelist cleaned. No command
+changes; website final partial-test badges pulled from9688f4c.
+
 ## 0.9.3: Website supporter status sync (2026-10-03)
 
 Website and checks only, from a00d1a3 live evidence. `/topup` and `/style`
