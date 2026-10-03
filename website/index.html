@@ -35,7 +35,7 @@
       <li><a href="#gallery">แผนที่</a></li>
       <li><a href="#start">เริ่มเล่น</a></li>
       <li><a href="#commands">คำสั่ง</a></li>
-      <li><a href="#topup">เติมเงิน</a></li>
+      <li><a href="#topup">ผู้สนับสนุน</a></li>
       <li><a href="#faq">คำถาม</a></li>
     </ul>
   </nav>
@@ -156,7 +156,8 @@
             <li><span class="badge b-draft">รอทดสอบ</span> ภารกิจส่งข้าวสาลี การรีเซ็ตหลังครบ 24 ชั่วโมงจริง และกรณีกระเป๋าเต็ม</li>
             <li><span class="badge b-draft">รอทดสอบ</span> สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
             <li><span class="badge b-draft">กำลังทำ</span> การตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
-            <li><span class="badge b-wait">ยังไม่เปิด</span> ห้องเติมเงิน ไม่มีการรับชำระเงินใด ๆ</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> เมนูตัวอย่างร้านผู้สนับสนุน (<code>/topup</code>, <code>/supporter</code>) และตู้แต่งตัว <code>/style</code></li>
+            <li><span class="badge b-wait">ยังไม่เปิด</span> การชำระเงิน: ร้านผู้สนับสนุนเป็นแค่ตัวอย่าง ไม่มีการรับชำระเงินใด ๆ</li>
             <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟสาธารณะ, ช่องทางติดต่อ, วันเปิด และการรองรับ Bedrock</li>
           </ul>
         </div>
@@ -217,7 +218,7 @@
           <a class="zone-link" href="#zone-market"><i class="sw sw-market" aria-hidden="true"></i><code>/market</code><span>ตลาด (หลังคาสีเขียว) · ช่องขายของ</span></a>
           <a class="zone-link" href="#zone-shop"><i class="sw sw-shop" aria-hidden="true"></i><code>/skyshop</code><span>ร้านค้า (หลังคาสีฟ้าอมเขียว) · ซื้อและขายตามหมวด</span></a>
           <a class="zone-link" href="#zone-quests"><i class="sw sw-quest" aria-hidden="true"></i><code>/skyquests</code><span>โถงภารกิจ (หลังคาสีม่วง) · ส่งของทุก 24 ชั่วโมง</span></a>
-          <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ห้องเติมเงิน (หลังคาสีทอง) · ยังไม่เปิด</span></a>
+          <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ร้านผู้สนับสนุน (หลังคาสีทอง) · ตัวอย่าง ยังไม่รับชำระเงิน</span></a>
           <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของเกาะที่เลือก</span></a>
           <p class="muted small">ราคาขายแสดงบนไอเท็มในกระเป๋าของคุณ (Sell each / Sell stack) ไม่ได้แสดงบนไอคอนร้าน ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม เมนูในเกมเป็นภาษาอังกฤษ</p>
         </div>
@@ -503,7 +504,9 @@
         <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านค้าเดียวกับ <code>/shop</code></span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดกล่องขายของ 54 ช่อง ใส่ของแล้วปิดหน้าต่างเพื่อขาย โบราณวัตถุจะถูกคืน (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง (ทดสอบแล้วกับภารกิจส่งหิน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>ห้องเติมเงิน ตอนนี้ยังไม่เปิด</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>เปิดหน้าตัวอย่างร้านผู้สนับสนุน ยังไม่รับชำระเงิน</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/supporter</code><div class="desc"><span>ดูแรงก์และฉายาพร้อมราคาที่เสนอ (หน้าเดียวกับ <code>/topup</code>)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/supporter" aria-label="คัดลอกคำสั่ง /supporter">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/style</code><div class="desc"><span>ตู้แต่งตัว: ใส่หรือซ่อนฉายาที่ปลดล็อกแล้ว</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/style" aria-label="คัดลอกคำสั่ง /style">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
         <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>เปิดเมนู Your Islands: เลือกเกาะ ไปเกาะ ไปเมืองของเกาะ หรือสร้างเกาะใหม่ (ใช้ <code>/islands</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
@@ -523,22 +526,81 @@
     </div>
   </section>
 
-  <!-- ============ เติมเงิน ============ -->
+  <!-- ============ ร้านผู้สนับสนุน (ตัวอย่าง) ============ -->
   <section id="topup" aria-labelledby="topup-h">
     <div class="wrap">
-      <div class="topup">
-        <div class="topup-head">
-          <span class="eyebrow">ห้องเติมเงิน</span>
-          <h2 id="topup-h">ยังไม่เปิด</h2>
-          <span class="badge b-wait">ยังไม่รับชำระเงิน</span>
-        </div>
-        <p>ตอนนี้ยังไม่มีแพ็กเกจ ราคา หรือช่องทางชำระเงิน โซนเติมเงินในฮับ (<code>/topup</code>) จะแจ้งว่ายังไม่เปิดเช่นกัน</p>
-        <ul class="topup-list">
-          <li>เมื่อเปิด จะประกาศช่องทางทางการบนหน้านี้และใน <code>/topup</code> ก่อนเท่านั้น</li>
-          <li>ทีมงานจะไม่ขอรหัสผ่านหรือข้อมูลบัตรของคุณ</li>
-          <li>อย่าโอนเงินให้ใครที่อ้างว่าเป็นทีมงานในตอนนี้</li>
-        </ul>
+      <div class="sec-head">
+        <span class="eyebrow">ร้านผู้สนับสนุน · ตัวอย่าง</span>
+        <h2 id="topup-h">แรงก์และฉายาสำหรับผู้สนับสนุน</h2>
+        <p class="muted">ของตกแต่งล้วน ซื้อครั้งเดียวใช้ได้ถาวร ไม่ช่วยให้เก่งขึ้นหรือรวยขึ้นในเกม</p>
       </div>
+      <div class="store-notice" role="note">
+        <span class="badge b-wait">ยังไม่รับชำระเงิน</span>
+        <p>ทุกราคาด้านล่างเป็น<b>ราคาที่เสนอ</b> ยังซื้อไม่ได้และอาจเปลี่ยนก่อนเปิดขาย ตอนนี้ยังไม่มีช่องทางชำระเงิน ไม่มีปุ่มซื้อ และไม่มีระบบตรวจสอบการชำระเงิน</p>
+      </div>
+
+      <h3 class="store-sub">แรงก์</h3>
+      <ul class="rank-grid">
+        <li class="rank-card rank-sky">
+          <div class="rank-top"><span class="rank-name">SKY</span><span class="rank-colour">สีฟ้าอมเขียว</span></div>
+          <p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">99</span> บาท</p>
+          <ul class="perk-list">
+            <li>ป้าย SKY และชื่อสีฟ้าอมเขียว ในแชตและรายชื่อผู้เล่น</li>
+          </ul>
+        </li>
+        <li class="rank-card rank-aurora">
+          <div class="rank-top"><span class="rank-name">AURORA</span><span class="rank-colour">สีม่วง</span></div>
+          <p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">199</span> บาท</p>
+          <ul class="perk-list">
+            <li>ป้าย AURORA และชื่อสีม่วง ในแชตและรายชื่อผู้เล่น</li>
+            <li>ได้ฉายา Builder</li>
+          </ul>
+        </li>
+        <li class="rank-card rank-nova">
+          <div class="rank-top"><span class="rank-name">NOVA</span><span class="rank-colour">สีทอง</span></div>
+          <p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">399</span> บาท</p>
+          <ul class="perk-list">
+            <li>ป้าย NOVA และชื่อสีทอง ในแชตและรายชื่อผู้เล่น</li>
+            <li>ได้ฉายาครบทั้ง 3 แบบ: Builder, Farmer และ Explorer</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3 class="store-sub">ฉายา</h3>
+      <ul class="title-grid">
+        <li class="title-card"><span class="title-name">Builder</span><span class="title-th">นักสร้าง</span><p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">39</span> บาท</p></li>
+        <li class="title-card"><span class="title-name">Farmer</span><span class="title-th">ชาวไร่</span><p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">39</span> บาท</p></li>
+        <li class="title-card"><span class="title-name">Explorer</span><span class="title-th">นักสำรวจ</span><p class="price"><span class="price-label">ราคาที่เสนอ</span><span class="price-num">39</span> บาท</p></li>
+      </ul>
+
+      <div class="store-info">
+        <div class="store-box">
+          <h3>ได้อะไร ไม่ได้อะไร</h3>
+          <ul class="plain">
+            <li>ทุกอย่างเป็นของตกแต่ง ผูกกับบัญชี ใช้ได้ถาวร ขาย ทิ้ง หรือแลกเปลี่ยนไม่ได้</li>
+            <li>ถ้ามีหลายแรงก์ จะใช้แรงก์ที่สูงที่สุดเสมอ ไม่ถูกลดระดับ</li>
+            <li><b>ไม่ได้</b>เงินในเกม อุปกรณ์ ไอเท็ม เกาะใหญ่ขึ้น ความคืบหน้าเมืองฟื้นฟู หรือสิทธิ์ทีมงาน</li>
+          </ul>
+        </div>
+        <div class="store-box">
+          <h3>ดูในเกม</h3>
+          <ul class="checklist">
+            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/topup</code> หรือ <code>/supporter</code> เปิดหน้าตัวอย่างร้าน (หรือคุยกับ Sky Concierge ในฮับ) กดที่สินค้าจะแจ้งว่ายังไม่รับชำระเงิน</span></li>
+            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/style</code> ตู้แต่งตัว เลือกใส่ฉายาที่ปลดล็อกแล้ว หรือซ่อนฉายา</span></li>
+          </ul>
+        </div>
+        <div class="store-box">
+          <h3>แผนในอนาคต</h3>
+          <p><span class="badge b-plan">แผน · ยังไม่ขาย</span></p>
+          <p>เอฟเฟกต์อนุภาค สัตว์เลี้ยง สกินเฟอร์นิเจอร์ และโมเดลพิเศษ ยังไม่ได้สร้างและไม่อยู่ในรายการด้านบน จะไม่มีกล่องสุ่มแบบเสียเงิน</p>
+        </div>
+      </div>
+
+      <ul class="topup-list">
+        <li>เมื่อเปิดรับชำระเงิน จะประกาศช่องทางทางการบนหน้านี้และใน <code>/topup</code> ก่อนเท่านั้น</li>
+        <li>ทีมงานจะไม่ขอรหัสผ่านหรือข้อมูลบัตรของคุณ</li>
+        <li>อย่าโอนเงินให้ใครที่อ้างว่าขายแรงก์หรือเป็นทีมงานในตอนนี้</li>
+      </ul>
     </div>
   </section>
 
@@ -560,7 +622,9 @@
         <details><summary>ดูราคาได้ที่ไหน</summary><div><p>ราคาขายแสดงบนไอเท็มในกระเป๋าของคุณ (Sell each ต่อชิ้น, Sell stack ทั้งกอง) ไอคอนในร้านไม่แสดงราคาทีละชิ้น ยอดรวมการซื้อจะแสดงตอนยืนยัน ตอนนี้เป็นราคาเริ่มต้นและอาจปรับก่อนเปิด</p></div></details>
         <details><summary>ขายของยังไง</summary><div><p>พิมพ์ <code>/sell</code> (หรือ <code>/market</code>) ใส่ของลงกล่อง แล้วปิดหน้าต่าง ของที่ไม่มีในร้านก็ขายได้ในราคาชิ้นละ $0.01 โบราณวัตถุและกล่องที่มีโบราณวัตถุข้างในจะถูกคืน</p></div></details>
         <details><summary>สวนฟื้นฟูคืออะไร</summary><div><p>ต้นแบบโครงการซ่อมเมืองทีละขั้นของแต่ละเกาะ บริจาค Stone Bricks 25, Grass Block 8 และ Oak Log 4 ผ่าน <code>/cityprojects</code> ยังเป็นต้นแบบเล็ก ๆ การซ่อมทั้งเมืองแบบนี้ยังเป็นแผนในอนาคต</p></div></details>
-        <details><summary>มีเติมเงินหรือ VIP ไหม</summary><div><p>ยังไม่เปิด ไม่มีการรับชำระเงิน แพ็กเกจ หรือราคาใด ๆ ในตอนนี้ ดูรายละเอียดในส่วน <a href="#topup">ห้องเติมเงิน</a></p></div></details>
+        <details><summary>มีแรงก์หรือ VIP ไหม</summary><div><p>มีตัวอย่างแรงก์ SKY, AURORA, NOVA และฉายา 3 แบบ พร้อมราคาที่เสนอ ดูได้ใน <a href="#topup">ร้านผู้สนับสนุน</a> และ <code>/supporter</code> แต่ยังซื้อไม่ได้ ยังไม่รับชำระเงิน</p></div></details>
+        <details><summary>ซื้อแรงก์แล้วได้เปรียบไหม</summary><div><p>ไม่ ทุกอย่างเป็นของตกแต่ง เช่น สีชื่อ ป้าย และฉายา ไม่ได้เงินในเกม อุปกรณ์ หรือเกาะใหญ่ขึ้น</p></div></details>
+        <details><summary>ตอนนี้โอนเงินซื้อได้ไหม</summary><div><p>ไม่ได้ ยังไม่มีช่องทางชำระเงิน ถ้ามีคนเสนอขายแรงก์หรือขอให้โอนเงิน อย่าโอน ช่องทางจริงจะประกาศบนหน้านี้และใน <code>/topup</code> ก่อน</p></div></details>
         <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ ตอนนี้ทดสอบกับ Java Edition</p></div></details>
         <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง เซิร์ฟใช้แพ็กฟอนต์ไทย ThaiFontFix ซึ่งเกมจะโหลดให้เองตอนเข้าเล่น แค่กดยอมรับ ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>
         <details><summary>ในเกมใช้ภาษาอะไร</summary><div><p>เมนู ร้านค้า และภารกิจในเกมเป็นภาษาอังกฤษ ส่วนเว็บนี้เป็นภาษาไทย ชื่อไอเท็มทั่วไปจะแสดงตามภาษาที่ตั้งในเกมของคุณ</p></div></details>

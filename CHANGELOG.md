@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.1: Website supporter store preview (2026-10-03)
+
+Website and checks only, from 0.9.0 and `docs/SUPPORTER_STORE.md`. `#topup`
+is now a supporter catalog preview: SKY 99, AURORA 199 (+ Builder), NOVA 399
+(+ all three titles), Builder/Farmer/Explorer titles 39 each, all marked as
+proposed THB prices. Cosmetic and permanent, no gameplay advantage. Payments
+stay closed: no buy buttons, checkout, payment verification, QR or payment
+details. Future particles/pets/furniture/custom models shown as a plan, not
+sold. Site lists `/supporter` and `/style` (23 -> 25 commands), all store
+commands awaiting test. FAQ updated. Checks 122 (planted false claims caught).
+No IP, map unfinished. No server files touched.
+
 ## 0.9.0: Supporter storefront preview (2026-10-03)
 
 Added three cosmetic rank packages and three account-bound titles, proposed THB

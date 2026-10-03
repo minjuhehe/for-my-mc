@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-03T09:58:14.641Z
+Run: 2026-10-03T10:11:00.636Z
 
-**112/112 passed**
+**122/122 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-03T09:58:14.641Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (764 elements)
+- ✅ text contrast meets WCAG AA (869 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-03T09:58:14.641Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (764 elements)
+- ✅ text contrast meets WCAG AA (869 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-03T09:58:14.641Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (764 elements)
+- ✅ text contrast meets WCAG AA (869 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-03T09:58:14.641Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (764 elements)
+- ✅ text contrast meets WCAG AA (869 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -83,13 +83,23 @@ Run: 2026-10-03T09:58:14.641Z
 - ✅ no shared server-wide city wording
 - ✅ no player counts, online status, reviews or "open" claims
 - ✅ no form or input fields
-- ✅ top-up says not open, no prices or payment details
+- ✅ store: payments closed, no checkout, no payment verification
+- ✅ store: no payment details (PromptPay, bank, account number, QR, wallet, card entry)
+- ✅ store: no buy/pay buttons, external links, images or forms in the section
+- ✅ store: SKY 99, AURORA 199, NOVA 399, Builder/Farmer/Explorer 39 each, every price labelled proposed
+- ✅ store: rank colours and titles (SKY cyan; AURORA purple + Builder; NOVA gold + all three)
+- ✅ store: cosmetic, permanent, account-bound, no money/gear/island/progress advantage
+- ✅ store: three rank names in three different colours
+- ✅ store: /topup, /supporter preview and /style wardrobe described, awaiting test (not claimed tested)
+- ✅ store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates
+- ✅ store: no capes, and no THB prices outside the store section
+- ✅ FAQ: ranks preview, no advantage, cannot pay yet
 - ✅ top-up has no technical wording
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
 - ✅ commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go
 - ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate
-- ✅ garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test
+- ✅ garden open/go, /topup, /supporter, /style, /city, donate, slot, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
 - ✅ tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test
 - ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
@@ -127,9 +137,9 @@ Run: 2026-10-03T09:58:14.641Z
 
 ## Command filters and copy
 
-- ✅ 23 commands listed
+- ✅ 25 commands listed
 - ✅ filter "hub" shows 4 commands
-- ✅ filter "shop" shows 7 commands
+- ✅ filter "shop" shows 9 commands
 - ✅ filter "island" shows 5 commands
 - ✅ filter "city" shows 7 commands
 - ✅ filter works with the keyboard
@@ -150,7 +160,7 @@ Run: 2026-10-03T09:58:14.641Z
 
 - ✅ reduced motion turns off all animation
 - ✅ no-JS: all 5 chapters readable
-- ✅ no-JS: all 23 commands readable
+- ✅ no-JS: all 25 commands readable
 - ✅ no-JS: menu links reachable
 - ✅ no-JS: copy and filter buttons hidden
 - ✅ no-JS: no horizontal scroll

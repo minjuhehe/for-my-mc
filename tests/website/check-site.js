@@ -204,7 +204,22 @@ const NAV_STATE = () => {
   check('no player counts, online status, reviews or "open" claims', !/ผู้เล่นออนไลน์|\d+\s*คนออนไลน์|รีวิว|เปิดให้เล่นแล้ว/.test(text));
   check('no form or input fields', (await page.$$('form, input, select, textarea')).length === 0);
   const topup = await page.textContent('#topup');
-  check('top-up says not open, no prices or payment details', /ยังไม่เปิด/.test(topup) && !/\$\d|฿|บาท|พร้อมเพย์|PromptPay|ธนาคาร/i.test(topup));
+  // Supporter store is a preview only (docs/SUPPORTER_STORE.md): proposed THB prices, no way to pay.
+  check('store: payments closed, no checkout, no payment verification', /ยังไม่รับชำระเงิน/.test(topup) && /ยังซื้อไม่ได้/.test(topup) && /ไม่มีปุ่มซื้อ/.test(topup) && /ไม่มีระบบตรวจสอบการชำระเงิน/.test(topup));
+  check('store: no payment details (PromptPay, bank, account number, QR, wallet, card entry)', !/พร้อมเพย์|PromptPay|ธนาคาร|เลขบัญชี|QR|TrueMoney|ทรูมันนี่|วอลเล็ท|wallet|กรอกบัตร|\$\d/i.test(topup));
+  check('store: no buy/pay buttons, external links, images or forms in the section', (await page.$$('#topup button, #topup a[href^="http"], #topup img, #topup form, #topup input, #topup iframe')).length === 0 && !/ซื้อเลย|ชำระเงินเลย|สั่งซื้อ|เพิ่มลงตะกร้า|checkout/i.test(topup));
+  const items = await page.$$eval('#topup .rank-card, #topup .title-card', cs => cs.map(c => [c.querySelector('.rank-name, .title-name').textContent, c.querySelector('.price-num').textContent, !!c.querySelector('.price-label') && /ราคาที่เสนอ/.test(c.querySelector('.price-label').textContent)]));
+  check('store: SKY 99, AURORA 199, NOVA 399, Builder/Farmer/Explorer 39 each, every price labelled proposed', JSON.stringify(items.map(i => i[0] + ':' + i[1])) === JSON.stringify(['SKY:99', 'AURORA:199', 'NOVA:399', 'Builder:39', 'Farmer:39', 'Explorer:39']) && items.every(i => i[2]) && /ทุกราคา[\s\S]*ราคาที่เสนอ/.test(topup), JSON.stringify(items));
+  const ranks = await page.$$eval('#topup .rank-card', cs => cs.map(c => c.textContent));
+  check('store: rank colours and titles (SKY cyan; AURORA purple + Builder; NOVA gold + all three)', /ฟ้าอมเขียว/.test(ranks[0]) && !/ฉายา/.test(ranks[0]) && /ม่วง/.test(ranks[1]) && /Builder/.test(ranks[1]) && !/Farmer|Explorer/.test(ranks[1]) && /ทอง/.test(ranks[2]) && /Builder[\s\S]*Farmer[\s\S]*Explorer/.test(ranks[2]));
+  check('store: cosmetic, permanent, account-bound, no money/gear/island/progress advantage', /ของตกแต่ง/.test(topup) && /ถาวร/.test(topup) && /ผูกกับบัญชี/.test(topup) && /ไม่ได้เงินในเกม/.test(topup) && /อุปกรณ์/.test(topup) && /เกาะใหญ่ขึ้น/.test(topup) && /ความคืบหน้าเมืองฟื้นฟู/.test(topup));
+  const rankColours = await page.$$eval('#topup .rank-name', ns => ns.map(n => getComputedStyle(n).color));
+  check('store: three rank names in three different colours', new Set(rankColours).size === 3, rankColours.join(' | '));
+  check('store: /topup, /supporter preview and /style wardrobe described, awaiting test (not claimed tested)', /\/topup[\s\S]*\/supporter[\s\S]*ตัวอย่าง/.test(topup) && /\/style[\s\S]*ตู้แต่งตัว/.test(topup) && (await page.$$eval('#topup .badge', bs => bs.map(b => b.textContent))).every(b => !/ทดสอบแล้ว|ทดสอบบางส่วน|ยืนยันแล้ว/.test(b)));
+  const future = await page.$eval('#topup .store-box:last-child', b => b.textContent);
+  check('store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates', /แผน/.test(future) && /ยังไม่ขาย/.test(future) && ['อนุภาค', 'สัตว์เลี้ยง', 'เฟอร์นิเจอร์', 'โมเดลพิเศษ'].every(w => future.includes(w)) && /ไม่มีกล่องสุ่ม/.test(future) && !/อนุภาค|สัตว์เลี้ยง|เฟอร์นิเจอร์/.test(await page.$$eval('#topup .rank-card, #topup .title-card', cs => cs.map(c => c.textContent).join(' '))));
+  check('store: no capes, and no THB prices outside the store section', !/ผ้าคลุม|\bcape/i.test(topup) && !/บาท|฿|THB/.test(text.replace(topup, '')));
+  check('FAQ: ranks preview, no advantage, cannot pay yet', /มีแรงก์หรือ VIP ไหม[\s\S]*ยังซื้อไม่ได้/.test(await page.textContent('#faq')) && /ซื้อแรงก์แล้วได้เปรียบไหม[\s\S]*ไม่/.test(await page.textContent('#faq')) && /ตอนนี้โอนเงินซื้อได้ไหม[\s\S]*ไม่ได้/.test(await page.textContent('#faq')));
   check('top-up has no technical wording', !/แบบฟอร์ม|form|backend|HTML/i.test(topup));
   check('footer date is 3 October 2026', /อัปเดตหน้านี้ล่าสุด 3 ตุลาคม 2026/.test(await page.textContent('footer')));
   check('hub shown as installed, not "not pasted"', /ติดตั้งแล้ว/.test(await page.textContent('#status')) && !/ยังไม่ได้วาง|ยังไม่ติดตั้ง|รอติดตั้ง/.test(text));
@@ -213,7 +228,7 @@ const NAV_STATE = () => {
   const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
   check('commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/sell,/is,/city go', JSON.stringify(badges));
   check('commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/cityprojects donate', JSON.stringify(badges));
-  check('garden open/go, /topup, /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/topup', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  check('garden open/go, /topup, /supporter, /style, /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/topup', '/supporter', '/style', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
   const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
   check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
   const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
@@ -264,14 +279,14 @@ const NAV_STATE = () => {
   check('only one tab is in the Tab order', (await page.$$eval('[role=tab]', ts => ts.filter(t => t.tabIndex === 0).length)) === 1);
 
   group = 'Command filters and copy';
-  check('23 commands listed', (await visibleCmds(page)).length === 23);
-  for (const [g, n] of Object.entries({ hub: 4, shop: 7, island: 5, city: 7 })) {
+  check('25 commands listed', (await visibleCmds(page)).length === 25);
+  for (const [g, n] of Object.entries({ hub: 4, shop: 9, island: 5, city: 7 })) {
     await page.click(`.chip[data-filter="${g}"]`);
     const v = await visibleCmds(page);
     check(`filter "${g}" shows ${n} commands`, v.length === n && v.every(x => x === g), v.join(','));
   }
   await page.focus('.chip[data-filter="all"]'); await page.keyboard.press('Enter');
-  check('filter works with the keyboard', (await visibleCmds(page)).length === 23 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
+  check('filter works with the keyboard', (await visibleCmds(page)).length === 25 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
   for (const cmd of ['/city go', '/sell', '/spawn']) {
     await page.click(`.copy[data-copy="${cmd}"]`);
     await page.waitForTimeout(100);
@@ -302,7 +317,7 @@ const NAV_STATE = () => {
   const nj = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
   const np = await nj.newPage(); await np.goto(URL);
   check('no-JS: all 5 chapters readable', (await np.$$eval('[role=tabpanel]', ps => ps.filter(p => p.getBoundingClientRect().height > 0).length)) === 5);
-  check('no-JS: all 23 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 23);
+  check('no-JS: all 25 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 25);
   check('no-JS: menu links reachable', await np.isVisible('.nav-links a[href="#topup"]'));
   check('no-JS: copy and filter buttons hidden', !(await np.isVisible('.filters')) && !(await np.isVisible('.copy')));
   check('no-JS: no horizontal scroll', (await np.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 0);

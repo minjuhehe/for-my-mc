@@ -265,6 +265,16 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   Still รอทดสอบ: economy failure and restart with the box open. Garden:
   server self-test passed 3 stages; player donation visual, restart
   persistence and multi-team isolation pending. Checks: 112.
+- **Supporter store preview (website `#topup`, after 88c4eae):** mirrors
+  `docs/SUPPORTER_STORE.md`. SKY 99 (cyan), AURORA 199 (purple + Builder),
+  NOVA 399 (gold + all three titles), Builder/Farmer/Explorer 39 each; every
+  price labelled ราคาที่เสนอ (proposed THB). Cosmetic, permanent, account
+  bound, no money/gear/island/progress advantage. No buy buttons, payment
+  details, QR or external links; checks forbid them. `/topup`, `/supporter`
+  and `/style` stay รอทดสอบ until the owner reports the runtime menu test.
+  Particles, pets, furniture skins and custom models shown only as แผน ·
+  ยังไม่ขาย. If prices or SKUs change, update the page and the store check in
+  `tests/website/check-site.js` together. Commands on site: 25. Checks: 122.
 - **Shop prices are not on the website.** The shop is EconomyShopGUI's
   default catalog (`docs/SHOP.md`); the site tells players to read prices in
   game. The old six-item price tables were removed. Quest rewards stay.
