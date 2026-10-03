@@ -3,6 +3,10 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.5: Prepared controlled in-game diagnostic client (2026-10-03)
+
+Added stdin-driven Mineflayer test client and fixture/cleanup instructions. Restricted temporary account names; no auto world actions or owner impersonation. Syntax check passed. Dependency installed locally, but whitelist/connection/live tests were not performed after panel logout. No player command changed.
+
 ## 0.8.4: Universal selling and clearer restoration feedback (2026-10-03)
 
 Owner requested inventory-only prices and all vanilla items sellable. Added shared pricing/universal sell box with exact shop quotes, normal-material variant pricing and0.01 fallback; protects Relics and containers holding them. Menu icons/cursor no longer get injected prices; ESGUI item price lore hidden. /sell, /sellgui, /market and NPC route to /lssell. Added console-only lsworthcheck. Garden now reports delivery totals and completed stages, refreshes its menu and clearly points to its separate warp; /city projects [go] aliases added. Live1.1.0 and all scripts started cleanly. Local1.1.1 container refinement awaits MineLan login;597 slot checks and70 island checks passed. Universal payout/rendered client tests pending.
