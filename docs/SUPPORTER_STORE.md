@@ -1,5 +1,20 @@
 # Supporter storefront preview
 
+## Rank abilities
+
+Higher ranks include previous abilities. SKY: cloud aura. AURORA: cloud/enchant
+auras and arrival chime. NOVA: all auras including halo, nova arrival sparkle,
+/celebrate burst with30s cooldown. /perks opens selection; /aura off and /arrival
+off disable them. Wardrobe button links to /perks. Effects are sent only to their
+owner in the lobby, never broadcast to other clients; no firework entity,
+explosion, flight, damage or economy modifier. Choose effects explicitly; defaults
+off. Every10ticks3-4 particles per active owner; halo4points. Perks are cosmetic.
+
+Persistent keys: skysupport::aura/arrival/celebrated by UUID. Cooldown survives
+reconnect. skyperks::menu is temporary. Rank checked at selection and emission;
+no effects outside lobby. Diagnostic cleanup also removes those three keys.
+Effects packet delivery and human rendering are separate verification scopes.
+
 Final17:24/17:25 reloads clean after exact-source replacement in server editor.
 Invalid order ID refused, valid grant and duplicate replay rechecked; open menu
 closed on reload. Cleanup validated using canonical Bukkit player name with no

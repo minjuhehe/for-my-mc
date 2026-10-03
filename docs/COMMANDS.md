@@ -21,6 +21,10 @@ Columns:
 | `/topup` | Open supporter storefront preview; payments closed | none | lostsky-market.sk | preview |
 | `/supporter` | Preview proposed ranks and title products | none | lostsky-support.sk | preview |
 | `/style` | Equip an unlocked cosmetic title | none | lostsky-support.sk | client tested |
+| `/perks` | Choose personal lobby rank effects | rank gates per effect | lostsky-perks.sk | testing |
+| `/aura [off/cloud/enchant/halo]` | Select or disable lobby aura | SKY/AURORA/NOVA | lostsky-perks.sk | testing |
+| `/arrival <off/chime/nova>` | Choose personal lobby join effect | AURORA/NOVA | lostsky-perks.sk | testing |
+| `/celebrate` | Personal lobby sparkle burst,30s cooldown | NOVA | lostsky-perks.sk | testing |
 | `supportgrant <online-player> <sku> <order-id>` | Grant cosmetic entitlement once per order ID | console only | lostsky-support.sk | client tested |
 | `supporttestclear <online-player>` | Clear only LostSkyTest diagnostic entitlement fixtures | console only | lostsky-support.sk | internal diagnostic |
 

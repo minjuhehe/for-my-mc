@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.9.5: Rank abilities (2026-10-03)
+
+Added functional personal lobby cloud/enchant/halo auras, arrival effects and
+NOVA celebration with30s cooldown. Higher tiers include earlier abilities.
+/perks, /aura, /arrival, /celebrate added; /style links to selection. Preferences
+persist by UUID and actual tier is checked again on emission. Payments stay closed.
+
 ## 0.9.4: Exact live source and fail-closed validation (2026-10-03)
 
 Replaced duplicate server-editor contents with verified exact source; canonical

@@ -1,5 +1,10 @@
 # Developer Notes
 
+Rank effects in lostsky-perks.sk read same skysupport tier, store aura/arrival/
+celebrated UUID preferences, and send personal particles/sounds only in lobby.
+/perks, /aura, /arrival and /celebrate use direct tier gates; no LP permission
+expansion. Wardrobe links to perks; cleanup removes effect preferences/cooldown.
+
 Supporter runtime17:11-17:16: syntax corrected and tested console-only/order
 dedupe/conflict, locked wardrobe, title selection and rank/selection reconnect.
 Test entitlements cleared. Menu lifecycle closes inventories on script reload.

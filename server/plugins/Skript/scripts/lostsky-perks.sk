@@ -1,0 +1,185 @@
+# Personal lobby cosmetics. No world/entity changes or gameplay privileges.
+import:
+    org.bukkit.Particle
+
+function skyPerkNeed(effect: text) :: number:
+    if {_effect} is "cloud":
+        return 1
+    if {_effect} is "enchant":
+        return 2
+    if {_effect} is "halo":
+        return 3
+    return 0
+
+function skyPerkDraw(p: player, effect: text):
+    if name of {_p}'s world is not "lobby":
+        stop
+    if ({skysupport::tier::%uuid of {_p}%} ? 0) < skyPerkNeed({_effect}):
+        stop
+    set {_loc} to {_p}.getLocation().clone()
+    if {_effect} is "cloud":
+        {_loc}.add(0, 0.15, 0)
+        {_p}.spawnParticle(Particle.CLOUD, {_loc}, 3, 0.2, 0.05, 0.2, 0.01)
+    else if {_effect} is "enchant":
+        {_loc}.add(0, 1, 0)
+        {_p}.spawnParticle(Particle.ENCHANT, {_loc}, 4, 0.3, 0.4, 0.3, 0.01)
+    else if {_effect} is "halo":
+        {_loc}.add(0, 2.15, 0)
+        loop 4 times:
+            set {_point} to {_loc}.clone()
+            if loop-number is 1:
+                {_point}.add(0.45, 0, 0)
+            else if loop-number is 2:
+                {_point}.add(0, 0, 0.45)
+            else if loop-number is 3:
+                {_point}.add(-0.45, 0, 0)
+            else:
+                {_point}.add(0, 0, -0.45)
+            {_p}.spawnParticle(Particle.END_ROD, {_point}, 1, 0, 0, 0, 0)
+
+function skyPerkAura(p: player, effect: text):
+    if {_effect} is "off":
+        delete {skysupport::aura::%uuid of {_p}%}
+        send "&6[Lost Sky] &aAura disabled." to {_p}
+        stop
+    set {_need} to skyPerkNeed({_effect})
+    if {_need} is 0:
+        send "&6[Lost Sky] &eUse /aura off|cloud|enchant|halo." to {_p}
+        stop
+    if ({skysupport::tier::%uuid of {_p}%} ? 0) < {_need}:
+        send "&6[Lost Sky] &eThis aura is locked for your rank." to {_p}
+        stop
+    set {skysupport::aura::%uuid of {_p}%} to {_effect}
+    send "&6[Lost Sky] &aAura selected: %{_effect}%. &7Visible to you in the lobby only." to {_p}
+
+function skyPerkMenu(p: player):
+    set {_inv} to chest inventory with 3 rows named "&6Lost Sky | Rank Abilities"
+    set {_tier} to {skysupport::tier::%uuid of {_p}%} ? 0
+    set slot 4 of {_inv} to book named "&ePersonal Lobby Effects" with lore "&7Your rank level: %{_tier}% / 3" and "&7Higher ranks include earlier abilities" and "&7Only you see/hear your effects" and "&7No damage, flight or gameplay boosts"
+    set slot 10 of {_inv} to feather named "&bCloud Aura - SKY+" with lore "&7Soft clouds near your feet" and "&eClick to select"
+    set slot 12 of {_inv} to enchanting table named "&dEnchant Aura - AURORA+" with lore "&7Magic particles around you" and "&eClick to select"
+    set slot 14 of {_inv} to end rod named "&6Halo - NOVA" with lore "&7Four lights above your head" and "&eClick to select"
+    set slot 16 of {_inv} to note block named "&dArrival Chime - AURORA+" with lore "&7Personal chime when joining at the lobby" and "&eClick to enable"
+    set slot 20 of {_inv} to firework star named "&6Celebrate - NOVA" with lore "&7Personal sparkle burst in the lobby" and "&7Cooldown: 30 seconds" and "&7No firework entity or explosion"
+    set slot 22 of {_inv} to barrier named "&cDisable All Effects"
+    set slot 24 of {_inv} to nether star named "&6Nova Arrival - NOVA" with lore "&7Personal sparkle and chime on join" and "&eClick to enable"
+    set slot 26 of {_inv} to arrow named "&eBack to Wardrobe"
+    set {skyperks::menu::%uuid of {_p}%} to {_inv}
+    open {_inv} to {_p}
+
+command /perks:
+    executable by: players
+    trigger:
+        skyPerkMenu(player)
+
+command /aura [<text>]:
+    executable by: players
+    trigger:
+        if arg-1 is not set:
+            skyPerkMenu(player)
+        else:
+            skyPerkAura(player, lowercase arg-1)
+
+command /arrival [<text>]:
+    executable by: players
+    trigger:
+        if arg-1 is "off":
+            delete {skysupport::arrival::%uuid of player%}
+            send "&6[Lost Sky] &aArrival effect disabled."
+            stop
+        set {_need} to 2
+        if arg-1 is "nova":
+            set {_need} to 3
+        else if arg-1 is not "chime":
+            send "&6[Lost Sky] &eUse /arrival off|chime|nova."
+            stop
+        if ({skysupport::tier::%uuid of player%} ? 0) < {_need}:
+            send "&6[Lost Sky] &eThis arrival effect is locked for your rank."
+            stop
+        set {skysupport::arrival::%uuid of player%} to arg-1
+        send "&6[Lost Sky] &aArrival effect selected: %arg-1%."
+
+command /celebrate:
+    executable by: players
+    trigger:
+        if ({skysupport::tier::%uuid of player%} ? 0) < 3:
+            send "&6[Lost Sky] &eCelebrate requires NOVA."
+            stop
+        if name of player's world is not "lobby":
+            send "&6[Lost Sky] &eCelebrate is available in the lobby only."
+            stop
+        if {skysupport::celebrated::%uuid of player%} is set:
+            if difference between now and {skysupport::celebrated::%uuid of player%} < 30 seconds:
+                send "&6[Lost Sky] &ePlease wait 30 seconds between celebrations."
+                stop
+        set {skysupport::celebrated::%uuid of player%} to now
+        set {_loc} to player.getLocation().clone()
+        {_loc}.add(0, 1, 0)
+        player.spawnParticle(Particle.END_ROD, {_loc}, 20, 0.6, 0.6, 0.6, 0.03)
+        play sound "block.amethyst_block.chime" with volume 0.5 to player
+        send "&6[Lost Sky] &aCelebration played!"
+
+every 10 ticks:
+    loop all players:
+        if {skysupport::aura::%uuid of loop-player%} is set:
+            skyPerkDraw(loop-player, {skysupport::aura::%uuid of loop-player%})
+
+on join:
+    wait 20 ticks
+    if player is online:
+        if name of player's world is "lobby":
+            set {_effect} to {skysupport::arrival::%uuid of player%} ? "off"
+            set {_tier} to {skysupport::tier::%uuid of player%} ? 0
+            if {_tier} >= 2:
+                if {_effect} is "chime" or "nova":
+                    play sound "block.amethyst_block.chime" with volume 0.5 to player
+            if {_tier} >= 3:
+                if {_effect} is "nova":
+                    set {_loc} to player.getLocation().clone()
+                    {_loc}.add(0, 1, 0)
+                    player.spawnParticle(Particle.END_ROD, {_loc}, 12, 0.5, 0.5, 0.5, 0.02)
+
+on inventory click:
+    if player's current inventory is not {skyperks::menu::%uuid of player%}:
+        stop
+    cancel event
+    if clicked inventory is not {skyperks::menu::%uuid of player%}:
+        stop
+    set {_slot} to index of event-slot
+    close player's inventory
+    if {_slot} is 10:
+        skyPerkAura(player, "cloud")
+    else if {_slot} is 12:
+        skyPerkAura(player, "enchant")
+    else if {_slot} is 14:
+        skyPerkAura(player, "halo")
+    else if {_slot} is 16:
+        execute player command "arrival chime"
+    else if {_slot} is 20:
+        execute player command "celebrate"
+    else if {_slot} is 22:
+        skyPerkAura(player, "off")
+        execute player command "arrival off"
+    else if {_slot} is 24:
+        execute player command "arrival nova"
+    else if {_slot} is 26:
+        execute player command "style"
+
+on inventory drag:
+    if player's current inventory is {skyperks::menu::%uuid of player%}:
+        cancel event
+
+on inventory close:
+    if event-inventory is {skyperks::menu::%uuid of player%}:
+        delete {skyperks::menu::%uuid of player%}
+
+on quit:
+    delete {skyperks::menu::%uuid of player%}
+
+on load:
+    delete {skyperks::menu::*}
+
+on unload:
+    loop all players:
+        if loop-player's current inventory is {skyperks::menu::%uuid of loop-player%}:
+            close loop-player's inventory
