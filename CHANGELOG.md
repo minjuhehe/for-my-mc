@@ -471,3 +471,5 @@ Notes for developers:
 - Live selector reload fixed: use the function's explicit player parameter when executing native island creation. Both island and city scripts reload successfully.
 
 - Activate /is selection menu with3 concurrent-island slots and separate teams; preserve other islands when accepting team invites. Native config installed and startup checked, player tests pending.
+
+- Save accepted future city restoration design: materials fund staged construction per island/team; no map changes applied. Record owner confirmation of basic island selector/warp flow.
