@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.9: Detailed Sky Harbor spawn (2026-10-03)
+
+AI builder and independent reviewer added detailed hall facades and roof ridges,
+four watchtowers, a vaulted city observatory, floating amethyst crystal,
+striped produce stalls, fenced sailing docks, garden parterres and banners.
+Spawn origin and seven NPC anchors preserved; all independently reachable
+with3-block air clearance.121x112x121,88080 blocks,65 palette states,
+zero embedded entities or clipped writes. No commands/permissions changed.
+Pre-update live world cloned as lobby_pre_detail_20261003 for rollback.
+Live paste succeeded19:06:26; spawn floor, floating crystal and retained NPC
+presence confirmed. World save completed19:06:48. Human visual review pending.
+
 ## 0.9.8: Flying restoration blocks (2026-10-03)
 
 Garden construction now animates matching block displays from3 blocks sideways

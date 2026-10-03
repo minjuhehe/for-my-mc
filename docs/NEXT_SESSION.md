@@ -1,5 +1,11 @@
 # Next session: Lost Sky state, 3 October 2026
 
+Latest19:07: detailed harbor spawn installed; /lshubbuild resulttrue19:06:26.
+Independent AI geometry review: all7 anchors reachable,3air headroom, dock
+rails complete, zero generated entities; offline render inspected. Live spawn
+floor/crystal/NPC presence checks passed. World saved; rollback world clone
+lobby_pre_detail_20261003 confirmed. Human in-game visual review pending.
+
 Latest animation update: Garden now flies block displays before each placement.
 Final18:52 reload clean; three-stage isolated test passed18:54:05 with25/8/4
 blocks and no pending flights. Fixture footprint cleaned. No player materials used.

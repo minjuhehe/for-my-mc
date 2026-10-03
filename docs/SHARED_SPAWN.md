@@ -59,3 +59,15 @@ chapter 1 -> 5 -> 1 replacement passed live. Team creation, warp, donation
 and real-player commerce remain unverified. The owner considers the map a
 20% foundation and requests decoration deferred while systems are completed.
 Never connect global chapter unlocks to re-pasting the shared spawn.
+
+## Detailed harbor update, 3 October
+
+Owner requested collaborative AI decoration. Builder produced the updated
+hub-market.js and spawn_hub.schem; separate reviewer checked flat-floor
+reachability from spawn to all7 NPC anchors,3air headroom, outer dock fences,
+unchanged dimensions/origin and zero embedded entities. Offline isometric and
+top previews are in lobby/preview/iso_spawn_hub.png and top_spawn_hub.png.
+Live pre-detail lobby saved and cloned as lobby_pre_detail_20261003.
+Added roofs/facades/watchtowers, city observatory, amethyst centerpiece,
+striped stalls, docks, gardens and banners. Systems and NPC locations remain
+the same. Human in-game visual review is still required.

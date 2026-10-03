@@ -77,5 +77,111 @@ module.exports = function buildHub() {
   }
   for(const [x,z] of [[47,76],[73,76],[47,66],[73,66]]) {w.fill(x-2,81,z,x+2,81,z,B.SPRUCE_STAIRS);w.set(x-3,81,z,B.POTTED_AZALEA);w.set(x+3,81,z,B.POTTED_AZALEA);}
   w.fill(56,79,105,64,79,113,B.STONE_BRICKS);
+  // Sky Harbor detail pass: all additions stay inside the original clipboard.
+  // The seven live NPC anchors and the arrival corridor are cleared last.
+  for(const [cx,cz,accent] of [[24,42,'green'],[96,42,'cyan'],[24,86,'purple'],[96,86,'yellow']]) {
+    for(const dx of [-8,8]) {
+      w.fill(cx+dx,81,cz-7,cx+dx,87,cz+6,B.STONE_BRICKS);
+      for(const z of [cz-3,cz+2]) {
+        w.fill(cx+dx,83,z,cx+dx,85,z+1,block('light_blue_stained_glass'));
+        w.set(cx+dx,82,z,B.SPRUCE_TRAPDOOR);
+      }
+    }
+    w.fill(cx-8,87,cz-7,cx+8,87,cz+7,B.STRIPPED_SPRUCE_LOG);
+    for(const z of [cz-8,cz+8]) for(let dx=-9;dx<=9;dx++) {
+      const y=88+Math.floor((9-Math.abs(dx))/2);
+      w.set(cx+dx,y,z,block('dark_prismarine'));
+      if(Math.abs(dx)%3===0) w.set(cx+dx,y+1,z,block(accent+'_carpet'));
+    }
+    w.fill(cx,93,cz-7,cx,93,cz+7,B.SPRUCE_SLAB);
+    for(const dx of [-7,7]) {
+      w.fill(cx+dx,82,cz+7,cx+dx,87,cz+7,B.QUARTZ_PILLAR);
+      w.set(cx+dx,88,cz+7,B.SEA_LANTERN);
+      w.set(cx+dx,89,cz+7,B.STONE_BRICK_SLAB);
+    }
+    for(const dx of [-5,5]) {
+      w.set(cx+dx,81,cz+4,B.BARREL);
+      w.set(cx+dx,82,cz+4,B.POTTED_AZALEA);
+    }
+  }
+  // Four slender harbor watchtowers provide a silhouette above the low shops.
+  for(const [cx,cz] of [[14,44],[106,44],[14,88],[106,88]]) {
+    w.fill(cx-2,80,cz-2,cx+2,81,cz+2,B.STONE_BRICKS);
+    for(const dx of [-1,1]) for(const dz of [-1,1]) w.fill(cx+dx,82,cz+dz,cx+dx,96,cz+dz,B.QUARTZ_PILLAR);
+    w.fill(cx-2,91,cz-2,cx+2,91,cz+2,B.SPRUCE_SLAB);
+    w.fill(cx-2,96,cz-2,cx+2,96,cz+2,B.DARK_PRISMARINE);
+    w.fill(cx-1,97,cz-1,cx+1,97,cz+1,B.DARK_PRISMARINE);
+    w.set(cx,98,cz,B.SEA_LANTERN);w.set(cx,99,cz,B.END_ROD);
+    for(const dx of [-2,2]) w.set(cx+dx,92,cz,B.LANTERN);
+  }
+  // The city pavilion becomes an open, vaulted observatory.
+  for(const x of [52,68]) for(const z of [12,24]) {
+    w.fill(x,90,z,x,96,z,B.QUARTZ_PILLAR);w.set(x,97,z,B.SEA_LANTERN);
+  }
+  for(let d=0;d<=4;d++) {
+    w.fill(51+d,97+d,11,69-d,97+d,11,B.DARK_PRISMARINE);
+    w.fill(51+d,97+d,25,69-d,97+d,25,B.DARK_PRISMARINE);
+  }
+  w.fill(58,102,11,62,102,25,B.DARK_PRISMARINE);
+  w.set(60,103,18,B.SEA_LANTERN);w.set(60,104,18,B.END_ROD);
+  // Faceted amethyst beacon above a sealed fountain; no water-flow updates.
+  w.set(60,86,72,B.SEA_LANTERN);
+  for(let y=88;y<=96;y++) {
+    const r=y<92?y-88:96-y;
+    for(let dx=-r;dx<=r;dx++) for(let dz=-r;dz<=r;dz++) if(Math.abs(dx)+Math.abs(dz)<=r) {
+      w.set(60+dx,y,72+dz,(dx===0&&dz===0)?B.SEA_LANTERN:B.AMETHYST_BLOCK);
+    }
+  }
+  w.set(60,97,72,B.END_ROD);
+  // Produce market: alternating canvas awnings, crates and colorful produce.
+  for(const [x,z,color] of [[38,56,'green'],[82,56,'cyan'],[39,94,'purple'],[81,94,'yellow']]) {
+    w.fill(x-3,80,z-3,x+3,80,z+3,B.SPRUCE_PLANKS);
+    for(const dx of [-3,3]) for(const dz of [-2,2]) w.fill(x+dx,81,z+dz,x+dx,84,z+dz,B.SPRUCE_FENCE);
+    for(let dx=-4;dx<=4;dx++) w.fill(x+dx,85,z-3,x+dx,85,z+3,block(dx%2===0?color+'_wool':'white_wool'));
+    w.fill(x-2,81,z,x+2,81,z,B.BARREL);
+    for(const dx of [-2,0,2]) w.set(x+dx,82,z,block(dx===0?'melon':'pumpkin'));
+    w.set(x,84,z+2,B.LANTERN_HANGING);
+  }
+  // Small timber jetties and mooring masts at the eastern and western edges.
+  for(const [cx,dir] of [[7,-1],[113,1]]) {
+    w.fill(cx-5,80,67,cx+5,80,77,B.SPRUCE_PLANKS);
+    for(const z of [67,77]) for(let x=cx-5;x<=cx+5;x++) w.set(x,81,z,B.SPRUCE_FENCE);
+    w.fill(cx+dir*5,81,68,cx+dir*5,81,76,B.SPRUCE_FENCE);
+    for(const x of [cx-4,cx+4]) for(const z of [68,76]) {
+      w.fill(x,77,z,x,84,z,B.STRIPPED_SPRUCE_LOG);w.set(x,85,z,B.LANTERN);
+    }
+    path(cx,72,dir<0?24:96,72,2);
+    w.fill(cx,81,70,cx,91,70,B.STRIPPED_SPRUCE_LOG);
+    for(let y=86;y<=90;y++) w.fill(cx+dir,y,70,cx+dir*3,y,70,block('white_wool'));
+    w.set(cx,92,70,B.END_ROD);
+  }
+  // Garden parterres stay away from the compass ring and main crosswalks.
+  for(const [cx,cz] of [[42,66],[78,66],[42,80],[78,80]]) {
+    for(let dx=-3;dx<=3;dx++) for(let dz=-2;dz<=2;dz++) {
+      const edge=Math.abs(dx)===3||Math.abs(dz)===2;
+      w.set(cx+dx,80,cz+dz,edge?B.STONE_BRICKS:B.MOSS_BLOCK);
+      w.set(cx+dx,81,cz+dz,edge?B.STONE_BRICK_SLAB:((dx+dz)%2?B.CORNFLOWER:B.OXEYE_DAISY));
+    }
+  }
+  // Flower belts, hedge corners and mineral seams break up the broad lawns.
+  for(let x=9;x<=111;x++) for(let z=32;z<=106;z++) {
+    if(w.name(x,80,z)!=='minecraft:grass_block'||!w.isAir(x,81,z)) continue;
+    if((x*17+z*31)%37===0) w.set(x,81,z,(x+z)%2?B.CORNFLOWER:B.OXEYE_DAISY);
+    if((x*13+z*7)%113===0 && Math.abs(x-60)>15) w.set(x,81,z,B.AZALEA);
+  }
+  for(const [x,z] of [[10,48],[110,48],[10,92],[110,92],[50,18],[70,18]]) {
+    w.fill(x-1,79,z-1,x+1,79,z+1,B.DEEPSLATE);
+    w.fill(x,74,z,x,78,z,B.AMETHYST_BLOCK);w.set(x,73,z,B.SEA_LANTERN);
+  }
+  for(const [x,z,color] of [[20,38,'lime'],[92,38,'light_blue'],[20,82,'magenta'],[92,82,'yellow']]) {
+    w.fill(x,94,z,x,99,z,B.SPRUCE_FENCE);
+    w.fill(x+1,97,z,x+3,99,z,block(color+'_wool'));w.set(x+3,97,z,B.AIR);
+  }
+  // Preserve floor / two-block headroom around live interaction anchors.
+  for(const [x,z] of [[55,99],[65,99],[60,18],[24,48],[96,48],[24,92],[96,92],[60,108]]) {
+    w.fill(x-1,80,z-1,x+1,80,z+1,B.SMOOTH_QUARTZ);
+    w.fill(x-1,81,z-1,x+1,83,z+1,B.AIR);
+  }
+  w.set(60,80,108,B.CHISELED_QUARTZ);
   return w;
 };
