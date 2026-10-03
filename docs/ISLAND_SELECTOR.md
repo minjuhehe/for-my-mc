@@ -1,8 +1,8 @@
 # Island selector (one island = one team)
 
-Status: **draft, not loaded on the server yet.** Written against BentoBox
+Status: **installed on MineLan 9623747d; player flow checks pending.** Written against BentoBox
 3.17.0 and BSkyBlock 1.20.0 source (tags checked out by
-`tests/islands/check-islands.js`). Skript reload and live tests are pending.
+`tests/islands/check-islands.js`). Live reload and full startup passed on 2026-10-03 at09:05:47 ICT. Player clicks and multi-team tests remain pending.
 
 ## What players get
 

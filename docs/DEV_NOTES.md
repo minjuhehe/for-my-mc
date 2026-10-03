@@ -376,3 +376,5 @@ Shop tooltip language: left-click-buy now Buy: %buyPrice%, right-click-sell Sell
 Floating-label background now transparent (background0, default_background false).
 
 Live reload2026-10-03 at09:03:17 ICT passed lostsky-islands after correcting execute {_p} command; lostsky-city passed09:01:38. Config installation and live player flow still pending.
+
+Native BSkyBlock live config saved: new-player-action/default-action /islands, concurrent-islands3, disallow-team-member-islands false. Server restarted normally; all scripts loaded without errors and Done14.822s at09:05:47 ICT. Player flow checks pending. Local config backup saved before edit; existing worlds/progress untouched.
