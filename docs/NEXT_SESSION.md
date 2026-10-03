@@ -20,8 +20,9 @@ MineLan signed in again. Server running at16:48 ICT.
 1. Human visual review, project partial charging/surplus, island-specific warp
    and restart persistence using isolated fixtures. Preserve owner progress.
 2. Multiple islands/teams, membership removal and city isolation.
-3. Update website badges: universal payout now verified; no public deployment.
-   Claude previously reported110 checks onb3834e4/e36dfea.
+3. Website badges updated inbad01b0 and pulled locally. Claude reports112 checks
+   plus mobile/desktop review. No public deployment. Local syntax check passed;
+   full local suite could not start because Playwright dependency is absent.
 4. Failed economy deposit and restart-close returns are untested. No durable
    crash journal. Garden is a prototype, not the full city remake.
 
