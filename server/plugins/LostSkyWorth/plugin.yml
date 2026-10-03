@@ -1,6 +1,11 @@
 name: LostSkyWorth
-version: '1.0.0'
+version: '1.1.1'
 main: net.lostsky.worth.LostSkyWorth
 api-version: '1.21'
-depend: [ProtocolLib, EconomyShopGUI]
+depend: [ProtocolLib, EconomyShopGUI, Vault]
+commands:
+  lssell:
+    description: Deposit vanilla items and close to sell.
+  lsworthcheck:
+    description: Console-only price coverage checks.
 description: Display-only sell prices from the live shop; original items stay unchanged.

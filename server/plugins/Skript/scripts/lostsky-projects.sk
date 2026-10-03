@@ -37,7 +37,7 @@ function skyProjectMenu(p: player):
         set slot 13 of {_inv} to clock named "&eBuilding Stage %{_stage}%" with lore "&7Blocks are being placed gradually" and "&7No more materials needed for this stage"
     else:
         set slot 13 of {_inv} to chest named "&eDonate Materials" with lore "&7Stage %{_stage}%: %{_material}%" and "&7Delivered: %{_paid}% / %{_need}%" and "&7Hold plain required blocks in your hand" and "&eClick to donate only what is still needed"
-    set slot 16 of {_inv} to ender pearl named "&bVisit Garden" with lore "&7Available once the foundation is finished"
+    set slot 16 of {_inv} to ender pearl named "&bVisit Garden - See What Changed" with lore "&7This project is separate from the main city" and "&7Available once the foundation is finished" and "&eClick here or use /cityprojects go"
     set slot 22 of {_inv} to arrow named "&eBack to City"
     set {skyproject::menu::%uuid of {_p}%} to {_inv}
     set {skyproject::menu-island::%uuid of {_p}%} to {_id}
@@ -93,11 +93,14 @@ function skyProjectDonate(p: player):
         set amount of {_held} to {_left}
         set {_p}'s tool to {_held}
     add {_take} to {skyproject::paid::%{_id}%::%{_stage}%}
-    send "&3[Lost Sky] &aDelivered %{_take}% %{_type}%." to {_p}
+    set {_total} to {skyproject::paid::%{_id}%::%{_stage}%}
+    set {_goal} to skyProjectNeed({_stage})
+    send "&3[Lost Sky] &aDelivered %{_take}% %{_type}% - Stage %{_stage}%: %{_total}% / %{_goal}%" to {_p}
     if {skyproject::paid::%{_id}%::%{_stage}%} >= skyProjectNeed({_stage}):
         set {skyproject::active::%{_id}%} to {_id}
         set {skyproject::cursor::%{_id}%} to 0
         send "&3[Lost Sky] &aStage funded! Construction has started." to {_p}
+        send "&3[Lost Sky] &eThe garden is separate from your main city. Use /cityprojects go after the foundation finishes." to {_p}
 
 function skyProjectGo(p: player):
     set {_id} to skyCityKey({_p})
@@ -165,6 +168,11 @@ every 5 ticks:
                 if {skyproject::cursor::%{_id}%} >= skyProjectNeed({_stage}):
                     set {skyproject::complete::%{_id}%} to {_stage}
                     delete {skyproject::active::%{_id}%}
+                    loop all players:
+                        if skyCityKey(loop-player) is {_id}:
+                            send "&3[Lost Sky] &aGarden stage %{_stage}% finished! &e/cityprojects go &ato see the new blocks." to loop-player
+                            if loop-player's current inventory is {skyproject::menu::%uuid of loop-player%}:
+                                skyProjectMenu(loop-player)
 
 command /cityprojects [<text>]:
     executable by: players
@@ -191,6 +199,7 @@ on inventory click:
     close player's inventory
     if {_choice} is 13:
         skyProjectDonate(player)
+        skyProjectMenu(player)
     else if {_choice} is 16:
         skyProjectGo(player)
     else if {_choice} is 22:

@@ -3,6 +3,10 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.4: Universal selling and clearer restoration feedback (2026-10-03)
+
+Owner requested inventory-only prices and all vanilla items sellable. Added shared pricing/universal sell box with exact shop quotes, normal-material variant pricing and0.01 fallback; protects Relics and containers holding them. Menu icons/cursor no longer get injected prices; ESGUI item price lore hidden. /sell, /sellgui, /market and NPC route to /lssell. Added console-only lsworthcheck. Garden now reports delivery totals and completed stages, refreshes its menu and clearly points to its separate warp; /city projects [go] aliases added. Live1.1.0 and all scripts started cleanly. Local1.1.1 container refinement awaits MineLan login;597 slot checks and70 island checks passed. Universal payout/rendered client tests pending.
+
 ## 0.8.3: First gradual restoration project (2026-10-03)
 
 Added a small garden prototype separate from chapter prefabs:25 stone bricks,8 grass blocks,4 oak logs across three stages. Partial donations use only remaining plain hand items; funded stages place blocks gradually with saved queue/cursor. Added /cityprojects [go|donate], /city menu entry and console-only lsprojectselftest. No money reward or full-city replacement. Player inventory and multi-team tests remain pending.

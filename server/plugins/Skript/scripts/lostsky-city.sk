@@ -187,7 +187,12 @@ function skyCityDonate(p: player):
 # /city go [slot]  warp to the (chosen) island's city
 # /city donate     donate to the active island's city
 function skyCityCommand(p: player, a: text, b: text):
-    if {_a} is "go":
+    if {_a} is "projects":
+        if {_b} is "go":
+            skyProjectGo({_p})
+        else:
+            skyProjectMenu({_p})
+    else if {_a} is "go":
         if {_b} is not "":
             if skyCityPick({_p}, {_b}) is false:
                 stop

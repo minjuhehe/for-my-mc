@@ -136,3 +136,7 @@ These run automatically. If you rename a plugin or change these, update the scri
 | /cityprojects donate | Donate required plain blocks from main hand | same | player test pending |
 | /cityprojects go | Visit garden after foundation is finished | same | player test pending |
 | lsprojectselftest | Diagnostic slot0 queued build and cleanup | console only | isolated check |
+
+## Universal selling update
+
+/sell, /sellgui and /market now open lostskyworth:lssell (54 empty slots; close to sell all ordinary vanilla item types). /lssell is also available directly, no additional permission. /shop stays EconomyShopGUI. lsworthcheck is console-only and checks quote coverage/Relic guards/slot filtering. /city projects opens Restoration Projects; /city projects go visits the garden. Namespaced EconomyShopGUI selling is the old catalog-limited path.

@@ -1,5 +1,9 @@
 # Shop and sell GUI
 
+Current universal sell system and inventory-only prices: see UNIVERSAL_SELL.md.
+The paragraphs below record the earlier ESGUI installation; public selling now
+uses LostSkyWorth1.1.0, not ESGUI's catalog-limited sell box.
+
 EconomyShopGUI 6.16.3, official CurseForge file 7423771. MD5:
 0326da94b07ec43c53e2ba66320ba3a5. Supports Paper 1.21.11.
 
@@ -10,7 +14,8 @@ No real-money handling is enabled.
 
 /shop and /skyshop open the category catalog. /sell, /sellgui and /market open
 the deposit inventory; close it to sell accepted items and receive unsellable items
-back. /sell is intercepted by lostsky-market.sk so Essentials' instant sell does not
+back. /sell and /sellgui are intercepted by lostsky-market.sk and now routed to
+lostskyworth:lssell so Essentials' instant sell does not
 run. Namespaced essentials:sell remains a separate command; no permission granted.
 Hub and merchant NPCs use the same routes. The legacy small shop/farm functions
 are retained for rollback but no longer opened by the public entry points.
@@ -31,11 +36,13 @@ In LanguageFiles/lang-en.yml:
 left-click-buy: '&a&lBuy: &f%buyPrice%'
 right-click-sell: '&e&lSell: &f%sellPrice%'
 
-Reload using /sreload. Tooltip placeholders use the actual current prices.
+Individual UI prices are now hidden: buy-prices and sell-prices were removed
+from lore-arrangement. Translation placeholders remain available. Confirmation
+transaction total and wallet are still shown. Reload ESGUI using /sreload.
 Owner confirms both GUIs open and an ordinary-item sale earns money. Exact
 amounts, all catalog prices and return behavior are not yet verified.
 
-Inventory hover prices: LostSkyWorth 1.0.0 queries EconomyShopGUI's player-aware
+Historical inventory hover implementation: LostSkyWorth 1.0.0 queries EconomyShopGUI's player-aware
 sell quote API on the original item and sends display-only cloned items through
 ProtocolLib. It shows `Sell each` and `Sell stack (quantity)` in English. No new
 command or permission is needed. Creative and spectator quotes are disabled.

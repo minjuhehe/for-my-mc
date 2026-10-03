@@ -24,6 +24,7 @@ import java.util.Locale;
 public final class LostSkyWorth extends JavaPlugin implements Listener {
     private Method sellPrice;
     private boolean reportedFailure;
+    private UniversalSell universalSell;
 
     @Override public void onEnable() {
         try {
@@ -31,6 +32,11 @@ public final class LostSkyWorth extends JavaPlugin implements Listener {
                 .getMethod("getItemSellPrice", Player.class, ItemStack.class);
         } catch (ReflectiveOperationException failure) {
             getLogger().severe("EconomyShopGUI sell quote API unavailable; disabling.");
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
+        universalSell = new UniversalSell(this, sellPrice);
+        if (!universalSell.initialize()) {
             getServer().getPluginManager().disablePlugin(this);
             return;
         }
@@ -46,12 +52,27 @@ public final class LostSkyWorth extends JavaPlugin implements Listener {
                     List<ItemStack> original = event.getPacket().getItemListModifier().readSafely(0);
                     if (original == null) return;
                     List<ItemStack> display = new ArrayList<>(original.size());
-                    for (ItemStack item : original) display.add(quote(event.getPlayer(), item));
+                    Integer window = event.getPacket().getIntegers().readSafely(0);
+                    if (window == null) return;
+                    int topSize = event.getPlayer().getOpenInventory().getTopInventory().getSize();
+                    for (int slot = 0; slot < original.size(); slot++) {
+                        ItemStack item = original.get(slot);
+                        display.add(isPlayerSlot(window, slot, topSize) ? quote(event.getPlayer(), item) : item);
+                    }
                     event.getPacket().getItemListModifier().writeSafely(0, display);
                 } else {
                     ItemStack item = event.getPacket().getItemModifier().readSafely(0);
-                    if (item != null) event.getPacket().getItemModifier()
-                        .writeSafely(0, quote(event.getPlayer(), item));
+                    if (item != null) {
+                        boolean playerSlot = event.getPacketType().equals(PacketType.Play.Server.SET_PLAYER_INVENTORY);
+                        if (!playerSlot) {
+                            Integer window = event.getPacket().getIntegers().readSafely(0);
+                            Integer slot = event.getPacket().getIntegers().readSafely(2);
+                            playerSlot = window != null && slot != null && isPlayerSlot(window, slot,
+                                event.getPlayer().getOpenInventory().getTopInventory().getSize());
+                        }
+                        if (playerSlot) event.getPacket().getItemModifier()
+                            .writeSafely(0, quote(event.getPlayer(), item));
+                    }
                 }
             }
         });
@@ -59,11 +80,17 @@ public final class LostSkyWorth extends JavaPlugin implements Listener {
         getLogger().info("Display-only sell prices enabled: per item and stack, EconomyShopGUI player quotes.");
     }
 
+    static boolean isPlayerSlot(int window, int slot, int topSize) {
+        if (window == 0) return slot >= 5 && slot <= 45;
+        if (window == -2) return slot >= 0 && slot <= 40;
+        return window > 0 && slot >= topSize && slot < topSize + 36;
+    }
+
     private ItemStack quote(Player player, ItemStack original) {
         if (original == null || original.getType().isAir() || original.getAmount() <= 0) return original;
         try {
-            Double total = (Double) sellPrice.invoke(null, player, original);
-            if (total == null || !Double.isFinite(total) || total <= 0) return original;
+            double total = universalSell.price(player, original, 0);
+            if (!Double.isFinite(total) || total <= 0) return original;
             ItemStack display = original.clone();
             ItemMeta meta = display.getItemMeta();
             if (meta == null) return original;
@@ -73,7 +100,7 @@ public final class LostSkyWorth extends JavaPlugin implements Listener {
             meta.setLore(lore);
             display.setItemMeta(meta);
             return display;
-        } catch (ReflectiveOperationException failure) {
+        } catch (RuntimeException failure) {
             if (!reportedFailure) {
                 reportedFailure = true;
                 getLogger().warning("Sell quote failed; leaving items unchanged: " + failure);
@@ -94,5 +121,8 @@ public final class LostSkyWorth extends JavaPlugin implements Listener {
         if (event.getWhoClicked() instanceof Player player) refresh(player);
     }
     @EventHandler public void mode(PlayerGameModeChangeEvent event) { refresh(event.getPlayer()); }
-    @Override public void onDisable() { ProtocolLibrary.getProtocolManager().removePacketListeners(this); }
+    @Override public void onDisable() {
+        if (universalSell != null) universalSell.returnOpenInventories();
+        ProtocolLibrary.getProtocolManager().removePacketListeners(this);
+    }
 }
