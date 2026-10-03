@@ -211,15 +211,15 @@ const NAV_STATE = () => {
   // Status badges must match docs/PLAYTEST_20261003.md exactly.
   const badges = await page.$$eval('.cmd', ls => Object.fromEntries(ls.map(l => [l.querySelector('code').textContent, l.querySelector('.badge').textContent])));
   const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
-  check('commands marked tested = /spawn, /hub, /menu, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/city go', JSON.stringify(badges));
-  check('commands marked partly tested = /skyshop, /skyquests', byBadge('ทดสอบบางส่วน') === '/skyshop,/skyquests', JSON.stringify(badges));
-  check('/market, /topup, /city donate and island commands still awaiting test', ['/market', '/topup', '/city', '/city donate', '/is', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  check('commands marked tested = /spawn, /hub, /menu, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/is,/city go', JSON.stringify(badges));
+  check('commands marked partly tested = /shop, /skyshop, /sell, /skyquests (menus open; transactions pending)', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/sell,/skyquests', JSON.stringify(badges));
+  check('/topup, /city, /city donate, /city go <slot>, team and money commands still awaiting test', ['/topup', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
   const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
   check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
   const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
-  check('tested card has only the verified results', /\$32[\s\S]*32 ก้อน/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|ทุกทีม|หลายคน/.test(tested), tested.slice(0, 200));
+  check('tested card: only verified results (menus open, selector flow, builder quest)', /\/shop[\s\S]*\/sell[\s\S]*เปิดเมนูได้/.test(tested) && /\/is[\s\S]*Restoration City/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/\$32|ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|หลายเกาะ|หลายคน|จำนวนเงิน/.test(tested), tested.slice(0, 300));
   const pending = await page.$$eval('.status-card', cs => cs[2].textContent);
-  check('pending card lists crop selling, wheat quest, 24h reset, full bag, multi-member teams, floating text, map decoration', ['ขายพืชผล', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'ทีมหลายคน', 'ข้อความลอย', 'การตกแต่งแผนที่'].every(w => pending.includes(w)));
+  check('pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration', ['จำนวนเงิน', 'คืนโบราณวัตถุ', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'สร้างหลายเกาะ', 'ทีมหลายคน', 'แยกเมือง', 'การตกแต่งแผนที่'].every(w => pending.includes(w)), pending.slice(0, 300));
   check('map decoration marked unfinished in gallery', /การตกแต่งแผนที่ยังไม่เสร็จ/.test(await page.textContent('#gallery')));
   const start = await page.textContent('#start');
   check('join steps explain the required font pack and the Server Resource Packs setting', /ยอมรับแพ็กฟอนต์ไทย/.test(start) && /Server Resource Packs/.test(start) && /Enabled หรือ Prompt/.test(start));
@@ -227,8 +227,13 @@ const NAV_STATE = () => {
   check('English in-game quest names shown', /Harbor Supplies/.test(await page.textContent('#zone-quests')) && /Apprentice Builder/.test(await page.textContent('#zone-quests')));
   check('no "nothing to download" claim', !/ไม่ต้อง[^.]{0,20}ดาวน์โหลดอะไร/.test(text));
   check('no blanket one-account rule; alt-account rule is about quest rewards', !/หนึ่งคนหนึ่งบัญชี/.test(text) && /บัญชีสำรอง[\s\S]{0,40}รางวัล/.test(await page.textContent('#rules')));
-  check('market prices match the script', /\$32[\s\S]*\$24[\s\S]*\$24[\s\S]*\$32[\s\S]*\$40[\s\S]*\$16/.test(await page.textContent('#zone-market')));
-  check('shop prices match the script', /\$32[\s\S]*\$64[\s\S]*\$96[\s\S]*\$64[\s\S]*\$16[\s\S]*\$24/.test(await page.textContent('#zone-shop')));
+  const shopText = await page.textContent('#zone-market') + await page.textContent('#zone-shop');
+  check('old fixed shop/market price tables removed (no $ prices in market or shop)', !/\$\d/.test(shopText) && (await page.$$('#zone-market table, #zone-shop table')).length === 0);
+  check('shop prices: told to check in game, default prices may change', /ราคาเริ่มต้น/.test(shopText) && /ในเกม/.test(shopText));
+  check('sell box explains close-to-sell, returns, and warns about relics', /ปิดหน้าต่าง/.test(shopText) && /คืน/.test(shopText) && /อย่าใส่โบราณวัตถุ/.test(shopText));
+  const team = await page.textContent('#team');
+  check('team section: 1 island = 1 team, up to 3 islands incl. memberships, own city per island', /1 เกาะ = 1 ทีม/.test(team) && /สูงสุด 3 เกาะ/.test(team) && /รวมเกาะที่/.test(team) && /\/city go 2/.test(team));
+  check('incremental restoration only as an unbuilt future plan', /ยังไม่ได้สร้าง/.test(team) && /แผนในอนาคต/.test(team) && !/ซ่อมเมืองทีละโครงการ[^<]{0,40}(ใช้ได้แล้ว|ทดสอบแล้ว)/.test(text));
   check('quest rewards and 24-hour reset shown', /\$100[\s\S]*\$80/.test(await page.textContent('#zone-quests')) && /24 ชั่วโมง/.test(await page.textContent('#zone-quests')));
   check('team goals are 0/100/300/600/1000', (await page.$$eval('.goal b', bs => bs.map(b => b.textContent).join(','))) === '0,100,300,600,1000');
 
@@ -252,15 +257,15 @@ const NAV_STATE = () => {
   check('only one tab is in the Tab order', (await page.$$eval('[role=tab]', ts => ts.filter(t => t.tabIndex === 0).length)) === 1);
 
   group = 'Command filters and copy';
-  check('18 commands listed', (await visibleCmds(page)).length === 18);
-  for (const [g, n] of Object.entries({ hub: 4, shop: 6, island: 5, city: 3 })) {
+  check('20 commands listed', (await visibleCmds(page)).length === 20);
+  for (const [g, n] of Object.entries({ hub: 4, shop: 7, island: 5, city: 4 })) {
     await page.click(`.chip[data-filter="${g}"]`);
     const v = await visibleCmds(page);
     check(`filter "${g}" shows ${n} commands`, v.length === n && v.every(x => x === g), v.join(','));
   }
   await page.focus('.chip[data-filter="all"]'); await page.keyboard.press('Enter');
-  check('filter works with the keyboard', (await visibleCmds(page)).length === 18 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
-  for (const cmd of ['/city go', '/market', '/spawn']) {
+  check('filter works with the keyboard', (await visibleCmds(page)).length === 20 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
+  for (const cmd of ['/city go', '/sell', '/spawn']) {
     await page.click(`.copy[data-copy="${cmd}"]`);
     await page.waitForTimeout(100);
     check(`copy button copies ${cmd}`, (await page.evaluate(() => navigator.clipboard.readText())) === cmd);
@@ -290,7 +295,7 @@ const NAV_STATE = () => {
   const nj = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
   const np = await nj.newPage(); await np.goto(URL);
   check('no-JS: all 5 chapters readable', (await np.$$eval('[role=tabpanel]', ps => ps.filter(p => p.getBoundingClientRect().height > 0).length)) === 5);
-  check('no-JS: all 18 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 18);
+  check('no-JS: all 20 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 20);
   check('no-JS: menu links reachable', await np.isVisible('.nav-links a[href="#topup"]'));
   check('no-JS: copy and filter buttons hidden', !(await np.isVisible('.filters')) && !(await np.isVisible('.copy')));
   check('no-JS: no horizontal scroll', (await np.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 0);

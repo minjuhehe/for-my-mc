@@ -228,17 +228,24 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   `/spawn` (and `/hub`, `/lobby`) return to the hub, and `/menu` opens it.
   The hub is shown as **installed** (zones, 7 guide NPCs, protection
   verified on the server).
-- **Player-test badges follow `docs/PLAYTEST_20261003.md` only.** As of
-  2026-10-03 (one owner account): tested = `/spawn`, `/hub`, `/menu`,
-  `/city go`; partly tested = `/skyshop` (one cobblestone purchase, $32 → 32
-  blocks; refuses without money) and `/skyquests` (builder quest: 128
-  cobblestone → $80 + 2 genuine shards, immediate retry blocked). Everything
-  else stays รอทดสอบ: crop selling, farmer quest, 24-hour expiry, full bag,
-  GUI drag/shift-click, multi-member teams, donation, chapter change.
+- **Player-test badges follow `docs/PLAYTEST_20261003.md` and `docs/SHOP.md`
+  only.** As of 2026-10-03 (one owner account): tested = `/spawn`, `/hub`,
+  `/menu`, `/is` (selector -> Restoration City), `/city go`; partly tested =
+  `/shop`, `/skyshop`, `/sell` (menus open; transactions, amounts and Relic
+  return pending) and `/skyquests` (builder quest only). Everything else
+  stays รอทดสอบ: farmer quest, 24-hour expiry, full bag, creating several
+  islands, multi-member teams, team isolation, donation, chapter change.
+- **Shop prices are not on the website.** The shop is EconomyShopGUI's
+  default catalog (`docs/SHOP.md`); the site tells players to read prices in
+  game. The old six-item price tables were removed. Quest rewards stay.
+- **Islands:** one island = one team, up to 3 islands per player including
+  team memberships, each with its own city (`docs/ISLAND_SELECTOR.md`).
+  Incremental restoration (`docs/INCREMENTAL_RESTORATION.md`) is shown only
+  as an unbuilt future plan.
 - **Join steps** explain the required ThaiFontFix pack
   (`docs/RESOURCE_PACK.md`): accept the prompt; if it never appears, set
-  Server Resource Packs to Enabled or Prompt. Floating hub text is "being
-  adjusted" and map decoration "unfinished"; don't claim either is done.
+  Server Resource Packs to Enabled or Prompt. Map decoration is
+  "unfinished"; don't claim it is done.
 - **In-game UI is English** (since Codex `037447b`); the website stays
   Thai. Show English in-game names where players need to match them
   (quest names, menu examples). The font pack stays required.

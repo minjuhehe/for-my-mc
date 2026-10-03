@@ -404,6 +404,13 @@ td .en { display: block; }
 .reward { display: flex; flex-wrap: wrap; gap: 4px 12px; font-weight: 700; }
 .reward span:first-child { font-family: var(--mono); color: var(--accent); }
 
+.howto, .plain { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
+.howto li::marker { color: var(--accent); font-weight: 700; }
+.note { margin: 0; padding: 10px 12px; border-left: 4px solid var(--z-topup); background: var(--panel-2); border-radius: 0 var(--radius) var(--radius) 0; font-size: 0.95rem; }
+.checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.checklist li { display: flex; gap: 8px; align-items: baseline; }
+.checklist li > .badge { flex: none; }
+
 /* ---------- Team ---------- */
 .compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 .compare-card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; display: grid; gap: 10px; align-content: start; }

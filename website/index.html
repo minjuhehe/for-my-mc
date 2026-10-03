@@ -125,9 +125,10 @@
           <ul>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> เซิร์ฟเวอร์รัน Paper 1.21.11 (Java Edition)</li>
             <li><span class="badge b-ok">ติดตั้งแล้ว</span> ฮับกลางอยู่ในเซิร์ฟแล้ว ครบทั้งห้าโซน มี NPC ผู้นำทาง 7 ตัว และระบบป้องกันพื้นที่</li>
+            <li><span class="badge b-ok">ติดตั้งแล้ว</span> ร้านค้าแบบแยกหมวด (<code>/shop</code>) และช่องขายของ (<code>/sell</code>)</li>
+            <li><span class="badge b-ok">ติดตั้งแล้ว</span> เมนูเลือกเกาะ: 1 เกาะ = 1 ทีม สูงสุด 3 เกาะต่อคน แต่ละเกาะมีเมืองฟื้นฟูของตัวเอง</li>
             <li><span class="badge b-ok">ติดตั้งแล้ว</span> แพ็กฟอนต์ไทย ThaiFontFix ผู้เล่นยืนยันว่าใช้งานได้</li>
             <li><span class="badge b-ok">ยืนยันแล้ว</span> เมนูและข้อความในเกมเป็นภาษาอังกฤษ (เว็บนี้เป็นภาษาไทย)</li>
-            <li><span class="badge b-ok">ออกแบบแล้ว</span> แต่ละทีมมีเมืองฟื้นฟูของตัวเอง แยกจากเกาะที่สร้างเอง</li>
           </ul>
         </div>
         <div class="status-card">
@@ -136,18 +137,18 @@
           <ul>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/spawn</code> และ <code>/hub</code> พากลับฮับ</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/menu</code> เปิดเมนูฮับได้</li>
-            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/city go</code> วาร์ปไปพื้นที่เมืองของทีมตัวเอง</li>
-            <li><span class="badge b-ok">ทดสอบแล้ว</span> ร้านเสบียง: ซื้อหินก้อน 1 ครั้ง ถูกหัก $32 และได้หิน 32 ก้อน ร้านไม่ขายเมื่อเงินไม่พอ</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/is</code> เปิดเมนูเลือกเกาะ และปุ่ม Restoration City พาไปเมืองของเกาะนั้น</li>
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/shop</code> และ <code>/sell</code> เปิดเมนูได้</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> ภารกิจส่งหิน 128 ก้อน: ได้ $80 และเศษผลึกสามัญของจริง 2 ชิ้น ส่งซ้ำทันทีถูกปฏิเสธจนกว่าจะครบ 24 ชั่วโมง</li>
           </ul>
         </div>
         <div class="status-card">
           <h3>ยังรอทดสอบ · ยังไม่เปิด</h3>
           <ul>
-            <li><span class="badge b-draft">รอทดสอบ</span> ขายพืชผลในตลาด และภารกิจส่งข้าวสาลี</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> การรีเซ็ตภารกิจหลังครบ 24 ชั่วโมงจริง และกรณีกระเป๋าเต็ม</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
-            <li><span class="badge b-draft">กำลังปรับ</span> ข้อความลอยในฮับ และการตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ซื้อขายจริงในร้านและช่องขาย: จำนวนเงิน และการคืนโบราณวัตถุ</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ภารกิจส่งข้าวสาลี การรีเซ็ตหลังครบ 24 ชั่วโมงจริง และกรณีกระเป๋าเต็ม</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
+            <li><span class="badge b-draft">กำลังทำ</span> การตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
             <li><span class="badge b-wait">ยังไม่เปิด</span> ห้องเติมเงิน ไม่มีการรับชำระเงินใด ๆ</li>
             <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟสาธารณะ, ช่องทางติดต่อ, วันเปิด และการรองรับ Bedrock</li>
           </ul>
@@ -206,58 +207,49 @@
         </figure>
 
         <div class="zones">
-          <a class="zone-link" href="#zone-market"><i class="sw sw-market" aria-hidden="true"></i><code>/market</code><span>ตลาดพืชผล (หลังคาสีเขียว) · ขายผลผลิต</span></a>
-          <a class="zone-link" href="#zone-shop"><i class="sw sw-shop" aria-hidden="true"></i><code>/skyshop</code><span>ร้านเสบียง (หลังคาสีฟ้าอมเขียว) · ซื้อวัสดุ</span></a>
+          <a class="zone-link" href="#zone-market"><i class="sw sw-market" aria-hidden="true"></i><code>/market</code><span>ตลาด (หลังคาสีเขียว) · ช่องขายของ</span></a>
+          <a class="zone-link" href="#zone-shop"><i class="sw sw-shop" aria-hidden="true"></i><code>/skyshop</code><span>ร้านค้า (หลังคาสีฟ้าอมเขียว) · ซื้อและขายตามหมวด</span></a>
           <a class="zone-link" href="#zone-quests"><i class="sw sw-quest" aria-hidden="true"></i><code>/skyquests</code><span>โถงภารกิจ (หลังคาสีม่วง) · ส่งของทุก 24 ชั่วโมง</span></a>
           <a class="zone-link" href="#topup"><i class="sw sw-topup" aria-hidden="true"></i><code>/topup</code><span>ห้องเติมเงิน (หลังคาสีทอง) · ยังไม่เปิด</span></a>
-          <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของทีมคุณ</span></a>
-          <p class="muted small">ราคาและรางวัลด้านล่างคือค่าที่ตั้งไว้ในเซิร์ฟ ป้ายบนแต่ละโซนบอกว่าทดสอบอะไรไปแล้วบ้าง ค่าอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม เมนูร้านค้าในเกมเป็นภาษาอังกฤษ เช่น "Buy 32 Cobblestone"</p>
+          <a class="zone-link" href="#team"><i class="sw sw-city" aria-hidden="true"></i><code>/city go</code><span>ศาลาเมืองของทีม · ไปเมืองฟื้นฟูของเกาะที่เลือก</span></a>
+          <p class="muted small">ราคาของร้านค้าดูได้ในเกมบนไอเท็มแต่ละชิ้น ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด หน่วยเงินคือเงินในเกม เมนูในเกมเป็นภาษาอังกฤษ</p>
         </div>
       </div>
 
       <div class="zone-grid">
         <article class="zone-card" id="zone-market" aria-labelledby="zm-h">
           <div class="zone-head">
-            <h3 id="zm-h">ตลาดพืชผล</h3>
-            <span class="badge b-draft">รอทดสอบกับผู้เล่น</span>
+            <h3 id="zm-h">ตลาด · ช่องขายของ</h3>
+            <span class="badge b-ok">ทดสอบบางส่วน</span>
           </div>
-          <p class="muted"><code>/market</code> · ขายพืชผลจากเกาะเพื่อรับเงินในเกม</p>
-          <div class="table-wrap">
-            <table>
-              <caption class="sr-only">ราคารับซื้อพืชผล</caption>
-              <thead><tr><th scope="col">ขาย</th><th scope="col" class="num">จำนวน</th><th scope="col" class="num">ได้รับ</th></tr></thead>
-              <tbody>
-                <tr><td>ข้าวสาลี <span class="en">Wheat</span></td><td class="num">32</td><td class="num">$32</td></tr>
-                <tr><td>แครอท <span class="en">Carrot</span></td><td class="num">32</td><td class="num">$24</td></tr>
-                <tr><td>มันฝรั่ง <span class="en">Potato</span></td><td class="num">32</td><td class="num">$24</td></tr>
-                <tr><td>บีทรูท <span class="en">Beetroot</span></td><td class="num">32</td><td class="num">$32</td></tr>
-                <tr><td>ฟักทอง <span class="en">Pumpkin</span></td><td class="num">8</td><td class="num">$40</td></tr>
-                <tr><td>แตงโมชิ้น <span class="en">Melon Slice</span></td><td class="num">32</td><td class="num">$16</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <p class="muted"><code>/sell</code>, <code>/sellgui</code> หรือ <code>/market</code> · เปิดช่องว่างสำหรับใส่ของที่จะขาย</p>
+          <ol class="howto">
+            <li>ใส่ของที่ต้องการขายลงในช่อง</li>
+            <li>ปิดหน้าต่าง ระบบจะขายของที่รับซื้อและจ่ายเป็นเงินในเกม</li>
+            <li>ของที่ขายไม่ได้จะถูกคืนให้</li>
+          </ol>
+          <p class="note">อย่าใส่โบราณวัตถุลงช่องขาย ระบบออกแบบให้คืนโบราณวัตถุ แต่ยังไม่ได้ทดสอบ</p>
+          <ul class="checklist">
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> เปิดช่องขายได้</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> จำนวนเงินที่ได้ และการคืนของ</li>
+          </ul>
         </article>
 
         <article class="zone-card" id="zone-shop" aria-labelledby="zs-h">
           <div class="zone-head">
-            <h3 id="zs-h">ร้านเสบียง</h3>
+            <h3 id="zs-h">ร้านค้า</h3>
             <span class="badge b-ok">ทดสอบบางส่วน</span>
           </div>
-          <p class="muted"><code>/skyshop</code> · ซื้อของที่เกาะใหม่มักขาด ทดสอบแล้วกับการซื้อหินก้อน รายการอื่นยังรอทดสอบ</p>
-          <div class="table-wrap">
-            <table>
-              <caption class="sr-only">ราคาสินค้าในร้านเสบียง</caption>
-              <thead><tr><th scope="col">ซื้อ</th><th scope="col" class="num">จำนวน</th><th scope="col" class="num">ราคา</th></tr></thead>
-              <tbody>
-                <tr><td>หินก้อน <span class="en">Cobblestone</span></td><td class="num">32</td><td class="num">$32</td></tr>
-                <tr><td>ดิน <span class="en">Dirt</span></td><td class="num">32</td><td class="num">$64</td></tr>
-                <tr><td>ท่อนไม้โอ๊ก <span class="en">Oak Log</span></td><td class="num">16</td><td class="num">$96</td></tr>
-                <tr><td>กระจก <span class="en">Glass</span></td><td class="num">16</td><td class="num">$64</td></tr>
-                <tr><td>เมล็ดข้าวสาลี <span class="en">Wheat Seeds</span></td><td class="num">16</td><td class="num">$16</td></tr>
-                <tr><td>คบเพลิง <span class="en">Torch</span></td><td class="num">16</td><td class="num">$24</td></tr>
-              </tbody>
-            </table>
-          </div>
+          <p class="muted"><code>/shop</code> หรือ <code>/skyshop</code> · ร้านแบบแยกหมวดหมู่ ทั้งซื้อและขาย</p>
+          <ul class="plain">
+            <li>เลือกหมวด แล้วดูราคาซื้อและราคาขายบนไอเท็มแต่ละชิ้นในเกม</li>
+            <li>ตอนนี้ใช้ราคาเริ่มต้นของระบบร้านค้า อาจปรับก่อนเปิด</li>
+            <li>NPC พ่อค้าในฮับเปิดร้านเดียวกันนี้</li>
+          </ul>
+          <ul class="checklist">
+            <li><span class="badge b-ok">ทดสอบแล้ว</span> เปิดร้านและดูหมวดได้</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> การซื้อขายจริงและจำนวนเงิน</li>
+          </ul>
         </article>
 
         <article class="zone-card" id="zone-quests" aria-labelledby="zq-h">
@@ -287,27 +279,28 @@
     <div class="wrap">
       <div class="sec-head">
         <span class="eyebrow">เล่นเป็นทีม</span>
-        <h2 id="team-h">เกาะของทีม กับเมืองฟื้นฟูของทีม</h2>
-        <p class="muted">ทุกทีมบนเกาะ BentoBox มีสองที่แยกกัน ที่หนึ่งสร้างเองได้อิสระ อีกที่เป็นเมืองโบราณที่ซ่อมด้วยโบราณวัตถุ แต่ละทีมมีเมืองของตัวเอง ไม่ได้ใช้เมืองร่วมกับทั้งเซิร์ฟ</p>
+        <h2 id="team-h">หนึ่งเกาะ หนึ่งทีม หนึ่งเมือง</h2>
+        <p class="muted">แต่ละเกาะคือทีมของมันเอง ผู้เล่นหนึ่งคนอยู่ได้สูงสุด 3 เกาะ นับรวมเกาะที่สร้างเองและเกาะที่เข้าร่วมทีม ทุกเกาะมีเมืองฟื้นฟูของตัวเอง ไม่ได้ใช้เมืองร่วมกับทั้งเซิร์ฟ และเมืองแยกจากตัวเกาะที่คุณสร้างเอง</p>
       </div>
 
       <div class="compare">
         <article class="compare-card">
           <h3>เกาะของทีม</h3>
           <dl>
-            <dt>คำสั่ง</dt><dd><code>/is</code></dd>
+            <dt>คำสั่ง</dt><dd><code>/is</code> เปิดเมนู Your Islands: เลือกเกาะ, ไปเกาะ, หรือกดช่องว่างเพื่อสร้างเกาะใหม่</dd>
+            <dt>ทีม</dt><dd>1 เกาะ = 1 ทีม สร้างเกาะใหม่ = ทีมใหม่ที่แยกกัน</dd>
+            <dt>จำนวนเกาะ</dt><dd>สูงสุด 3 เกาะต่อคน รวมเกาะที่เป็นสมาชิกทีม</dd>
             <dt>สร้างบล็อก</dt><dd>ได้อิสระ ทุบและวางได้ทั้งเกาะ</dd>
-            <dt>ใช้ทำอะไร</dt><dd>ฟาร์ม, ปั่นหิน, เก็บของ, บ้านของทีม</dd>
             <dt>สมาชิก</dt><dd>ชวนเพื่อนด้วย <code>/is team invite</code> (แผน: สูงสุด 4 คนต่อทีม)</dd>
           </dl>
         </article>
         <article class="compare-card">
-          <h3>เมืองฟื้นฟูของทีม</h3>
+          <h3>เมืองฟื้นฟูของเกาะ</h3>
           <dl>
-            <dt>คำสั่ง</dt><dd><code>/is city</code> หรือ <code>/city</code> เปิดเมนู · <code>/city go</code> วาร์ปไปเมือง</dd>
+            <dt>คำสั่ง</dt><dd><code>/city</code> เปิดเมนูเมือง · <code>/city go</code> วาร์ปไปเมืองของเกาะที่เลือก · <code>/city go 2</code> เลือกเกาะช่องที่ 2 แล้ววาร์ป</dd>
             <dt>สร้างบล็อก</dt><dd>ไม่ได้ เมืองเป็นแผนที่สำเร็จรูปที่ถูกป้องกันไว้</dd>
             <dt>ใช้ทำอะไร</dt><dd>บริจาคโบราณวัตถุด้วย <code>/city donate</code> เพื่อซ่อมเมืองทีละบท</dd>
-            <dt>ของใคร</dt><dd>ของทีมคุณเท่านั้น สมาชิกในทีมใช้เมืองเดียวกัน ถ้าย้ายไปอยู่ทีมอื่นจะเข้าเมืองของทีมใหม่แทน</dd>
+            <dt>ของใคร</dt><dd>ของเกาะนั้นเท่านั้น สมาชิกทีมเดียวกันใช้เมืองเดียวกัน ถ้าคุณอยู่หลายเกาะ แต่ละเกาะมีเมืองแยกกัน</dd>
           </dl>
         </article>
       </div>
@@ -358,7 +351,8 @@
           </div>
         </div>
       </div>
-      <p class="season-note">ทดสอบแล้ว: <code>/city go</code> พาไปพื้นที่เมืองของทีมตัวเอง (บัญชีเดียว) ยังรอทดสอบ: ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท ส่วนรางวัลอื่นของแต่ละบท (นอกจากหน้าตาเมือง) ยังอยู่ระหว่างออกแบบ</p>
+      <p class="season-note">ทดสอบแล้ว: <code>/is</code> → Restoration City พาไปเมืองของเกาะที่เลือก (บัญชีเดียว) ยังรอทดสอบ: สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท ส่วนรางวัลอื่นของแต่ละบท (นอกจากหน้าตาเมือง) ยังอยู่ระหว่างออกแบบ</p>
+      <p class="season-note"><span class="badge b-plan">แผนในอนาคต</span> แนวคิดซ่อมเมืองทีละโครงการด้วยวัสดุ (เช่น สะพาน ตลาด สวน) ออกแบบไว้แล้วแต่ยังไม่ได้สร้าง ระบบบทแบบปัจจุบันยังใช้อยู่</p>
     </div>
   </section>
 
@@ -414,8 +408,8 @@
           <li><strong>กดยอมรับแพ็กฟอนต์ไทย</strong><span>ตอนเข้าเซิร์ฟ เกมจะถามให้โหลดแพ็ก ThaiFontFix ให้กดยอมรับ ถ้าปฏิเสธจะเข้าเซิร์ฟไม่ได้</span></li>
           <li><strong>ถ้าไม่มีคำถามขึ้นมา</strong><span>ไปที่ Multiplayer → เลือกเซิร์ฟ → Edit → ตั้ง Server Resource Packs เป็น Enabled หรือ Prompt แล้วเข้าใหม่</span></li>
           <li><strong>เริ่มที่ฮับ</strong><span>เปิดเมนูด้วย <code>/menu</code> หรือกลับฮับด้วย <code>/spawn</code> เมนูในเกมเป็นภาษาอังกฤษ</span></li>
-          <li><strong>สร้างเกาะของทีมด้วย <code>/is</code></strong><span>ชวนเพื่อนเข้าทีมด้วย <code>/is team invite</code></span></li>
-          <li><strong>ไปเมืองของทีมด้วย <code>/city go</code></strong><span>ทำภารกิจที่ฮับเพื่อรับเศษผลึก แล้วใช้ <code>/city donate</code> ซ่อมเมือง</span></li>
+          <li><strong>เปิดเมนูเกาะด้วย <code>/is</code></strong><span>กดช่องว่างเพื่อสร้างเกาะ ชวนเพื่อนเข้าทีมด้วย <code>/is team invite</code></span></li>
+          <li><strong>ไปเมืองของเกาะด้วย <code>/city go</code></strong><span>ทำภารกิจที่ฮับเพื่อรับเศษผลึก แล้วใช้ <code>/city donate</code> ซ่อมเมือง</span></li>
         </ol>
         <div class="facts">
           <div class="address-row">
@@ -427,6 +421,7 @@
             <dt>การเข้าเล่น</dt><dd>whitelist ช่วงทดสอบภายใน <span class="badge b-ok">ยืนยันแล้ว</span></dd>
             <dt>แพ็กของเซิร์ฟ</dt><dd>แพ็กฟอนต์ไทย <a href="https://modrinth.com/resourcepack/thaifontfix" rel="noopener">ThaiFontFix</a> (บังคับ, โหลดอัตโนมัติ) ช่วยให้ภาษาไทยในแชตแสดงถูกต้อง <span class="badge b-ok">ติดตั้งแล้ว</span></dd>
             <dt>ภาษาในเกม</dt><dd>อังกฤษ <span class="badge b-ok">ยืนยันแล้ว</span></dd>
+            <dt>จำนวนเกาะ</dt><dd>สูงสุด 3 เกาะต่อคน (1 เกาะ = 1 ทีม) <span class="badge b-ok">ตั้งค่าแล้ว</span></dd>
             <dt>ทีม</dt><dd>สูงสุด 4 คนต่อเกาะ <span class="badge b-plan">แผน</span></dd>
             <dt>PvP</dt><dd>ปิดทุกพื้นที่ <span class="badge b-plan">แผน</span></dd>
             <dt>ม็อดฝั่งผู้เล่น</dt><dd><span class="ok">ใช้ได้:</span> ม็อดเพิ่มความลื่น (เช่น Sodium), shader, minimap</dd>
@@ -469,27 +464,29 @@
         <button class="chip" type="button" data-filter="hub" aria-pressed="false">ฮับ</button>
         <button class="chip" type="button" data-filter="shop" aria-pressed="false">ร้านค้าและภารกิจ</button>
         <button class="chip" type="button" data-filter="island" aria-pressed="false">เกาะ</button>
-        <button class="chip" type="button" data-filter="city" aria-pressed="false">เมืองของทีม</button>
+        <button class="chip" type="button" data-filter="city" aria-pressed="false">เมืองของเกาะ</button>
       </div>
       <ul class="cmd-list">
         <li class="cmd" data-group="hub"><code>/spawn</code><div class="desc"><span>กลับฮับกลาง</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/spawn" aria-label="คัดลอกคำสั่ง /spawn">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/hub</code><div class="desc"><span>กลับฮับกลาง (ใช้ <code>/lobby</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/hub" aria-label="คัดลอกคำสั่ง /hub">คัดลอก</button></li>
-        <li class="cmd" data-group="hub"><code>/menu</code><div class="desc"><span>เปิดเมนูฮับ: เกาะ, เมืองของทีม, คู่มือ และโซนต่าง ๆ</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/menu" aria-label="คัดลอกคำสั่ง /menu">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/menu</code><div class="desc"><span>เปิดเมนูฮับ: เกาะ, เมืองของเกาะ, คู่มือ และโซนต่าง ๆ</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/menu" aria-label="คัดลอกคำสั่ง /menu">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/skyguide</code><div class="desc"><span>อ่านคู่มือเริ่มต้น (Getting Started)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyguide" aria-label="คัดลอกคำสั่ง /skyguide">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/market</code><div class="desc"><span>เปิดตลาดพืชผล ขายผลผลิตรับเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/market" aria-label="คัดลอกคำสั่ง /market">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านเสบียง ซื้อของด้วยเงินในเกม (ทดสอบแล้วกับการซื้อหินก้อน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/shop</code><div class="desc"><span>เปิดร้านค้าแบบแยกหมวด ซื้อและขาย (เปิดเมนูได้แล้ว การซื้อขายจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/shop" aria-label="คัดลอกคำสั่ง /shop">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านค้าเดียวกับ <code>/shop</code></span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดช่องขายของ ใส่ของแล้วปิดหน้าต่างเพื่อขาย (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้ เปิดได้แล้ว การขายจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง (ทดสอบแล้วกับภารกิจส่งหิน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>ห้องเติมเงิน ตอนนี้ยังไม่เปิด</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>สร้างเกาะของทีม หรือวาร์ปกลับเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
-        <li class="cmd" data-group="island"><code>/is team invite &lt;ชื่อผู้เล่น&gt;</code><div class="desc"><span>ชวนเพื่อนเข้าทีมเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is team invite " aria-label="คัดลอกคำสั่ง /is team invite">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>เปิดเมนู Your Islands: เลือกเกาะ ไปเกาะ ไปเมืองของเกาะ หรือสร้างเกาะใหม่ (ใช้ <code>/islands</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
+        <li class="cmd" data-group="island"><code>/is team invite &lt;ชื่อผู้เล่น&gt;</code><div class="desc"><span>ชวนเพื่อนเข้าทีมของเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is team invite " aria-label="คัดลอกคำสั่ง /is team invite">คัดลอก</button></li>
         <li class="cmd" data-group="island"><code>/is sethome</code><div class="desc"><span>ตั้งจุดเกิดบนเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is sethome" aria-label="คัดลอกคำสั่ง /is sethome">คัดลอก</button></li>
         <li class="cmd" data-group="island"><code>/is level</code><div class="desc"><span>คำนวณเลเวลเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is level" aria-label="คัดลอกคำสั่ง /is level">คัดลอก</button></li>
         <li class="cmd" data-group="island"><code>/is top</code><div class="desc"><span>อันดับเกาะ</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/is top" aria-label="คัดลอกคำสั่ง /is top">คัดลอก</button></li>
-        <li class="cmd" data-group="city"><code>/city</code><div class="desc"><span>เปิดเมนูเมืองของทีม (ใช้ <code>/is city</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city" aria-label="คัดลอกคำสั่ง /city">คัดลอก</button></li>
-        <li class="cmd" data-group="city"><code>/city go</code><div class="desc"><span>วาร์ปไปเมืองของทีม ครั้งแรกจะเตรียมเมืองบทที่ 1 ให้ (ใช้ <code>/is city go</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/city go" aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
-        <li class="cmd" data-group="city"><code>/city donate</code><div class="desc"><span>บริจาคโบราณวัตถุที่ถืออยู่ในมือหลักให้เมืองของทีม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city donate" aria-label="คัดลอกคำสั่ง /city donate">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city</code><div class="desc"><span>เปิดเมนูเมืองของเกาะที่เลือก (ใช้ <code>/is city</code> ก็ได้)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city" aria-label="คัดลอกคำสั่ง /city">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city go</code><div class="desc"><span>วาร์ปไปเมืองของเกาะที่เลือกอยู่ ครั้งแรกจะเตรียมเมืองบทที่ 1 ให้</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/city go" aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city go &lt;ช่อง&gt;</code><div class="desc"><span>เลือกเกาะในช่องนั้นของเมนู <code>/is</code> แล้ววาร์ปไปเมืองของเกาะนั้น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city go " aria-label="คัดลอกคำสั่ง /city go">คัดลอก</button></li>
+        <li class="cmd" data-group="city"><code>/city donate</code><div class="desc"><span>บริจาคโบราณวัตถุที่ถืออยู่ในมือหลักให้เมืองของเกาะที่เลือก</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/city donate" aria-label="คัดลอกคำสั่ง /city donate">คัดลอก</button></li>
       </ul>
       <p class="sr-only" id="copy-status" role="status" aria-live="polite"></p>
     </div>
@@ -526,9 +523,11 @@
         <details><summary>ที่อยู่เซิร์ฟเวอร์คืออะไร</summary><div><p>ยังไม่ประกาศสำหรับผู้เล่นทั่วไป จะแสดงในส่วน "ที่อยู่เซิร์ฟเวอร์" ด้านบนเมื่อเปิดสาธารณะ</p></div></details>
         <details><summary>เมืองฟื้นฟูใช้ร่วมกับทั้งเซิร์ฟไหม</summary><div><p>ไม่ ทุกทีมมีเมืองของตัวเอง แต้มที่ทีมบริจาคใช้ซ่อมเมืองของทีมนั้นเท่านั้น ทีมอื่นไม่ได้รับผล</p></div></details>
         <details><summary>สร้างบ้านในเมืองฟื้นฟูได้ไหม</summary><div><p>ไม่ได้ เมืองถูกป้องกันไว้และเปลี่ยนตามบท สร้างอิสระได้บนเกาะของทีม (<code>/is</code>)</p></div></details>
-        <details><summary>ถ้าย้ายไปอยู่ทีมอื่น เมืองจะเป็นยังไง</summary><div><p>เมืองผูกกับเกาะของทีม ถ้าคุณเข้าร่วมเกาะของทีมอื่น <code>/city go</code> จะพาไปเมืองของทีมใหม่ เมืองของทีมเดิมยังอยู่กับทีมเดิม</p></div></details>
+        <details><summary>มีได้กี่เกาะ</summary><div><p>สูงสุด 3 เกาะต่อคน นับรวมเกาะที่คุณเป็นสมาชิกทีม แต่ละเกาะคือทีมแยกกันและมีเมืองฟื้นฟูของตัวเอง เปิดเมนู <code>/is</code> เพื่อเลือกเกาะ</p></div></details>
+        <details><summary>ถ้าเข้าร่วมทีมของเพื่อน เกาะเดิมจะหายไหม</summary><div><p>ไม่ เซิร์ฟตั้งค่าให้เก็บเกาะเดิมไว้ เกาะของเพื่อนจะเพิ่มเข้ามาเป็นอีกช่องในเมนู <code>/is</code> ถ้ายังมีช่องว่างเหลือ ระบบนี้ยังรอทดสอบกับผู้เล่นหลายคน</p></div></details>
         <details><summary>ภารกิจส่งของทำได้บ่อยแค่ไหน</summary><div><p>แต่ละภารกิจทำได้ 1 ครั้งต่อผู้เล่นทุก 24 ชั่วโมง ระบบนี้ยังรอทดสอบเล่น</p></div></details>
-        <details><summary>ราคาในตลาดและร้านจะเปลี่ยนไหม</summary><div><p>อาจเปลี่ยน ราคาตอนนี้เป็นค่าที่กำลังติดตั้ง จะปรับหลังทดสอบเล่น</p></div></details>
+        <details><summary>ดูราคาร้านค้าได้ที่ไหน</summary><div><p>ในเกม เปิด <code>/shop</code> แล้วดูราคาซื้อและราคาขายบนไอเท็มแต่ละชิ้น ตอนนี้เป็นราคาเริ่มต้นของระบบร้านค้าและอาจปรับก่อนเปิด</p></div></details>
+        <details><summary>ขายของยังไง</summary><div><p>พิมพ์ <code>/sell</code> (หรือ <code>/market</code>) ใส่ของที่จะขายลงช่อง แล้วปิดหน้าต่าง ของที่ขายไม่ได้จะถูกคืน อย่าใส่โบราณวัตถุลงไป ระบบการขายจริงยังรอทดสอบ</p></div></details>
         <details><summary>มีเติมเงินหรือ VIP ไหม</summary><div><p>ยังไม่เปิด ไม่มีการรับชำระเงิน แพ็กเกจ หรือราคาใด ๆ ในตอนนี้ ดูรายละเอียดในส่วน <a href="#topup">ห้องเติมเงิน</a></p></div></details>
         <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ ตอนนี้ทดสอบกับ Java Edition</p></div></details>
         <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง เซิร์ฟใช้แพ็กฟอนต์ไทย ThaiFontFix ซึ่งเกมจะโหลดให้เองตอนเข้าเล่น แค่กดยอมรับ ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>

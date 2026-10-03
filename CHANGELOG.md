@@ -3,6 +3,35 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.1: Website for the new shop, island selector and playtest results (2026-10-03)
+
+**Why:** EconomyShopGUI replaced the six-item script shop, the island
+selector is installed, and the owner confirmed new flows in game.
+
+Changed (website and its checks only):
+- Hub: removed the old fixed crop and supply price tables (no longer
+  current). Market card explains the sell box (`/sell`, `/sellgui`,
+  `/market`: drop items, close to sell, unsellable items returned) with a
+  warning not to put Relics in it. Shop card explains `/shop` / `/skyshop`
+  categories with prices read in game. Quest rewards unchanged.
+- Status: tested (one owner account) `/is` selector -> Restoration City and
+  `/shop` / `/sell` menus opening; pending: shop amounts and Relic return,
+  creating several islands, multi-member teams, isolation. Old single
+  cobblestone purchase removed (old shop).
+- Team: one island = one team, up to 3 islands incl. memberships, one city
+  per island, `/city go 2`; incremental restoration shown as an unbuilt
+  future plan only.
+- Commands: 20 player commands; `/is` tested, `/shop`, `/skyshop`, `/sell`
+  partly tested, `/city go <slot>` added (awaiting test).
+- FAQ: how many islands, joining a friend's team keeps your islands
+  (awaiting multi-player test), where shop prices are, how to sell.
+- Checks: 107 (`tests/website/check-site.js`), including no `$` prices in
+  shop/market cards and badge sets matching the playtest docs. Verified by
+  planting an old price and a wrong badge (both caught).
+
+Unchanged: top-up closed, no payments, no IP, map decoration unfinished.
+No commands changed. Server scripts not touched.
+
 ## 0.8.0: Island selector, one island = one team (2026-10-03)
 
 **Why:** the owner wants players to hold several islands, each a separate

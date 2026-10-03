@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-02T19:20:38.439Z
+Run: 2026-10-03T02:17:42.935Z
 
-**104/104 passed**
+**107/107 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-02T19:20:38.439Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (709 elements)
+- ✅ text contrast meets WCAG AA (696 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-02T19:20:38.439Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (709 elements)
+- ✅ text contrast meets WCAG AA (696 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-02T19:20:38.439Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (709 elements)
+- ✅ text contrast meets WCAG AA (696 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-02T19:20:38.439Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (709 elements)
+- ✅ text contrast meets WCAG AA (696 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -87,20 +87,23 @@ Run: 2026-10-02T19:20:38.439Z
 - ✅ top-up has no technical wording
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
-- ✅ commands marked tested = /spawn, /hub, /menu, /city go
-- ✅ commands marked partly tested = /skyshop, /skyquests
-- ✅ /market, /topup, /city donate and island commands still awaiting test
+- ✅ commands marked tested = /spawn, /hub, /menu, /is, /city go
+- ✅ commands marked partly tested = /shop, /skyshop, /sell, /skyquests (menus open; transactions pending)
+- ✅ /topup, /city, /city donate, /city go <slot>, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
-- ✅ tested card has only the verified results
-- ✅ pending card lists crop selling, wheat quest, 24h reset, full bag, multi-member teams, floating text, map decoration
+- ✅ tested card: only verified results (menus open, selector flow, builder quest)
+- ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
 - ✅ map decoration marked unfinished in gallery
 - ✅ join steps explain the required font pack and the Server Resource Packs setting
 - ✅ game UI language stated as English; in-game guide not called Thai
 - ✅ English in-game quest names shown
 - ✅ no "nothing to download" claim
 - ✅ no blanket one-account rule; alt-account rule is about quest rewards
-- ✅ market prices match the script
-- ✅ shop prices match the script
+- ✅ old fixed shop/market price tables removed (no $ prices in market or shop)
+- ✅ shop prices: told to check in game, default prices may change
+- ✅ sell box explains close-to-sell, returns, and warns about relics
+- ✅ team section: 1 island = 1 team, up to 3 islands incl. memberships, own city per island
+- ✅ incremental restoration only as an unbuilt future plan
 - ✅ quest rewards and 24-hour reset shown
 - ✅ team goals are 0/100/300/600/1000
 
@@ -119,14 +122,14 @@ Run: 2026-10-02T19:20:38.439Z
 
 ## Command filters and copy
 
-- ✅ 18 commands listed
+- ✅ 20 commands listed
 - ✅ filter "hub" shows 4 commands
-- ✅ filter "shop" shows 6 commands
+- ✅ filter "shop" shows 7 commands
 - ✅ filter "island" shows 5 commands
-- ✅ filter "city" shows 3 commands
+- ✅ filter "city" shows 4 commands
 - ✅ filter works with the keyboard
 - ✅ copy button copies /city go
-- ✅ copy button copies /market
+- ✅ copy button copies /sell
 - ✅ copy button copies /spawn
 - ✅ copy works with the keyboard
 - ✅ copy is announced to screen readers
@@ -142,7 +145,7 @@ Run: 2026-10-02T19:20:38.439Z
 
 - ✅ reduced motion turns off all animation
 - ✅ no-JS: all 5 chapters readable
-- ✅ no-JS: all 18 commands readable
+- ✅ no-JS: all 20 commands readable
 - ✅ no-JS: menu links reachable
 - ✅ no-JS: copy and filter buttons hidden
 - ✅ no-JS: no horizontal scroll
