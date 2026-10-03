@@ -1,5 +1,18 @@
 # Next session: Lost Sky state, 3 October 2026
 
+Latest17:51 ICT: lostsky-perks.sk deployed, support/perks clean17:41 reloads.
+Websitec99c80e pulled (131 checks reported by Claude). Payments remain closed.
+Non-OP rank locks and cloud/enchant/halo packets passed; celebration first use
+emitted sound and immediate second use refused30s. Outside lobby0 particles/0
+sounds after reset. Arrival reconnect and human rendering remain untested.
+Fixture garden charged10 then15 from20 stone bricks, left5, completed stage1
+and /cityprojects go reached its safe foundation at(1634.5,100,2.5).
+LostSkyTest island is retained intentionally for follow-up; city slot3 at1536.5.
+Do not use earlier "No island created" note as current state. Its entitlements,
+inventory, balance and whitelist were cleared17:51; save-all succeeded.
+Do not reset owner cities. Garden stages2/3 fixture, restart persistence and
+multiple-team isolation remain next checks.
+
 LostSkyWorth1.1.1 deployed; clean16:37 startup, all scripts loaded without errors.
 MineLan signed in again. Server running at16:48 ICT.
 

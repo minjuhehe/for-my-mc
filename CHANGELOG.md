@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.7: Live abilities and garden charging checks (2026-10-03)
+
+Deployed rank abilities with clean script reloads at17:41 ICT. Non-OP fixture
+verified tier locks, cloud/enchant/halo particle packets, one celebration sound,
+30-second celebration refusal and zero effect packets outside the lobby.
+Garden accepted10 then15 of20 stone bricks, retained5 surplus, completed the
+foundation and warped the fixture safely. Temporary rank data, items, money
+and whitelist removed; fixture island and city slot3 retained for later tests.
+No human effect-rendering or full restart-persistence claim.
+
 ## 0.9.6: Website rank effects (2026-10-03)
 
 Website and checks only, from dfee340 (`lostsky-perks.sk`). Rank cards add

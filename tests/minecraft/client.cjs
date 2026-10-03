@@ -11,6 +11,11 @@ const bot = mineflayer.createBot({ host, port: Number(portText), username,
   auth: 'offline', version: '1.21.11', viewDistance: 'tiny' });
 let ready = false;
 let pending = Promise.resolve();
+const effects = { particles: 0, sounds: 0 };
+bot._client.on('packet', (_data, meta) => {
+  if (meta.name === 'world_particles') effects.particles++;
+  if (meta.name === 'sound_effect' || meta.name === 'named_sound_effect') effects.sounds++;
+});
 const describe = item => item ? {
   slot: item.slot, name: item.name, count: item.count,
   nbt: item.nbt, components: item.components
@@ -51,6 +56,8 @@ async function action(command) {
       if (!String(command.text).startsWith('/')) throw Error('Only explicit game commands accepted');
       bot.chat(command.text); break;
     case 'inventory': emit('inventory', bot.inventory.slots.map(describe)); break;
+    case 'effects': emit('effects', { ...effects }); break;
+    case 'resetEffects': effects.particles = 0; effects.sounds = 0; break;
     case 'profile': emit('profile', { username, displayName: bot.players[username]?.displayName }); break;
     case 'summary': {
       const window = bot.currentWindow || bot.inventory;

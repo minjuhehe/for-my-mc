@@ -44,3 +44,7 @@ prove the font loaded or rendered. This tool also doesn't replace human visual
 review, genuine-account login testing or client performance checks.
 
 Source: https://github.com/PrismarineJS/mineflayer
+
+`{"action":"resetEffects"}` resets packet counters;
+`{"action":"effects"}` reports received particle/sound packets. Ambient sounds
+can contribute, so counters are protocol evidence, not visual or audio QA.
