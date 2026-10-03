@@ -473,3 +473,5 @@ Notes for developers:
 - Activate /is selection menu with3 concurrent-island slots and separate teams; preserve other islands when accepting team invites. Native config installed and startup checked, player tests pending.
 
 - Save accepted future city restoration design: materials fund staged construction per island/team; no map changes applied. Record owner confirmation of basic island selector/warp flow.
+
+- Align island checker with the live-corrected explicit player parameter;70/70 offline source/structure checks pass locally.

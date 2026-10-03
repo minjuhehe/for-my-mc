@@ -163,7 +163,7 @@ check('no lookup by owner (getOwner/isOwner not used)', !/getOwner|isOwner|getOw
 check('city key no longer uses location-based getIsland(world, uuid)', !/getIsland\(\{_world\}/.test(citySk) && /function skyCityKey\(p: player\) :: text:\s*\n\s*return skyIslandSelected\(\{_p\}\)/.test(citySk));
 check('existing city data keys unchanged (skycity::<kind>::<island id>)', ['slot', 'ready', 'chapter', 'points'].every(k => new RegExp(`\\{skycity::${k}::%\\{_key\\}%\\}`).test(citySk)));
 check('selector never deletes city data or worlds', !/delete \{skycity::(slot|ready|chapter|points)/.test(islandsSk + citySk) && !/unload|deleteWorld|deleteIsland|bsbadmin|reset/i.test(islandsSk));
-check('create goes through the native namespaced command', /execute player command "bskyblock:island create"/.test(islandsSk));
+check('create goes through the native namespaced command', /execute \{_p\} command "bskyblock:island create"/.test(islandsSk));
 check('selector never runs plain "is"/"island" (no loop with default-action)', !/execute player command "(is|island)"/.test(islandsSk + cityNew));
 const onCmd = citySk.slice(citySk.indexOf('on command:'));
 check('/is interception is limited to "is|island city ..." (other subcommands untouched)', /if \{_parts::2\} is not "city":\s*\n\s*stop/.test(onCmd) && onCmd.indexOf('cancel event') > onCmd.indexOf('{_parts::2} is not "city"'));

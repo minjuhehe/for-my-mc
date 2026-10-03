@@ -380,3 +380,5 @@ Live reload2026-10-03 at09:03:17 ICT passed lostsky-islands after correcting exe
 Native BSkyBlock live config saved: new-player-action/default-action /islands, concurrent-islands3, disallow-team-member-islands false. Server restarted normally; all scripts loaded without errors and Done14.822s at09:05:47 ICT. Player flow checks pending. Local config backup saved before edit; existing worlds/progress untouched.
 
 Saved accepted incremental restoration design in docs/INCREMENTAL_RESTORATION.md; implementation deferred at owner request. Resume shop transactions and multi-island/team checks first.
+
+Local island check initially failed because its native-command assertion still expected the old invalid event-player syntax. Corrected to explicit function parameter;70/70 checks passed. This is separate from actual live Skript parsing and owner flow confirmation.
