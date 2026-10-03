@@ -3,6 +3,10 @@
 Every addition or change goes here: **what** changed, **why**, and **which
 commands** it touched. Newest first.
 
+## 0.8.7: Saved deployment/test handoff (2026-10-03)
+
+Added NEXT_SESSION with exact live1.1.0 vs staged1.1.1 state, login blocker, test plan and private-data precautions. Website110checks are Claude-reported; source pulled and local preview restarted. No game command changed.
+
 ## 0.8.6: Website for universal selling and the Restoration Garden (2026-10-03)
 
 Website and checks only. Sell card: 54-slot `/sell` box, price order (shop ->
