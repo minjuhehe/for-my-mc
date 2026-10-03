@@ -374,3 +374,5 @@ English labels use default font and bold; Thai font workaround is no longer need
 Shop tooltip language: left-click-buy now Buy: %buyPrice%, right-click-sell Sell: %sellPrice%, using actual plugin pricing placeholders. Owner confirms /shop and /sell GUIs open; sale amount/return behavior not yet confirmed. Named/lore Relics remain protected by ESGUI component matching (only repair_cost ignored).
 
 Floating-label background now transparent (background0, default_background false).
+
+Live reload2026-10-03 at09:03:17 ICT passed lostsky-islands after correcting execute {_p} command; lostsky-city passed09:01:38. Config installation and live player flow still pending.

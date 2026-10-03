@@ -467,3 +467,5 @@ Notes for developers:
 - Clarify hover tooltips with Buy and Sell prices from EconomyShopGUI; owner confirms both GUIs open.
 
 - Remove floating-label backgrounds at owner request; keep bold English lettering.
+
+- Live selector reload fixed: use the function's explicit player parameter when executing native island creation. Both island and city scripts reload successfully.

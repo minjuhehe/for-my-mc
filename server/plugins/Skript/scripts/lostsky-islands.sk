@@ -239,7 +239,7 @@ function skyIslandCreate(p: player):
     # (NewIsland), so forgetting the stored choice selects it next time.
     delete {skyisland::selected::%uuid of {_p}%}
     # Native command: limit checks, blueprint panel and messages stay BentoBox's.
-    execute player command "bskyblock:island create"
+    execute {_p} command "bskyblock:island create"
 
 command /islands:
     aliases: /myislands
