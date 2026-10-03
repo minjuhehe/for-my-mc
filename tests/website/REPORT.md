@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-03T10:11:00.636Z
+Run: 2026-10-03T10:21:41.727Z
 
-**122/122 passed**
+**125/125 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (869 elements)
+- ✅ text contrast meets WCAG AA (880 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (869 elements)
+- ✅ text contrast meets WCAG AA (880 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (869 elements)
+- ✅ text contrast meets WCAG AA (880 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (869 elements)
+- ✅ text contrast meets WCAG AA (880 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -90,7 +90,9 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ store: rank colours and titles (SKY cyan; AURORA purple + Builder; NOVA gold + all three)
 - ✅ store: cosmetic, permanent, account-bound, no money/gear/island/progress advantage
 - ✅ store: three rank names in three different colours
-- ✅ store: /topup, /supporter preview and /style wardrobe described, awaiting test (not claimed tested)
+- ✅ store: /topup and /style partly tested, /supporter not claimed separately tested, never fully tested
+- ✅ store: product click charges nothing; locked title refused
+- ✅ store: on-screen/chat look awaiting visual review, server-restart persistence awaiting test
 - ✅ store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates
 - ✅ store: no capes, and no THB prices outside the store section
 - ✅ FAQ: ranks preview, no advantage, cannot pay yet
@@ -98,11 +100,12 @@ Run: 2026-10-03T10:11:00.636Z
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
 - ✅ commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go
-- ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate
-- ✅ garden open/go, /topup, /supporter, /style, /city, donate, slot, team and money commands still awaiting test
+- ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /style, /cityprojects donate
+- ✅ garden open/go, /supporter (alias not tested on its own), /city, donate, slot, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
 - ✅ tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test
 - ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
+- ✅ status cards: supporter partial evidence in tested card; visual, restart and /supporter alias pending
 - ✅ map decoration marked unfinished in gallery
 - ✅ join steps explain the required font pack and the Server Resource Packs setting
 - ✅ game UI language stated as English; in-game guide not called Thai

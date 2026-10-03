@@ -215,7 +215,12 @@ const NAV_STATE = () => {
   check('store: cosmetic, permanent, account-bound, no money/gear/island/progress advantage', /ของตกแต่ง/.test(topup) && /ถาวร/.test(topup) && /ผูกกับบัญชี/.test(topup) && /ไม่ได้เงินในเกม/.test(topup) && /อุปกรณ์/.test(topup) && /เกาะใหญ่ขึ้น/.test(topup) && /ความคืบหน้าเมืองฟื้นฟู/.test(topup));
   const rankColours = await page.$$eval('#topup .rank-name', ns => ns.map(n => getComputedStyle(n).color));
   check('store: three rank names in three different colours', new Set(rankColours).size === 3, rankColours.join(' | '));
-  check('store: /topup, /supporter preview and /style wardrobe described, awaiting test (not claimed tested)', /\/topup[\s\S]*\/supporter[\s\S]*ตัวอย่าง/.test(topup) && /\/style[\s\S]*ตู้แต่งตัว/.test(topup) && (await page.$$eval('#topup .badge', bs => bs.map(b => b.textContent))).every(b => !/ทดสอบแล้ว|ทดสอบบางส่วน|ยืนยันแล้ว/.test(b)));
+  // Supporter runtime evidence (docs/SUPPORTER_STORE.md, 17:11 ICT): headless client only, so at most partly tested.
+  const storeChecks = await page.$$eval('#topup .checklist li', ls => ls.map(l => [l.querySelector('.badge').textContent, l.textContent]));
+  const storeLine = w => (storeChecks.find(c => c[1].includes(w)) || ['', ''])[0];
+  check('store: /topup and /style partly tested, /supporter not claimed separately tested, never fully tested', storeLine('/topup') === 'ทดสอบบางส่วน' && storeLine('/style') === 'ทดสอบบางส่วน' && storeLine('/supporter') === 'รอทดสอบ' && /ยังไม่ได้ทดสอบแยก/.test(topup) && storeChecks.every(c => !/^(ทดสอบแล้ว|ยืนยันแล้ว)$/.test(c[0])), JSON.stringify(storeChecks.map(c => c[0])));
+  check('store: product click charges nothing; locked title refused', /ไม่มีการเก็บเงิน/.test(topup) && /ยังไม่ปลดล็อกใส่ไม่ได้/.test(topup));
+  check('store: on-screen/chat look awaiting visual review, server-restart persistence awaiting test', storeLine('หน้าจอ') === 'รอตรวจด้วยตา' && /รีสตาร์ทเซิร์ฟยังรอทดสอบ/.test(topup));
   const future = await page.$eval('#topup .store-box:last-child', b => b.textContent);
   check('store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates', /แผน/.test(future) && /ยังไม่ขาย/.test(future) && ['อนุภาค', 'สัตว์เลี้ยง', 'เฟอร์นิเจอร์', 'โมเดลพิเศษ'].every(w => future.includes(w)) && /ไม่มีกล่องสุ่ม/.test(future) && !/อนุภาค|สัตว์เลี้ยง|เฟอร์นิเจอร์/.test(await page.$$eval('#topup .rank-card, #topup .title-card', cs => cs.map(c => c.textContent).join(' '))));
   check('store: no capes, and no THB prices outside the store section', !/ผ้าคลุม|\bcape/i.test(topup) && !/บาท|฿|THB/.test(text.replace(topup, '')));
@@ -227,14 +232,15 @@ const NAV_STATE = () => {
   const badges = await page.$$eval('.cmd', ls => Object.fromEntries(ls.map(l => [l.querySelector('code').textContent, l.querySelector('.badge').textContent])));
   const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
   check('commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/sell,/is,/city go', JSON.stringify(badges));
-  check('commands marked partly tested = /shop, /skyshop, /skyquests, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/cityprojects donate', JSON.stringify(badges));
-  check('garden open/go, /topup, /supporter, /style, /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/topup', '/supporter', '/style', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  check('commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /style, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/topup,/style,/cityprojects donate', JSON.stringify(badges));
+  check('garden open/go, /supporter (alias not tested on its own), /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/supporter', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
   const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
   check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
   const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
   check('tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test', /ไม่ใช่ OP/.test(tested) && /\/sell[\s\S]*ได้เงินตรง/.test(tested) && /Shulker/.test(tested) && /ถุงที่มีโบราณวัตถุ/.test(tested) && /1,504[\s\S]*ไม่ได้ขายจริงทุกชนิด/.test(tested) && /ทดสอบอัตโนมัติ/.test(tested) && /\/is[\s\S]*Restoration City/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/\$32|ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|หลายเกาะ|หลายคน|เห็นสวน|หน้าจอ|รีสตาร์ท/.test(tested), tested.slice(0, 300));
   const pending = await page.$$eval('.status-card', cs => cs[2].textContent);
   check('pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration', ['ยังไม่มีคนดูบนหน้าจอ', 'ระบบเงินขัดข้อง', 'เห็นสวนเปลี่ยน', 'หลังรีสตาร์ท', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'สร้างหลายเกาะ', 'ทีมหลายคน', 'แยกเมือง', 'การตกแต่งแผนที่'].every(w => pending.includes(w)), pending.slice(0, 300));
+  check('status cards: supporter partial evidence in tested card; visual, restart and /supporter alias pending', /ร้านผู้สนับสนุน[\s\S]*\/topup[\s\S]*ไม่มีการเก็บเงิน[\s\S]*โปรแกรมจำลองผู้เล่น/.test(tested) && /ร้านผู้สนับสนุน: ยังไม่มีคนดู/.test(pending) && /ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ[\s\S]*\/supporter/.test(pending) && /ยังไม่เปิด[^<]*การชำระเงิน/.test(pending));
   check('map decoration marked unfinished in gallery', /การตกแต่งแผนที่ยังไม่เสร็จ/.test(await page.textContent('#gallery')));
   const start = await page.textContent('#start');
   check('join steps explain the required font pack and the Server Resource Packs setting', /ยอมรับแพ็กฟอนต์ไทย/.test(start) && /Server Resource Packs/.test(start) && /Enabled หรือ Prompt/.test(start));

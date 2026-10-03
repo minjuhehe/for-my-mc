@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.3: Website supporter status sync (2026-10-03)
+
+Website and checks only, from a00d1a3 live evidence. `/topup` and `/style`
+now ทดสอบบางส่วน (headless non-OP client): preview opens, product click
+charges nothing, locked title refused, unlocked title equips, rank/title
+kept after reconnect. `/supporter` still รอทดสอบ (not clicked on its own).
+Screen/chat look awaiting visual review; server-restart persistence awaiting
+test. Prices unchanged; payments closed. Checks 125 (planted false claims
+caught). No commands changed; no server files touched.
+
 ## 0.9.2: Live supporter verification and reload safety (2026-10-03)
 
 Corrected Skript validation syntax, deployed storefront and tested non-OP preview,

@@ -134,7 +134,7 @@
         </div>
         <div class="status-card">
           <h3>ทดสอบกับผู้เล่นแล้ว</h3>
-          <p class="muted small">ทดสอบ 3 ต.ค. 2026 ด้วยบัญชีเจ้าของเซิร์ฟ และบัญชีทดสอบที่ไม่ใช่ OP (สำหรับระบบขาย)</p>
+          <p class="muted small">ทดสอบ 3 ต.ค. 2026 ด้วยบัญชีเจ้าของเซิร์ฟ และบัญชีทดสอบที่ไม่ใช่ OP (สำหรับระบบขายและร้านผู้สนับสนุน)</p>
           <ul>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/spawn</code> และ <code>/hub</code> พากลับฮับ</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> <code>/menu</code> เปิดเมนูฮับได้</li>
@@ -145,6 +145,7 @@
             <li><span class="badge b-ok">ตรวจแล้ว</span> คำนวณราคาได้ครบ 1,504 ชนิดของวัสดุ (ตรวจความครอบคลุม ไม่ได้ขายจริงทุกชนิด)</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> บริจาควัสดุเข้าสวนฟื้นฟู: ระบบรับวัสดุแล้ว และการทดสอบอัตโนมัติฝั่งเซิร์ฟผ่านครบ 3 ขั้น</li>
             <li><span class="badge b-ok">ทดสอบแล้ว</span> ภารกิจส่งหิน 128 ก้อน: ได้ $80 และเศษผลึกสามัญของจริง 2 ชิ้น ส่งซ้ำทันทีถูกปฏิเสธจนกว่าจะครบ 24 ชั่วโมง</li>
+            <li><span class="badge b-ok">ทดสอบบางส่วน</span> ร้านผู้สนับสนุน (ตัวอย่าง): <code>/topup</code> เปิดได้ กดสินค้าแล้วไม่มีการเก็บเงิน <code>/style</code> ไม่ให้ใส่ฉายาที่ยังไม่ปลดล็อก ใส่ฉายาที่ปลดล็อกแล้วได้ และแรงก์กับฉายายังอยู่หลังออกแล้วเข้าใหม่ (ทดสอบด้วยโปรแกรมจำลองผู้เล่น)</li>
           </ul>
         </div>
         <div class="status-card">
@@ -156,7 +157,8 @@
             <li><span class="badge b-draft">รอทดสอบ</span> ภารกิจส่งข้าวสาลี การรีเซ็ตหลังครบ 24 ชั่วโมงจริง และกรณีกระเป๋าเต็ม</li>
             <li><span class="badge b-draft">รอทดสอบ</span> สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
             <li><span class="badge b-draft">กำลังทำ</span> การตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> เมนูตัวอย่างร้านผู้สนับสนุน (<code>/topup</code>, <code>/supporter</code>) และตู้แต่งตัว <code>/style</code></li>
+            <li><span class="badge b-draft">รอตรวจด้วยตา</span> ร้านผู้สนับสนุน: ยังไม่มีคนดูเมนู ป้ายแรงก์ และสีชื่อบนหน้าจอและในแชตจริง</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ และคำสั่ง <code>/supporter</code> แยกจาก <code>/topup</code></li>
             <li><span class="badge b-wait">ยังไม่เปิด</span> การชำระเงิน: ร้านผู้สนับสนุนเป็นแค่ตัวอย่าง ไม่มีการรับชำระเงินใด ๆ</li>
             <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟสาธารณะ, ช่องทางติดต่อ, วันเปิด และการรองรับ Bedrock</li>
           </ul>
@@ -504,9 +506,9 @@
         <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านค้าเดียวกับ <code>/shop</code></span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดกล่องขายของ 54 ช่อง ใส่ของแล้วปิดหน้าต่างเพื่อขาย โบราณวัตถุจะถูกคืน (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง (ทดสอบแล้วกับภารกิจส่งหิน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>เปิดหน้าตัวอย่างร้านผู้สนับสนุน ยังไม่รับชำระเงิน</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/supporter</code><div class="desc"><span>ดูแรงก์และฉายาพร้อมราคาที่เสนอ (หน้าเดียวกับ <code>/topup</code>)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/supporter" aria-label="คัดลอกคำสั่ง /supporter">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/style</code><div class="desc"><span>ตู้แต่งตัว: ใส่หรือซ่อนฉายาที่ปลดล็อกแล้ว</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/style" aria-label="คัดลอกคำสั่ง /style">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>เปิดหน้าตัวอย่างร้านผู้สนับสนุน ยังไม่รับชำระเงิน (เปิดได้แล้ว ยังไม่มีคนดูบนหน้าจอจริง)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/supporter</code><div class="desc"><span>ดูแรงก์และฉายาพร้อมราคาที่เสนอ (หน้าเดียวกับ <code>/topup</code> แต่ตัวคำสั่งนี้ยังไม่ได้ทดสอบแยก)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/supporter" aria-label="คัดลอกคำสั่ง /supporter">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/style</code><div class="desc"><span>ตู้แต่งตัว: ใส่หรือซ่อนฉายาที่ปลดล็อกแล้ว (ยังไม่มีคนดูบนหน้าจอจริง)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/style" aria-label="คัดลอกคำสั่ง /style">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
         <li class="cmd" data-group="island"><code>/is</code><div class="desc"><span>เปิดเมนู Your Islands: เลือกเกาะ ไปเกาะ ไปเมืองของเกาะ หรือสร้างเกาะใหม่ (ใช้ <code>/islands</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/is" aria-label="คัดลอกคำสั่ง /is">คัดลอก</button></li>
@@ -585,8 +587,10 @@
         <div class="store-box">
           <h3>ดูในเกม</h3>
           <ul class="checklist">
-            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/topup</code> หรือ <code>/supporter</code> เปิดหน้าตัวอย่างร้าน (หรือคุยกับ Sky Concierge ในฮับ) กดที่สินค้าจะแจ้งว่ายังไม่รับชำระเงิน</span></li>
-            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/style</code> ตู้แต่งตัว เลือกใส่ฉายาที่ปลดล็อกแล้ว หรือซ่อนฉายา</span></li>
+            <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/topup</code> เปิดหน้าตัวอย่างร้าน (หรือคุยกับ Sky Concierge ในฮับ) กดที่สินค้าจะแจ้งว่ายังไม่รับชำระเงิน และไม่มีการเก็บเงิน</span></li>
+            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/supporter</code> เปิดหน้าเดียวกัน แต่ยังไม่ได้ทดสอบแยก</span></li>
+            <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/style</code> ตู้แต่งตัว เลือกใส่ฉายาที่ปลดล็อกแล้ว หรือซ่อนฉายา ฉายาที่ยังไม่ปลดล็อกใส่ไม่ได้</span></li>
+            <li><span class="badge b-draft">รอตรวจด้วยตา</span><span>หน้าตาเมนู ป้ายแรงก์ และสีชื่อบนหน้าจอและในแชตจริง ส่วนการเก็บสิทธิ์หลังรีสตาร์ทเซิร์ฟยังรอทดสอบ</span></li>
           </ul>
         </div>
         <div class="store-box">

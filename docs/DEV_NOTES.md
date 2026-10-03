@@ -278,6 +278,13 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   bound, no money/gear/island/progress advantage. No buy buttons, payment
   details, QR or external links; checks forbid them. `/topup`, `/supporter`
   and `/style` stay รอทดสอบ until the owner reports the runtime menu test.
+  **Update (a00d1a3, headless non-OP client):** `/topup` and `/style` are
+  ทดสอบบางส่วน (preview opens, product click charges nothing, locked title
+  refused, unlocked title equips, NOVA/title survive reconnect, lower SKY
+  grant keeps NOVA). `/supporter` stays รอทดสอบ: same function, but not
+  clicked on its own. Human screen/chat review is รอตรวจด้วยตา; full
+  server-restart persistence is รอทดสอบ. Checks allow partly tested but
+  never ทดสอบแล้ว for the store, and payments stay closed. Checks: 125.
   Particles, pets, furniture skins and custom models shown only as แผน ·
   ยังไม่ขาย. If prices or SKUs change, update the page and the store check in
   `tests/website/check-site.js` together. Commands on site: 25. Checks: 122.
