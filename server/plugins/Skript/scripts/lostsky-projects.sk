@@ -3,6 +3,7 @@
 import:
     org.bukkit.Bukkit
     org.bukkit.Material
+    org.bukkit.entity.EntityType
 
 function skyProjectNeed(stage: number) :: number:
     if {_stage} is 1:
@@ -34,7 +35,7 @@ function skyProjectMenu(p: player):
     if {_stage} > 3:
         set slot 13 of {_inv} to emerald named "&aProject Complete" with lore "&7Your team restored the garden!"
     else if {skyproject::active::%{_id}%} is set:
-        set slot 13 of {_inv} to clock named "&eBuilding Stage %{_stage}%" with lore "&7Blocks are being placed gradually" and "&7No more materials needed for this stage"
+        set slot 13 of {_inv} to clock named "&eBuilding Stage %{_stage}%" with lore "&7Blocks fly into place one by one" and "&7No more materials needed for this stage"
     else:
         set slot 13 of {_inv} to chest named "&eDonate Materials" with lore "&7Stage %{_stage}%: %{_material}%" and "&7Delivered: %{_paid}% / %{_need}%" and "&7Hold plain required blocks in your hand" and "&eClick to donate only what is still needed"
     set slot 16 of {_inv} to ender pearl named "&bVisit Garden - See What Changed" with lore "&7This project is separate from the main city" and "&7Available once the foundation is finished" and "&eClick here or use /cityprojects go"
@@ -148,7 +149,49 @@ function skyProjectPlace(id: text, stage: number, n: number) :: boolean:
             set {_z} to 4
         set {_y} to 101
     set {_material} to Material.valueOf(skyProjectMaterial({_stage}))
+    # Display entities have no item drops or falling-block physics.
+    # Cursor is durable; cosmetic flight state is discarded on reload.
+    set {_target} to location({_x}, {_y}, {_z}, world "lostsky_cities")
+    set {_display} to {skyproject-flight::entity::%{_id}%}
+    if {_display} is set:
+        if {_display}.isValid() is false:
+            skyProjectFlightRelease({_id})
+            delete {skyproject-flight::entity::%{_id}%}
+            delete {skyproject-flight::step::%{_id}%}
+            return false
+    else:
+        set {_start} to {_target}.clone()
+        {_start}.add(-3, 3, 0)
+        # Keep both flight chunks alive even when the donating team leaves.
+        set {_chunk1} to {_start}.getChunk()
+        set {_chunk2} to {_target}.getChunk()
+        set {skyproject-flight::chunk1::%{_id}%} to {_chunk1}
+        set {skyproject-flight::chunk2::%{_id}%} to {_chunk2}
+        set {_plugin} to Bukkit.getPluginManager().getPlugin("Skript")
+        set {skyproject-flight::ticket1::%{_id}%} to {_chunk1}.addPluginChunkTicket({_plugin})
+        set {skyproject-flight::ticket2::%{_id}%} to {_chunk2}.addPluginChunkTicket({_plugin})
+        set {_display} to {_world}.spawnEntity({_start}, EntityType.BLOCK_DISPLAY)
+        {_display}.setBlock({_material}.createBlockData())
+        {_display}.setPersistent(false)
+        {_display}.addScoreboardTag("lostsky_project_flight")
+        {_display}.setTeleportDuration(5)
+        set {skyproject-flight::entity::%{_id}%} to {_display}
+        set {skyproject-flight::step::%{_id}%} to 0
+        return false
+    add 1 to {skyproject-flight::step::%{_id}%}
+    set {_step} to {skyproject-flight::step::%{_id}%}
+    if {_step} < 4:
+        set {_offset} to 3 * (1 - {_step} / 4)
+        set {_point} to {_target}.clone()
+        {_point}.add(0 - {_offset}, {_offset}, 0)
+        {_display}.teleport({_point})
+        return false
+    # Place only after the flight. A restart retries the same paid cursor.
     {_world}.getBlockAt({_x}, {_y}, {_z}).setType({_material}, false)
+    {_display}.remove()
+    skyProjectFlightRelease({_id})
+    delete {skyproject-flight::entity::%{_id}%}
+    delete {skyproject-flight::step::%{_id}%}
     return true
 
 every 5 ticks:
@@ -162,9 +205,9 @@ every 5 ticks:
             delete {skyproject::active::%{_id}%}
         else:
             set {_cursor} to {skyproject::cursor::%{_id}%} ? 0
+            subtract 1 from {_budget}
             if skyProjectPlace({_id}, {_stage}, {_cursor}) is true:
                 add 1 to {skyproject::cursor::%{_id}%}
-                subtract 1 from {_budget}
                 if {skyproject::cursor::%{_id}%} >= skyProjectNeed({_stage}):
                     set {skyproject::complete::%{_id}%} to {_stage}
                     delete {skyproject::active::%{_id}%}
@@ -219,9 +262,38 @@ on quit:
     delete {skyproject::menu-island::%uuid of player%}
 
 on load:
+    skyProjectFlightClear()
     delete {skyproject::menu::*}
     delete {skyproject::menu-island::*}
     # Paid totals, completed stages, active queues and cursors deliberately persist.
+
+function skyProjectFlightClear():
+    loop {skyproject-flight::chunk1::*}:
+        skyProjectFlightRelease(loop-index)
+    set {_world} to Bukkit.getWorld("lostsky_cities")
+    if {_world} is set:
+        loop all entities in world "lostsky_cities":
+            if loop-entity.getScoreboardTags().contains("lostsky_project_flight") is true:
+                loop-entity.remove()
+    delete {skyproject-flight::*}
+
+function skyProjectFlightRelease(id: text):
+    set {_plugin} to Bukkit.getPluginManager().getPlugin("Skript")
+    set {_chunk1} to {skyproject-flight::chunk1::%{_id}%}
+    set {_chunk2} to {skyproject-flight::chunk2::%{_id}%}
+    if {_chunk1} is set:
+        if {skyproject-flight::ticket1::%{_id}%} is true:
+            {_chunk1}.removePluginChunkTicket({_plugin})
+    if {_chunk2} is set:
+        if {skyproject-flight::ticket2::%{_id}%} is true:
+            {_chunk2}.removePluginChunkTicket({_plugin})
+    delete {skyproject-flight::chunk1::%{_id}%}
+    delete {skyproject-flight::chunk2::%{_id}%}
+    delete {skyproject-flight::ticket1::%{_id}%}
+    delete {skyproject-flight::ticket2::%{_id}%}
+
+on unload:
+    skyProjectFlightClear()
 
 # Reserved slot 0 only; refuses any existing block or nearby visitor.
 command /lsprojectselftest:
@@ -256,7 +328,8 @@ command /lsprojectselftest:
             set {skyproject::paid::%{_id}%::%{_stage}%} to skyProjectNeed({_stage})
             set {skyproject::cursor::%{_id}%} to 0
             set {skyproject::active::%{_id}%} to {_id}
-            wait 8 seconds
+            wait 35 seconds
+            send "[Lost Sky PROJECT TEST] Stage %{_stage}% complete=%{skyproject::complete::%{_id}%}% cursor=%{skyproject::cursor::%{_id}%}% flight-step=%{skyproject-flight::step::%{_id}%}%"
             if {skyproject::complete::%{_id}%} is not {_stage}:
                 set {_ok} to false
             if {skyproject::active::%{_id}%} is set:
@@ -279,4 +352,10 @@ command /lsprojectselftest:
         delete {skyproject::complete::%{_id}%}
         delete {skyproject::cursor::%{_id}%}
         delete {skyproject::paid::%{_id}%::*}
+        if {skyproject-flight::entity::%{_id}%} is set:
+            set {_display} to {skyproject-flight::entity::%{_id}%}
+            {_display}.remove()
+        skyProjectFlightRelease({_id})
+        delete {skyproject-flight::entity::%{_id}%}
+        delete {skyproject-flight::step::%{_id}%}
         send "[Lost Sky PROJECT TEST] Result: %{_ok}% (3 funded stages, queued placement, safe arrival floor, cleanup)"

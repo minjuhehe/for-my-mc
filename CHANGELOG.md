@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.8: Flying restoration blocks (2026-10-03)
+
+Garden construction now animates matching block displays from3 blocks sideways
+and above into their destination before committing each real block. Displays
+are nonpersistent, tagged and removed on script unload/load. Paid progress and
+cursor remain durable; interrupted flights retry without consuming more items.
+No player command/permission changes. Diagnostic stage timeout raised35s for
+the slower visible placement sequence.
+Final live reload18:52:20; isolated three-stage test passed18:54:05 with
+25/8/4 committed blocks, no pending flight per stage and fixture cleanup.
+Human visual smoothness and full restart recovery remain unverified.
+
 ## 0.9.7: Live abilities and garden charging checks (2026-10-03)
 
 Deployed rank abilities with clean script reloads at17:41 ICT. Non-OP fixture

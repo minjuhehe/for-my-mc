@@ -37,8 +37,9 @@ project. First visit `/city go` to prepare that island's city. Stages:
 
 Hold materials and click Donate Materials, or `/cityprojects donate`. Partial
 donations count; only remaining required quantity is taken from the hand.
-Named/lore/enchanted items are rejected. A funded stage places one block per
-project every five ticks, with a global cap of five blocks each interval.
+Named/lore/enchanted items are rejected. A funded stage flies matching display
+blocks from the side and above before committing each block (about1.25 seconds
+per block). A global budget processes at most5 island flights every5 ticks.
 No currency or reward is paid. Fully-funded or completed stages take no more
 materials. `/cityprojects go` unlocks after the foundation and checks its arrival
 floor. The main city warp still goes to the existing city.

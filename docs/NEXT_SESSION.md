@@ -1,5 +1,13 @@
 # Next session: Lost Sky state, 3 October 2026
 
+Latest animation update: Garden now flies block displays before each placement.
+Final18:52 reload clean; three-stage isolated test passed18:54:05 with25/8/4
+blocks and no pending flights. Fixture footprint cleaned. No player materials used.
+Temporary plugin chunk tickets keep flights alive without nearby observers;
+release on commit/retry/unload. Paid cursor is unchanged. Human visual review
+requested; full chapter prefab swaps do not yet animate. Full city projects
+still need to be built from the saved incremental restoration design.
+
 Latest17:51 ICT: lostsky-perks.sk deployed, support/perks clean17:41 reloads.
 Websitec99c80e pulled (131 checks reported by Claude). Payments remain closed.
 Non-OP rank locks and cloud/enchant/halo packets passed; celebration first use
