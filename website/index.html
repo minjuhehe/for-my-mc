@@ -158,7 +158,8 @@
             <li><span class="badge b-draft">รอทดสอบ</span> สร้างหลายเกาะ, ทีมหลายคน, การแยกเมืองระหว่างทีม, การบริจาค และการเปลี่ยนบท</li>
             <li><span class="badge b-draft">กำลังทำ</span> การตกแต่งแผนที่ (ยังไม่เสร็จ)</li>
             <li><span class="badge b-draft">รอตรวจด้วยตา</span> ร้านผู้สนับสนุน: ยังไม่มีคนดูเมนู ป้ายแรงก์ และสีชื่อบนหน้าจอและในแชตจริง</li>
-            <li><span class="badge b-draft">รอทดสอบ</span> ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ และคำสั่ง <code>/supporter</code> แยกจาก <code>/topup</code></li>
+            <li><span class="badge b-draft">รอทดสอบ</span> ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ</li>
+            <li><span class="badge b-draft">รอทดสอบ</span> เอฟเฟกต์ของแรงก์ในฮับ (<code>/perks</code>, <code>/aura</code>, <code>/arrival</code>, <code>/celebrate</code>)</li>
             <li><span class="badge b-wait">ยังไม่เปิด</span> การชำระเงิน: ร้านผู้สนับสนุนเป็นแค่ตัวอย่าง ไม่มีการรับชำระเงินใด ๆ</li>
             <li><span class="badge b-wait">รอประกาศ</span> ที่อยู่เซิร์ฟสาธารณะ, ช่องทางติดต่อ, วันเปิด และการรองรับ Bedrock</li>
           </ul>
@@ -502,12 +503,16 @@
         <li class="cmd" data-group="hub"><code>/hub</code><div class="desc"><span>กลับฮับกลาง (ใช้ <code>/lobby</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/hub" aria-label="คัดลอกคำสั่ง /hub">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/menu</code><div class="desc"><span>เปิดเมนูฮับ: เกาะ, เมืองของเกาะ, คู่มือ และโซนต่าง ๆ</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/menu" aria-label="คัดลอกคำสั่ง /menu">คัดลอก</button></li>
         <li class="cmd" data-group="hub"><code>/skyguide</code><div class="desc"><span>อ่านคู่มือเริ่มต้น (Getting Started)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/skyguide" aria-label="คัดลอกคำสั่ง /skyguide">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/perks</code><div class="desc"><span>เมนูเอฟเฟกต์ของแรงก์ ใช้ได้ในฮับ เห็นเฉพาะตัวเอง</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/perks" aria-label="คัดลอกคำสั่ง /perks">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/aura &lt;off|cloud|enchant|halo&gt;</code><div class="desc"><span>เลือกหรือปิดออร่า (cloud: SKY ขึ้นไป, enchant: AURORA ขึ้นไป, halo: NOVA)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/aura " aria-label="คัดลอกคำสั่ง /aura">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/arrival &lt;off|chime|nova&gt;</code><div class="desc"><span>เลือกหรือปิดเอฟเฟกต์ตอนเข้าเกมที่ฮับ (chime: AURORA ขึ้นไป, nova: NOVA)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/arrival " aria-label="คัดลอกคำสั่ง /arrival">คัดลอก</button></li>
+        <li class="cmd" data-group="hub"><code>/celebrate</code><div class="desc"><span>ประกายฉลองในฮับ เฉพาะ NOVA ใช้ได้ทุก 30 วินาที</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/celebrate" aria-label="คัดลอกคำสั่ง /celebrate">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/shop</code><div class="desc"><span>เปิดร้านค้าแบบแยกหมวด ราคาขายดูได้ที่ไอเท็มในกระเป๋า (เปิดร้านได้แล้ว การซื้อจริงยังรอทดสอบ)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/shop" aria-label="คัดลอกคำสั่ง /shop">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyshop</code><div class="desc"><span>เปิดร้านค้าเดียวกับ <code>/shop</code></span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyshop" aria-label="คัดลอกคำสั่ง /skyshop">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/sell</code><div class="desc"><span>เปิดกล่องขายของ 54 ช่อง ใส่ของแล้วปิดหน้าต่างเพื่อขาย โบราณวัตถุจะถูกคืน (ใช้ <code>/sellgui</code> หรือ <code>/market</code> ก็ได้)</span><span class="badge b-ok">ทดสอบแล้ว</span></div><button class="copy" type="button" data-copy="/sell" aria-label="คัดลอกคำสั่ง /sell">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/skyquests</code><div class="desc"><span>ส่งของตามภารกิจ ทำได้ทุก 24 ชั่วโมง (ทดสอบแล้วกับภารกิจส่งหิน)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/skyquests" aria-label="คัดลอกคำสั่ง /skyquests">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/topup</code><div class="desc"><span>เปิดหน้าตัวอย่างร้านผู้สนับสนุน ยังไม่รับชำระเงิน (เปิดได้แล้ว ยังไม่มีคนดูบนหน้าจอจริง)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/topup" aria-label="คัดลอกคำสั่ง /topup">คัดลอก</button></li>
-        <li class="cmd" data-group="shop"><code>/supporter</code><div class="desc"><span>ดูแรงก์และฉายาพร้อมราคาที่เสนอ (หน้าเดียวกับ <code>/topup</code> แต่ตัวคำสั่งนี้ยังไม่ได้ทดสอบแยก)</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/supporter" aria-label="คัดลอกคำสั่ง /supporter">คัดลอก</button></li>
+        <li class="cmd" data-group="shop"><code>/supporter</code><div class="desc"><span>ดูแรงก์และฉายาพร้อมราคาที่เสนอ (หน้าเดียวกับ <code>/topup</code> เปิดได้แล้ว ยังไม่มีคนดูบนหน้าจอจริง)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/supporter" aria-label="คัดลอกคำสั่ง /supporter">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/style</code><div class="desc"><span>ตู้แต่งตัว: ใส่หรือซ่อนฉายาที่ปลดล็อกแล้ว (ยังไม่มีคนดูบนหน้าจอจริง)</span><span class="badge b-ok">ทดสอบบางส่วน</span></div><button class="copy" type="button" data-copy="/style" aria-label="คัดลอกคำสั่ง /style">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/bal</code><div class="desc"><span>ดูเงินในเกม</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/bal" aria-label="คัดลอกคำสั่ง /bal">คัดลอก</button></li>
         <li class="cmd" data-group="shop"><code>/pay &lt;ชื่อผู้เล่น&gt; &lt;จำนวน&gt;</code><div class="desc"><span>โอนเงินในเกมให้ผู้เล่นอื่น</span><span class="badge b-draft">รอทดสอบ</span></div><button class="copy" type="button" data-copy="/pay " aria-label="คัดลอกคำสั่ง /pay">คัดลอก</button></li>
@@ -549,6 +554,10 @@
           <ul class="perk-list">
             <li>ป้าย SKY และชื่อสีฟ้าอมเขียว ในแชตและรายชื่อผู้เล่น</li>
           </ul>
+          <p class="perk-head">เอฟเฟกต์ในฮับ</p>
+          <ul class="perk-list">
+            <li>ออร่าเมฆ (Cloud Aura) ใต้เท้า</li>
+          </ul>
         </li>
         <li class="rank-card rank-aurora">
           <div class="rank-top"><span class="rank-name">AURORA</span><span class="rank-colour">สีม่วง</span></div>
@@ -556,6 +565,11 @@
           <ul class="perk-list">
             <li>ป้าย AURORA และชื่อสีม่วง ในแชตและรายชื่อผู้เล่น</li>
             <li>ได้ฉายา Builder</li>
+          </ul>
+          <p class="perk-head">เอฟเฟกต์ในฮับ (รวมของ SKY)</p>
+          <ul class="perk-list">
+            <li>ออร่าเวทมนตร์ (Enchant Aura) รอบตัว</li>
+            <li>เสียงกริ่งตอนเข้าเกมที่ฮับ (Arrival Chime)</li>
           </ul>
         </li>
         <li class="rank-card rank-nova">
@@ -565,8 +579,29 @@
             <li>ป้าย NOVA และชื่อสีทอง ในแชตและรายชื่อผู้เล่น</li>
             <li>ได้ฉายาครบทั้ง 3 แบบ: Builder, Farmer และ Explorer</li>
           </ul>
+          <p class="perk-head">เอฟเฟกต์ในฮับ (รวมของ SKY และ AURORA)</p>
+          <ul class="perk-list">
+            <li>วงแสงเหนือหัว (Halo)</li>
+            <li>ประกายตอนเข้าเกมที่ฮับ (Nova Arrival)</li>
+            <li>ประกายฉลอง <code>/celebrate</code> ใช้ได้ทุก 30 วินาที</li>
+          </ul>
         </li>
       </ul>
+
+      <div class="fx-box">
+        <div class="fx-head">
+          <h3>เอฟเฟกต์ของแรงก์</h3>
+          <span class="badge b-draft">รอทดสอบ</span>
+        </div>
+        <p>สร้างในเซิร์ฟแล้ว กำลังทดสอบ แรงก์ที่สูงกว่าได้เอฟเฟกต์ของแรงก์ก่อนหน้าด้วย</p>
+        <ul class="plain">
+          <li><b>เห็นและได้ยินเฉพาะตัวคุณเอง</b> ผู้เล่นคนอื่นไม่เห็นเอฟเฟกต์ของคุณ</li>
+          <li>ใช้ได้เฉพาะในฮับ ออกจากฮับแล้วเอฟเฟกต์จะไม่แสดง</li>
+          <li>ปิดไว้ตั้งแต่แรก ต้องเลือกเปิดเอง และปิดได้ทุกเมื่อ</li>
+          <li>ไม่ทำให้บินได้ ไม่ทำดาเมจ และไม่มีผลกับเงินในเกม</li>
+        </ul>
+        <p class="fx-cmds"><code>/perks</code> เปิดเมนูเอฟเฟกต์ · <code>/aura off|cloud|enchant|halo</code> · <code>/arrival off|chime|nova</code> · <code>/celebrate</code></p>
+      </div>
 
       <h3 class="store-sub">ฉายา</h3>
       <ul class="title-grid">
@@ -588,15 +623,16 @@
           <h3>ดูในเกม</h3>
           <ul class="checklist">
             <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/topup</code> เปิดหน้าตัวอย่างร้าน (หรือคุยกับ Sky Concierge ในฮับ) กดที่สินค้าจะแจ้งว่ายังไม่รับชำระเงิน และไม่มีการเก็บเงิน</span></li>
-            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/supporter</code> เปิดหน้าเดียวกัน แต่ยังไม่ได้ทดสอบแยก</span></li>
-            <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/style</code> ตู้แต่งตัว เลือกใส่ฉายาที่ปลดล็อกแล้ว หรือซ่อนฉายา ฉายาที่ยังไม่ปลดล็อกใส่ไม่ได้</span></li>
+            <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/supporter</code> เปิดหน้าเดียวกันได้ (ทดสอบการกดสินค้าผ่าน <code>/topup</code>)</span></li>
+            <li><span class="badge b-ok">ทดสอบบางส่วน</span><span><code>/style</code> ตู้แต่งตัว เลือกใส่ฉายาที่ปลดล็อกแล้ว หรือซ่อนฉายา ฉายาที่ยังไม่ปลดล็อกใส่ไม่ได้ และมีปุ่มไปเมนูเอฟเฟกต์ <code>/perks</code></span></li>
+            <li><span class="badge b-draft">รอทดสอบ</span><span><code>/perks</code>, <code>/aura</code>, <code>/arrival</code> และ <code>/celebrate</code> เอฟเฟกต์ของแรงก์</span></li>
             <li><span class="badge b-draft">รอตรวจด้วยตา</span><span>หน้าตาเมนู ป้ายแรงก์ และสีชื่อบนหน้าจอและในแชตจริง ส่วนการเก็บสิทธิ์หลังรีสตาร์ทเซิร์ฟยังรอทดสอบ</span></li>
           </ul>
         </div>
         <div class="store-box">
           <h3>แผนในอนาคต</h3>
           <p><span class="badge b-plan">แผน · ยังไม่ขาย</span></p>
-          <p>เอฟเฟกต์อนุภาค สัตว์เลี้ยง สกินเฟอร์นิเจอร์ และโมเดลพิเศษ ยังไม่ได้สร้างและไม่อยู่ในรายการด้านบน จะไม่มีกล่องสุ่มแบบเสียเงิน</p>
+          <p>สัตว์เลี้ยง สกินเฟอร์นิเจอร์ และโมเดลพิเศษ ยังไม่ได้สร้างและไม่อยู่ในรายการด้านบน จะไม่มีกล่องสุ่มแบบเสียเงิน</p>
         </div>
       </div>
 
@@ -627,7 +663,8 @@
         <details><summary>ขายของยังไง</summary><div><p>พิมพ์ <code>/sell</code> (หรือ <code>/market</code>) ใส่ของลงกล่อง แล้วปิดหน้าต่าง ของที่ไม่มีในร้านก็ขายได้ในราคาชิ้นละ $0.01 โบราณวัตถุและกล่องที่มีโบราณวัตถุข้างในจะถูกคืน</p></div></details>
         <details><summary>สวนฟื้นฟูคืออะไร</summary><div><p>ต้นแบบโครงการซ่อมเมืองทีละขั้นของแต่ละเกาะ บริจาค Stone Bricks 25, Grass Block 8 และ Oak Log 4 ผ่าน <code>/cityprojects</code> ยังเป็นต้นแบบเล็ก ๆ การซ่อมทั้งเมืองแบบนี้ยังเป็นแผนในอนาคต</p></div></details>
         <details><summary>มีแรงก์หรือ VIP ไหม</summary><div><p>มีตัวอย่างแรงก์ SKY, AURORA, NOVA และฉายา 3 แบบ พร้อมราคาที่เสนอ ดูได้ใน <a href="#topup">ร้านผู้สนับสนุน</a> และ <code>/supporter</code> แต่ยังซื้อไม่ได้ ยังไม่รับชำระเงิน</p></div></details>
-        <details><summary>ซื้อแรงก์แล้วได้เปรียบไหม</summary><div><p>ไม่ ทุกอย่างเป็นของตกแต่ง เช่น สีชื่อ ป้าย และฉายา ไม่ได้เงินในเกม อุปกรณ์ หรือเกาะใหญ่ขึ้น</p></div></details>
+        <details><summary>ซื้อแรงก์แล้วได้เปรียบไหม</summary><div><p>ไม่ ทุกอย่างเป็นของตกแต่ง เช่น สีชื่อ ป้าย ฉายา และเอฟเฟกต์ในฮับ ไม่ได้เงินในเกม อุปกรณ์ เกาะใหญ่ขึ้น หรือบินได้</p></div></details>
+        <details><summary>เอฟเฟกต์ของแรงก์ คนอื่นเห็นไหม</summary><div><p>ไม่เห็น เอฟเฟกต์และเสียงแสดงให้เจ้าของเห็นและได้ยินคนเดียว ใช้ได้เฉพาะในฮับ และปิดไว้ตั้งแต่แรก เปิดได้ที่ <code>/perks</code> ระบบนี้ยังรอทดสอบ</p></div></details>
         <details><summary>ตอนนี้โอนเงินซื้อได้ไหม</summary><div><p>ไม่ได้ ยังไม่มีช่องทางชำระเงิน ถ้ามีคนเสนอขายแรงก์หรือขอให้โอนเงิน อย่าโอน ช่องทางจริงจะประกาศบนหน้านี้และใน <code>/topup</code> ก่อน</p></div></details>
         <details><summary>เล่นบนมือถือหรือคอนโซล (Bedrock) ได้ไหม</summary><div><p>ยังไม่ได้ตัดสินใจ ตอนนี้ทดสอบกับ Java Edition</p></div></details>
         <details><summary>ต้องลงม็อดไหม</summary><div><p>ไม่ต้อง เซิร์ฟใช้แพ็กฟอนต์ไทย ThaiFontFix ซึ่งเกมจะโหลดให้เองตอนเข้าเล่น แค่กดยอมรับ ม็อดเพิ่มความลื่นหรือ shader ใช้ได้ แต่ห้ามโปรแกรมโกงทุกชนิด</p></div></details>

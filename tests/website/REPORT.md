@@ -1,8 +1,8 @@
 # Lost Sky website check
 
-Run: 2026-10-03T10:21:41.727Z
+Run: 2026-10-03T10:45:44.998Z
 
-**125/125 passed**
+**131/131 passed**
 
 ## Layout 1280px light
 
@@ -13,7 +13,7 @@ Run: 2026-10-03T10:21:41.727Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (880 elements)
+- ✅ text contrast meets WCAG AA (951 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -27,7 +27,7 @@ Run: 2026-10-03T10:21:41.727Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (880 elements)
+- ✅ text contrast meets WCAG AA (951 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -41,7 +41,7 @@ Run: 2026-10-03T10:21:41.727Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (880 elements)
+- ✅ text contrast meets WCAG AA (951 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -55,7 +55,7 @@ Run: 2026-10-03T10:21:41.727Z
 - ✅ all 7 images load
 - ✅ every image has Thai alt text
 - ✅ page has a solid background
-- ✅ text contrast meets WCAG AA (880 elements)
+- ✅ text contrast meets WCAG AA (951 elements)
 - ✅ no text smaller than 12px
 - ✅ no clipped text in overflow-hidden boxes
 - ✅ no sentences broken apart by grid/flex layout
@@ -90,22 +90,28 @@ Run: 2026-10-03T10:21:41.727Z
 - ✅ store: rank colours and titles (SKY cyan; AURORA purple + Builder; NOVA gold + all three)
 - ✅ store: cosmetic, permanent, account-bound, no money/gear/island/progress advantage
 - ✅ store: three rank names in three different colours
-- ✅ store: /topup and /style partly tested, /supporter not claimed separately tested, never fully tested
+- ✅ store: /topup, /supporter and /style partly tested (supporter opened directly in the final client check), never fully tested
+- ✅ store: rank effects awaiting test (block badge and checklist line), not claimed tested
+- ✅ store: rank effects per tier (SKY cloud; AURORA enchant + chime; NOVA halo + nova arrival + /celebrate 30 s), higher tiers include lower
+- ✅ store: effects personal (owner only), lobby only, off by default, no flight/damage/economy
+- ✅ store: rank and title cards promise no flight, damage, money, items or bigger island
+- ✅ store: wardrobe links to /perks
 - ✅ store: product click charges nothing; locked title refused
 - ✅ store: on-screen/chat look awaiting visual review, server-restart persistence awaiting test
-- ✅ store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates
+- ✅ store: pets, furniture, custom models only as a plan, not sold (particles moved out of the plan); no paid random crates
 - ✅ store: no capes, and no THB prices outside the store section
 - ✅ FAQ: ranks preview, no advantage, cannot pay yet
 - ✅ top-up has no technical wording
 - ✅ footer date is 3 October 2026
 - ✅ hub shown as installed, not "not pasted"
 - ✅ commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go
-- ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /style, /cityprojects donate
-- ✅ garden open/go, /supporter (alias not tested on its own), /city, donate, slot, team and money commands still awaiting test
+- ✅ commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /supporter, /style, /cityprojects donate
+- ✅ rank effects, garden open/go, /city, donate, slot, team and money commands still awaiting test
 - ✅ quests: builder tested, farmer (wheat) awaiting test
 - ✅ tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test
 - ✅ pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration
-- ✅ status cards: supporter partial evidence in tested card; visual, restart and /supporter alias pending
+- ✅ status cards: supporter partial evidence in tested card; visual, restart and rank effects pending; payments not open
+- ✅ FAQ: rank effects only visible to the owner, lobby only, off by default
 - ✅ map decoration marked unfinished in gallery
 - ✅ join steps explain the required font pack and the Server Resource Packs setting
 - ✅ game UI language stated as English; in-game guide not called Thai
@@ -140,8 +146,8 @@ Run: 2026-10-03T10:21:41.727Z
 
 ## Command filters and copy
 
-- ✅ 25 commands listed
-- ✅ filter "hub" shows 4 commands
+- ✅ 29 commands listed
+- ✅ filter "hub" shows 8 commands
 - ✅ filter "shop" shows 9 commands
 - ✅ filter "island" shows 5 commands
 - ✅ filter "city" shows 7 commands
@@ -163,7 +169,7 @@ Run: 2026-10-03T10:21:41.727Z
 
 - ✅ reduced motion turns off all animation
 - ✅ no-JS: all 5 chapters readable
-- ✅ no-JS: all 25 commands readable
+- ✅ no-JS: all 29 commands readable
 - ✅ no-JS: menu links reachable
 - ✅ no-JS: copy and filter buttons hidden
 - ✅ no-JS: no horizontal scroll

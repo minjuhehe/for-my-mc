@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.9.6: Website rank effects (2026-10-03)
+
+Website and checks only, from dfee340 (`lostsky-perks.sk`). Rank cards add
+lobby effects: SKY Cloud Aura; AURORA Enchant Aura + Arrival Chime; NOVA Halo
++ Nova Arrival + `/celebrate` (30 s cooldown); higher ranks include lower.
+Effects box: only the owner sees/hears them, lobby only, off by default, no
+flight/damage/economy; marked awaiting test. Site lists `/perks`, `/aura`,
+`/arrival`, `/celebrate` (25 -> 29 commands). `/supporter` partly tested
+(opened directly). Particles removed from the future plan; pets, furniture,
+custom models still planned. Prices unchanged, payments closed. FAQ updated.
+Checks 131 (planted false claims caught). No server files touched.
+
 ## 0.9.5: Rank abilities (2026-10-03)
 
 Added functional personal lobby cloud/enchant/halo auras, arrival effects and

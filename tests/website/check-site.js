@@ -218,11 +218,18 @@ const NAV_STATE = () => {
   // Supporter runtime evidence (docs/SUPPORTER_STORE.md, 17:11 ICT): headless client only, so at most partly tested.
   const storeChecks = await page.$$eval('#topup .checklist li', ls => ls.map(l => [l.querySelector('.badge').textContent, l.textContent]));
   const storeLine = w => (storeChecks.find(c => c[1].includes(w)) || ['', ''])[0];
-  check('store: /topup and /style partly tested, /supporter not claimed separately tested, never fully tested', storeLine('/topup') === 'ทดสอบบางส่วน' && storeLine('/style') === 'ทดสอบบางส่วน' && storeLine('/supporter') === 'รอทดสอบ' && /ยังไม่ได้ทดสอบแยก/.test(topup) && storeChecks.every(c => !/^(ทดสอบแล้ว|ยืนยันแล้ว)$/.test(c[0])), JSON.stringify(storeChecks.map(c => c[0])));
+  check('store: /topup, /supporter and /style partly tested (supporter opened directly in the final client check), never fully tested', storeLine('/topup') === 'ทดสอบบางส่วน' && storeLine('/supporter') === 'ทดสอบบางส่วน' && storeLine('/style') === 'ทดสอบบางส่วน' && storeChecks.every(c => !/^(ทดสอบแล้ว|ยืนยันแล้ว)$/.test(c[0])), JSON.stringify(storeChecks.map(c => c[0])));
+  // Rank effects (docs/SUPPORTER_STORE.md "Rank abilities", lostsky-perks.sk): built, runtime tests in progress.
+  check('store: rank effects awaiting test (block badge and checklist line), not claimed tested', storeLine('เอฟเฟกต์ของแรงก์') === 'รอทดสอบ' && (await page.$eval('#topup .fx-head .badge', b => b.textContent)) === 'รอทดสอบ');
+  check('store: rank effects per tier (SKY cloud; AURORA enchant + chime; NOVA halo + nova arrival + /celebrate 30 s), higher tiers include lower', /Cloud Aura/.test(ranks[0]) && !/Enchant|Chime|Halo|celebrate/.test(ranks[0]) && /Enchant Aura/.test(ranks[1]) && /Arrival Chime/.test(ranks[1]) && /รวมของ SKY/.test(ranks[1]) && !/Halo|Nova Arrival|celebrate/.test(ranks[1]) && /Halo/.test(ranks[2]) && /Nova Arrival/.test(ranks[2]) && /\/celebrate[\s\S]*30 วินาที/.test(ranks[2]) && /รวมของ SKY และ AURORA/.test(ranks[2]));
+  const fx = await page.textContent('#topup .fx-box');
+  check('store: effects personal (owner only), lobby only, off by default, no flight/damage/economy', /เฉพาะตัวคุณเอง/.test(fx) && /ผู้เล่นคนอื่นไม่เห็น/.test(fx) && /เฉพาะในฮับ/.test(fx) && /ปิดไว้ตั้งแต่แรก/.test(fx) && /ไม่ทำให้บินได้/.test(fx) && /ไม่ทำดาเมจ/.test(fx) && /ไม่มีผลกับเงิน/.test(fx) && ['/perks', '/aura off|cloud|enchant|halo', '/arrival off|chime|nova', '/celebrate'].every(c => fx.includes(c)) && !/ทุกคนเห็น|ผู้เล่นอื่นเห็น|ทั่วทั้งเซิร์ฟ/.test(topup));
+  check('store: rank and title cards promise no flight, damage, money, items or bigger island', !/บิน|ดาเมจ|เงินในเกม|\$\d|ไอเท็ม|อุปกรณ์|เกาะใหญ่|kit/i.test(await page.$$eval('#topup .rank-card, #topup .title-card', cs => cs.map(c => c.textContent).join(' '))));
+  check('store: wardrobe links to /perks', /\/style[^]*?ปุ่มไปเมนูเอฟเฟกต์ \/perks/.test(topup));
   check('store: product click charges nothing; locked title refused', /ไม่มีการเก็บเงิน/.test(topup) && /ยังไม่ปลดล็อกใส่ไม่ได้/.test(topup));
   check('store: on-screen/chat look awaiting visual review, server-restart persistence awaiting test', storeLine('หน้าจอ') === 'รอตรวจด้วยตา' && /รีสตาร์ทเซิร์ฟยังรอทดสอบ/.test(topup));
   const future = await page.$eval('#topup .store-box:last-child', b => b.textContent);
-  check('store: particles, pets, furniture, custom models only as a plan, not sold; no paid random crates', /แผน/.test(future) && /ยังไม่ขาย/.test(future) && ['อนุภาค', 'สัตว์เลี้ยง', 'เฟอร์นิเจอร์', 'โมเดลพิเศษ'].every(w => future.includes(w)) && /ไม่มีกล่องสุ่ม/.test(future) && !/อนุภาค|สัตว์เลี้ยง|เฟอร์นิเจอร์/.test(await page.$$eval('#topup .rank-card, #topup .title-card', cs => cs.map(c => c.textContent).join(' '))));
+  check('store: pets, furniture, custom models only as a plan, not sold (particles moved out of the plan); no paid random crates', /แผน/.test(future) && /ยังไม่ขาย/.test(future) && ['สัตว์เลี้ยง', 'เฟอร์นิเจอร์', 'โมเดลพิเศษ'].every(w => future.includes(w)) && !/อนุภาค|ออร่า/.test(future) && /ไม่มีกล่องสุ่ม/.test(future) && !/สัตว์เลี้ยง|เฟอร์นิเจอร์|โมเดล/.test(await page.$$eval('#topup .rank-card, #topup .title-card, #topup .fx-box', cs => cs.map(c => c.textContent).join(' '))));
   check('store: no capes, and no THB prices outside the store section', !/ผ้าคลุม|\bcape/i.test(topup) && !/บาท|฿|THB/.test(text.replace(topup, '')));
   check('FAQ: ranks preview, no advantage, cannot pay yet', /มีแรงก์หรือ VIP ไหม[\s\S]*ยังซื้อไม่ได้/.test(await page.textContent('#faq')) && /ซื้อแรงก์แล้วได้เปรียบไหม[\s\S]*ไม่/.test(await page.textContent('#faq')) && /ตอนนี้โอนเงินซื้อได้ไหม[\s\S]*ไม่ได้/.test(await page.textContent('#faq')));
   check('top-up has no technical wording', !/แบบฟอร์ม|form|backend|HTML/i.test(topup));
@@ -232,15 +239,16 @@ const NAV_STATE = () => {
   const badges = await page.$$eval('.cmd', ls => Object.fromEntries(ls.map(l => [l.querySelector('code').textContent, l.querySelector('.badge').textContent])));
   const byBadge = t => Object.keys(badges).filter(k => badges[k] === t).join(',');
   check('commands marked tested = /spawn, /hub, /menu, /sell, /is, /city go', byBadge('ทดสอบแล้ว') === '/spawn,/hub,/menu,/sell,/is,/city go', JSON.stringify(badges));
-  check('commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /style, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/topup,/style,/cityprojects donate', JSON.stringify(badges));
-  check('garden open/go, /supporter (alias not tested on its own), /city, donate, slot, team and money commands still awaiting test', ['/cityprojects', '/cityprojects go', '/supporter', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
+  check('commands marked partly tested = /shop, /skyshop, /skyquests, /topup, /supporter, /style, /cityprojects donate', byBadge('ทดสอบบางส่วน') === '/shop,/skyshop,/skyquests,/topup,/supporter,/style,/cityprojects donate', JSON.stringify(badges));
+  check('rank effects, garden open/go, /city, donate, slot, team and money commands still awaiting test', ['/perks', '/aura <off|cloud|enchant|halo>', '/arrival <off|chime|nova>', '/celebrate', '/cityprojects', '/cityprojects go', '/city', '/city donate', '/city go <ช่อง>', '/is team invite <ชื่อผู้เล่น>', '/bal'].every(k => badges[k] === 'รอทดสอบ'), JSON.stringify(badges));
   const quests = await page.$$eval('#zone-quests .quest-list li', ls => ls.map(l => l.querySelector('.badge').textContent));
   check('quests: builder tested, farmer (wheat) awaiting test', quests.join(',') === 'รอทดสอบ,ทดสอบแล้ว', quests.join(','));
   const tested = await page.$$eval('.status-card', cs => cs[1].textContent);
   check('tested card: verified results incl. non-OP sell payout, Relic returns, 1,504-material coverage (not 1,504 sales), garden self-test', /ไม่ใช่ OP/.test(tested) && /\/sell[\s\S]*ได้เงินตรง/.test(tested) && /Shulker/.test(tested) && /ถุงที่มีโบราณวัตถุ/.test(tested) && /1,504[\s\S]*ไม่ได้ขายจริงทุกชนิด/.test(tested) && /ทดสอบอัตโนมัติ/.test(tested) && /\/is[\s\S]*Restoration City/.test(tested) && /\$80[\s\S]*2 ชิ้น/.test(tested) && !/\$32|ขายพืช|ข้าวสาลี|กระเป๋าเต็ม|หลายเกาะ|หลายคน|เห็นสวน|หน้าจอ|รีสตาร์ท/.test(tested), tested.slice(0, 300));
   const pending = await page.$$eval('.status-card', cs => cs[2].textContent);
   check('pending card lists shop amounts + relic return, wheat quest, 24h reset, full bag, multiple islands, multi-member teams, isolation, map decoration', ['ยังไม่มีคนดูบนหน้าจอ', 'ระบบเงินขัดข้อง', 'เห็นสวนเปลี่ยน', 'หลังรีสตาร์ท', 'ข้าวสาลี', '24 ชั่วโมงจริง', 'กระเป๋าเต็ม', 'สร้างหลายเกาะ', 'ทีมหลายคน', 'แยกเมือง', 'การตกแต่งแผนที่'].every(w => pending.includes(w)), pending.slice(0, 300));
-  check('status cards: supporter partial evidence in tested card; visual, restart and /supporter alias pending', /ร้านผู้สนับสนุน[\s\S]*\/topup[\s\S]*ไม่มีการเก็บเงิน[\s\S]*โปรแกรมจำลองผู้เล่น/.test(tested) && /ร้านผู้สนับสนุน: ยังไม่มีคนดู/.test(pending) && /ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ[\s\S]*\/supporter/.test(pending) && /ยังไม่เปิด[^<]*การชำระเงิน/.test(pending));
+  check('status cards: supporter partial evidence in tested card; visual, restart and rank effects pending; payments not open', /ร้านผู้สนับสนุน[\s\S]*\/topup[\s\S]*ไม่มีการเก็บเงิน[\s\S]*โปรแกรมจำลองผู้เล่น/.test(tested) && !/\/perks|\/celebrate|ออร่า/.test(tested) && /ร้านผู้สนับสนุน: ยังไม่มีคนดู/.test(pending) && /ร้านผู้สนับสนุน: แรงก์และฉายายังอยู่หลังรีสตาร์ทเซิร์ฟ/.test(pending) && /รอทดสอบ\s*เอฟเฟกต์ของแรงก์[\s\S]*\/perks/.test(pending) && /ยังไม่เปิด[^<]*การชำระเงิน/.test(pending));
+  check('FAQ: rank effects only visible to the owner, lobby only, off by default', /คนอื่นเห็นไหม[\s\S]*ไม่เห็น[\s\S]*เฉพาะในฮับ[\s\S]*ปิดไว้ตั้งแต่แรก/.test(await page.textContent('#faq')));
   check('map decoration marked unfinished in gallery', /การตกแต่งแผนที่ยังไม่เสร็จ/.test(await page.textContent('#gallery')));
   const start = await page.textContent('#start');
   check('join steps explain the required font pack and the Server Resource Packs setting', /ยอมรับแพ็กฟอนต์ไทย/.test(start) && /Server Resource Packs/.test(start) && /Enabled หรือ Prompt/.test(start));
@@ -285,14 +293,14 @@ const NAV_STATE = () => {
   check('only one tab is in the Tab order', (await page.$$eval('[role=tab]', ts => ts.filter(t => t.tabIndex === 0).length)) === 1);
 
   group = 'Command filters and copy';
-  check('25 commands listed', (await visibleCmds(page)).length === 25);
-  for (const [g, n] of Object.entries({ hub: 4, shop: 9, island: 5, city: 7 })) {
+  check('29 commands listed', (await visibleCmds(page)).length === 29);
+  for (const [g, n] of Object.entries({ hub: 8, shop: 9, island: 5, city: 7 })) {
     await page.click(`.chip[data-filter="${g}"]`);
     const v = await visibleCmds(page);
     check(`filter "${g}" shows ${n} commands`, v.length === n && v.every(x => x === g), v.join(','));
   }
   await page.focus('.chip[data-filter="all"]'); await page.keyboard.press('Enter');
-  check('filter works with the keyboard', (await visibleCmds(page)).length === 25 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
+  check('filter works with the keyboard', (await visibleCmds(page)).length === 29 && (await page.getAttribute('.chip[data-filter="all"]', 'aria-pressed')) === 'true');
   for (const cmd of ['/city go', '/sell', '/spawn']) {
     await page.click(`.copy[data-copy="${cmd}"]`);
     await page.waitForTimeout(100);
@@ -323,7 +331,7 @@ const NAV_STATE = () => {
   const nj = await browser.newContext({ viewport: { width: 390, height: 844 }, javaScriptEnabled: false });
   const np = await nj.newPage(); await np.goto(URL);
   check('no-JS: all 5 chapters readable', (await np.$$eval('[role=tabpanel]', ps => ps.filter(p => p.getBoundingClientRect().height > 0).length)) === 5);
-  check('no-JS: all 25 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 25);
+  check('no-JS: all 29 commands readable', (await np.$$eval('.cmd', ls => ls.filter(l => l.getBoundingClientRect().height > 0).length)) === 29);
   check('no-JS: menu links reachable', await np.isVisible('.nav-links a[href="#topup"]'));
   check('no-JS: copy and filter buttons hidden', !(await np.isVisible('.filters')) && !(await np.isVisible('.copy')));
   check('no-JS: no horizontal scroll', (await np.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth)) <= 0);

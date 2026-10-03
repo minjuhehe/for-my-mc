@@ -452,6 +452,13 @@ td .en { display: block; }
 .price-label { flex-basis: 100%; font-size: 0.8rem; font-weight: 700; color: var(--draft-ink); }
 .price-num { font-family: var(--mono); font-size: 1.75rem; font-weight: 700; line-height: 1.2; }
 .perk-list { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; }
+.perk-head { margin: 4px 0 -4px; font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); }
+.fx-box { margin-top: 24px; background: var(--panel); border: 1px solid var(--line); border-left: 6px solid var(--r-nova); border-radius: var(--radius); padding: 18px; display: grid; gap: 10px; }
+.fx-box p { margin: 0; }
+.fx-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.fx-head h3 { font-size: 1.15rem; }
+.fx-cmds { font-size: 0.95rem; color: var(--ink-soft); }
+.fx-cmds code { white-space: nowrap; }
 .title-name { font-family: var(--mono); font-weight: 700; font-size: 1.15rem; color: var(--accent); }
 .title-th { color: var(--ink-soft); font-size: 0.95rem; margin-top: -8px; }
 .store-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 32px; }

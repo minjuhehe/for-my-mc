@@ -290,6 +290,16 @@ set to "GitHub Actions" in the repo settings once. **Not deployed yet.**
   clicked on its own. Human screen/chat review is รอตรวจด้วยตา; full
   server-restart persistence is รอทดสอบ. Checks allow partly tested but
   never ทดสอบแล้ว for the store, and payments stay closed. Checks: 125.
+- **Rank effects (website, after dfee340):** rank cards list lobby effects
+  from `lostsky-perks.sk`: SKY Cloud Aura; AURORA + Enchant Aura, Arrival
+  Chime; NOVA + Halo, Nova Arrival, `/celebrate` (30 s). Higher ranks include
+  lower ones. Site states owner-only (others do not see/hear), lobby only,
+  off by default, no flight/damage/economy. `/perks`, `/aura`, `/arrival`,
+  `/celebrate` listed in the hub filter as รอทดสอบ until runtime results are
+  reported. `/supporter` now ทดสอบบางส่วน (opened directly in the final
+  client check, `docs/SUPPORTER_STORE.md`); product click evidence is still
+  only via `/topup`. Particles left the future plan; pets, furniture skins and
+  custom models remain แผน · ยังไม่ขาย. Commands on site: 29. Checks: 131.
   Particles, pets, furniture skins and custom models shown only as แผน ·
   ยังไม่ขาย. If prices or SKUs change, update the page and the store check in
   `tests/website/check-site.js` together. Commands on site: 25. Checks: 122.
