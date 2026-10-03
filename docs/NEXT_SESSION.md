@@ -3,6 +3,13 @@
 LostSkyWorth1.1.1 deployed; clean16:37 startup, all scripts loaded without errors.
 MineLan signed in again. Server running at16:48 ICT.
 
+Supporter preview installed17:11, corrected validation, functional wardrobe and
+console-only idempotent grants. Tested NOVA/title unlock and reconnect retention,
+locked title refusal, player grant refusal, order replay/conflict and no downgrade.
+Test data cleaned17:16. Payments remain closed by owner's choice; proposed prices
+and product list in SUPPORTER_STORE.md. Website8eec695 catalog preview pulled;
+Claude reports122 checks; final partial-test badge sync in progress aftera00d1a3.
+
 ## Live verification
 
 - Non-OP LostSkyTest client tested actual payouts:32 stone$5.76, sword$0.01,

@@ -1,5 +1,11 @@
 # Developer Notes
 
+Supporter runtime17:11-17:16: syntax corrected and tested console-only/order
+dedupe/conflict, locked wardrobe, title selection and rank/selection reconnect.
+Test entitlements cleared. Menu lifecycle closes inventories on script reload.
+No real payments integrated. Diagnostic client profile action reads only its
+own player-list display; human visual/full restart verification remains pending.
+
 Supporter preview: lostsky-support.sk owns UUID-keyed tier/title entitlements,
 selected title and fulfillment-ID records. /topup and Sky Concierge route to
 /supporter; /style applies cosmetic display/tab names. Console supportgrant
